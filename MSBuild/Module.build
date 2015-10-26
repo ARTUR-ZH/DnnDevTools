@@ -1,0 +1,66 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="AfterBuild" DependsOnTargets="CopyBin;GetFiles;DebugProject;PackageModule">
+  </Target>
+  <Target Name="GetFiles">
+    <ItemGroup>
+      <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
+      <SourceFiles Include="*.css;*.htm;*.xsl;*.png;*.gif" />
+      <ConfigFiles Include="*.config" Exclude="web.config"/>
+      <RootConfig Include="*eb.config" />
+      <Services Include="*.svc" />
+      <Views Include="**/*.ascx;**/*.asmx;**/*.ashx;" />
+      <Controls Include="Controls/*.ascx;" />
+      <ResourceFiles Include="App_LocalResources/*.resx" />
+      <Images Include="Images/*.*" />
+      <Keys Include="keys/*.*" />
+      <ClientScripts Include="ClientScripts/*.*" />
+      <JsFiles Include="js/*.*" />
+      <Scripts Include="Scripts/*.*" />
+      <SharedScripts Include="Scripts/Shared/*.*" />
+      <Templates Include="Templates/*.htm" />
+      <DataFiles Include="Resources/*.xml" />
+      <Resources Include="@(ResourceFiles);@(Scripts);@(Images);@(TextFiles);@(SourceFiles);@(ClientScripts);@(JsFiles);
+                 @(Keys);@(Services);@(RootConfig);@(ConfigFiles);@(Templates);@(DataFiles);@(SharedScripts);@(Controls)" />
+      <WebResources Include="Web/*.*" />
+    </ItemGroup>
+  </Target>
+  <Target Name="CopyBin">
+    
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(WebsitePath)/bin" />
+    
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll" DestinationFolder="$(WebsitePath)/bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll" DestinationFolder="$(WebsitePath)/bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll" DestinationFolder="$(WebsitePath)/bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Owin.1.0\lib\net40\Owin.dll" DestinationFolder="$(WebsitePath)/bin" />
+
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll" DestinationFolder="$(WebsitePath)/bin" />
+
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll" DestinationFolder="$(WebsitePath)/bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll" DestinationFolder="$(WebsitePath)/bin" />
+
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll" DestinationFolder="$(WebsitePath)/bin" />
+
+
+
+
+  </Target>
+  <Target Name="DebugProject" Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Copy SourceFiles="@(TextFiles)" DestinationFolder="$(ModuleFolderName)" />
+    <Copy SourceFiles="@(SourceFiles)" DestinationFolder="$(ModuleFolderName)" />
+    <Copy SourceFiles="@(Views)" DestinationFolder="$(ModuleFolderName)" />
+    <Copy SourceFiles="@(RootConfig)" DestinationFolder="$(ModuleFolderName)" />
+    <Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(ModuleFolderName)\App_LocalResources" />
+    <Copy SourceFiles="@(ClientScripts)" DestinationFolder="$(ModuleFolderName)\ClientScripts" />
+    <Copy SourceFiles="@(Controls)" DestinationFolder="$(ModuleFolderName)\Controls" />
+    <Copy SourceFiles="@(Images)" DestinationFolder="$(ModuleFolderName)\Images" />
+    <Copy SourceFiles="@(JsFiles)" DestinationFolder="$(ModuleFolderName)\js" />
+    <Copy SourceFiles="@(Keys)" DestinationFolder="$(ModuleFolderName)\keys" />
+    <Copy SourceFiles="@(DataFiles)" DestinationFolder="$(ModuleFolderName)\Resources" />
+    <Copy SourceFiles="@(Scripts)" DestinationFolder="$(ModuleFolderName)\Scripts" />
+    <Copy SourceFiles="@(SharedScripts)" DestinationFolder="$(ModuleFolderName)\Scripts\Shared" />
+    <Copy SourceFiles="@(Templates)" DestinationFolder="$(ModuleFolderName)\Templates" />
+
+    <Copy SourceFiles="@(WebResources)" DestinationFolder="$(ModuleFolderName)\" />
+
+  </Target> 
+</Project>

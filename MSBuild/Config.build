@@ -1,0 +1,13 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <DNNFileName>DnnDevTools</DNNFileName>
+    <PackageName>$(DNNFileName)</PackageName>
+    <WebsitePath>$(MSBuildProjectDirectory)\..\Website</WebsitePath>
+    <ModuleFolderName>$(WebsitePath)\DesktopModules\$(DNNFileName)</ModuleFolderName>
+    <BuildScriptsPath>$(MSBuildProjectDirectory)\..\MSBuild</BuildScriptsPath>
+    <WebsiteInstallPath>$(WebsitePath)\Install\Module</WebsiteInstallPath>
+    <Extension>zip</Extension>
+  </PropertyGroup>
+
+</Project>

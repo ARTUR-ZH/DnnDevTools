@@ -1,0 +1,10 @@
+﻿<script type="text/javascript">
+    $(function() {
+        console.log("Init Toolbar...");
+        $.connection.hub.start();
+        var hub = $.connection.devToolsEventHub;
+        hub.client.OnEvent = function(type, data) {
+            console.log("OnEvent", type, data);
+        };
+    });
+</script>

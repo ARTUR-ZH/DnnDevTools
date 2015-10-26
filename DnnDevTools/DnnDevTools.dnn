@@ -1,0 +1,155 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="DnnDevTools" type="Module" version="01.00.00">
+      <friendlyName>DNN Dev Tools</friendlyName>
+      <description>... TODOD ...</description>
+      <iconFile>Images/Icon_32x32.png</iconFile>
+      <owner>
+        <name>weweave GbR</name>
+        <url>https://weweave.net</url>
+        <organization>weweave GbR</organization>
+        <email>mail@weweave.net</email>
+      </owner>
+      <license src="License.txt"></license>
+      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">08.00.00</dependency>
+      </dependencies>
+      <components>
+        <component type="Config">
+          <config>
+            <configFile>web.config</configFile>
+            <install>
+              <configuration>
+                <nodes>
+                  <node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
+                    <add name="weweave.DnnDevTools" type="weweave.DnnDevTools.HttpModule, weweave.DnnDevTools" />
+                  </node>
+                </nodes>
+              </configuration>
+            </install>
+            <uninstall>
+              <configuration>
+                <nodes>
+                  <node path="/configuration/system.webServer/modules/add[@name='weweave.DnnDevTools']" action="remove"/>
+                </nodes>
+              </configuration>
+            </uninstall>
+          </config>
+        </component>
+
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>weweave.DnnDevTools.dll</name>
+            </assembly>
+          </assemblies>
+        </component>
+
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\DnnGoogleAnalyticsAdvanced</basePath>
+
+            <!-- 01.00.00 -->
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+    
+            
+            <!-- Uninstall -->
+            <script type="UnInstall">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+          </scripts>
+        </component>
+
+        <!--component type="File">
+          <files>
+            <basePath>DesktopModules/DnnGoogleAnalyticsAdvanced</basePath>
+            <file>
+              <name>Settings.ascx</name>
+              <sourceFileName>Settings.ascx</sourceFileName>
+            </file>
+            <file>
+              <name>SettingsHost.ascx</name>
+              <sourceFileName>SettingsHost.ascx</sourceFileName>
+            </file>
+            <file>
+              <name>SettingsPortal.ascx</name>
+              <sourceFileName>SettingsPortal.ascx</sourceFileName>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>Settings.ascx.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>SettingsHost.ascx.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>SettingsPortal.ascx.resx</name>
+            </file>
+            <file>
+              <path>Images</path>
+              <name>Icon_32x32.png</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>OutboundLinkTracking.js</name>
+            </file>          
+          </files>
+        </component-->
+
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>DnnDevTools</moduleName>
+            <foldername>DnnDevTools</foldername>
+
+            <!--businessControllerClass>weweave.DnnGoogleAnalyticsAdvanced.BusinessController, weweave.DnnGoogleAnalyticsAdvanced</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Upgradeable" />
+            </supportedFeatures-->
+
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>DNN Dev Tools</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DesktopModules/DnnDevTools/Test.html</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+
+          <!--eventMessage>
+            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>weweave.DnnGoogleAnalyticsAdvanced.BusinessController</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.00,01.04.00</upgradeVersionsList>
+            </attributes>
+          </eventMessage-->
+        </component>
+
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

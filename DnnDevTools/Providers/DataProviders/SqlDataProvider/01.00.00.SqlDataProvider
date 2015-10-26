@@ -1,0 +1,23 @@
+﻿
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}hostsettings WHERE SettingName = 'AUM_DoNotRewriteRegEx')
+BEGIN
+	insert into {databaseOwner}{objectQualifier}hostsettings
+	(SettingName
+	, SettingValue
+	, SettingIsSecure 
+	, CreatedByUserId
+	, CreatedOnDate
+	, LastModifiedByUserId
+	, LastModifiedOnDate
+	)
+	values(
+	'AUM_DoNotRewriteRegEx'
+	,'/DesktopModules/|/Providers|/LinkClick\.aspx|/SignalR'
+	, 0
+	, -1
+	, GETDATE()
+	, -1
+	, GETDATE()
+	)
+
+END

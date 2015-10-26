@@ -1,0 +1,9 @@
+﻿<script type="text/javascript">
+    $(function() {
+        $("#sendMail").click(function () {
+            $.get('/DesktopModules/DnnDevTools/API/Mail/SendMail');
+        });
+    });
+</script>
+
+<input id="sendMail" type="button" value="send mail"/>

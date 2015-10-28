@@ -43,7 +43,9 @@ namespace weweave.DnnDevTools
             if (bodyControl == null) return;
 
             ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
+
             var toolbarHtml = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
+            toolbarHtml += $@"<script type=""text/javascript"">window.dnnMailDev={{config:{{enableMailCatch: true}}}}</script>";
             toolbarHtml += System.IO.File.ReadAllText(
                 HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
             );

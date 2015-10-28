@@ -1,5 +1,8 @@
 ﻿<script type="text/javascript">
     $(function() {
+
+        console.log("Mail catch enabled: " + window.dnnMailDev.config.enableMailCatch);
+
         console.log("Init Toolbar...");
         $.connection.hub.start();
         var hub = $.connection.devToolsEventHub;

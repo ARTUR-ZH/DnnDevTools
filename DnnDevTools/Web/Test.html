@@ -1,7 +1,7 @@
 ﻿<script type="text/javascript">
     $(function() {
         $("#sendMail").click(function () {
-            $.get('/DesktopModules/DnnDevTools/API/Mail/SendMail');
+            $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Mail/SendMail');
         });
     });
 </script>

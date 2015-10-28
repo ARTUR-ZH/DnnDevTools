@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
 
-namespace weweave.DnnDevTools
+namespace weweave.DnnDevTools.Api
 {
     public class MailController : DnnApiController
     {

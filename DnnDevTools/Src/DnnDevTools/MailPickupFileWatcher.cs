@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using weweave.DnnDevTools.Dto;
 
 namespace weweave.DnnDevTools
 {
@@ -32,7 +33,14 @@ namespace weweave.DnnDevTools
         // Define the event handlers.
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
-            GlobalHost.ConnectionManager.GetHubContext<DevToolsEventHub>().Clients.All.OnEvent("mailSent", "subject: 'sdasd'");
+            var email = new Email
+            {
+                Subject = "Subject",
+                Body = "Test",
+                To = "recipient@mail.de",
+                From = "from@mail.de"
+            };
+            GlobalHost.ConnectionManager.GetHubContext<DevToolsEventHub>().Clients.All.OnEvent("mailSent", email);
         }
 
     }

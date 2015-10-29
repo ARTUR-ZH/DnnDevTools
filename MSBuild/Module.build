@@ -24,25 +24,18 @@
       <WebResources Include="Web/*.*" />
     </ItemGroup>
   </Target>
-  <Target Name="CopyBin">
-    
+  <Target Name="CopyBin">    
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(WebsitePath)/bin" />
-    
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll" DestinationFolder="$(WebsitePath)/bin" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll" DestinationFolder="$(WebsitePath)/bin" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll" DestinationFolder="$(WebsitePath)/bin" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Owin.1.0\lib\net40\Owin.dll" DestinationFolder="$(WebsitePath)/bin" />
-
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll" DestinationFolder="$(WebsitePath)/bin" />
-
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll" DestinationFolder="$(WebsitePath)/bin" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll" DestinationFolder="$(WebsitePath)/bin" />
-
     <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll" DestinationFolder="$(WebsitePath)/bin" />
-
-
-
-
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\lib\Interop.ADODB.dll" DestinationFolder="$(WebsitePath)/bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\lib\Interop.CDO.dll" DestinationFolder="$(WebsitePath)/bin" />
   </Target>
   <Target Name="DebugProject" Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Copy SourceFiles="@(TextFiles)" DestinationFolder="$(ModuleFolderName)" />

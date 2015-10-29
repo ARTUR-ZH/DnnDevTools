@@ -95,8 +95,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\DnnDevTools\Api\MailController.cs" />
-    <Compile Include="Src\DnnDevTools\Dto\Email.cs" />
-    <Compile Include="Src\DnnDevTools\Dto\EmailSentEvent.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\MailSentEvent.cs" />
     <Compile Include="Src\DnnDevTools\MailPickupFileWatcher.cs" />
     <Compile Include="Src\DnnDevTools\HttpModule.cs" />
     <Compile Include="Src\DnnDevTools\RouterMapper.cs" />

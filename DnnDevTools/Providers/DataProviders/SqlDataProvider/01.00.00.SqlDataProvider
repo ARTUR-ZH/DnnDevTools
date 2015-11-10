@@ -1,5 +1,4 @@
-﻿
-IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}hostsettings WHERE SettingName = 'AUM_DoNotRewriteRegEx')
+﻿IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}hostsettings WHERE SettingName = 'AUM_DoNotRewriteRegEx')
 BEGIN
 	insert into {databaseOwner}{objectQualifier}hostsettings
 	(SettingName
@@ -19,5 +18,6 @@ BEGIN
 	, -1
 	, GETDATE()
 	)
-
 END
+
+

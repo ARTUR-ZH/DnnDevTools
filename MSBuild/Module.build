@@ -21,7 +21,7 @@
       <DataFiles Include="Resources/*.xml" />
       <Resources Include="@(ResourceFiles);@(Scripts);@(Images);@(TextFiles);@(SourceFiles);@(ClientScripts);@(JsFiles);
                  @(Keys);@(Services);@(RootConfig);@(ConfigFiles);@(Templates);@(DataFiles);@(SharedScripts);@(Controls)" />
-      <WebResources Include="Web/*.*" />
+      <WebResources Include="Web/**/*.*" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">    
@@ -53,7 +53,7 @@
     <Copy SourceFiles="@(SharedScripts)" DestinationFolder="$(ModuleFolderName)\Scripts\Shared" />
     <Copy SourceFiles="@(Templates)" DestinationFolder="$(ModuleFolderName)\Templates" />
 
-    <Copy SourceFiles="@(WebResources)" DestinationFolder="$(ModuleFolderName)\" />
+    <Copy SourceFiles="@(WebResources)" DestinationFolder="$(ModuleFolderName)\%(RecursiveDir)" />
 
   </Target> 
 </Project>

@@ -1,15 +1,150 @@
-﻿<script type="text/javascript">
-    $(function() {
+﻿<style>
+    /* MDT: Mail Developer Toolbar */
 
-        console.log("Mail catch enabled: " + window.dnnMailDev.config.enableMailCatch);
+    /* ATOMS */
+    .dnn-mdt-checkbox {
+        margin-right: 4px;
+    }
 
-        console.log("Init Toolbar...");
-        $.connection.hub.start();
-        var hub = $.connection.devToolsEventHub;
-        hub.client.OnEvent = function(data) {
-            console.log("OnEvent", data);
-        };
-    });
+    /* TEMPLATES */
+    #dnn-mdt {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        border: 1px solid #cdcdcd;
+        text-align: right;
+    }
+
+    /* LAYOUT */
+    .dnn-mdt-panel {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .dnn-mdt-marginBottom1 {
+        margin-bottom: 14px;
+    }
+
+    .dnn-mdt-hidden {
+        display: none;
+    }
+
+    /* COLORS */
+    .dnn-mdt-bgColorWhite {
+        background-color: #ffffff;
+    }
+
+    .dnn-mdt-bgColorGrey {
+        background-color: #e5e5e5;
+    }
+
+    /* FONTS */
+    .dnn-mdt-copySmall {
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .dnn-mdt-copyBold {
+        font-weight: bold;
+    }
+</style>
+
+<div id="dnn-mdt" class="dnn-mdt-panel dnn-mdt-bgColorWhite">
+    <div class="dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-marginBottom1">
+        <p id="dnn-mdt-inboxEmpty" class="dnn-mdt-copySmall">Inbox empty</p>
+        <div id="dnn-mdt-lastMail" class="dnn-mdt-hidden">
+            <p class="dnn-mdt-copySmall">
+                <span id="dnn-mdt-lastMailDate"></span>
+            </p>
+            <p class="dnn-mdt-copySmall">
+                <span id="dnn-mdt-lastMailSubject"></span>
+            </p>
+            <p class="dnn-mdt-copySmall">
+                <span class="dnn-mdt-copySmall dnn-mdt-copyBold">From:</span>
+                <span id="dnn-mdt-lastMailSender"></span>
+            </p>
+            <p class="dnn-mdt-copySmall">
+                <span class="dnn-mdt-copySmall dnn-mdt-copyBold">To:</span>
+                <span id="dnn-mdt-lastMailReciever"></span>
+            </p>
+        </div>
+    </div>
+    <input id="dnn-mdt-status" type="checkbox" class="dnn-mdt-checkbox" checked="checked" />
+    <label for="dnn-mdt-status" class="dnn-mdt-copySmall">Enable mail catch</label>
+</div>
+
+<script type="text/javascript">
+    (function(document) {
+        // console.log("Mail catch enabled: " + window.dnnMailDev.config.enableMailCatch);
+
+        var hub = $.connection.devToolsEventHub,
+            statusElement = document.getElementById('dnn-mdt-status'),
+            inboxEmptyElement = document.getElementById('dnn-mdt-inboxEmpty'),
+            lastMailElement = document.getElementById('dnn-mdt-lastMail'),
+            dateElement = document.getElementById('dnn-mdt-lastMailDate'),
+            subjectElement = document.getElementById('dnn-mdt-lastMailSubject'),
+            senderElement = document.getElementById('dnn-mdt-lastMailSender'),
+            revieverElement = document.getElementById('dnn-mdt-lastMailReciever');
+        
+        initStatusCheckbox();
+        enable();
+
+        /**
+        * Establishets connection to devToolsEventHub
+        */
+        function enable() {
+            // listen to mail events
+            hub.client.OnEvent = function (data) {
+                // TODO check internet explorer support (http://caniuse.com/#search=classList)
+                inboxEmptyElement.classList.add('dnn-mdt-hidden');
+                updateLastEmail(data);
+            };
+
+            // open connection
+            $.connection.hub.start();
+        }
+
+        function disable() {
+            // TODO is there a better way to remove the callback?
+            hub.client.OnEvent = null;
+
+            // close connection
+            $.connection.hub.stop();
+
+            // remove last mail
+            // TODO check internet explorer support (http://caniuse.com/#search=classList)
+            lastMailElement.classList.add('dnn-mdt-hidden');
+            
+            // show empty inbox
+            // TODO check internet explorer support (http://caniuse.com/#search=classList)
+            inboxEmptyElement.classList.remove('dnn-mdt-hidden');
+        }
+
+        function initStatusCheckbox() {
+            statusElement.addEventListener('change', function (event) {
+                if (this.checked) {
+                    enable();
+                } else {
+                    disable();
+                }
+            });
+        }
+
+        /**
+        * Populate last mail elements with new mails data
+        * @param {object} data Data of mail
+        */
+        function updateLastEmail(data) {
+            dateElement.textContent = data.SentOn;
+            subjectElement.textContent = data.Subject;
+            senderElement.textContent = data.Sender;
+            revieverElement.textContent = data.To;
+
+            // TODO check internet explorer support (http://caniuse.com/#search=classList)
+            lastMailElement.classList.remove('dnn-mdt-hidden');
+        }
+    }(document));
 </script>
 
-<a onclick="window.location.href=$.ServicesFramework().getServiceRoot('DnnDevTools') + '../Overlay.aspx';">Open Overlay</a>
+<!--<a onclick="window.location.href=$.ServicesFramework().getServiceRoot('DnnDevTools') + '../Overlay.aspx';">Open Overlay</a>-->

@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Configuration;
 using System.Net.Mail;
+using System.Resources;
 using System.Threading;
 using System.Web;
 using System.Web.Configuration;
@@ -12,6 +14,7 @@ using DotNetNuke.Framework;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.Client.Providers;
+using Newtonsoft.Json;
 
 namespace weweave.DnnDevTools
 {
@@ -97,8 +100,15 @@ namespace weweave.DnnDevTools
 
             ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
 
+            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
+            var resources = new Dictionary<string, string>();
+            foreach (DictionaryEntry d in rsxr)
+            {
+                resources[d.Key.ToString()] = d.Value.ToString();
+            }
+
             var toolbarHtml = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
-            toolbarHtml += $@"<script type=""text/javascript"">window.dnnMailDev={{config:{{enableMailCatch: true}}}}</script>";
+            toolbarHtml += $@"<script type=""text/javascript"">window.dnnMailDev={{config:{{enableMailCatch: true}},toolbar:{{resources:" + JsonConvert.SerializeObject(resources) + "}}}}</script>";
             toolbarHtml += System.IO.File.ReadAllText(
                 HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
             );

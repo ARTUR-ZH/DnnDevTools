@@ -20,4 +20,56 @@ BEGIN
 	)
 END
 
+/* ----------------------------------------- */
+/* Table DnnDevTools_Settings */
+/* ----------------------------------------- */
 
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_Settings]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+BEGIN
+	CREATE TABLE {databaseOwner}[{objectQualifier}DnnDevTools_Settings](
+		[Key] [nvarchar](255) NOT NULL,
+		[Value] [nvarchar](max) NOT NULL,
+	 CONSTRAINT [PK_{objectQualifier}DnnDevTools_Settings] PRIMARY KEY CLUSTERED 
+	(
+		[Key]
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+	)
+END
+GO
+
+/* ----------------------------------------------------- */
+/* StoredProcedure DnnDevTools_GetSettings */
+/* ----------------------------------------------------- */
+
+IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_GetSettings]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_GetSettings]
+GO
+
+EXEC sp_executesql N'CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_GetSettings]
+	AS
+	BEGIN
+		SELECT Settings.[key], Settings.[value]
+		FROM {databaseOwner}[{objectQualifier}DnnDevTools_Settings] AS Settings
+	END'
+GO
+
+/* --------------------------------------------------------- */
+/* StoredProcedure DnnDevTools_UpdateSettings */
+/* --------------------------------------------------------- */
+
+IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_UpdateSettings]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_UpdateSettings]
+GO
+
+EXEC sp_executesql N'CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_UpdateSettings]
+		@key	  nvarchar(50),
+		@value    nvarchar(max)
+	AS
+	BEGIN
+		UPDATE {databaseOwner}[{objectQualifier}DnnDevTools_Settings]
+		  SET value=@value
+		WHERE [key]=@key
+		IF @@ROWCOUNT=0
+			INSERT INTO {databaseOwner}[{objectQualifier}DnnDevTools_Settings] ([key], [value])VALUES (@key, @value)
+	END'
+GO

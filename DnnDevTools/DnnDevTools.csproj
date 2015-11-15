@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\DnnDevTools\Api\ConfigController.cs" />
     <Compile Include="Src\DnnDevTools\Api\MailController.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
@@ -102,6 +103,16 @@
     <Compile Include="Src\DnnDevTools\MailPickupFileWatcher.cs" />
     <Compile Include="Src\DnnDevTools\HttpModule.cs" />
     <Compile Include="Src\DnnDevTools\RouterMapper.cs" />
+    <Compile Include="Src\DnnDevTools\ServiceLocatorFactory.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Config\ConfigService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Config\IConfigService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Dnn\DnnService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Dnn\IDnnService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\IServiceLocator.cs" />
+    <Compile Include="Src\DnnDevTools\Service\ServiceBase.cs" />
+    <Compile Include="Src\DnnDevTools\Service\ServiceLocator.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Settings\ISettingsService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Settings\SettingsService.cs" />
     <Compile Include="Src\DnnDevTools\Startup.cs" />
     <Compile Include="Src\DnnDevTools\DevToolsEventHub.cs" />
     <Compile Include="Src\DnnDevTools\Util\EmlFileParser.cs" />
@@ -125,9 +136,7 @@
     <None Include="Providers\DataProviders\SqlDataProvider\01.00.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Src\DnnDevTools\Service\Mail\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <COMReference Include="ADODB">
       <Guid>{B691E011-1797-432E-907A-4D8C69339129}</Guid>

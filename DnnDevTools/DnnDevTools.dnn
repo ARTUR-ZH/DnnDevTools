@@ -50,7 +50,7 @@
 
         <component type="Script">
           <scripts>
-            <basePath>DesktopModules\DnnGoogleAnalyticsAdvanced</basePath>
+            <basePath>DesktopModules\DnnDevTools</basePath>
 
             <!-- 01.00.00 -->
             <script type="Install">

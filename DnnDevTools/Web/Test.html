@@ -3,7 +3,15 @@
         $("#sendMail").click(function () {
             $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Mail/SendMail');
         });
+        $("#enableMailCatch").click(function () {
+            $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=true');
+        });
+        $("#disableMailCatch").click(function () {
+            $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=false');
+        });
     });
 </script>
 
 <input id="sendMail" type="button" value="send mail"/>
+<input id="enableMailCatch" type="button" value="enable mail catch"/>
+<input id="disableMailCatch" type="button" value="disable mail catch" />

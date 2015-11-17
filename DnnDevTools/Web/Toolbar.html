@@ -6,13 +6,24 @@
         margin-right: 4px;
     }
 
+    /* LAST MAIL */
+    #dnn-mdt-lastMail {
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+    }
+
     /* TEMPLATES */
     #dnn-mdt {
         position: fixed;
         right: 20px;
-        bottom: 20px;
+        bottom: 20px;   
         border: 1px solid #cdcdcd;
         text-align: right;
+    }
+
+    #dnn-mdt #dnn-mdt-mailOverviewButton {
+        display: block;
     }
 
     /* LAYOUT */
@@ -50,45 +61,59 @@
     }
 </style>
 
-<div id="dnn-mdt" class="dnn-mdt-panel dnn-mdt-bgColorWhite">
-    <div class="dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-marginBottom1">
-        <p id="dnn-mdt-inboxEmpty" class="dnn-mdt-copySmall">Inbox empty</p>
-        <div id="dnn-mdt-lastMail" class="dnn-mdt-hidden">
-            <p class="dnn-mdt-copySmall">
-                <span id="dnn-mdt-lastMailDate"></span>
-            </p>
-            <p class="dnn-mdt-copySmall">
-                <span id="dnn-mdt-lastMailSubject"></span>
-            </p>
-            <p class="dnn-mdt-copySmall">
-                <span class="dnn-mdt-copySmall dnn-mdt-copyBold">From:</span>
-                <span id="dnn-mdt-lastMailSender"></span>
-            </p>
-            <p class="dnn-mdt-copySmall">
-                <span class="dnn-mdt-copySmall dnn-mdt-copyBold">To:</span>
-                <span id="dnn-mdt-lastMailReciever"></span>
-            </p>
+<div id="dnn-mdt">
+    <div class="dnn-mdt-panel dnn-mdt-bgColorWhite">
+        <div class="dnn-mdt-marginBottom1">
+            <input id="dnn-mdt-status" type="checkbox" class="dnn-mdt-checkbox" checked="checked" />
+            <label for="dnn-mdt-status" class="dnn-mdt-copySmall">Enable mail catch</label>
         </div>
+        <button type="button" id="dnn-mdt-mailOverviewButton">Show mail overview</button>
     </div>
-    <input id="dnn-mdt-status" type="checkbox" class="dnn-mdt-checkbox" checked="checked" />
-    <label for="dnn-mdt-status" class="dnn-mdt-copySmall">Enable mail catch</label>
+    <div id="dnn-mdt-lastMail" class="dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-hidden">
+        <p class="dnn-mdt-copySmall">
+            <span id="dnn-mdt-lastMailDate"></span>
+        </p>
+        <p class="dnn-mdt-copySmall">
+            <span id="dnn-mdt-lastMailSubject"></span>
+        </p>
+        <p class="dnn-mdt-copySmall">
+            <span class="dnn-mdt-copySmall dnn-mdt-copyBold">From:</span>
+            <span id="dnn-mdt-lastMailSender"></span>
+        </p>
+        <p class="dnn-mdt-copySmall">
+            <span class="dnn-mdt-copySmall dnn-mdt-copyBold">To:</span>
+            <span id="dnn-mdt-lastMailReciever"></span>
+        </p>
+    </div>
 </div>
 
 <script type="text/javascript">
-    (function(document) {
+    (function(document, window, settings) {
         // console.log("Mail catch enabled: " + window.dnnMailDev.config.enableMailCatch);
 
         var hub = $.connection.devToolsEventHub,
+            lastMailTimeoutId,
             statusElement = document.getElementById('dnn-mdt-status'),
-            inboxEmptyElement = document.getElementById('dnn-mdt-inboxEmpty'),
             lastMailElement = document.getElementById('dnn-mdt-lastMail'),
             dateElement = document.getElementById('dnn-mdt-lastMailDate'),
             subjectElement = document.getElementById('dnn-mdt-lastMailSubject'),
             senderElement = document.getElementById('dnn-mdt-lastMailSender'),
-            revieverElement = document.getElementById('dnn-mdt-lastMailReciever');
+            revieverElement = document.getElementById('dnn-mdt-lastMailReciever'),
+            mailOverviewButton = document.getElementById('dnn-mdt-mailOverviewButton');
+
+        // merge settings with default settings
+        settings.lastMailVisibleTime = settings.lastMailVisibleTime || 3000;
         
+        // initialization
+        initMailOverview();
         initStatusCheckbox();
         enable();
+
+        function initMailOverview() {
+            mailOverviewButton.addEventListener('click', function () {
+                window.location.href = $.ServicesFramework().getServiceRoot('DnnDevTools') + '../Overlay.aspx';
+            }, false);
+        }
 
         /**
         * Establishets connection to devToolsEventHub
@@ -96,9 +121,8 @@
         function enable() {
             // listen to mail events
             hub.client.OnEvent = function (data) {
-                // TODO check internet explorer support (http://caniuse.com/#search=classList)
-                inboxEmptyElement.classList.add('dnn-mdt-hidden');
                 updateLastEmail(data);
+                showLastMail();
             };
 
             // open connection
@@ -111,14 +135,6 @@
 
             // close connection
             $.connection.hub.stop();
-
-            // remove last mail
-            // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            lastMailElement.classList.add('dnn-mdt-hidden');
-            
-            // show empty inbox
-            // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            inboxEmptyElement.classList.remove('dnn-mdt-hidden');
         }
 
         function initStatusCheckbox() {
@@ -140,11 +156,25 @@
             subjectElement.textContent = data.Subject;
             senderElement.textContent = data.Sender;
             revieverElement.textContent = data.To;
+        }
 
+        function showLastMail() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
             lastMailElement.classList.remove('dnn-mdt-hidden');
-        }
-    }(document));
-</script>
 
-<!--<a onclick="window.location.href=$.ServicesFramework().getServiceRoot('DnnDevTools') + '../Overlay.aspx';">Open Overlay</a>-->
+            // reset timeout if another mail comes in while the last mail is still visible
+            if (lastMailTimeoutId) {
+                clearTimeout(lastMailTimeoutId);
+                lastMailTimeoutId = null;
+            }
+
+            // hide last mail after some short delay
+            lastMailTimeoutId = window.setTimeout(hideLastMail, settings.lastMailVisibleTime);
+        }
+
+        function hideLastMail() {
+            // TODO check internet explorer support (http://caniuse.com/#search=classList)
+            lastMailElement.classList.add('dnn-mdt-hidden');
+        }
+    }(document, window, {}));
+</script>

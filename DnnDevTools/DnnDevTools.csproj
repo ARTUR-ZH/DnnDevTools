@@ -120,6 +120,7 @@
   <ItemGroup>
     <Content Include="license.txt" />
     <Content Include="releaseNotes.txt" />
+    <Content Include="Web\Scripts\angular.js" />
     <Content Include="Web\Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Web\Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Web\Overlay.aspx">

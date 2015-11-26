@@ -1,13 +1,25 @@
 ﻿<script type="text/javascript">
     $(function() {
         $("#sendMail").click(function () {
-            $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Mail/SendMail');
+            $.ajax({
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Mail/SendMail',
+                type: "GET",
+                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
+            });
         });
         $("#enableMailCatch").click(function () {
-            $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=true');
+            $.ajax({
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=true',
+                type: "GET",
+                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
+            });
         });
         $("#disableMailCatch").click(function () {
-            $.get($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=false');
+            $.ajax({
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=false',
+                type: "GET",
+                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
+            });
         });
     });
 </script>

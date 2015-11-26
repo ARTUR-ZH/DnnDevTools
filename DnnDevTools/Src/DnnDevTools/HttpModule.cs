@@ -10,6 +10,7 @@ using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -91,6 +92,9 @@ namespace weweave.DnnDevTools
 
         private static void OnPageInit(object sender, EventArgs e)
         {
+            if (!PortalController.Instance.GetCurrentPortalSettings().UserInfo.IsSuperUser)
+                return;
+
             var page = (Page)sender;
 
             ServicesFramework.Instance.RequestAjaxScriptSupport();

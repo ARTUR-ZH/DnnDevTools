@@ -33,6 +33,9 @@
     </style>
 </head>
 <body>
+    
+    <% Response.Write(Helpers.AntiForgery.GetHtml()) %>
+
     <div ng-app="app">
         <div ng-controller="MailController as mail">
             <p ng-if="mail.list.length === 0" class="dnn-mdt-copy">Loading&hellip;</p>
@@ -77,7 +80,10 @@
 
                     $http({
                         method: 'GET',
-                        url: 'API/Mail/List'
+                        url: 'API/Mail/List',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
                     })
                         .success(success)
                         .error(error);

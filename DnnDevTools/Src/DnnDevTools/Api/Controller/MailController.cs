@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -8,18 +7,13 @@ using DotNetNuke.Web.Api;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.Util;
 
-namespace weweave.DnnDevTools.Api
+namespace weweave.DnnDevTools.Api.Controller
 {
+
+    [SuperUserAuthorize]
+    [ValidateAntiForgeryToken]
     public class MailController : DnnApiController
     {
-        [AllowAnonymous]
-        [HttpGet]
-        public HttpResponseMessage HelloWorld()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK, "Hello World!");
-        }
-
-        [AllowAnonymous]
         [HttpGet]
         public List<Mail> List()
         {
@@ -33,7 +27,7 @@ namespace weweave.DnnDevTools.Api
 
                 mails.Add(new Mail
                 {
-                    Id = System.IO.Path.GetFileNameWithoutExtension(file),
+                    Id = Path.GetFileNameWithoutExtension(file),
                     Subject = mail.Subject,
                     Sender = mail.Sender,
                     SentOn = mail.SentOn,
@@ -44,7 +38,6 @@ namespace weweave.DnnDevTools.Api
             return mails;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public HttpResponseMessage Delete(string id)
         {
@@ -56,7 +49,6 @@ namespace weweave.DnnDevTools.Api
         }
 
 
-        [AllowAnonymous]
         [HttpGet]
         public HttpResponseMessage Detail(string id)
         {
@@ -80,7 +72,6 @@ namespace weweave.DnnDevTools.Api
             });
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public HttpResponseMessage SendMail()
         {

@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
 
-namespace weweave.DnnDevTools.Api
+namespace weweave.DnnDevTools.Api.Controller
 {
+    [ValidateAntiForgeryToken]
+    [SuperUserAuthorize]
     public class ConfigController : DnnApiController
     {
 
-        [AllowAnonymous]
         [HttpGet]
         public HttpResponseMessage EnableMailCatch(bool enableMailCatch)
         {

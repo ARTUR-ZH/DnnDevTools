@@ -35,7 +35,7 @@
 </head>
 <body>
     
-    <% Response.Write(Helpers.AntiForgery.GetHtml()) %>
+    <% Response.Write(System.Web.Helpers.AntiForgery.GetHtml()); %>
 
     <div ng-app="app">
         <div ng-controller="MailController as mail">

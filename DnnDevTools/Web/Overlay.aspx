@@ -1,5 +1,6 @@
 ﻿<html>
 <head>
+    <title>DotNetNuke Developer Tools Mail Window</title>
     <style>
         body {
             margin: 0;

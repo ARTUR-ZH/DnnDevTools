@@ -1,4 +1,5 @@
-﻿<html>
+﻿<%@ Page Language="C#" %>
+<html>
 <head>
     <style>
         body {

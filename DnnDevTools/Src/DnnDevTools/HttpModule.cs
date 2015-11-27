@@ -116,7 +116,7 @@ namespace weweave.DnnDevTools
             var enableMailCatch = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch();
 
             var toolbarHtml = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
-            toolbarHtml += $@"<script type=""text/javascript"">window.dnnMailDev={{config:{{enableMailCatch: " + enableMailCatch + "}},toolbar:{{resources:" + JsonConvert.SerializeObject(resources) + "}}}}</script>";
+            toolbarHtml += @"<script type=""text/javascript"">window.dnnMailDev={config:{enableMailCatch: " + enableMailCatch.ToString().ToLowerInvariant() + "},toolbar:{resources:" + JsonConvert.SerializeObject(resources) + "}}</script>";
             toolbarHtml += System.IO.File.ReadAllText(
                 HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
             );

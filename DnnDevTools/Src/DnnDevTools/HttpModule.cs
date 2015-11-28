@@ -102,12 +102,12 @@ namespace weweave.DnnDevTools
             var javaScriptConfig = new Dictionary<string, object>
             {
                 ["enableMailCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch(),
-                ["overlay"] = $"{HostingEnvironment.ApplicationVirtualPath}/DesktopModules/DnnDevTools/Overlay.aspx"
+                ["baseUrl"] = $"{HostingEnvironment.ApplicationVirtualPath}/DesktopModules/DnnDevTools/"
             };
 
             // Inject HTML into end of body
             var html = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
-            html += $@"<script type=""text/javascript"">window.dnnMailDev={JsonConvert.SerializeObject(javaScriptConfig)}</script>";
+            html += $@"<script type=""text/javascript"">window.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>";
             html += toolbarHtml;
             var scriptControl = new LiteralControl { Text = html };
             bodyControl.Controls.Add(scriptControl);

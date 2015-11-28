@@ -10,7 +10,7 @@ namespace weweave.DnnDevTools.Api.Controller
     public class ConfigController : DnnApiController
     {
 
-        [HttpGet]
+        [HttpPut]
         public HttpResponseMessage EnableMailCatch(bool enableMailCatch)
         {
             ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(enableMailCatch);

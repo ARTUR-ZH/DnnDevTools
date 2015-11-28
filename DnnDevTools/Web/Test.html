@@ -3,21 +3,21 @@
         $("#sendMail").click(function () {
             $.ajax({
                 url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Mail/SendMail',
-                type: "GET",
+                type: "POST",
                 beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
             });
         });
         $("#enableMailCatch").click(function () {
             $.ajax({
                 url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=true',
-                type: "GET",
+                type: "PUT",
                 beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
             });
         });
         $("#disableMailCatch").click(function () {
             $.ajax({
                 url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=false',
-                type: "GET",
+                type: "PUT",
                 beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
             });
         });

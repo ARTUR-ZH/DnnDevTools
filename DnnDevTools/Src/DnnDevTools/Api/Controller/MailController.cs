@@ -39,7 +39,7 @@ namespace weweave.DnnDevTools.Api.Controller
             return mails;
         }
 
-        [HttpGet]
+        [HttpDelete]
         public HttpResponseMessage Delete(string id)
         {
             var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
@@ -73,7 +73,7 @@ namespace weweave.DnnDevTools.Api.Controller
             });
         }
 
-        [HttpGet]
+        [HttpPost]
         public HttpResponseMessage SendMail()
         {
             DotNetNuke.Services.Mail.Mail.SendEmail("receiver@localhost", "sender@localhost", "EmailTest", "Hello world!");

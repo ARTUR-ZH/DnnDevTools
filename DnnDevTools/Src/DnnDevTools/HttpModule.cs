@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using System.Net.Configuration;
 using System.Net.Mail;
 using System.Resources;
@@ -15,7 +15,6 @@ using DotNetNuke.Framework;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.Client.Providers;
-using Newtonsoft.Json;
 using weweave.DnnDevTools.SignalR;
 
 namespace weweave.DnnDevTools
@@ -103,26 +102,24 @@ namespace weweave.DnnDevTools
             var bodyControl = page?.FindControl("Body") as HtmlContainerControl;
             if (bodyControl == null) return;
 
+            // Register SignalR
             ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
 
-            // Read Toolbar resources
-            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
-            var resources = new Dictionary<string, string>();
-            foreach (DictionaryEntry d in rsxr)
-            {
-                resources[d.Key.ToString()] = d.Value.ToString();
-            }
-
-            // Get enable mail catch config
-            var enableMailCatch = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch();
-
-            var toolbarHtml = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
-            toolbarHtml += @"<script type=""text/javascript"">window.dnnMailDev={config:{enableMailCatch: " + enableMailCatch.ToString().ToLowerInvariant() + "},toolbar:{resources:" + JsonConvert.SerializeObject(resources) + "}}</script>";
-            toolbarHtml += System.IO.File.ReadAllText(
+            // Get (static) toolbar html
+            var toolbarHtml = System.IO.File.ReadAllText(
                 HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
             );
 
-            var scriptControl = new LiteralControl { Text = toolbarHtml };
+            // Replace toolbar resources
+            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
+            toolbarHtml = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
+
+            // Inject HTML into end of body
+            var enableMailCatch = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch();
+            var html = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
+            html += @"<script type=""text/javascript"">window.dnnMailDev={enableMailCatch: " + enableMailCatch.ToString().ToLowerInvariant() + "}</script>";
+            html += toolbarHtml;
+            var scriptControl = new LiteralControl { Text = html };
             bodyControl.Controls.Add(scriptControl);
         }
     }

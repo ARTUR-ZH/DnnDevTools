@@ -1,6 +1,6 @@
 ﻿Import-Module -Name "$PSScriptRoot\Invoke-MsBuild.psm1"
 
-$fileTypes = ".scss",".jpg",".jpeg",".png",".gif",".js",".css",".cshtml",".html",".ascx",".json",".aspx"
+$fileTypes = ".scss",".jpg",".jpeg",".png",".gif",".js",".css",".cshtml",".html",".ascx",".json",".aspx",".resx"
 
 function Deploy()
 {

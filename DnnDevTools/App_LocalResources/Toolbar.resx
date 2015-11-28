@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Res1" xml:space="preserve">
-    <value>Hello</value>
+  <data name="EnableMailCatch" xml:space="preserve">
+    <value>Enable mail catch</value>
   </data>
-  <data name="Res2" xml:space="preserve">
-    <value>World</value>
+  <data name="ShowMailOvierview" xml:space="preserve">
+    <value>Show mail overview</value>
   </data>
 </root>

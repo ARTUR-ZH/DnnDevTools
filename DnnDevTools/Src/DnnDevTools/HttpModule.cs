@@ -13,6 +13,7 @@ using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework;
 using DotNetNuke.Web.Client;
@@ -125,8 +126,12 @@ namespace weweave.DnnDevTools
 
         private static void OnPageInit(object sender, EventArgs e)
         {
+            // Skip if user is no super user
             if (!PortalController.Instance.GetCurrentPortalSettings().UserInfo.IsSuperUser)
                 return;
+
+            // Skip for DNN popups
+            if (UrlUtils.InPopUp()) return;
 
             var page = (Page)sender;
 

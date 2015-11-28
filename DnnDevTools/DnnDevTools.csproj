@@ -144,7 +144,9 @@
     <None Include="Providers\DataProviders\SqlDataProvider\01.00.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_LocalResources\Overlay.aspx.resx" />
+  </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
       <Guid>{B691E011-1797-432E-907A-4D8C69339129}</Guid>
@@ -166,10 +168,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Toolbar.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Toolbar.Designer.cs</LastGenOutput>
-    </Content>
+    <Content Include="App_LocalResources\Toolbar.html.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
 using System.Linq;
 using System.Net.Configuration;
 using System.Net.Mail;
 using System.Resources;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Configuration;
@@ -19,12 +21,43 @@ using weweave.DnnDevTools.SignalR;
 
 namespace weweave.DnnDevTools
 {
+    public class LocalizeResourceFilter : MemoryStream
+    {
+        private readonly Stream _outputStream;
+        public LocalizeResourceFilter(Stream outputStream)
+        {
+            _outputStream = outputStream;
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            var contentInBuffer = Encoding.UTF8.GetString(buffer);
+
+            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Overlay.aspx.resx"));
+
+            contentInBuffer = rsxr.Cast<DictionaryEntry>().Aggregate(contentInBuffer, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
+
+            _outputStream.Write(Encoding.UTF8.GetBytes(contentInBuffer), offset, Encoding.UTF8.GetByteCount(contentInBuffer));
+        }
+    }
+
     public class HttpModule : IHttpModule
     {
         public void Init(HttpApplication context)
         {
             context.BeginRequest += OnBeginRequest;
             context.PreRequestHandlerExecute += OnPreRequestHandlerExecute;
+            context.ReleaseRequestState += OnReleaseRequestState;
+        }
+
+        private static void OnReleaseRequestState(object sender, EventArgs e)
+        {
+            var request = HttpContext.Current.Request;
+
+            if (!"~/DesktopModules/DnnDevTools/Overlay.aspx".Equals(request.AppRelativeCurrentExecutionFilePath, StringComparison.OrdinalIgnoreCase))
+                return;
+
+            HttpContext.Current.Response.Filter = new LocalizeResourceFilter(HttpContext.Current.Response.Filter);
         }
 
         public void Dispose()
@@ -106,12 +139,12 @@ namespace weweave.DnnDevTools
             ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
 
             // Get (static) toolbar html
-            var toolbarHtml = System.IO.File.ReadAllText(
+            var toolbarHtml = File.ReadAllText(
                 HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
             );
 
             // Replace toolbar resources
-            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
+            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.html.resx"));
             toolbarHtml = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
 
             // Inject HTML into end of body
@@ -122,5 +155,7 @@ namespace weweave.DnnDevTools
             var scriptControl = new LiteralControl { Text = html };
             bodyControl.Controls.Add(scriptControl);
         }
+
     }
+
 }

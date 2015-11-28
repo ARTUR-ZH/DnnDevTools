@@ -40,13 +40,13 @@
 
     <div ng-app="app">
         <div ng-controller="MailController as mail">
-            <p ng-if="mail.list.length === 0" class="dnn-mdt-copy">Loading&hellip;</p>
+            <p ng-if="mail.list.length === 0" class="dnn-mdt-copy">[res:Loading]</p>
             <table ng-cloak ng-if="mail.list.length > 0" class="dnn-mdt-table">
                 <thead>
                     <tr>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">Id</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">Sender</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">SentOn</th>
+                        <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.Id.Title]</th>
+                        <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.Sender.Title]</th>
+                        <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.SentOn.Title]</th>
                         <th class="dnn-mdt-tableCell dnn-mdt-copy">Subject</th>
                         <th class="dnn-mdt-tableCell dnn-mdt-copy">To</th>
                     </tr>

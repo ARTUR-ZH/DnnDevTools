@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
 using weweave.DnnDevTools.Dto;
+using weweave.DnnDevTools.SignalR;
 using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.Api.Controller
@@ -19,7 +20,7 @@ namespace weweave.DnnDevTools.Api.Controller
         {
             var mails = new List<Mail>();
 
-            var files = Directory.EnumerateFiles(MailPickupFileWatcher.Path, "*.eml", SearchOption.TopDirectoryOnly);
+            var files = Directory.EnumerateFiles(MailPickupFolderWatcher.Path, "*.eml", SearchOption.TopDirectoryOnly);
             foreach (var file in files)
             {
                 var mail = EmlFileParser.ParseEmlFile(file);
@@ -41,7 +42,7 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public HttpResponseMessage Delete(string id)
         {
-            var file = MailPickupFileWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
+            var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
 
             if (File.Exists(file)) File.Delete(file);
 
@@ -52,7 +53,7 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public HttpResponseMessage Detail(string id)
         {
-            var file = MailPickupFileWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
+            var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
 
             if (!File.Exists(file))
                 return Request.CreateResponse(HttpStatusCode.NotFound);

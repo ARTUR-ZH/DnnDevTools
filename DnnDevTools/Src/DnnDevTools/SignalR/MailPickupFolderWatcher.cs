@@ -4,9 +4,9 @@ using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.Util;
 
-namespace weweave.DnnDevTools
+namespace weweave.DnnDevTools.SignalR
 {
-    internal class MailPickupFileWatcher
+    internal class MailPickupFolderWatcher
     {
 
         internal static string Path => HttpContext.Current.Server.MapPath("~/App_Data/MailPickup");
@@ -45,7 +45,7 @@ namespace weweave.DnnDevTools
                 SentOn = mail.SentOn,
             };
             
-            GlobalHost.ConnectionManager.GetHubContext<DevToolsEventHub>().Clients.All.OnEvent(emailSentEvent);
+            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsEventHub>().Clients.All.OnEvent(emailSentEvent);
         }
 
     }

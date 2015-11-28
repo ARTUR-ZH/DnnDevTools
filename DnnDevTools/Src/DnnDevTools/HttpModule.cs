@@ -16,6 +16,7 @@ using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.Client.Providers;
 using Newtonsoft.Json;
+using weweave.DnnDevTools.SignalR;
 
 namespace weweave.DnnDevTools
 {
@@ -52,7 +53,7 @@ namespace weweave.DnnDevTools
             if (section == null)
             {
                 var smtpSection = new SmtpSection();
-                smtpSection.SpecifiedPickupDirectory.PickupDirectoryLocation = MailPickupFileWatcher.Path;
+                smtpSection.SpecifiedPickupDirectory.PickupDirectoryLocation = MailPickupFolderWatcher.Path;
                 smtpSection.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
                 configuration.Sections.Add("system.net/mailSettings/smtp", smtpSection);
                 saveConfig = true;
@@ -64,9 +65,9 @@ namespace weweave.DnnDevTools
                     section.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
                     saveConfig = true;
                 }
-                if (section.SpecifiedPickupDirectory.PickupDirectoryLocation != MailPickupFileWatcher.Path)
+                if (section.SpecifiedPickupDirectory.PickupDirectoryLocation != MailPickupFolderWatcher.Path)
                 {
-                    section.SpecifiedPickupDirectory.PickupDirectoryLocation = MailPickupFileWatcher.Path;
+                    section.SpecifiedPickupDirectory.PickupDirectoryLocation = MailPickupFolderWatcher.Path;
                     saveConfig = true;
                 }
             }

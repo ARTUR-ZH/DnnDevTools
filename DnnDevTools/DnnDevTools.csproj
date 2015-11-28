@@ -104,8 +104,9 @@
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\IEvent.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailSentEvent.cs" />
-    <Compile Include="Src\DnnDevTools\MailPickupFileWatcher.cs" />
+    <Compile Include="Src\DnnDevTools\SignalR\MailPickupFolderWatcher.cs" />
     <Compile Include="Src\DnnDevTools\HttpModule.cs" />
     <Compile Include="Src\DnnDevTools\RouterMapper.cs" />
     <Compile Include="Src\DnnDevTools\ServiceLocatorFactory.cs" />
@@ -118,8 +119,9 @@
     <Compile Include="Src\DnnDevTools\Service\ServiceLocator.cs" />
     <Compile Include="Src\DnnDevTools\Service\Settings\ISettingsService.cs" />
     <Compile Include="Src\DnnDevTools\Service\Settings\SettingsService.cs" />
+    <Compile Include="Src\DnnDevTools\SignalR\SuperUserAuthorizeAttribute.cs" />
     <Compile Include="Src\DnnDevTools\Startup.cs" />
-    <Compile Include="Src\DnnDevTools\DevToolsEventHub.cs" />
+    <Compile Include="Src\DnnDevTools\SignalR\DnnDevToolsEventHub.cs" />
     <Compile Include="Src\DnnDevTools\Util\EmlFileParser.cs" />
   </ItemGroup>
   <ItemGroup>

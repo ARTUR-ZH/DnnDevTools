@@ -1,6 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 using weweave.DnnDevTools;
+using weweave.DnnDevTools.SignalR;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace weweave.DnnDevTools
@@ -9,10 +10,11 @@ namespace weweave.DnnDevTools
     {
         public void Configuration(IAppBuilder app)
         {
-            // Any connection or hub wire up and configuration should go here
+            // Wire up SignalR
             app.MapSignalR();
 
-            MailPickupFileWatcher.Run();
+            // Start mail pickup folder watcher
+            MailPickupFolderWatcher.Run();
         }
     }
 }

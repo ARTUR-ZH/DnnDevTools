@@ -3,13 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Configuration;
-using System.Net.Mail;
 using System.Resources;
 using System.Text;
-using System.Threading;
 using System.Web;
-using System.Web.Configuration;
 using System.Web.Hosting;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -20,7 +16,6 @@ using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.Client.Providers;
 using Newtonsoft.Json;
-using weweave.DnnDevTools.SignalR;
 
 namespace weweave.DnnDevTools
 {
@@ -46,7 +41,6 @@ namespace weweave.DnnDevTools
 
         public void Init(HttpApplication context)
         {
-            context.BeginRequest += OnBeginRequest;
             context.PreRequestHandlerExecute += OnPreRequestHandlerExecute;
             context.ReleaseRequestState += OnReleaseRequestState;
         }
@@ -63,54 +57,6 @@ namespace weweave.DnnDevTools
 
         public void Dispose()
         {
-
-        }
-
-        private static void OnBeginRequest(object sender, EventArgs e)
-        {
-            var request = HttpContext.Current.Request;
-
-            if (
-                !"get".Equals(request.HttpMethod, StringComparison.OrdinalIgnoreCase) || 
-                (request.AppRelativeCurrentExecutionFilePath != null && (
-                    request.AppRelativeCurrentExecutionFilePath.StartsWith("~/signalr/", StringComparison.OrdinalIgnoreCase) ||
-                    request.AppRelativeCurrentExecutionFilePath.StartsWith("~/WebResource.axd", StringComparison.OrdinalIgnoreCase))
-                )
-            ) return;
-
-            var configuration = WebConfigurationManager.OpenWebConfiguration("~");
-
-            var section = configuration.GetSection("system.net/mailSettings/smtp") as SmtpSection;
-
-            var saveConfig = false;
-            if (section == null)
-            {
-                var smtpSection = new SmtpSection();
-                smtpSection.SpecifiedPickupDirectory.PickupDirectoryLocation = MailPickupFolderWatcher.Path;
-                smtpSection.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                configuration.Sections.Add("system.net/mailSettings/smtp", smtpSection);
-                saveConfig = true;
-            }
-            else
-            {
-                if (section.DeliveryMethod != SmtpDeliveryMethod.SpecifiedPickupDirectory)
-                {
-                    section.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    saveConfig = true;
-                }
-                if (section.SpecifiedPickupDirectory.PickupDirectoryLocation != MailPickupFolderWatcher.Path)
-                {
-                    section.SpecifiedPickupDirectory.PickupDirectoryLocation = MailPickupFolderWatcher.Path;
-                    saveConfig = true;
-                }
-            }
-            if (saveConfig)
-            {
-                new Thread(() =>
-                {
-                    configuration.Save();
-                }).Start();
-            }
 
         }
 

@@ -2,7 +2,7 @@
 {
     interface IConfigService
     {
-        void SetEnableMailCatch(bool enableMailCatch);
+        bool SetEnableMailCatch(bool enableMailCatch);
 
         bool GetEnableMailCatch();
     }

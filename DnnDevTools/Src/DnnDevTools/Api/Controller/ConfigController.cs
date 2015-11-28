@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
+using Newtonsoft.Json;
 
 namespace weweave.DnnDevTools.Api.Controller
 {
@@ -13,8 +14,12 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpPut]
         public HttpResponseMessage EnableMailCatch(bool enableMailCatch)
         {
-            ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(enableMailCatch);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            var status = ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(enableMailCatch);
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(status))
+            };
+            return result;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
+using weweave.DnnDevTools.Service;
 using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.SignalR
@@ -11,7 +12,16 @@ namespace weweave.DnnDevTools.SignalR
 
         internal static string Path => HttpContext.Current.Server.MapPath("~/App_Data/MailPickup");
 
-        internal static void Run()
+        private IServiceLocator _serviceLocator;
+
+        private IServiceLocator ServiceLocator => _serviceLocator ?? (_serviceLocator = new ServiceLocator());
+
+        private static MailPickupFolderWatcher _instance;
+        internal static MailPickupFolderWatcher Instance => _instance ?? (_instance = new MailPickupFolderWatcher());
+
+        private MailPickupFolderWatcher() { }
+
+        internal void Run()
         {
             if (!Directory.Exists(Path))
                 Directory.CreateDirectory(Path);
@@ -31,11 +41,17 @@ namespace weweave.DnnDevTools.SignalR
             watcher.EnableRaisingEvents = true;
         }
 
-        // Define the event handlers.
-        private static void OnChanged(object source, FileSystemEventArgs e)
+        private void OnChanged(object source, FileSystemEventArgs e)
         {
+            // Do nothing, if mail catch is not enabled
+            if (!ServiceLocator.ConfigService.GetEnableMailCatch())
+                return;
+            
+            // Try to parse mail
             var mail = EmlFileParser.ParseEmlFile(e.FullPath);
             if (mail == null) return;
+
+            // Send mail event to clients
             var emailSentEvent = new MailSentEvent
             {
                 Id = System.IO.Path.GetFileNameWithoutExtension(e.Name),
@@ -44,7 +60,6 @@ namespace weweave.DnnDevTools.SignalR
                 Subject = mail.Subject,
                 SentOn = mail.SentOn,
             };
-            
             GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsEventHub>().Clients.All.OnEvent(emailSentEvent);
         }
 

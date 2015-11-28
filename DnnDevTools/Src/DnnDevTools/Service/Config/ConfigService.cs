@@ -8,14 +8,14 @@
 
         public void SetEnableMailCatch(bool enableMailCatch)
         {
-            ServiceLocatorFactory.Instance.SettingsService.UpdateSetting("EnableMailCatch", enableMailCatch.ToString());
+            ServiceLocator.SettingsService.UpdateSetting("EnableMailCatch", enableMailCatch.ToString());
         }
 
         public bool GetEnableMailCatch()
         {
             bool enableMailCatch;
             return bool.TryParse(
-                ServiceLocatorFactory.Instance.SettingsService.GetSetting("EnableMailCatch", false.ToString()),
+                ServiceLocator.SettingsService.GetSetting("EnableMailCatch", false.ToString()),
                 out enableMailCatch) && enableMailCatch;
         }
 

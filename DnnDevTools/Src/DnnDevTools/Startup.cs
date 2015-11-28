@@ -14,7 +14,7 @@ namespace weweave.DnnDevTools
             app.MapSignalR();
 
             // Start mail pickup folder watcher
-            MailPickupFolderWatcher.Run();
+            MailPickupFolderWatcher.Instance.Run();
         }
     }
 }

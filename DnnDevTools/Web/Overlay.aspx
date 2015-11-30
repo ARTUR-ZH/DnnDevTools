@@ -49,6 +49,8 @@
                         <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.SentOn.Title]</th>
                         <th class="dnn-mdt-tableCell dnn-mdt-copy">Subject</th>
                         <th class="dnn-mdt-tableCell dnn-mdt-copy">To</th>
+                        <th class="dnn-mdt-tableCell dnn-mdt-copy"></th>
+                        <th class="dnn-mdt-tableCell dnn-mdt-copy"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +60,8 @@
                         <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.SentOn}}</td>
                         <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.Subject}}</td>
                         <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.To}}</td>
+                        <td class="dnn-mdt-tableCell dnn-mdt-copy"><button ng-click="mail.detail(item)" type="button">Detail</button></td>
+                        <td class="dnn-mdt-tableCell dnn-mdt-copy"><button ng-click="mail.remove(item)" type="button">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -74,15 +78,71 @@
 
             function remoteData($http, $q) {
                 return {
-                    getMailList: getMailList
+                    list: list,
+                    detail: detail,
+                    remove: remove
                 }
 
-                function getMailList() {
+                function list() {
                     var deferred = $q.defer();
 
                     $http({
                         method: 'GET',
-                        url: 'API/Mail/List',
+                        url: 'api/mail/list',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    })
+                        .success(success)
+                        .error(error);
+
+                    return deferred.promise;
+
+                    function success(response) {
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+                }
+
+                function detail(mail) {
+                    var deferred = $q.defer();
+
+                    $http({
+                        method: 'GET',
+                        url: 'api/mail/detail',
+                        params: {
+                            id: mail.Id
+                        },
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    })
+                        .success(success)
+                        .error(error);
+
+                    return deferred.promise;
+
+                    function success(response) {
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+                }
+
+                function remove(mail) {
+                    var deferred = $q.defer();
+
+                    $http({
+                        method: 'delete',
+                        url: 'api/mail/delete',
+                        params: {
+                            id: mail.Id
+                        },
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
@@ -106,20 +166,49 @@
                 var vm = this;
 
                 vm.list = [];
+                vm.detail = detail;
+                vm.remove = remove;
 
                 activate();
 
                 function activate() {
-                    remoteData.getMailList().then(success, error);
+                    remoteData.list().then(success, error);
+
+                    function success(response) {
+                        vm.list = response;
+                    }
+
+                    function error(response) {
+                        // TODO handle error
+                        console.log(response);
+                    }
                 }
 
-                function success(response) {
-                    vm.list = response;
+                function detail(mail) {
+                    remoteData.detail(mail).then(success, error);
+
+                    function success(response) {
+                        console.log(response);
+                    }
+
+                    function error(response) {
+                        // TODO handle error
+                        console.log(response);
+                    }
                 }
 
-                function error(response) {
-                    // TODO handle error
-                    console.log(response);
+                function remove(mail) {
+                    remoteData.remove(mail).then(success, error);
+
+                    function success(response) {
+                        var index = vm.list.indexOf(mail);
+                        vm.list.splice(index, 1);
+                    }
+
+                    function error(response) {
+                        // TODO handle error
+                        console.log(response);
+                    }
                 }
             }
         }());

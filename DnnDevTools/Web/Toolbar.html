@@ -113,6 +113,35 @@
 </div>
 
 <script type="text/javascript">
+    (function () {
+        dnnMdtAjax = {
+            put: function(url) {
+                return new Promise(function(resolve, reject) {
+                    var req = new XMLHttpRequest();
+
+                    req.open('PUT', url);
+
+                    req.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue());
+
+                    req.onload = function() {
+                        if (req.status == 200) {
+                            resolve(req.response);
+                        }
+                        else {
+                            reject(Error(req.statusText));
+                        }
+                    };
+
+                    req.onerror = function() {
+                        reject(Error("Please check your internet connection."));
+                    };
+
+                    req.send();
+                });
+            }
+        }
+    }());
+
     (function(document, window, settings) {
         var hub = $.connection.dnnDevToolsEventHub,
             lastMailTimeoutId,
@@ -133,6 +162,7 @@
         // initialization
         initMailOverview();
         initStatusCheckbox();
+        initConnection();
         enable();
 
         function initMailOverview() {
@@ -153,10 +183,7 @@
             });
         }
 
-        /**
-        * Establishets connection to devToolsEventHub
-        */
-        function enable() {
+        function initConnection() {
             // listen to mail events
             hub.client.OnEvent = function (data) {
                 updateLastEmail(data);
@@ -167,12 +194,26 @@
             $.connection.hub.start();
         }
 
-        function disable() {
-            // TODO is there a better way to remove the callback?
-            hub.client.OnEvent = null;
+        /**
+        * Enables mail catch
+        */
+        function enable() {
+            setMailCatchStatus(true);
+        }
 
-            // close connection
-            $.connection.hub.stop();
+        /**
+        * Disables mail catch
+        */
+        function disable() {
+            setMailCatchStatus(false);
+        }
+
+        function setMailCatchStatus(status) {
+            dnnMdtAjax.put($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=' + status).then(function (response) {
+                // TODO show success
+            }, function (error) {
+                // TODO show error
+            });
         }
 
         function initStatusCheckbox() {

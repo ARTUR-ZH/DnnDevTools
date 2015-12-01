@@ -166,7 +166,7 @@
 
         function initMailOverview() {
             mailOverviewButton.addEventListener('click', function () {
-                mailOverviewIframe.src = 'http://localhost/dnndevtools/DesktopModules/DnnDevTools/Overlay.aspx';
+                mailOverviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx';
                 mailOverviewWindow.classList.remove('dnn-mdt-hidden');
             }, false);
             

@@ -83,7 +83,7 @@
 <div id="dnn-mdt-hint">
     <div class="dnn-mdt-panel dnn-mdt-bgColorWhite">
         <div class="dnn-mdt-marginBottom1">
-            <input id="dnn-mdt-status" type="checkbox" class="dnn-mdt-checkbox" checked="checked" />
+            <input id="dnn-mdt-status" type="checkbox" class="dnn-mdt-checkbox" />
             <label for="dnn-mdt-status" class="dnn-mdt-copySmall">[res:EnableMailCatch]</label>
         </div>
         <button type="button" id="dnn-mdt-mailOverviewButton">[res:ShowMailOvierview]</button>
@@ -163,7 +163,6 @@
         initMailOverview();
         initStatusCheckbox();
         initConnection();
-        enable();
 
         function initMailOverview() {
             mailOverviewButton.addEventListener('click', function () {
@@ -217,6 +216,9 @@
         }
 
         function initStatusCheckbox() {
+            // set initial value
+            statusElement.checked = window.dnnDevTools.enableMailCatch;
+
             statusElement.addEventListener('change', function (event) {
                 if (this.checked) {
                     enable();

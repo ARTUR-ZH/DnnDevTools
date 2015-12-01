@@ -41,7 +41,7 @@
     <div ng-app="app">
         <div ng-controller="MailController as mail">
             <p ng-if="mail.list.length === 0" class="dnn-mdt-copy">[res:Loading]</p>
-            <table ng-cloak ng-if="mail.list.length > 0" class="dnn-mdt-table">
+            <table ng-cloak ng-if="mail.list.length > 0 && !mail.currentMail" class="dnn-mdt-table">
                 <thead>
                     <tr>
                         <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.Id.Title]</th>
@@ -65,14 +65,20 @@
                     </tr>
                 </tbody>
             </table>
+            <div ng-if="mail.currentMail" ng-cloak>
+                <button type="button" ng-click="mail.currentMail = undefined">back</button>
+                <p ng-if="mail.currentMail.BodyHtml" ng-bind-html="mail.currentMail.BodyHtml" class="dnn-mdt-copy"></p>
+                <p ng-if="mail.currentMail && mail.currentMail.BodyHtml === ''" class="dnn-mdt-copy">Body is empty.</p>
+            </div>
         </div>
     </div>
     
     <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
 
     <script>
         (function () {
-            angular.module('app', [])
+            angular.module('app', ['ngSanitize'])
                 .factory('remoteData', remoteData)
                 .controller('MailController', MailController);
 
@@ -168,6 +174,7 @@
                 vm.list = [];
                 vm.detail = detail;
                 vm.remove = remove;
+                vm.currentMail = undefined;
 
                 activate();
 
@@ -188,7 +195,7 @@
                     remoteData.detail(mail).then(success, error);
 
                     function success(response) {
-                        console.log(response);
+                        vm.currentMail = response;
                     }
 
                     function error(response) {

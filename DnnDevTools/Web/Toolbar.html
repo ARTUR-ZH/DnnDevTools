@@ -11,6 +11,10 @@
         position: absolute;
         bottom: 100%;
         right: 0;
+        cursor: pointer;
+    }
+    #dnn-mdt-lastMail:hover {
+        background-color: #cdcdcd;
     }
 
     /* TEMPLATES */
@@ -144,6 +148,7 @@
 
     (function(document, window, settings) {
         var hub = $.connection.dnnDevToolsEventHub,
+            lastMail = {},
             lastMailTimeoutId,
             statusElement = document.getElementById('dnn-mdt-status'),
             lastMailElement = document.getElementById('dnn-mdt-lastMail'),
@@ -160,20 +165,25 @@
         settings.lastMailVisibleTime = settings.lastMailVisibleTime || 3000;
         
         // initialization
+        initLastMail();
         initMailOverview();
         initStatusCheckbox();
         initConnection();
 
+        function initLastMail() {
+            lastMailElement.addEventListener('click', function () {
+                openOverlay(lastMail.Id);
+            }, false);
+        }
+
         function initMailOverview() {
             mailOverviewButton.addEventListener('click', function () {
-                mailOverviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx';
-                mailOverviewWindow.classList.remove('dnn-mdt-hidden');
+                openOverlay();
             }, false);
             
             // close mail overview window when clicking outside the window panel
             mailOverviewWindow.addEventListener('click', function () {
-                mailOverviewIframe.src = '';
-                mailOverviewWindow.classList.add('dnn-mdt-hidden');
+                closeOverlay();
             });
 
             // prevent closing the mail overview window when clicking on the window panel
@@ -191,6 +201,22 @@
 
             // open connection
             $.connection.hub.start();
+        }
+
+        /**
+         * opens the mail overlay
+         * @param {string} id The mail with this id will be initially highlighted in overlay
+         */
+        function openOverlay(id) {
+            var search = (id !== undefined) ? '?id=' + id : '';
+
+            mailOverviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx' + search;
+            mailOverviewWindow.classList.remove('dnn-mdt-hidden');
+        }
+
+        function closeOverlay() {
+            mailOverviewIframe.src = '';
+            mailOverviewWindow.classList.add('dnn-mdt-hidden');
         }
 
         /**
@@ -233,6 +259,7 @@
         * @param {object} data Data of mail
         */
         function updateLastEmail(data) {
+            lastMail = data;
             dateElement.textContent = data.SentOn;
             subjectElement.textContent = data.Subject;
             senderElement.textContent = data.Sender;

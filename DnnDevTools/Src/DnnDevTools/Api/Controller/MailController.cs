@@ -64,7 +64,8 @@ namespace weweave.DnnDevTools.Api.Controller
 
             return Request.CreateResponse(HttpStatusCode.OK, new MailDetail()
             {
-                BodyHtml = mail.HTMLBody,
+                Body = string.IsNullOrWhiteSpace(mail.HTMLBody) ? mail.TextBody : mail.HTMLBody,
+                BodyIsHtml = !string.IsNullOrWhiteSpace(mail.HTMLBody),
                 Subject = mail.Subject,
                 Sender = mail.Sender,
                 SentOn = mail.SentOn,

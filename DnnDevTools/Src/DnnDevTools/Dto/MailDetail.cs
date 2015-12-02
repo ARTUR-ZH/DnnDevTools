@@ -2,6 +2,8 @@
 {
     public class MailDetail : Mail
     {
-        public string BodyHtml { get; set; }
+        public bool BodyIsHtml { get; set; }
+
+        public string Body { get; set; }
     }
 }

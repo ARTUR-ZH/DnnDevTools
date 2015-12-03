@@ -7,6 +7,7 @@
     }
 
     .dnn-mdt-iconButton {
+        display: block;
         padding: 15px;
         background-color: #00a5e1;
         border: 2px solid #ffffff;
@@ -17,6 +18,10 @@
 
     .dnn-mdt-iconButton:hover {
         opacity: 1;
+    }
+
+    .dnn-mdt-iconButton.dnn-mdt-active {
+        background-color: #ec3d47;
     }
 
     .dnn-mdt-icon24x24 {
@@ -36,6 +41,10 @@
 
     .dnn-mdt-inboxIcon {
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMiAwYy0xLjEwNSAwLTIgLjg5NS0yIDJ2MjhjMCAxLjEwNS44OTUgMiAyIDJoMjZjMS4xMDUgMCAyLS44OTUgMi0ydi0yOGMwLTEuMTA1LS44OTUtMi0yLTJoLTI2em0xIDVoMjR2MTloLTdsLTIgM2gtNmwtMi0zaC03di0xOXoiLz48L3N2Zz4=);
+    }
+
+    .dnn-mdt-iconButton.dnn-mdt-active .dnn-mdt-inboxIcon {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNOCAwdjNoLTh2NGg4djNsOC01LTgtNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMykiIC8+PC9zdmc+);
     }
 
     /* MOLECULES */
@@ -62,10 +71,7 @@
         position: fixed;
         right: 10px;
         bottom: 10px;
-    }
-
-    #dnn-mdt-hint #dnn-mdt-mailOverviewButton {
-        display: block;
+        z-index: 10002;
     }
 
     #dnn-mdt-mailOverviewWindow {
@@ -74,17 +80,16 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1003;
+        background-color: rgba(0, 0, 0, 0.9);
     }
 
     #dnn-mdt-mailOverviewPanel {
         position: fixed;
         left: 15%;
         right: 15%;
-        top: 15%;
-        bottom: 15%;
-        background-color: #ffffff;
-        padding: 30px;
+        top: 0;
+        bottom: 0;
     }
 
     /* LAYOUT */
@@ -241,7 +246,7 @@
 
         function initMailOverview() {
             mailOverviewButton.addEventListener('click', function () {
-                openOverlay();
+                toggleOverlay();
             }, false);
             
             // close mail overview window when clicking outside the window panel
@@ -266,6 +271,14 @@
             $.connection.hub.start();
         }
 
+        function toggleOverlay(id) {
+            if (mailOverviewWindow.classList.contains('dnn-mdt-hidden')) {
+                openOverlay();
+            } else {
+                closeOverlay();
+            }
+        }
+
         /**
          * opens the mail overlay
          * @param {string} id The mail with this id will be initially highlighted in overlay
@@ -275,11 +288,15 @@
 
             mailOverviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx' + search;
             mailOverviewWindow.classList.remove('dnn-mdt-hidden');
+
+            mailOverviewButton.classList.add('dnn-mdt-active');
         }
 
         function closeOverlay() {
             mailOverviewIframe.src = '';
             mailOverviewWindow.classList.add('dnn-mdt-hidden');
+
+            mailOverviewButton.classList.remove('dnn-mdt-active');
         }
 
         /**
@@ -297,6 +314,8 @@
         }
 
         function setMailCatchStatus(status) {
+            closeOverlay();
+
             statusButton.classList.add('dnn-mdt-pulseAnimation');
             
             dnnMdtAjax.put($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=' + status).then(function (response) {

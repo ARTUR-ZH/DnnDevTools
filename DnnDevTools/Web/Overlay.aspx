@@ -5,16 +5,59 @@
     <style>
         body {
             margin: 0;
-        }        
+        } 
+
+        /* style scrollbar in webkit */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #272822;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #12120f;
+        }
 
         [ng-cloak] {
             display: none !important;
         }
 
+        /* SPINNER */
+        @keyframes spinner {
+            to {transform: rotate(360deg);}
+        }
+         
+        @-webkit-keyframes spinner {
+            to {-webkit-transform: rotate(360deg);}
+        }
+         
+        .dnn-mdt-spinner {
+            min-width: 24px;
+            min-height: 24px;
+        }
+
+        .dnn-mdt-spinner:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            margin-top: -10px;
+            margin-left: -10px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, .3);
+            border-top-color: rgba(255, 255, 255, .6);
+            animation: spinner .6s linear infinite;
+            -webkit-animation: spinner .6s linear infinite;
+        }
+
         /* FONTS */
         .dnn-mdt-copy {
             font-family: Arial, sans-serif;
-            font-size: 16px;
+            font-size: 13px;
             margin-top: 0;
             margin-bottom: 0;
         }
@@ -30,7 +73,46 @@
         .dnn-mdt-tableCell {
             padding: 7px 14px;
             text-align: left;
-            border-bottom: 1px solid #cdcdcd;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .dnn-mdt-tableCellSender {
+            width: 25%;
+            color: #ffffff;
+        }
+        .dnn-mdt-tableCellSubject {
+            width: 20%;
+            color: #ffffff;
+        }
+        .dnn-mdt-tableCellSentOn {
+            width: 20%;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .dnn-mdt-tableCellTo {
+            width: 25%;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .dnn-mdt-tableCellActions {
+            width: 10%;
+            text-align: right;
+        }
+
+        /* LIST */
+        .dnn-mdt-list {
+            padding: 20px;
+            background-color: #272822;
+            color: #ffffff;
+        }
+
+        /* DETAIL */
+        .dnn-mdt-detail {
+            padding: 20px;
+            background-color: #ffffff;
+            color: #111111;
         }
     </style>
 </head>
@@ -40,32 +122,24 @@
 
     <div ng-app="app">
         <div ng-controller="MailController as mail">
-            <p ng-if="mail.state === 'loading'" class="dnn-mdt-copy">[res:Loading]</p>
-            <table ng-cloak ng-if="mail.state === 'list'" class="dnn-mdt-table">
-                <thead>
-                    <tr>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.Id.Title]</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.Sender.Title]</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">[res:Mails.Column.SentOn.Title]</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">Subject</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy">To</th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy"></th>
-                        <th class="dnn-mdt-tableCell dnn-mdt-copy"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in mail.list">
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.Id}}</td>
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.Sender}}</td>
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.SentOn}}</td>
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.Subject}}</td>
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy">{{item.To}}</td>
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy"><button ng-click="mail.showDetail(item.Id)" type="button">Detail</button></td>
-                        <td class="dnn-mdt-tableCell dnn-mdt-copy"><button ng-click="mail.remove(item)" type="button">Delete</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div ng-if="mail.state === 'detail'" ng-cloak>
+            <div ng-if="mail.state === 'loading'" class="dnn-mdt-spinner"></div>
+            <div ng-if="mail.state === 'list'" class="dnn-mdt-list" ng-cloak>
+                <table class="dnn-mdt-table">
+                    <tbody>
+                        <tr ng-repeat="item in mail.list | orderBy:'-SentOn'">
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSender">{{item.Sender}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSubject">{{item.Subject}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSentOn">{{item.SentOn | date:'dd.MM.yyyy HH:mm'}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTo">{{item.To}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-tableCellActions">
+                                <button ng-click="mail.showDetail(item.Id)" type="button">+</button>
+                                <button ng-click="mail.remove(item)" type="button">x</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="mail.state === 'detail'" class="dnn-mdt-detail" ng-cloak>
                 <button type="button" ng-click="mail.showList()">back</button>
                 <p ng-if="mail.currentMail.BodyHtml" ng-bind-html="mail.currentMail.BodyHtml" class="dnn-mdt-copy"></p>
                 <p ng-if="mail.currentMail && mail.currentMail.BodyHtml === ''" class="dnn-mdt-copy">Body is empty.</p>

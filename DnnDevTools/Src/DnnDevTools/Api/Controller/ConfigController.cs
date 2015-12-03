@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
+using weweave.DnnDevTools.Dto;
 
 namespace weweave.DnnDevTools.Api.Controller
 {
@@ -13,8 +14,17 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpPut]
         public HttpResponseMessage EnableMailCatch(bool enableMailCatch)
         {
-            var status = ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(enableMailCatch);
+            ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(enableMailCatch);
             return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public HttpResponseMessage List()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, new Config()
+            {
+                EnableMailCatch = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch()
+            });
         }
     }
 }

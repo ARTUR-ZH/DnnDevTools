@@ -102,6 +102,7 @@
     <Compile Include="Src\DnnDevTools\Api\Controller\ConfigController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\MailController.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\Config.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\IEvent.cs" />

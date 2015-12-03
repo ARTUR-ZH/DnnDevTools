@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
 using weweave.DnnDevTools.Dto;
@@ -12,7 +13,7 @@ namespace weweave.DnnDevTools.Api.Controller
 {
 
     [SuperUserAuthorize]
-    [ValidateAntiForgeryToken]
+    //[ValidateAntiForgeryToken]
     public class MailController : DnnApiController
     {
         [HttpGet]
@@ -49,6 +50,25 @@ namespace weweave.DnnDevTools.Api.Controller
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        [HttpGet]
+        public HttpResponseMessage Download(string id)
+        {
+            var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
+
+            if (!File.Exists(file))
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+
+            var result = Request.CreateResponse(HttpStatusCode.OK);
+            result.Content = new StreamContent(new FileStream(file, FileMode.Open, FileAccess.Read)) {
+                Headers =
+                {
+                    ContentDisposition = new ContentDispositionHeaderValue("attachment"),
+                    ContentType = new MediaTypeHeaderValue("message/rfc822")
+                }
+            };
+            result.Content.Headers.ContentDisposition.FileName = id + ".eml";
+            return result;
+        }
 
         [HttpGet]
         public HttpResponseMessage Detail(string id)
@@ -64,7 +84,8 @@ namespace weweave.DnnDevTools.Api.Controller
 
             return Request.CreateResponse(HttpStatusCode.OK, new MailDetail()
             {
-                BodyHtml = mail.HTMLBody,
+                Body = string.IsNullOrWhiteSpace(mail.HTMLBody) ? mail.TextBody : mail.HTMLBody,
+                BodyIsHtml = !string.IsNullOrWhiteSpace(mail.HTMLBody),
                 Subject = mail.Subject,
                 Sender = mail.Sender,
                 SentOn = mail.SentOn,

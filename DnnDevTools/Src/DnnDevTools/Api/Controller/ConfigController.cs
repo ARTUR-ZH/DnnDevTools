@@ -12,9 +12,16 @@ namespace weweave.DnnDevTools.Api.Controller
     {
 
         [HttpPut]
-        public HttpResponseMessage EnableMailCatch(bool enableMailCatch)
+        public HttpResponseMessage Enable(bool status)
         {
-            ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(enableMailCatch);
+            ServiceLocatorFactory.Instance.ConfigService.SetEnable(status);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [HttpPut]
+        public HttpResponseMessage EnableMailCatch(bool status)
+        {
+            ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(status);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
@@ -23,6 +30,7 @@ namespace weweave.DnnDevTools.Api.Controller
         {
             return Request.CreateResponse(HttpStatusCode.OK, new Config()
             {
+                Enable = ServiceLocatorFactory.Instance.ConfigService.GetEnable(),
                 EnableMailCatch = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch()
             });
         }

@@ -2,6 +2,8 @@
 {
     public class Config
     {
+        public bool Enable { get; set; }
+
         public bool EnableMailCatch { get; set; }
     }
 }

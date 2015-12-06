@@ -9,14 +9,28 @@
         });
         $("#enableMailCatch").click(function () {
             $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=true',
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?status=true',
                 type: "PUT",
                 beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
             });
         });
         $("#disableMailCatch").click(function () {
             $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=false',
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?status=false',
+                type: "PUT",
+                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
+            });
+        });
+        $("#enable").click(function () {
+            $.ajax({
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/Enable?status=true',
+                type: "PUT",
+                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
+            });
+        });
+        $("#disable").click(function () {
+            $.ajax({
+                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/Enable?status=false',
                 type: "PUT",
                 beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
             });
@@ -25,5 +39,7 @@
 </script>
 
 <input id="sendMail" type="button" value="[Resx:{key:"SendMail"}]"/>
+<input id="enable" type="button" value="[Resx:{key:"Enable"}]" />
+<input id="disable" type="button" value="[Resx:{key:"Disable"}]" />
 <input id="enableMailCatch" type="button" value="[Resx:{key:"EnableMailCatch"}]"/>
 <input id="disableMailCatch" type="button" value="[Resx:{key:"DisableMailCatch"}]" />

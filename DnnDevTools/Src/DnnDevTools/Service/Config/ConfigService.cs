@@ -12,9 +12,22 @@ namespace weweave.DnnDevTools.Service.Config
         {
         }
 
-        public bool SetEnableMailCatch(bool enableMailCatch)
+        public bool SetEnable(bool status)
         {
-            var updated = ServiceLocator.SettingsService.UpdateSetting("EnableMailCatch", enableMailCatch.ToString());
+            return ServiceLocator.SettingsService.UpdateSetting("Enable", status.ToString());
+        }
+
+        public bool GetEnable()
+        {
+            bool enable;
+            return bool.TryParse(
+                ServiceLocator.SettingsService.GetSetting("Enable", false.ToString()),
+                out enable) && enable;
+        }
+
+        public bool SetEnableMailCatch(bool status)
+        {
+            var updated = ServiceLocator.SettingsService.UpdateSetting("EnableMailCatch", status.ToString());
 
             // Do nothing if config has not changed
             if (!updated) return false;
@@ -23,7 +36,7 @@ namespace weweave.DnnDevTools.Service.Config
             var section = configuration.GetSection("system.net/mailSettings/smtp") as SmtpSection;
             var saveConfig = false;
 
-            if (enableMailCatch)
+            if (status)
             {
                 if (section == null)
                 {

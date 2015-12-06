@@ -79,6 +79,10 @@ namespace weweave.DnnDevTools
             // Skip for DNN popups
             if (UrlUtils.InPopUp()) return;
 
+            // Skip if Dnn Dev Tools in not enabled
+            if (!ServiceLocatorFactory.Instance.ConfigService.GetEnable())
+                return;
+
             var page = (Page)sender;
 
             ServicesFramework.Instance.RequestAjaxScriptSupport();

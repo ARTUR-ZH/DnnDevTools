@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Disable" xml:space="preserve">
+  <data name="Disable.Text" xml:space="preserve">
     <value>Disable</value>
   </data>
   <data name="DisableMailCatch.Text" xml:space="preserve">
     <value>Disable mail catch</value>
   </data>
-  <data name="Enable" xml:space="preserve">
+  <data name="Enable.Text" xml:space="preserve">
     <value>Enable</value>
   </data>
   <data name="EnableMailCatch.Text" xml:space="preserve">

@@ -318,7 +318,7 @@
 
             statusButton.classList.add('dnn-mdt-pulseAnimation');
             
-            dnnMdtAjax.put($.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?enableMailCatch=' + status).then(function (response) {
+            dnnMdtAjax.put(window.dnnDevTools.baseUrl + "api/config/enableMailCatch?enableMailCatch=" + status).then(function (response) {
                     statusButton.classList.remove('dnn-mdt-pulseAnimation');
 
                     if (status) {

@@ -71,52 +71,63 @@
 
         <!--component type="File">
           <files>
-            <basePath>DesktopModules/DnnGoogleAnalyticsAdvanced</basePath>
+            <basePath>DesktopModules/DnnDevTools</basePath>
             <file>
-              <name>Settings.ascx</name>
-              <sourceFileName>Settings.ascx</sourceFileName>
+              <name>HostSettings.html</name>
+              <sourceFileName>HostSettings.html</sourceFileName>
             </file>
             <file>
-              <name>SettingsHost.ascx</name>
-              <sourceFileName>SettingsHost.ascx</sourceFileName>
+              <name>Overlay.aspx</name>
+              <sourceFileName>Overlay.aspx</sourceFileName>
             </file>
             <file>
-              <name>SettingsPortal.ascx</name>
-              <sourceFileName>SettingsPortal.ascx</sourceFileName>
-            </file>
-            <file>
-              <path>App_LocalResources</path>
-              <name>Settings.ascx.resx</name>
+              <name>Toolbar.html</name>
+              <sourceFileName>Toolbar.html</sourceFileName>
             </file>
             <file>
               <path>App_LocalResources</path>
-              <name>SettingsHost.ascx.resx</name>
+              <name>Overlay.aspx.resx</name>
             </file>
             <file>
               <path>App_LocalResources</path>
-              <name>SettingsPortal.ascx.resx</name>
-            </file>
-            <file>
-              <path>Images</path>
-              <name>Icon_32x32.png</name>
+              <name>Toolbar.html.resx</name>
             </file>
             <file>
               <path>Scripts</path>
-              <name>OutboundLinkTracking.js</name>
-            </file>          
+              <name>angular.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>angular-sanitize.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>jquery.signalR-2.2.0.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>jquery.signalR-2.2.0.min.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>jquery-1.6.4.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>jquery-1.6.4.min.js</name>
+            </file>
           </files>
         </component-->
-
 
         <component type="Module">
           <desktopModule>
             <moduleName>DnnDevTools</moduleName>
             <foldername>DnnDevTools</foldername>
 
-            <!--businessControllerClass>weweave.DnnGoogleAnalyticsAdvanced.BusinessController, weweave.DnnGoogleAnalyticsAdvanced</businessControllerClass>
+            <businessControllerClass>weweave.DnnDevTools.BusinessController, weweave.DnnDevTools</businessControllerClass>
             <supportedFeatures>
               <supportedFeature type="Upgradeable" />
-            </supportedFeatures-->
+            </supportedFeatures>
 
             <moduleDefinitions>
               <moduleDefinition>
@@ -125,7 +136,7 @@
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>DesktopModules/DnnDevTools/Test.html</controlSrc>
+                    <controlSrc>DesktopModules/DnnDevTools/HostSettings.html</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>
@@ -138,15 +149,15 @@
             </moduleDefinitions>
           </desktopModule>
 
-          <!--eventMessage>
+          <eventMessage>
             <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
             <processorCommand>UpgradeModule</processorCommand>
             <attributes>
-              <businessControllerClass>weweave.DnnGoogleAnalyticsAdvanced.BusinessController</businessControllerClass>
+              <businessControllerClass>weweave.DnnDevTools.BusinessController</businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.00,01.04.00</upgradeVersionsList>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
             </attributes>
-          </eventMessage-->
+          </eventMessage>
         </component>
 
       </components>

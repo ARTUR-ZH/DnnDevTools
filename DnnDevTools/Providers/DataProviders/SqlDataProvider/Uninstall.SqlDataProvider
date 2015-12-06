@@ -1,1 +1,23 @@
-﻿
+﻿/* -------------------------- */
+/* Table DnnDevTools_Settings */
+/* -------------------------- */
+
+IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_Settings]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+	DROP TABLE {databaseOwner}[{objectQualifier}DnnDevTools_Settings]
+GO
+
+/* --------------------------------------- */
+/* StoredProcedure DnnDevTools_GetSettings */
+/* --------------------------------------- */
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}DnnDevTools_GetSettings') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_GetSettings]
+GO
+
+/* ------------------------------------------ */
+/* StoredProcedure DnnDevTools_UpdateSettings */
+/* ------------------------------------------ */
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}DnnDevTools_UpdateSettings') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_UpdateSettings]
+GO

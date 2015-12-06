@@ -20,9 +20,9 @@ BEGIN
 	)
 END
 
-/* ----------------------------------------- */
+/* -------------------------- */
 /* Table DnnDevTools_Settings */
-/* ----------------------------------------- */
+/* -------------------------- */
 
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_Settings]') and OBJECTPROPERTY(id, N'IsTable') = 1)
 BEGIN
@@ -37,9 +37,9 @@ BEGIN
 END
 GO
 
-/* ----------------------------------------------------- */
+/* --------------------------------------- */
 /* StoredProcedure DnnDevTools_GetSettings */
-/* ----------------------------------------------------- */
+/* --------------------------------------- */
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_GetSettings]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_GetSettings]
@@ -53,9 +53,9 @@ EXEC sp_executesql N'CREATE PROCEDURE {databaseOwner}[{objectQualifier}DnnDevToo
 	END'
 GO
 
-/* --------------------------------------------------------- */
+/* ------------------------------------------ */
 /* StoredProcedure DnnDevTools_UpdateSettings */
-/* --------------------------------------------------------- */
+/* ------------------------------------------ */
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DnnDevTools_UpdateSettings]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
 	DROP PROCEDURE {databaseOwner}[{objectQualifier}DnnDevTools_UpdateSettings]

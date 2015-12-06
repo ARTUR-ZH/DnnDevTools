@@ -13,7 +13,7 @@ namespace weweave.DnnDevTools.Api.Controller
 {
 
     [SuperUserAuthorize]
-    //[ValidateAntiForgeryToken]
+    [ValidateAntiForgeryToken]
     public class MailController : DnnApiController
     {
         [HttpGet]

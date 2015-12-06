@@ -148,7 +148,7 @@
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Overlay.aspx.resx" />
+    <Content Include="App_LocalResources\Overlay.resx" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
@@ -171,7 +171,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Toolbar.html.resx" />
+    <Content Include="App_LocalResources\Toolbar.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\HostSettings.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

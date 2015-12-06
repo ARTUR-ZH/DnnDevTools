@@ -32,7 +32,7 @@ namespace weweave.DnnDevTools
             public override void Write(byte[] buffer, int offset, int count)
             {
                 var contentInBuffer = Encoding.UTF8.GetString(buffer);
-                var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Overlay.aspx.resx"));
+                var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Overlay.resx"));
                 contentInBuffer = rsxr.Cast<DictionaryEntry>().Aggregate(contentInBuffer, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
                 _outputStream.Write(Encoding.UTF8.GetBytes(contentInBuffer), offset, Encoding.UTF8.GetByteCount(contentInBuffer));
             }
@@ -95,7 +95,7 @@ namespace weweave.DnnDevTools
             );
 
             // Replace toolbar resources
-            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.html.resx"));
+            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
             toolbarHtml = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
 
             // Build JavaScript config

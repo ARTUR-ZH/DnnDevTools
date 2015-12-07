@@ -21,7 +21,7 @@ namespace weweave.DnnDevTools.Service.Config
         {
             bool enable;
             return bool.TryParse(
-                ServiceLocator.SettingsService.GetSetting("Enable", false.ToString()),
+                ServiceLocator.SettingsService.GetSetting("Enable", true.ToString()),
                 out enable) && enable;
         }
 
@@ -84,7 +84,7 @@ namespace weweave.DnnDevTools.Service.Config
         {
             bool enableMailCatch;
             return bool.TryParse(
-                ServiceLocator.SettingsService.GetSetting("EnableMailCatch", false.ToString()),
+                ServiceLocator.SettingsService.GetSetting("EnableMailCatch", true.ToString()),
                 out enableMailCatch) && enableMailCatch;
         }
 

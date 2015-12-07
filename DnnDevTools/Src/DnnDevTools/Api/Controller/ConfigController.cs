@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
 using weweave.DnnDevTools.Dto;
+using weweave.DnnDevTools.Service;
 
 namespace weweave.DnnDevTools.Api.Controller
 {
@@ -11,17 +12,24 @@ namespace weweave.DnnDevTools.Api.Controller
     public class ConfigController : DnnApiController
     {
 
+        private static ServiceLocator ServiceLocator => ServiceLocatorFactory.Instance;
+
         [HttpPut]
         public HttpResponseMessage Enable(bool status)
         {
-            ServiceLocatorFactory.Instance.ConfigService.SetEnable(status);
+            ServiceLocator.ConfigService.SetEnable(status);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpPut]
         public HttpResponseMessage EnableMailCatch(bool status)
         {
-            ServiceLocatorFactory.Instance.ConfigService.SetEnableMailCatch(status);
+            if (status && !ServiceLocator.ConfigService.GetEnable())
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "NOT_ENABLED");
+            }
+
+            ServiceLocator.ConfigService.SetEnableMailCatch(status);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
@@ -30,8 +38,8 @@ namespace weweave.DnnDevTools.Api.Controller
         {
             return Request.CreateResponse(HttpStatusCode.OK, new Config()
             {
-                Enable = ServiceLocatorFactory.Instance.ConfigService.GetEnable(),
-                EnableMailCatch = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch()
+                Enable = ServiceLocator.ConfigService.GetEnable(),
+                EnableMailCatch = ServiceLocator.ConfigService.GetEnableMailCatch()
             });
         }
     }

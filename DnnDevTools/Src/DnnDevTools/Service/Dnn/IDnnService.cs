@@ -2,7 +2,7 @@
 
 namespace weweave.DnnDevTools.Service.Dnn
 {
-    interface IDnnService
+    public interface IDnnService
     {
         T GetCachedObject<T>(int cacheTime, string cacheKey, Func<T> callback);
 

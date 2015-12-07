@@ -1,6 +1,6 @@
 ﻿namespace weweave.DnnDevTools.Service.Config
 {
-    interface IConfigService
+    public interface IConfigService
     {
         bool SetEnable(bool status);
 

@@ -1,6 +1,6 @@
 ﻿namespace weweave.DnnDevTools.Service.Settings
 {
-    internal interface ISettingsService
+    public interface ISettingsService
     {
         string GetSetting(string key, string defaultValue);
 

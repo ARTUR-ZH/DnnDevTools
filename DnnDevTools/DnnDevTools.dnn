@@ -26,6 +26,15 @@
                   <node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
                     <add name="weweave.DnnDevTools" type="weweave.DnnDevTools.HttpModule, weweave.DnnDevTools" preCondition="managedHandler" />
                   </node>
+                  <node path="/configuration/system.web/httpRuntime" action="updateattribute" name="targetFramework" value="4.5" />
+                  <node path="/configuration/runtime/ab:assemblyBinding" action="update"
+                      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Newtonsoft.Json']"
+                      collision="overwrite" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab">
+                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
+                      <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30AD4FE6B2A6AEED" />
+                      <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+                    </dependentAssembly>
+                  </node>                    
                 </nodes>
               </configuration>
             </install>

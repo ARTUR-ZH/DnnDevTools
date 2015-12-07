@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSBuild", "MSBuild", "{FE04
 		MSBuild\ModulePackage.targets = MSBuild\ModulePackage.targets
 		MSBuild\MSBuild.Community.Tasks.dll = MSBuild\MSBuild.Community.Tasks.dll
 		MSBuild\MSBuild.Community.Tasks.Targets = MSBuild\MSBuild.Community.Tasks.Targets
-		MSBuild\Package.targets = MSBuild\Package.targets
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DnnDevTools", "http://localhost/DnnDevTools", "{E60165D7-4E57-42B8-AC58-24513B6046C7}"

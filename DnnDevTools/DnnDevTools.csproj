@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\DnnDevTools\Api\Controller\ApiControllerBase.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\ConfigController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\MailController.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />

@@ -5,7 +5,7 @@ using weweave.DnnDevTools.Service.Settings;
 
 namespace weweave.DnnDevTools.Service
 {
-    class ServiceLocator : IServiceLocator
+    public class ServiceLocator : IServiceLocator
     {
         private ISettingsService _settingsService;
         public ISettingsService SettingsService

@@ -9,10 +9,8 @@ namespace weweave.DnnDevTools.Api.Controller
 {
     [ValidateAntiForgeryToken]
     [SuperUserAuthorize]
-    public class ConfigController : DnnApiController
+    public class ConfigController : ApiControllerBase
     {
-
-        private static ServiceLocator ServiceLocator => ServiceLocatorFactory.Instance;
 
         [HttpPut]
         public HttpResponseMessage Enable(bool status)
@@ -36,7 +34,7 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public HttpResponseMessage List()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, new Config()
+            return Request.CreateResponse(HttpStatusCode.OK, new Config
             {
                 Enable = ServiceLocator.ConfigService.GetEnable(),
                 EnableMailCatch = ServiceLocator.ConfigService.GetEnableMailCatch()

@@ -14,7 +14,7 @@ namespace weweave.DnnDevTools.Api.Controller
 
     [SuperUserAuthorize]
     [ValidateAntiForgeryToken]
-    public class MailController : DnnApiController
+    public class MailController : ApiControllerBase
     {
         [HttpGet]
         public List<Mail> List()

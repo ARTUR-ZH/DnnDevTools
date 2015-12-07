@@ -45,6 +45,46 @@
               <path>bin</path>
               <name>weweave.DnnDevTools.dll</name>
             </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Microsoft.Owin.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Microsoft.Owin.Host.SystemWeb.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Microsoft.Owin.Security.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Owin.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Newtonsoft.Json.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Microsoft.AspNet.SignalR.SystemWeb.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Microsoft.AspNet.SignalR.Core.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>System.Net.Http.Formatting.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Interop.ADODB.dll</name>
+            </assembly>
+            <assembly>
+              <path>bin</path>
+              <name>Interop.CDO.dll</name>
+            </assembly>
           </assemblies>
         </component>
 
@@ -58,7 +98,6 @@
               <name>01.00.00.SqlDataProvider</name>
               <version>01.00.00</version>
             </script>
-    
             
             <!-- Uninstall -->
             <script type="UnInstall">
@@ -69,55 +108,14 @@
           </scripts>
         </component>
 
-        <!--component type="File">
-          <files>
+        <component type="ResourceFile">
+          <resourceFiles>
             <basePath>DesktopModules/DnnDevTools</basePath>
-            <file>
-              <name>HostSettings.html</name>
-              <sourceFileName>HostSettings.html</sourceFileName>
-            </file>
-            <file>
-              <name>Overlay.aspx</name>
-              <sourceFileName>Overlay.aspx</sourceFileName>
-            </file>
-            <file>
-              <name>Toolbar.html</name>
-              <sourceFileName>Toolbar.html</sourceFileName>
-            </file>
-            <file>
-              <path>App_LocalResources</path>
-              <name>Overlay.aspx.resx</name>
-            </file>
-            <file>
-              <path>App_LocalResources</path>
-              <name>Toolbar.html.resx</name>
-            </file>
-            <file>
-              <path>Scripts</path>
-              <name>angular.js</name>
-            </file>
-            <file>
-              <path>Scripts</path>
-              <name>angular-sanitize.js</name>
-            </file>
-            <file>
-              <path>Scripts</path>
-              <name>jquery.signalR-2.2.0.js</name>
-            </file>
-            <file>
-              <path>Scripts</path>
-              <name>jquery.signalR-2.2.0.min.js</name>
-            </file>
-            <file>
-              <path>Scripts</path>
-              <name>jquery-1.6.4.js</name>
-            </file>
-            <file>
-              <path>Scripts</path>
-              <name>jquery-1.6.4.min.js</name>
-            </file>
-          </files>
-        </component-->
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
 
         <component type="Module">
           <desktopModule>

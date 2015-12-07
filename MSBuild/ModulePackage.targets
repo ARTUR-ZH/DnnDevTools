@@ -2,83 +2,92 @@
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="MSBuild.Community.Tasks.Targets" />
   <Target Name="PackageModule" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+    <!--                          -->
+    <!-- Prepare package creation -->
+    <!--                          -->
+
+    <!-- Read manifest to get module version -->
     <XmlRead Prefix="n"
                     Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
                     XPath="dotnetnuke/packages/package/@version"
                     XmlFileName="$(DNNFileName).dnn">
       <Output TaskParameter="Value" PropertyName="Version" />
     </XmlRead>
-    <CreateItem Include="$(DNNFileName).dnn">
-      <Output TaskParameter="Include" ItemName="PackageManifestFiles" />
-    </CreateItem>
-    <CreateItem Include="*.txt">
-      <Output TaskParameter="Include" ItemName="PackageTextFiles" />
-    </CreateItem>
-    <CreateItem Include="Components\**\*.dll">
-      <Output TaskParameter="Include" ItemName="ComponentReferences" />
-    </CreateItem>
-    <CreateItem Include="*.asmx;**\*.ascx;*.css;*.xsl;*.svc;*.xml;*.gif;*.png">
-      <Output TaskParameter="Include" ItemName="PackageSourceFiles" />
-    </CreateItem>
-    <CreateItem Include="*.config">
-      <Output TaskParameter="Include" ItemName="PackageConfigFiles" />
-    </CreateItem>
+
+    <!-- Clean temp folder -->
+    <RemoveDir Directories ="$(BuildTempFolder)" />
+
+    <!--                                     -->
+    <!-- Copy files  to resource temp folder -->
+    <!--                                     -->
+
+    <!-- App_LocalResources -->
     <CreateItem Include="App_LocalResources\*.resx">
       <Output TaskParameter="Include" ItemName="PackageLocalResourceFiles" />
     </CreateItem>
-    <CreateItem Include="Documentation\*.txt">
-      <Output TaskParameter="Include" ItemName="PackageDocumentationFiles" />
+    <Copy SourceFiles="@(PackageLocalResourceFiles)" DestinationFolder="$(BuildTempFolder)\Resource\App_LocalResources" />
+
+    <!-- Web -->
+    <CreateItem Include="Web\**\*.*">
+      <Output TaskParameter="Include" ItemName="WebFiles" />
     </CreateItem>
+    <Copy SourceFiles="@(WebFiles)" DestinationFiles="@(WebFiles->'$(BuildTempFolder)\Resource\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <!--                                    -->
+    <!-- Copy files  to package temp folder -->
+    <!--                                    -->
+
+    <!-- SqlDataProvider files -->
     <CreateItem Include="Providers\DataProviders\SqlDataProvider\*.SqlDataProvider">
       <Output TaskParameter="Include" ItemName="PackageSqlDataProviderFiles" />
     </CreateItem>
-    <CreateItem Include="Data\*.SqlDataProvider">
-      <Output TaskParameter="Include" ItemName="PackageDataFiles" />
+    <Copy SourceFiles="@(PackageSqlDataProviderFiles)" DestinationFolder="$(BuildTempFolder)\Package\Providers\DataProviders\SqlDataProvider" />
+
+    <!-- Package text files (releaseNotes and license) -->
+    <CreateItem Include="*.txt">
+      <Output TaskParameter="Include" ItemName="PackageTextFiles" />
     </CreateItem>
-    <CreateItem Include="Images\*.*">
-      <Output TaskParameter="Include" ItemName="MyImages" />
+    <Copy SourceFiles="@(PackageTextFiles)" DestinationFolder="$(BuildTempFolder)\Package" />
+
+    <!-- Package manifest file -->
+    <CreateItem Include="$(DNNFileName).dnn">
+      <Output TaskParameter="Include" ItemName="PackageManifestFiles" />
     </CreateItem>
-    <CreateItem Include="keys\*.*">
-      <Output TaskParameter="Include" ItemName="MyKeys" />
-    </CreateItem>
-    <CreateItem Include="Views\*.ascx">
-      <Output TaskParameter="Include" ItemName="MyViews" />
-    </CreateItem>
-    <CreateItem Include="Views\Controls\*.ascx">
-      <Output TaskParameter="Include" ItemName="MyViewControls" />
-    </CreateItem>
-    <CreateItem Include="RazorHelpers\*.cshtml">
-      <Output TaskParameter="Include" ItemName="MyRazorHelpers" />
-    </CreateItem>
-    <CreateItem Include="Scripts\*.*">
-      <Output TaskParameter="Include" ItemName="MyScripts" />
-    </CreateItem>
-    <CreateItem Include="Scripts\Shared\*.cshtml">
-      <Output TaskParameter="Include" ItemName="MySharedScripts" />
-    </CreateItem>
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(MSBuildProjectDirectory)\Package\bin" />
-    <Copy SourceFiles="@(PackageSourceFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
-    <Copy SourceFiles="@(PackageLocalResourceFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package\App_LocalResources" />
-    <Copy SourceFiles="@(ComponentReferences)" DestinationFolder="$(MSBuildProjectDirectory)\Package\bin" />
-    <Copy SourceFiles="@(PackageSqlDataProviderFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Providers\DataProviders\SqlDataProvider" />
-    <Copy SourceFiles="@(PackageDataFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Data" />
-    <Copy SourceFiles="@(PackageManifestFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
-    <Copy SourceFiles="@(PackageTextFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
-    <Copy SourceFiles="@(PackageConfigFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
-    <Copy SourceFiles="@(PackageDocumentationFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Documentation" />
-    <Copy SourceFiles="@(MyImages)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Images" />
-    <Copy SourceFiles="@(MyKeys)" DestinationFolder="$(MSBuildProjectDirectory)\Package\keys" />
-    <Copy SourceFiles="@(MyViews)" DestinationFolder="$(MSBuildProjectDirectory)\Package" />
-    <Copy SourceFiles="@(MyViewControls)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Controls" />
-    <Copy SourceFiles="@(MyScripts)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Scripts" />
-    <Copy SourceFiles="@(MySharedScripts)" DestinationFolder="$(MSBuildProjectDirectory)\Package\Scripts\Shared" />
-    <Copy SourceFiles="@(MyRazorHelpers)" DestinationFolder="$(MSBuildProjectDirectory)\Package\RazorHelpers" />
-    <CreateItem Include="$(MSBuildProjectDirectory)\Package\**\*.*">
+    <Copy SourceFiles="@(PackageManifestFiles)" DestinationFolder="$(BuildTempFolder)\Package" />
+
+    <!-- bin files -->
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\$(AssemblyName).dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Owin.1.0\lib\net40\Owin.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\lib\Interop.ADODB.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\lib\Interop.CDO.dll" DestinationFolder="$(BuildTempFolder)\Package\bin" />
+
+    <!--                      -->
+    <!-- Create Resources.zip -->
+    <!--                      -->
+
+    <CreateItem Include="$(BuildTempFolder)\Resource\**\*.*">
       <Output TaskParameter="Include" ItemName="OutputContent" />
     </CreateItem>
-    <Zip Files="@(OutputContent)" WorkingDirectory="$(MSBuildProjectDirectory)\Package" ZipFileName="$(PackageName)_$(Version)_Install.$(Extension)" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
-    <Delete Files="$(MSBuildProjectDirectory)\$(PackageName)_$(Version)_Install.$(Extension)" />
-    <RemoveDir Directories ="$(MSBuildProjectDirectory)\Package" />
+    <Zip Files="@(OutputContent)" WorkingDirectory="$(BuildTempFolder)\Resource" ZipFileName="$(BuildTempFolder)\Package\Resources.zip" />
+
+    <!--                                        -->
+    <!-- Create package and copy to install dir -->
+    <!--                                        -->
+
+    <CreateItem Include="$(BuildTempFolder)\Package\**\*.*">
+      <Output TaskParameter="Include" ItemName="OutputContent" />
+    </CreateItem>
+    <Zip Files="@(OutputContent)" WorkingDirectory="$(BuildTempFolder)\Package" ZipFileName="$(BuildTempFolder)\$(PackageName)_$(Version)_Install.$(Extension)" />
+
+    <Copy SourceFiles="$(BuildTempFolder)\$(PackageName)_$(Version)_Install.$(Extension)" DestinationFolder="$(WebsiteInstallPath)" />
+    
   </Target>
 </Project>

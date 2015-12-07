@@ -1,6 +1,7 @@
 ﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+    <BuildTempFolder>$(MSBuildProjectDirectory)\..\.Temp</BuildTempFolder>
     <DNNFileName>DnnDevTools</DNNFileName>
     <PackageName>$(DNNFileName)</PackageName>
     <WebsitePath>$(MSBuildProjectDirectory)\..\Website</WebsitePath>

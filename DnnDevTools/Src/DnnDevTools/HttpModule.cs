@@ -102,15 +102,17 @@ namespace weweave.DnnDevTools
             var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
             toolbarHtml = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
 
+            var basePath = string.IsNullOrWhiteSpace(HostingEnvironment.ApplicationVirtualPath) ? string.Empty : HostingEnvironment.ApplicationVirtualPath.TrimEnd('/');
+
             // Build JavaScript config
             var javaScriptConfig = new Dictionary<string, object>
             {
                 ["enableMailCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch(),
-                ["baseUrl"] = $"{HostingEnvironment.ApplicationVirtualPath}/DesktopModules/DnnDevTools/"
+                ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/"
             };
 
             // Inject HTML into end of body
-            var html = $@"<script src=""{HostingEnvironment.ApplicationVirtualPath}/signalr/hubs""></script>";
+            var html = $@"<script src=""{basePath}/signalr/hubs""></script>";
             html += $@"<script type=""text/javascript"">window.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>";
             html += toolbarHtml;
             var scriptControl = new LiteralControl { Text = html };

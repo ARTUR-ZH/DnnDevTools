@@ -313,8 +313,7 @@
 
                     function success(response) {
                         vm.state = 'list';
-                        // vm.list = response;
-                        vm.list = [];
+                        vm.list = response;
                     }
 
                     function error(response) {

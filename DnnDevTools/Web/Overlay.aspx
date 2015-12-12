@@ -107,6 +107,9 @@
             background-color: #272822;
             color: #ffffff;
         }
+        .dnn-mdt-listEmpty {
+            text-align: center;
+        }
 
         /* DETAIL */
         .dnn-mdt-detail {
@@ -124,6 +127,7 @@
         <div ng-controller="MailController as mail">
             <div ng-if="mail.state === 'loading'" class="dnn-mdt-spinner"></div>
             <div ng-if="mail.state === 'list'" class="dnn-mdt-list" ng-cloak>
+                <p ng-if="mail.list.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
                 <table class="dnn-mdt-table">
                     <tbody>
                         <tr ng-repeat="item in mail.list | orderBy:'-SentOn'">
@@ -134,6 +138,7 @@
                             <td class="dnn-mdt-tableCell dnn-mdt-tableCellActions">
                                 <button ng-click="mail.showDetail(item.Id)" type="button">+</button>
                                 <button ng-click="mail.remove(item)" type="button">x</button>
+                                <button ng-click="mail.download(item.Id)" type="button">down</button>
                             </td>
                         </tr>
                     </tbody>
@@ -160,7 +165,8 @@
                 return {
                     list: list,
                     detail: detail,
-                    remove: remove
+                    remove: remove,
+                    download: download
                 }
 
                 function list() {
@@ -193,6 +199,33 @@
                     $http({
                         method: 'GET',
                         url: 'api/mail/detail',
+                        params: {
+                            id: id
+                        },
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    })
+                        .success(success)
+                        .error(error);
+
+                    return deferred.promise;
+
+                    function success(response) {
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+                }
+
+                function download(id) {
+                    var deferred = $q.defer();
+
+                    $http({
+                        method: 'GET',
+                        url: 'api/mail/download',
                         params: {
                             id: id
                         },
@@ -252,6 +285,7 @@
                 vm.showList = showList;
                 vm.showDetail = showDetail;
                 vm.remove = remove;
+                vm.download = download;
 
                 activate();
 
@@ -279,7 +313,8 @@
 
                     function success(response) {
                         vm.state = 'list';
-                        vm.list = response;
+                        // vm.list = response;
+                        vm.list = [];
                     }
 
                     function error(response) {
@@ -309,6 +344,19 @@
                     function success(response) {
                         var index = vm.list.indexOf(mail);
                         vm.list.splice(index, 1);
+                    }
+
+                    function error(response) {
+                        // TODO handle error
+                        console.log(response);
+                    }
+                }
+
+                function download(id) {
+                    remoteData.download(id).then(success, error);
+
+                    function success(response) {
+                        console.log(response);
                     }
 
                     function error(response) {

@@ -13,9 +13,9 @@ namespace weweave.DnnDevTools.Api.Controller
 {
 
     [SuperUserAuthorize]
-    [ValidateAntiForgeryToken]
     public class MailController : ApiControllerBase
     {
+        [ValidateAntiForgeryToken]
         [HttpGet]
         public List<Mail> List()
         {
@@ -40,6 +40,7 @@ namespace weweave.DnnDevTools.Api.Controller
             return mails;
         }
 
+        [ValidateAntiForgeryToken]
         [HttpDelete]
         public HttpResponseMessage Delete(string id)
         {
@@ -70,6 +71,7 @@ namespace weweave.DnnDevTools.Api.Controller
             return result;
         }
 
+        [ValidateAntiForgeryToken]
         [HttpGet]
         public HttpResponseMessage Detail(string id)
         {
@@ -94,6 +96,7 @@ namespace weweave.DnnDevTools.Api.Controller
             });
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public HttpResponseMessage SendMail()
         {

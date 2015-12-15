@@ -36,6 +36,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DnnDevTools", "http://local
 		SlnRelativePath = "Website\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnnDevTools.Test", "DnnDevTools.Test\DnnDevTools.Test.csproj", "{654847B6-31E5-4ED6-B8CB-290791897110}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{E60165D7-4E57-42B8-AC58-24513B6046C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E60165D7-4E57-42B8-AC58-24513B6046C7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{E60165D7-4E57-42B8-AC58-24513B6046C7}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{654847B6-31E5-4ED6-B8CB-290791897110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654847B6-31E5-4ED6-B8CB-290791897110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654847B6-31E5-4ED6-B8CB-290791897110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654847B6-31E5-4ED6-B8CB-290791897110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

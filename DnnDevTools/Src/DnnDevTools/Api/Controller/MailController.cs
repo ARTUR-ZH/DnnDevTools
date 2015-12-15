@@ -100,7 +100,7 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpPost]
         public HttpResponseMessage SendMail()
         {
-            DotNetNuke.Services.Mail.Mail.SendEmail("receiver@localhost", "sender@localhost", "EmailTest", "Hello world!");
+            DotNetNuke.Services.Mail.Mail.SendEmail("sender@localhost", "receiver@localhost", "Test mail from DNN Dev Tools", "Hello world!");
             return Request.CreateResponse(HttpStatusCode.OK, "Mail sent!");
         }
     }

@@ -1,0 +1,12 @@
+X-Sender: sender@localhost
+X-Receiver: receiver@localhost
+MIME-Version: 1.0
+Sender: sender@localhost
+From: sender@localhost
+To: receiver@localhost
+Date: 15 Dec 2015 15:23:08 +0100
+Subject: Test mail from DNN Dev Tools
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+Hello world!

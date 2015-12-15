@@ -2,7 +2,7 @@
   <packages>
     <package name="DnnDevTools" type="Module" version="01.00.00">
       <friendlyName>DNN Dev Tools</friendlyName>
-      <description>... TODOD ...</description>
+      <description>DNN Dev Tools smoothly integrates into your DNN environment and add useful functionality fpor host admins to test and debug the environment.</description>
       <iconFile>Images/Icon_32x32.png</iconFile>
       <owner>
         <name>weweave GbR</name>

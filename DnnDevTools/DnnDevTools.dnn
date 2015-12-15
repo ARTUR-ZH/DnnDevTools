@@ -2,7 +2,7 @@
   <packages>
     <package name="DnnDevTools" type="Module" version="01.00.00">
       <friendlyName>DNN Dev Tools</friendlyName>
-      <description>DNN Dev Tools smoothly integrates into your DNN environment and add useful functionality fpor host admins to test and debug the environment.</description>
+      <description>DNN Dev Tools smoothly integrates into your DNN environment and adds useful functionalities for host admins.</description>
       <iconFile>Images/Icon_32x32.png</iconFile>
       <owner>
         <name>weweave GbR</name>
@@ -42,6 +42,9 @@
               <configuration>
                 <nodes>
                   <node path="/configuration/system.webServer/modules/add[@name='weweave.DnnDevTools']" action="remove"/>
+                </nodes>
+                <nodes>
+                  <node path="/configuration/system.net/mailSettings/smtp[@deliveryMethod='SpecifiedPickupDirectory']" action="remove"/>
                 </nodes>
               </configuration>
             </uninstall>

@@ -263,8 +263,12 @@
         function initConnection() {
             // listen to mail events
             hub.client.OnEvent = function (data) {
-                updateLastEmail(data);
-                showLastMail();
+                if (data.Type === 'MailSent') {
+                    updateLastEmail(data);
+                    showLastMail();
+                } else if (data.Type === 'LogMessage') {
+                    console.log(data);
+                }
             };
 
             // open connection

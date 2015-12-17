@@ -1,4 +1,6 @@
-﻿namespace weweave.DnnDevTools.Service.Config
+﻿using log4net.Core;
+
+namespace weweave.DnnDevTools.Service.Config
 {
     public interface IConfigService
     {
@@ -9,5 +11,9 @@
         bool SetEnableMailCatch(bool status);
 
         bool GetEnableMailCatch();
+
+        Level GetLogMessageLevel();
+
+        bool SetLogMessageLevel(Level level);
     }
 }

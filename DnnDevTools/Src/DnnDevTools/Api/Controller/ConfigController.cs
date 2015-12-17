@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Web.Api;
 using weweave.DnnDevTools.Dto;
-using weweave.DnnDevTools.Service;
+using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.Api.Controller
 {
@@ -31,13 +31,28 @@ namespace weweave.DnnDevTools.Api.Controller
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
+        [HttpPut]
+        public HttpResponseMessage SetLogMessageLevel(string level)
+        {
+            var log4NetLevel = Log4NetUtil.ParseLevel(level);
+
+            if (log4NetLevel == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+
+            ServiceLocator.ConfigService.SetLogMessageLevel(log4NetLevel);
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
         [HttpGet]
         public HttpResponseMessage List()
         {
             return Request.CreateResponse(HttpStatusCode.OK, new Config
             {
                 Enable = ServiceLocator.ConfigService.GetEnable(),
-                EnableMailCatch = ServiceLocator.ConfigService.GetEnableMailCatch()
+                EnableMailCatch = ServiceLocator.ConfigService.GetEnableMailCatch(),
+                LogMessageLevel = ServiceLocator.ConfigService.GetLogMessageLevel().DisplayName
             });
         }
     }

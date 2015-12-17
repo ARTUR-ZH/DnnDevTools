@@ -7,6 +7,7 @@ namespace weweave.DnnDevTools.Dto
         public string Id { get; set; }
 
         public string Sender { get; set; }
+
         public string To { get; set; }
 
         public string Subject { get; set; }

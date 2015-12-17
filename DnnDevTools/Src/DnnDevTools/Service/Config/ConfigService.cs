@@ -2,7 +2,9 @@
 using System.Net.Mail;
 using System.Threading;
 using System.Web.Configuration;
+using log4net.Core;
 using weweave.DnnDevTools.SignalR;
+using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.Service.Config
 {
@@ -88,5 +90,15 @@ namespace weweave.DnnDevTools.Service.Config
                 out enableMailCatch) && enableMailCatch;
         }
 
+        public Level GetLogMessageLevel()
+        {
+            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting("ALL", true.ToString()));
+            return log4NetLevel ?? Level.All;
+        }
+
+        public bool SetLogMessageLevel(Level level)
+        {
+            return ServiceLocator.SettingsService.UpdateSetting("LogMessageLevel", level.ToString());
+        }
     }
 }

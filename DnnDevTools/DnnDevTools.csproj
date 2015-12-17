@@ -101,14 +101,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\ApiControllerBase.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\ConfigController.cs" />
+    <Compile Include="Src\DnnDevTools\Api\Controller\LogController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\MailController.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\LogMessage.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />
     <Compile Include="Src\DnnDevTools\BusinessController.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Config.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\IEvent.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\LogMessageEvent.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailSentEvent.cs" />
+    <Compile Include="Src\DnnDevTools\SignalR\Log4NetAppender.cs" />
     <Compile Include="Src\DnnDevTools\SignalR\MailPickupFolderWatcher.cs" />
     <Compile Include="Src\DnnDevTools\HttpModule.cs" />
     <Compile Include="Src\DnnDevTools\RouterMapper.cs" />
@@ -126,6 +130,7 @@
     <Compile Include="Src\DnnDevTools\Startup.cs" />
     <Compile Include="Src\DnnDevTools\SignalR\DnnDevToolsEventHub.cs" />
     <Compile Include="Src\DnnDevTools\Util\EmlFileParser.cs" />
+    <Compile Include="Src\DnnDevTools\Util\Log4NetUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />

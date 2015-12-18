@@ -72,8 +72,10 @@ namespace weweave.DnnDevTools
 
         private static void OnPageInit(object sender, EventArgs e)
         {
+            var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
+
             // Skip if user is no super user
-            if (!PortalController.Instance.GetCurrentPortalSettings().UserInfo.IsSuperUser)
+            if (!portalSettings.UserInfo.IsSuperUser)
                 return;
 
             // Skip for DNN popups
@@ -108,7 +110,9 @@ namespace weweave.DnnDevTools
             var javaScriptConfig = new Dictionary<string, object>
             {
                 ["enableMailCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch(),
-                ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/"
+                ["logMessageLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageLevel(),
+                ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/",
+                ["hostSettingsUrl"] = $"{basePath}/Host/DNN-Dev-Tools/portalid/{portalSettings.PortalId}/"
             };
 
             // Inject HTML into end of body

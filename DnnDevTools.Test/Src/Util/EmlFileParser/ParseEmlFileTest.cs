@@ -18,5 +18,20 @@ namespace weweave.DnnDevTools.Test.Util.EmlFileParser
             Assert.IsTrue(mail.TextBody.Contains("Hello world"));
         }
 
+        [TestMethod]
+        public void ParseMailFileNotExist()
+        {
+            var mail = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/MailDoesNotExist.eml");
+            Assert.IsNull(mail);
+        }
+
+        [TestMethod]
+        public void ParseInvalidMail()
+        {
+            var mail = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/InvalidMail.eml");
+            Assert.IsNull(mail);
+        }
+
+
     }
 }

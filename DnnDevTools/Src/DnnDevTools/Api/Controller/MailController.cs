@@ -76,10 +76,6 @@ namespace weweave.DnnDevTools.Api.Controller
         public HttpResponseMessage Detail(string id)
         {
             var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
-
-            if (!File.Exists(file))
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-
             var mail = EmlFileParser.ParseEmlFile(file);
             if (mail == null)
                 return Request.CreateResponse(HttpStatusCode.NotFound);

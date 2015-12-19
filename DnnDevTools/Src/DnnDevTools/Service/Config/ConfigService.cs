@@ -90,6 +90,19 @@ namespace weweave.DnnDevTools.Service.Config
                 out enableMailCatch) && enableMailCatch;
         }
 
+        public bool SetEnableDnnEventCatch(bool status)
+        {
+            return ServiceLocator.SettingsService.UpdateSetting("EnableDnnEventCatch", status.ToString());
+        }
+
+        public bool GetEnableDnnEventCatch()
+        {
+            bool enableMailCatch;
+            return bool.TryParse(
+                ServiceLocator.SettingsService.GetSetting("EnableDnnEventCatch", true.ToString()),
+                out enableMailCatch) && enableMailCatch;
+        }
+
         public Level GetLogMessageLevel()
         {
             var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting("ALL", true.ToString()));

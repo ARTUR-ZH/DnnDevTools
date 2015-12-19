@@ -1,6 +1,6 @@
 namespace weweave.DnnDevTools.Dto
 {
-    public interface IEvent
+    public interface INotification
     {
         string Type { get; }
     }

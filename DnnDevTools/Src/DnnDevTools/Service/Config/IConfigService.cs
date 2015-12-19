@@ -12,6 +12,10 @@ namespace weweave.DnnDevTools.Service.Config
 
         bool GetEnableMailCatch();
 
+        bool SetEnableDnnEventCatch(bool status);
+
+        bool GetEnableDnnEventCatch();
+
         Level GetLogMessageLevel();
 
         bool SetLogMessageLevel(Level level);

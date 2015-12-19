@@ -215,7 +215,7 @@
     }());
 
     (function(document, window, settings) {
-        var hub = $.connection.dnnDevToolsEventHub,
+        var hub = $.connection.dnnDevToolsNotificationHub,
             lastMail = {},
             lastMailTimeoutId,
             statusButton = document.getElementById('dnn-mdt-statusButton'),
@@ -267,6 +267,8 @@
                     updateLastEmail(data);
                     showLastMail();
                 } else if (data.Type === 'LogMessage') {
+                    console.log(data);
+                } else if (data.Type === 'Event') {
                     console.log(data);
                 }
             };

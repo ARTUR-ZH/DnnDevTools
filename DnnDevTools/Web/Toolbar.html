@@ -13,11 +13,10 @@
         border: 2px solid #ffffff;
         border-radius: 100%;
         outline: 0;
-        opacity: 0.8;
     }
 
     .dnn-mdt-iconButton:hover {
-        opacity: 1;
+        background-color: #0184b4;
     }
 
     .dnn-mdt-iconButton.dnn-mdt-active {
@@ -31,14 +30,21 @@
         background-size: 24px 24px;
     }
 
+    .dnn-mdt-icon16x16 {
+        display: block;
+        width: 16px;
+        height: 16px;
+        background-size: 16px 16px;
+    }
+
     .dnn-mdt-eyeIcon {
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTYgMGMtOC44MzcgMC0xNiA3LjE2My0xNiAxNnM3LjE2MyAxNiAxNiAxNiAxNi03LjE2MyAxNi0xNi03LjE2My0xNi0xNi0xNnptLTUgOC44NzVsNSA1IDUtNSAyLjEyNSAyLjEyNS01IDUgNSA1LTIuMTI1IDIuMTI1LTUtNS01IDUtMi4xMjUtMi4xMjUgNS01LTUtNSAyLjEyNS0yLjEyNXoiIC8+PC9zdmc+);
     }
-
+/*
     .dnn-mdt-iconButton.dnn-mdt-active .dnn-mdt-eyeIcon {
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTYgMGMtOC44MzcgMC0xNiA3LjE2My0xNiAxNnM3LjE2MyAxNiAxNiAxNiAxNi03LjE2MyAxNi0xNi03LjE2My0xNi0xNi0xNnptNi45MDYgOC44NzVsMi4yMTkgMi4wMzEtMTIuMDYzIDEzLjI4MS02LjE4OC02LjE4OCAyLjEyNS0yLjEyNSAzLjkzOCAzLjkzOCA5Ljk2OS0xMC45Mzh6IiAvPjwvc3ZnPg==);
     }
-
+*/
     .dnn-mdt-inboxIcon {
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMiAwYy0xLjEwNSAwLTIgLjg5NS0yIDJ2MjhjMCAxLjEwNS44OTUgMiAyIDJoMjZjMS4xMDUgMCAyLS44OTUgMi0ydi0yOGMwLTEuMTA1LS44OTUtMi0yLTJoLTI2em0xIDVoMjR2MTloLTdsLTIgM2gtNmwtMi0zaC03di0xOXoiLz48L3N2Zz4=);
     }
@@ -47,12 +53,27 @@
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNOCAwdjNoLTh2NGg4djNsOC01LTgtNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMykiIC8+PC9zdmc+);
     }
 
-    /* MOLECULES */
-    .dnn-mdt-menu > * {
-        margin-bottom: 5px;
+    .dnn-mdt-cogIcon {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGQ9Ik0zLjUgMGwtLjUgMS4xOWMtLjEuMDMtLjE5LjA4LS4yOC4xM2wtMS4xOS0uNS0uNzIuNzIuNSAxLjE5Yy0uMDUuMS0uMDkuMTgtLjEzLjI4bC0xLjE5LjV2MWwxLjE5LjVjLjA0LjEuMDguMTguMTMuMjhsLS41IDEuMTkuNzIuNzIgMS4xOS0uNWMuMDkuMDQuMTguMDkuMjguMTNsLjUgMS4xOWgxbC41LTEuMTljLjA5LS4wNC4xOS0uMDguMjgtLjEzbDEuMTkuNS43Mi0uNzItLjUtMS4xOWMuMDQtLjA5LjA5LS4xOS4xMy0uMjhsMS4xOS0uNXYtMWwtMS4xOS0uNWMtLjAzLS4wOS0uMDgtLjE5LS4xMy0uMjhsLjUtMS4xOS0uNzItLjcyLTEuMTkuNWMtLjA5LS4wNC0uMTktLjA5LS4yOC0uMTNsLS41LTEuMTloLTF6bS41IDIuNWMuODMgMCAxLjUuNjcgMS41IDEuNXMtLjY3IDEuNS0xLjUgMS41LTEuNS0uNjctMS41LTEuNS42Ny0xLjUgMS41LTEuNXoiLz48L3N2Zz4=);
     }
-    .dnn-mdt-menu > *:last-child {
-        margin-bottom: 0;
+
+    .dnn-mdt-settingsButton {
+        padding: 5px;
+        background-color: #ec3d47;
+    }
+
+    .dnn-mdt-settingsButton:hover {
+        background-color: #b92d35;
+    }
+
+    /* MOLECULES */
+    .dnn-mdt-menu {
+        position: relative;
+    }
+    .dnn-mdt-menu .dnn-mdt-settingsButton {
+        position: absolute;
+        right: -9px;
+        bottom: -9px;
     }
 
     /* LAST MAIL */
@@ -69,8 +90,8 @@
     /* TEMPLATES */
     #dnn-mdt-hint {
         position: fixed;
-        right: 10px;
-        bottom: 10px;
+        right: 12px;
+        bottom: 12px;
         z-index: 10002;
     }
 
@@ -153,13 +174,14 @@
 
 <div id="dnn-mdt-hint">
     <div class="dnn-mdt-menu">
-        <button type="button" id="dnn-mdt-statusButton" class="dnn-mdt-statusButton dnn-mdt-iconButton" title="[res:EnableMailCatch]">
-            <span class="dnn-mdt-eyeIcon dnn-mdt-icon24x24"></span>
-        </button>
-        <button type="button" id="dnn-mdt-mailOverviewButton" class="dnn-mdt-mailOverviewButton dnn-mdt-iconButton" title="[res:ShowMailOvierview]">
+        <button type="button" id="dnn-mdt-mailOverviewButton" class="dnn-mdt-iconButton" title="[res:ShowMailOvierview]">
             <span class="dnn-mdt-inboxIcon dnn-mdt-icon24x24"></span>
         </button>
+        <button type="button" id="dnn-mdt-settingsButton" class="dnn-mdt-settingsButton dnn-mdt-iconButton">
+            <span class="dnn-mdt-cogIcon dnn-mdt-icon16x16"></span>
+        </button>
     </div>
+
     <div id="dnn-mdt-lastMail" class="dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-hidden">
         <p class="dnn-mdt-copySmall">
             <span id="dnn-mdt-lastMailDate"></span>
@@ -184,7 +206,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
     (function () {
         dnnMdtAjax = {
             put: function(url) {
@@ -227,7 +249,8 @@
             mailOverviewButton = document.getElementById('dnn-mdt-mailOverviewButton'),
             mailOverviewWindow = document.getElementById('dnn-mdt-mailOverviewWindow'),
             mailOverviewPanel = document.getElementById('dnn-mdt-mailOverviewPanel'),
-            mailOverviewIframe = document.getElementById('dnn-mdt-mailOverviewIframe');
+            mailOverviewIframe = document.getElementById('dnn-mdt-mailOverviewIframe'),
+            settingsButton = document.getElementById('dnn-mdt-settingsButton');
 
         // merge settings with default settings
         settings.lastMailVisibleTime = settings.lastMailVisibleTime || 3000;
@@ -245,8 +268,14 @@
         }
 
         function initMailOverview() {
+            // toggle overlay visibility on overview button click
             mailOverviewButton.addEventListener('click', function () {
                 toggleOverlay();
+            }, false);
+
+            // open settings page on settings button click
+            settingsButton.addEventListener('click', function () {
+                window.location.href = window.dnnDevTools.hostSettingsUrl;
             }, false);
             
             // close mail overview window when clicking outside the window panel
@@ -267,7 +296,8 @@
                     updateLastEmail(data);
                     showLastMail();
                 } else if (data.Type === 'LogMessage') {
-                    console.log(data);
+                    // TODO
+                    // console.log(data);
                 }
             };
 
@@ -322,7 +352,7 @@
 
             statusButton.classList.add('dnn-mdt-pulseAnimation');
             
-            dnnMdtAjax.put(window.dnnDevTools.baseUrl + "api/config/enableMailCatch?status=" + status).then(function (response) {
+            dnnMdtAjax.put(window.dnnDevTools.baseUrl + 'api/config/enableMailCatch?status=' + status).then(function (response) {
                     statusButton.classList.remove('dnn-mdt-pulseAnimation');
 
                     if (status) {

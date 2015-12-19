@@ -51,15 +51,8 @@ namespace weweave.DnnDevTools.SignalR
             var mail = EmlFileParser.ParseEmlFile(e.FullPath);
             if (mail == null) return;
 
-            // Send mail event to clients
-            var emailSentEvent = new MailSentNotification
-            {
-                Id = System.IO.Path.GetFileNameWithoutExtension(e.Name),
-                Sender = mail.Sender,
-                To = mail.To,
-                Subject = mail.Subject,
-                SentOn = mail.SentOn,
-            };
+            // Send mail notification to clients
+            var emailSentEvent = new MailSentNotification(System.IO.Path.GetFileNameWithoutExtension(e.Name), mail);
             GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(emailSentEvent);
         }
 

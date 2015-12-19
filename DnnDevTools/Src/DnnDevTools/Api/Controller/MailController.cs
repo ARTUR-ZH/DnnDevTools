@@ -27,14 +27,7 @@ namespace weweave.DnnDevTools.Api.Controller
                 var mail = EmlFileParser.ParseEmlFile(file);
                 if (mail == null) continue;
 
-                mails.Add(new Mail
-                {
-                    Id = Path.GetFileNameWithoutExtension(file),
-                    Subject = mail.Subject,
-                    Sender = mail.Sender,
-                    SentOn = mail.SentOn,
-                    To = mail.To
-                });
+                mails.Add(new Mail(Path.GetFileNameWithoutExtension(file), mail));
             }
 
             return mails;
@@ -77,19 +70,9 @@ namespace weweave.DnnDevTools.Api.Controller
         {
             var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
             var mail = EmlFileParser.ParseEmlFile(file);
-            if (mail == null)
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-
-            return Request.CreateResponse(HttpStatusCode.OK, new MailDetail()
-            {
-                Body = string.IsNullOrWhiteSpace(mail.HTMLBody) ? mail.TextBody : mail.HTMLBody,
-                BodyIsHtml = !string.IsNullOrWhiteSpace(mail.HTMLBody),
-                Subject = mail.Subject,
-                Sender = mail.Sender,
-                SentOn = mail.SentOn,
-                Id = id,
-                To = mail.To
-            });
+            return mail == null ? 
+                Request.CreateResponse(HttpStatusCode.NotFound) : 
+                Request.CreateResponse(HttpStatusCode.OK, new MailDetail(id, mail));
         }
 
         [ValidateAntiForgeryToken]
@@ -97,7 +80,7 @@ namespace weweave.DnnDevTools.Api.Controller
         public HttpResponseMessage SendMail()
         {
             DotNetNuke.Services.Mail.Mail.SendEmail("sender@localhost", "receiver@localhost", "Test mail from DNN Dev Tools", "Hello world!");
-            return Request.CreateResponse(HttpStatusCode.OK, "Mail sent!");
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

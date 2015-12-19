@@ -1,4 +1,5 @@
 ﻿using System;
+using DotNetNuke.Services.Log.EventLog;
 
 namespace weweave.DnnDevTools.Dto
 {
@@ -33,5 +34,17 @@ namespace weweave.DnnDevTools.Dto
         /// Message of the event
         /// </summary>
         public string Message { get; set; }
+
+        public DnnEvent() { }
+
+        internal DnnEvent(LogInfo log)
+        {
+            LogType = log.LogTypeKey;
+            Portal = log.LogPortalName;
+            Id = log.LogGUID;
+            TimeStamp = log.LogCreateDate;
+            Username = log.LogUserName;
+            Message = log.LogProperties.Summary;
+        }
     }
 }

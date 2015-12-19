@@ -36,6 +36,7 @@ namespace weweave.DnnDevTools.SignalR
                     if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableDnnEventCatch())
                         return;
 
+                    // Get last 100 log entries
                     var logs = LogController.Instance.GetLogs(Null.NullInteger, Null.NullString, 100, 0, ref totalRecords);
 
                     var newLogs = logs.Where(e => e.LogCreateDate > lastLog).ToList();
@@ -44,16 +45,8 @@ namespace weweave.DnnDevTools.SignalR
                     // ReSharper disable once LoopCanBePartlyConvertedToQuery
                     foreach (var newLog in newLogs)
                     {
-                        // Send event notification to clients
-                        var eventNotification = new DnnDnnEventNotification
-                        {
-                            LogType = newLog.LogTypeKey,
-                            Portal = newLog.LogPortalName,
-                            Id = newLog.LogGUID,
-                            TimeStamp = newLog.LogCreateDate,
-                            Username = newLog.LogUserName,
-                            Message = newLog.LogProperties.Summary
-                        };
+                        // Send DNN event notification to clients
+                        var eventNotification = new DnnDnnEventNotification(newLog);
                         GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(eventNotification);
                     }
                 }

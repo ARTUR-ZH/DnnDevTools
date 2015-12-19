@@ -9,6 +9,8 @@ namespace weweave.DnnDevTools.SignalR
 {
     internal class Log4NetAppender : AppenderSkeleton
     {
+        private const int QueueSize = 1000;
+
         internal readonly static ConcurrentQueue<LogMessage> LogMessageQueue = new ConcurrentQueue<LogMessage>();
 
         private IServiceLocator _serviceLocator;
@@ -27,7 +29,7 @@ namespace weweave.DnnDevTools.SignalR
 
             // Queue logging event
             LogMessageQueue.Enqueue(logMessageEvent);
-            if (LogMessageQueue.Count > 100)
+            if (LogMessageQueue.Count > QueueSize)
             {
                 LogMessage l;
                 LogMessageQueue.TryDequeue(out l);

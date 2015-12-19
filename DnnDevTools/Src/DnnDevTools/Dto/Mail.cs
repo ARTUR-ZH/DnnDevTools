@@ -1,4 +1,5 @@
 ﻿using System;
+using CDO;
 
 namespace weweave.DnnDevTools.Dto
 {
@@ -13,5 +14,16 @@ namespace weweave.DnnDevTools.Dto
         public string Subject { get; set; }
 
         public DateTime SentOn { get; set; }
+
+        public Mail() {}
+
+        internal Mail(string id, IMessage mail)
+        {
+            Id = id;
+            Subject = mail.Subject;
+            Sender = mail.Sender;
+            SentOn = mail.SentOn;
+            To = mail.To;
+        }
     }
 }

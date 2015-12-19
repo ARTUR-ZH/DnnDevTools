@@ -12,19 +12,14 @@ namespace weweave.DnnDevTools.Api.Controller
     [ValidateAntiForgeryToken]
     public class DnnEventController : ApiControllerBase
     {
+
         [HttpGet]
         public List<DnnEvent> List()
         {
             var totalRecords = 0;
-            var logs = DotNetNuke.Services.Log.EventLog.LogController.Instance.GetLogs(Null.NullInteger, Null.NullString, 100, 0, ref totalRecords);
-            return logs.Select(e => new DnnEvent
-            {
-                LogType = e.LogTypeKey,
-                Portal = e.LogPortalName,
-                Id = e.LogGUID,
-                TimeStamp = e.LogCreateDate,
-                Username = e.LogUserName
-            }).ToList();
+            var logs = DotNetNuke.Services.Log.EventLog.LogController.Instance.GetLogs(Null.NullInteger, Null.NullString, 1000, 0, ref totalRecords);
+            return logs.Select(e => new DnnEvent(e)).ToList();
         }
+
     }
 }

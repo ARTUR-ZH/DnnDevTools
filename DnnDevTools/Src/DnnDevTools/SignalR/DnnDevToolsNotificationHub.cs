@@ -4,7 +4,7 @@ namespace weweave.DnnDevTools.SignalR
 {
 
     [SuperUserAuthorize]
-    public class DnnDevToolsEventHub : Hub
+    public class DnnDevToolsNotificationHub : Hub
     {
     }
 }

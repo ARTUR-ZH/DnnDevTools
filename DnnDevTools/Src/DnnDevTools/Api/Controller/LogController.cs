@@ -15,7 +15,7 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public List<LogMessage> List()
         {
-            return Log4NetAppender.LoggingEvents.ToList()
+            return Log4NetAppender.LogMessageQueue.ToList()
                 .Select(e => new LogMessage {Level = e.Level, Message = e.Message, TimeStamp = e.TimeStamp})
                 .ToList();
         }

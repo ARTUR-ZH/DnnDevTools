@@ -10,7 +10,9 @@ using System.Web.Hosting;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -81,44 +83,59 @@ namespace weweave.DnnDevTools
             // Skip for DNN popups
             if (UrlUtils.InPopUp()) return;
 
-            // Skip if Dnn Dev Tools in not enabled
-            if (!ServiceLocatorFactory.Instance.ConfigService.GetEnable())
-                return;
+            var hostSettings = TabController.CurrentPage.Modules.Cast<ModuleInfo>().Any(m => m.DesktopModule.ModuleName == "DnnDevTools");
+            var enabled = ServiceLocatorFactory.Instance.ConfigService.GetEnable();
+
+            // Skip if Dnn Dev Tools in not enabled and we do not show host settings
+            if (!enabled && !hostSettings) return;
 
             var page = (Page)sender;
-
-            ServicesFramework.Instance.RequestAjaxScriptSupport();
-
             var bodyControl = page?.FindControl("Body") as HtmlContainerControl;
             if (bodyControl == null) return;
 
-            // Register SignalR
-            ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
+            ServicesFramework.Instance.RequestAjaxScriptSupport();
 
-            // Get (static) toolbar html
-            var toolbarHtml = File.ReadAllText(
-                HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
-            );
-
-            // Replace toolbar resources
-            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
-            toolbarHtml = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
+            // Included shared dnn.js and dnn.css
+            ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/dnn.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
+            ClientResourceManager.RegisterStyleSheet(page, "~/desktopmodules/DnnDevTools/Styles/dnn.css");
 
             var basePath = string.IsNullOrWhiteSpace(HostingEnvironment.ApplicationVirtualPath) ? string.Empty : HostingEnvironment.ApplicationVirtualPath.TrimEnd('/');
 
             // Build JavaScript config
             var javaScriptConfig = new Dictionary<string, object>
             {
+                ["enable"] = ServiceLocatorFactory.Instance.ConfigService.GetEnable(),
                 ["enableMailCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch(),
+                ["enableDnnEventCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableDnnEventCatch(),
                 ["logMessageLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageLevel(),
                 ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/",
                 ["hostSettingsUrl"] = $"{basePath}/Host/DNN-Dev-Tools/portalid/{portalSettings.PortalId}/"
             };
 
+            // Inject DnnDevTool config 
+            var html = $@"<script type=""text/javascript"">window.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>";
+
+            // Inject Toolbar HTML
+            if (enabled)
+            {
+                // Include SignalR script
+                html += $@"<script src=""{basePath}/signalr/hubs""></script>";
+
+                // Register SignalR
+                ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
+
+                // Get (static) toolbar html
+                var toolbarHtml = File.ReadAllText(
+                    HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/Toolbar.html")
+                );
+
+                // Replace toolbar resources
+                var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
+                html += rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
+
+            }
+
             // Inject HTML into end of body
-            var html = $@"<script src=""{basePath}/signalr/hubs""></script>";
-            html += $@"<script type=""text/javascript"">window.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>";
-            html += toolbarHtml;
             var scriptControl = new LiteralControl { Text = html };
             bodyControl.Controls.Add(scriptControl);
         }

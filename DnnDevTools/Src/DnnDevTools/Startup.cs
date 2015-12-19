@@ -20,10 +20,13 @@ namespace weweave.DnnDevTools
             root.Level = Level.All;
             var attachable = (IAppenderAttachable) root;
             var appender = new Log4NetAppender();
-            attachable?.AddAppender(appender);
+            attachable.AddAppender(appender);
 
             // Start mail pickup folder watcher
             MailPickupFolderWatcher.Instance.Run();
+
+            // Start event watcher
+            DnnEventWatcher.Instance.Run();
         }
     }
 }

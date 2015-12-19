@@ -1,6 +1,6 @@
 namespace weweave.DnnDevTools.Dto
 {
-    public class MailSentEvent : Mail, IEvent
+    public class MailSentNotification : Mail, INotification
     {
         public string Type => "MailSent";
     }

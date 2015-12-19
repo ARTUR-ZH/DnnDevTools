@@ -26,7 +26,7 @@ namespace weweave.DnnDevTools.SignalR
             if (!Directory.Exists(Path))
                 Directory.CreateDirectory(Path);
 
-            // Create a new FileSystemWatcher and set its properties.
+            // Create a new FileSystemWatcher and set its properties
             var watcher = new FileSystemWatcher
             {
                 Path = Path,
@@ -34,10 +34,10 @@ namespace weweave.DnnDevTools.SignalR
                 Filter = "*.eml"
             };
 
-            // Add event handlers.
+            // Add event handlers
             watcher.Created += OnChanged;
 
-            // Begin watching.
+            // Begin watching
             watcher.EnableRaisingEvents = true;
         }
 
@@ -52,7 +52,7 @@ namespace weweave.DnnDevTools.SignalR
             if (mail == null) return;
 
             // Send mail event to clients
-            var emailSentEvent = new MailSentEvent
+            var emailSentEvent = new MailSentNotification
             {
                 Id = System.IO.Path.GetFileNameWithoutExtension(e.Name),
                 Sender = mail.Sender,
@@ -60,7 +60,7 @@ namespace weweave.DnnDevTools.SignalR
                 Subject = mail.Subject,
                 SentOn = mail.SentOn,
             };
-            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsEventHub>().Clients.All.OnEvent(emailSentEvent);
+            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(emailSentEvent);
         }
 
     }

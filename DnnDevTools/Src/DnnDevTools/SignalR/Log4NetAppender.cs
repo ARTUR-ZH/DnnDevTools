@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using log4net.Appender;
 using log4net.Core;
 using Microsoft.AspNet.SignalR;
@@ -10,7 +9,7 @@ namespace weweave.DnnDevTools.SignalR
 {
     internal class Log4NetAppender : AppenderSkeleton
     {
-        internal readonly static ConcurrentQueue<LogMessage> LoggingEvents = new ConcurrentQueue<LogMessage>();
+        internal readonly static ConcurrentQueue<LogMessage> LogMessageQueue = new ConcurrentQueue<LogMessage>();
 
         private IServiceLocator _serviceLocator;
 
@@ -24,7 +23,7 @@ namespace weweave.DnnDevTools.SignalR
             if (level.Value > loggingEvent.Level.Value) return;
 
             // Create log event
-            var logMessageEvent = new LogMessageEvent
+            var logMessageEvent = new LogMessageNotification
             {
                 Level = loggingEvent.Level.DisplayName,
                 Message = loggingEvent.RenderedMessage,
@@ -32,15 +31,15 @@ namespace weweave.DnnDevTools.SignalR
             };
 
             // Queue logging event
-            LoggingEvents.Enqueue(logMessageEvent);
-            if (LoggingEvents.Count > 100)
+            LogMessageQueue.Enqueue(logMessageEvent);
+            if (LogMessageQueue.Count > 100)
             {
                 LogMessage l;
-                LoggingEvents.TryDequeue(out l);
+                LogMessageQueue.TryDequeue(out l);
             }
 
             // Send log event to clients
-            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsEventHub>().Clients.All.OnEvent(logMessageEvent);
+            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(logMessageEvent);
         }
 
         protected override bool RequiresLayout => false;

@@ -22,7 +22,8 @@ namespace weweave.DnnDevTools.Api.Controller
                 LogType = e.LogTypeKey,
                 Portal = e.LogPortalName,
                 Id = e.LogGUID,
-                TimeStamp = e.LogCreateDate
+                TimeStamp = e.LogCreateDate,
+                Username = e.LogUserName
             }).ToList();
         }
     }

@@ -50,7 +50,9 @@ namespace weweave.DnnDevTools.SignalR
                             LogType = newLog.LogTypeKey,
                             Portal = newLog.LogPortalName,
                             Id = newLog.LogGUID,
-                            TimeStamp = newLog.LogCreateDate
+                            TimeStamp = newLog.LogCreateDate,
+                            Username = newLog.LogUserName,
+                            Message = newLog.LogProperties.Summary
                         };
                         GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(eventNotification);
                     }

@@ -95,6 +95,10 @@ namespace weweave.DnnDevTools
 
             ServicesFramework.Instance.RequestAjaxScriptSupport();
 
+            // Included shared dnn.js and dnn.css
+            ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/dnn.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
+            ClientResourceManager.RegisterStyleSheet(page, "~/desktopmodules/DnnDevTools/Styles/dnn.css");
+
             var basePath = string.IsNullOrWhiteSpace(HostingEnvironment.ApplicationVirtualPath) ? string.Empty : HostingEnvironment.ApplicationVirtualPath.TrimEnd('/');
 
             // Build JavaScript config

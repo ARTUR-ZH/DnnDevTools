@@ -142,6 +142,8 @@
     <Content Include="Web\Overlay.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Web\Scripts\dnn.js" />
+    <Content Include="Web\Styles\dnn.css" />
     <Content Include="Web\Toolbar.html" />
     <Content Include="Web\HostSettings.html" />
   </ItemGroup>
@@ -182,6 +184,7 @@
   <ItemGroup>
     <Content Include="App_LocalResources\HostSettings.resx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

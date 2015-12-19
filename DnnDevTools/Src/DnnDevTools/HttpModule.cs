@@ -100,7 +100,7 @@ namespace weweave.DnnDevTools
             // Build JavaScript config
             var javaScriptConfig = new Dictionary<string, object>
             {
-                ["enabled"] = ServiceLocatorFactory.Instance.ConfigService.GetEnable(),
+                ["enable"] = ServiceLocatorFactory.Instance.ConfigService.GetEnable(),
                 ["enableMailCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch(),
                 ["logMessageLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageLevel(),
                 ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/",

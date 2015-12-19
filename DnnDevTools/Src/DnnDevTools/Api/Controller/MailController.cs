@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -19,6 +21,13 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public List<Mail> List()
         {
+            return List(null, null, null);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpGet]
+        public List<Mail> List(int? skip, int? take, string search)
+        {
             var mails = new List<Mail>();
 
             var files = Directory.EnumerateFiles(MailPickupFolderWatcher.Path, "*.eml", SearchOption.TopDirectoryOnly);
@@ -30,7 +39,14 @@ namespace weweave.DnnDevTools.Api.Controller
                 mails.Add(new Mail(Path.GetFileNameWithoutExtension(file), mail));
             }
 
-            return mails;
+            IEnumerable<Mail> result  = mails.OrderByDescending(e => e.SentOn);
+
+            if (!string.IsNullOrWhiteSpace(search))
+                result = result.Where(e => string.Concat(e.Sender, e.Subject, e.To).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            if (skip != null) result = result.Skip(skip.Value);
+            if (take != null) result = result.Take(take.Value);
+
+            return result.ToList();
         }
 
         [ValidateAntiForgeryToken]

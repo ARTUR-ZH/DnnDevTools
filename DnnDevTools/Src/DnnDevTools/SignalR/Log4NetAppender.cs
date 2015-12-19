@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using log4net.Appender;
 using log4net.Core;
 using Microsoft.AspNet.SignalR;
@@ -24,15 +23,7 @@ namespace weweave.DnnDevTools.SignalR
             if (level.Value > loggingEvent.Level.Value) return;
 
             // Create log event
-            var logMessageEvent = new LogMessageNotification
-            {
-                Id = Guid.NewGuid().ToString(),
-                Level = loggingEvent.Level.DisplayName,
-                Message = loggingEvent.RenderedMessage,
-                TimeStamp = loggingEvent.TimeStamp,
-                MethodName = loggingEvent.LocationInformation.MethodName,
-                ClassName = loggingEvent.LocationInformation.ClassName
-            };
+            var logMessageEvent = new LogMessageNotification(loggingEvent);
 
             // Queue logging event
             LogMessageQueue.Enqueue(logMessageEvent);

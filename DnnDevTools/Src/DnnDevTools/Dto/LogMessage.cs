@@ -1,4 +1,5 @@
 ﻿using System;
+using log4net.Core;
 
 namespace weweave.DnnDevTools.Dto
 {
@@ -34,6 +35,29 @@ namespace weweave.DnnDevTools.Dto
         /// </summary>
         public string MethodName { get; set; }
 
+        public LogMessage() { }
 
+        internal LogMessage(LoggingEvent loggingEvent)
+        {
+            Id = Guid.NewGuid().ToString();
+            Level = loggingEvent.Level.DisplayName;
+            Message = loggingEvent.RenderedMessage;
+            TimeStamp = loggingEvent.TimeStamp;
+            MethodName = loggingEvent.LocationInformation.MethodName;
+            ClassName = loggingEvent.LocationInformation.ClassName;
+        }
+
+        internal LogMessage Copy()
+        {
+            return new LogMessage
+            {
+                Level  = Level,
+                Id = Id,
+                ClassName = ClassName,
+                Message = Message,
+                MethodName = MethodName,
+                TimeStamp = TimeStamp
+            };
+        }
     }
 }

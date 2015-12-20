@@ -1,4 +1,56 @@
-﻿<script type="text/javascript">
+﻿<input id="sendMail" type="button" value="[Resx:{key:"SendMail"}]"/>
+<input id="enable" type="button" value="[Resx:{key:"Enable"}]" />
+<input id="disable" type="button" value="[Resx:{key:"Disable"}]" />
+<input id="enableMailCatch" type="button" value="[Resx:{key:"EnableMailCatch"}]"/>
+<input id="disableMailCatch" type="button" value="[Resx:{key:"DisableMailCatch"}]" />
+
+<script>
+    (function () {
+        dnnMdtAjax = {
+            put: function (url) {
+                return new Promise(function (resolve, reject) {
+                    var req = new XMLHttpRequest();
+
+                    req.open('PUT', url);
+
+                    req.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue());
+
+                    req.onload = function () {
+                        if (req.status == 200) {
+                            resolve(req.response);
+                        }
+                        else {
+                            reject(Error(req.statusText));
+                        }
+                    };
+
+                    req.onerror = function () {
+                        reject(Error("Please check your internet connection."));
+                    };
+
+                    req.send();
+                });
+            }
+        }
+    }());
+
+    (function () {
+        getConfig();
+
+        function getConfig() {
+            console.log(window.dnnDevTools.enable);
+            console.log(window.dnnDevTools.enableDnnEventCatch);
+            /*
+            dnnMdtAjax.put($.ServicesFramework().getServiceRoot("DnnDevTools") + 'config/list').then(function (response) {
+                    console.log('>', response);
+                }, function (error) {
+                    // TODO show error
+                }
+            );
+*/
+        }
+    }());
+
     $(function() {
         $("#sendMail").click(function () {
             $.ajax({
@@ -37,9 +89,3 @@
         });
     });
 </script>
-
-<input id="sendMail" type="button" value="[Resx:{key:"SendMail"}]"/>
-<input id="enable" type="button" value="[Resx:{key:"Enable"}]" />
-<input id="disable" type="button" value="[Resx:{key:"Disable"}]" />
-<input id="enableMailCatch" type="button" value="[Resx:{key:"EnableMailCatch"}]"/>
-<input id="disableMailCatch" type="button" value="[Resx:{key:"DisableMailCatch"}]" />

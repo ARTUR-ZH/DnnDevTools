@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" %>
+<%@ Page Language="C#" %>
 <html>
 <head>
     <title>DotNetNuke Developer Tools Mail Window</title>
@@ -124,6 +124,16 @@
     <% Response.Write(System.Web.Helpers.AntiForgery.GetHtml()); %>
 
     <div ng-app="app">
+        <div ui-view role="main"></div>
+
+        <script type="text/ng-template" id="dnn-mdt-overview.html">
+            <h1 style="color: #ffffff">Test1</h1>
+            <a ui-sref="test">goto test2</a>
+        </script>
+        <script type="text/ng-template" id="dnn-mdt-mail-detail.html">
+            <h1>Test2</h1>
+        </script>
+<!--
         <div ng-controller="MailController as mail">
             <div ng-if="mail.state === 'loading'" class="dnn-mdt-spinner"></div>
             <div ng-if="mail.state === 'list'" class="dnn-mdt-list" ng-cloak>
@@ -150,23 +160,40 @@
                 <p ng-if="mail.currentMail && mail.currentMail.BodyHtml === ''" class="dnn-mdt-copy">Body is empty.</p>
             </div>
         </div>
+-->
     </div>
     
     <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
     <script src="Scripts/angular-sanitize.js"></script>
 
     <script>
         (function () {
-            angular.module('app', ['ngSanitize'])
+            angular.module('app', ['ui.router', 'ngSanitize'])
+                .config(config)
                 .factory('remoteData', remoteData)
                 .controller('MailController', MailController);
+
+            function config($stateProvider, $urlRouterProvider) {
+                $urlRouterProvider.otherwise('/');
+                $stateProvider
+                    .state('overview', {
+                        url: '/',
+                        templateUrl: 'dnn-mdt-overview.html',
+                        controller: 'MailController'
+                    })
+                    .state('mailDetail', {
+                        url: '/mail/{id}',
+                        templateUrl: 'dnn-mdt-mail-detail.html',
+                        controller: 'MailDetailController'
+                    });
+            }
 
             function remoteData($http, $q) {
                 return {
                     list: list,
                     detail: detail,
-                    remove: remove,
-                    download: download
+                    remove: remove
                 }
 
                 function list() {
@@ -220,33 +247,6 @@
                     }
                 }
 
-                function download(id) {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'GET',
-                        url: 'api/mail/download',
-                        params: {
-                            id: id
-                        },
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    })
-                        .success(success)
-                        .error(error);
-
-                    return deferred.promise;
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-                }
-
                 function remove(mail) {
                     var deferred = $q.defer();
 
@@ -275,7 +275,7 @@
                 }
             }
 
-            function MailController($scope, remoteData) {
+            function MailController($scope, $window, remoteData) {
                 var vm = this;
 
                 vm.list = undefined;
@@ -290,7 +290,9 @@
                 activate();
 
                 function activate() {
+                    console.log($stateParams);
                     // get id of mail which should be initially highlighted
+                    /*
                     var currentMailId = getUrlParameterByName('id');
 
                     if (currentMailId) {
@@ -298,6 +300,7 @@
                     } else {
                         showList();
                     }
+                    */
                 }
 
                 function showList() {
@@ -352,16 +355,7 @@
                 }
 
                 function download(id) {
-                    remoteData.download(id).then(success, error);
-
-                    function success(response) {
-                        console.log(response);
-                    }
-
-                    function error(response) {
-                        // TODO handle error
-                        console.log(response);
-                    }
+                    $window.location.href = 'api/mail/download?id=' + id;
                 }
 
                 function getUrlParameterByName(name) {
@@ -370,6 +364,10 @@
                         results = regex.exec(location.search);
                     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
                 }
+            }
+
+            function MailDetailController($stateParams) {
+                console.log($stateParams);
             }
         }());
     </script>

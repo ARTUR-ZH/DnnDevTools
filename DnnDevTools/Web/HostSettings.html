@@ -1,91 +1,125 @@
-﻿<input id="sendMail" type="button" value="[Resx:{key:"SendMail"}]"/>
-<input id="enable" type="button" value="[Resx:{key:"Enable"}]" />
-<input id="disable" type="button" value="[Resx:{key:"Disable"}]" />
-<input id="enableMailCatch" type="button" value="[Resx:{key:"EnableMailCatch"}]"/>
-<input id="disableMailCatch" type="button" value="[Resx:{key:"DisableMailCatch"}]" />
+﻿<div>
+    <p class="dnn-mdt-copy">Dnn Dev Tools</p>
+    <button id="dnn-mdt-enableButton" type="button">[Resx:{key:"Enable"}]</button>
+    <button id="dnn-mdt-disableButton" type="button">[Resx:{key:"Disable"}]</button>
+</div>
+
+<div>
+    <p class="dnn-mdt-copy">Mail Catch</p>
+    <button id="dnn-mdt-sendMailButton" type="button">[Resx:{key:"SendMail"}]</button>
+    <button id="dnn-mdt-enableMailCatchButton" type="button">[Resx:{key:"EnableMailCatch"}]</button>
+    <button id="dnn-mdt-disableMailCatchButton" type="button">[Resx:{key:"DisableMailCatch"}]</button>
+</div>
+
+<div>
+    <p class="dnn-mdt-copy">Event catch</p>
+    <button id="dnn-mdt-enableEventCatchButton" type="button">Enable event catch</button>
+    <button id="dnn-mdt-disableEventCatchButton" type="button">Disable event catch</button>
+</div>
+
+<div>
+    <p class="dnn-mdt-copy">Log level</p>
+    <select name="" id="dnn-mdt-logLevelSelect">
+        <option value="ALL">all</option>
+        <option value="DEBUG">debug</option>
+        <option value="INFO">info</option>
+        <option value="WARN">warning</option>
+        <option value="ERROR">error</option>
+        <option value="FATAL">fatal</option>
+    </select>
+</div>
 
 <script>
     (function () {
-        dnnMdtAjax = {
-            put: function (url) {
-                return new Promise(function (resolve, reject) {
-                    var req = new XMLHttpRequest();
+        var enableButton = document.getElementById('dnn-mdt-enableButton'),
+            disableButton = document.getElementById('dnn-mdt-disableButton'),
+            enableMailCatchButton = document.getElementById('dnn-mdt-enableMailCatchButton'),
+            disableMailCatchButton = document.getElementById('dnn-mdt-disableMailCatchButton'),
+            enableEventCatchButton = document.getElementById('dnn-mdt-enableEventCatchButton'),
+            disableEventCatchButton = document.getElementById('dnn-mdt-disableEventCatchButton'),
+            logLevelSelect = document.getElementById('dnn-mdt-logLevelSelect'),
+            sendMailButton = document.getElementById('dnn-mdt-sendMailButton');
 
-                    req.open('PUT', url);
+        enableButton.addEventListener('click', function () {
+            setStatus(true);
+        }, false);
 
-                    req.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue());
+        disableButton.addEventListener('click', function () {
+            setStatus(false);
+        }, false);
 
-                    req.onload = function () {
-                        if (req.status == 200) {
-                            resolve(req.response);
-                        }
-                        else {
-                            reject(Error(req.statusText));
-                        }
-                    };
+        enableMailCatchButton.addEventListener('click', function () {
+            setMailCatchStatus(true);
+        }, false);
 
-                    req.onerror = function () {
-                        reject(Error("Please check your internet connection."));
-                    };
+        disableMailCatchButton.addEventListener('click', function () {
+            setMailCatchStatus(false);
+        }, false);
 
-                    req.send();
-                });
-            }
-        }
-    }());
+        sendMailButton.addEventListener('click', function () {
+            sendMail();
+        }, false);
 
-    (function () {
-        getConfig();
+        enableEventCatchButton.addEventListener('click', function () {
+            setEventCatchStatus(true);
+        }, false);
 
-        function getConfig() {
-            console.log(window.dnnDevTools.enable);
-            console.log(window.dnnDevTools.enableDnnEventCatch);
-            /*
-            dnnMdtAjax.put($.ServicesFramework().getServiceRoot("DnnDevTools") + 'config/list').then(function (response) {
-                    console.log('>', response);
+        disableEventCatchButton.addEventListener('click', function () {
+            setEventCatchStatus(false);
+        }, false);
+
+        logLevelSelect.addEventListener('change', function () {
+            setLogLevel(logLevelSelect.value);
+        });
+
+        function setStatus(isEnabled) {
+            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled).then(
+                function (response) {
+                    window.location.reload(false);
                 }, function (error) {
                     // TODO show error
                 }
             );
-*/
+        }
+
+        function setMailCatchStatus(isEnabled) {
+            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enableMailCatch?status=' + isEnabled).then(
+                function (response) {
+                    console.log(response);
+                }, function (error) {
+                    // TODO show error
+                }
+            );
+        }
+
+        function setEventCatchStatus(isEnabled) {
+            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enableDnnEventCatch?status=' + isEnabled).then(
+                function (response) {
+                    console.log(response);
+                }, function (error) {
+                    // TODO show error
+                }
+            );
+        }
+
+        function sendMail() {
+            dnnMdt.ajax('POST', window.dnnDevTools.baseUrl + 'api/mail/sendMail').then(
+                function (response) {
+                    console.log(response);
+                }, function (error) {
+                    // TODO show error
+                }
+            );
+        }
+
+        function setLogLevel(level) {
+            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/setLogMessageLevel?level=' + level).then(
+                function (response) {
+                    console.log(response);
+                }, function (error) {
+                    // TODO show error
+                }
+            );
         }
     }());
-
-    $(function() {
-        $("#sendMail").click(function () {
-            $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Mail/SendMail',
-                type: "POST",
-                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
-            });
-        });
-        $("#enableMailCatch").click(function () {
-            $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?status=true',
-                type: "PUT",
-                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
-            });
-        });
-        $("#disableMailCatch").click(function () {
-            $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/EnableMailCatch?status=false',
-                type: "PUT",
-                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
-            });
-        });
-        $("#enable").click(function () {
-            $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/Enable?status=true',
-                type: "PUT",
-                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
-            });
-        });
-        $("#disable").click(function () {
-            $.ajax({
-                url: $.ServicesFramework().getServiceRoot("DnnDevTools") + '/Config/Enable?status=false',
-                type: "PUT",
-                beforeSend: function (xhr) { xhr.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue()); }
-            });
-        });
-    });
 </script>

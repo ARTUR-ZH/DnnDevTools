@@ -62,6 +62,11 @@
             margin-bottom: 0;
         }
 
+        .dnn-mdt-pre {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
         /* TABLE */
         .dnn-mdt-table {
             width: 100%;
@@ -127,40 +132,34 @@
         <div ui-view role="main"></div>
 
         <script type="text/ng-template" id="dnn-mdt-overview.html">
-            <h1 style="color: #ffffff">Test1</h1>
-            <a ui-sref="test">goto test2</a>
-        </script>
-        <script type="text/ng-template" id="dnn-mdt-mail-detail.html">
-            <h1>Test2</h1>
-        </script>
-<!--
-        <div ng-controller="MailController as mail">
-            <div ng-if="mail.state === 'loading'" class="dnn-mdt-spinner"></div>
-            <div ng-if="mail.state === 'list'" class="dnn-mdt-list" ng-cloak>
-                <p ng-if="mail.list.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
+            <div class="dnn-mdt-list">
+                <p ng-if="overview.mailList.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
                 <table class="dnn-mdt-table">
                     <tbody>
-                        <tr ng-repeat="item in mail.list | orderBy:'-SentOn'">
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSender">{{item.Sender}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSubject">{{item.Subject}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSentOn">{{item.SentOn | date:'dd.MM.yyyy HH:mm'}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTo">{{item.To}}</td>
+                        <tr ng-repeat="mail in overview.mailList | orderBy:'-SentOn'">
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSender">{{mail.Sender}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSubject">{{mail.Subject}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSentOn">{{mail.SentOn | date:'dd.MM.yyyy HH:mm'}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTo">{{mail.To}}</td>
                             <td class="dnn-mdt-tableCell dnn-mdt-tableCellActions">
-                                <button ng-click="mail.showDetail(item.Id)" type="button">+</button>
-                                <button ng-click="mail.remove(item)" type="button">x</button>
-                                <button ng-click="mail.download(item.Id)" type="button">down</button>
+                                <button ui-sref="mailDetail({id:mail.Id})" type="button">+</button>
+                                <button ng-click="overview.removeMail(mail)" type="button">x</button>
+                                <button ng-click="overview.downloadMail(mail.Id)" type="button">down</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div ng-if="mail.state === 'detail'" class="dnn-mdt-detail" ng-cloak>
-                <button type="button" ng-click="mail.showList()">back</button>
-                <p ng-if="mail.currentMail.BodyHtml" ng-bind-html="mail.currentMail.BodyHtml" class="dnn-mdt-copy"></p>
-                <p ng-if="mail.currentMail && mail.currentMail.BodyHtml === ''" class="dnn-mdt-copy">Body is empty.</p>
+        </script>
+
+        <script type="text/ng-template" id="dnn-mdt-mail-detail.html">
+            <div class="dnn-mdt-detail">
+                <a ui-sref="overview">back to overview</a>
+                <div ng-if="mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnn-mdt-copy"></div>
+                <pre ng-if="!mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnn-mdt-pre"></pre>
+                <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnn-mdt-copy">Body is empty.</p>
             </div>
-        </div>
--->
+        </script>
     </div>
     
     <script src="Scripts/angular.js"></script>
@@ -172,7 +171,8 @@
             angular.module('app', ['ui.router', 'ngSanitize'])
                 .config(config)
                 .factory('remoteData', remoteData)
-                .controller('MailController', MailController);
+                .controller('OverviewController', OverviewController)
+                .controller('MailDetailController', MailDetailController);
 
             function config($stateProvider, $urlRouterProvider) {
                 $urlRouterProvider.otherwise('/');
@@ -180,143 +180,47 @@
                     .state('overview', {
                         url: '/',
                         templateUrl: 'dnn-mdt-overview.html',
-                        controller: 'MailController'
+                        controller: 'OverviewController as overview'
                     })
                     .state('mailDetail', {
                         url: '/mail/{id}',
                         templateUrl: 'dnn-mdt-mail-detail.html',
-                        controller: 'MailDetailController'
+                        controller: 'MailDetailController as mailDetail',
+                        resolve: {
+                            mail: function ($stateParams, remoteData) {
+                                return remoteData.mailDetail($stateParams.id);
+                            }
+                        }
                     });
             }
 
-            function remoteData($http, $q) {
-                return {
-                    list: list,
-                    detail: detail,
-                    remove: remove
-                }
-
-                function list() {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'GET',
-                        url: 'api/mail/list',
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    })
-                        .success(success)
-                        .error(error);
-
-                    return deferred.promise;
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-                }
-
-                function detail(id) {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'GET',
-                        url: 'api/mail/detail',
-                        params: {
-                            id: id
-                        },
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    })
-                        .success(success)
-                        .error(error);
-
-                    return deferred.promise;
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-                }
-
-                function remove(mail) {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'delete',
-                        url: 'api/mail/delete',
-                        params: {
-                            id: mail.Id
-                        },
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    })
-                        .success(success)
-                        .error(error);
-
-                    return deferred.promise;
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-                }
-            }
-
-            function MailController($scope, $window, remoteData) {
+            function OverviewController($scope, $window, remoteData) {
                 var vm = this;
 
-                vm.list = undefined;
-                vm.currentMail = undefined;
-                vm.state = 'loading';
-                
-                vm.showList = showList;
-                vm.showDetail = showDetail;
-                vm.remove = remove;
-                vm.download = download;
+                vm.mailList = [];
+                vm.removeMail = removeMail;
+                vm.downloadMail = downloadMail;
 
                 activate();
 
                 function activate() {
-                    console.log($stateParams);
-                    // get id of mail which should be initially highlighted
-                    /*
-                    var currentMailId = getUrlParameterByName('id');
-
-                    if (currentMailId) {
-                        showDetail(currentMailId);
-                    } else {
-                        showList();
-                    }
-                    */
+                    remoteData.mailList().then(function (response) {
+                        vm.mailList = response.data;
+                    });
+                    remoteData.logList().then(function () {
+                        console.log('logList');
+                    });
+                    remoteData.eventList().then(function () {
+                        console.log('eventList');
+                    });
                 }
 
-                function showList() {
-                    vm.currentMail = undefined;
-
-                    // get list if its not already available
-                    if (!vm.list) {
-                        vm.state = 'loading';
-                        remoteData.list().then(success, error);
-                    } else {
-                        vm.state = 'list';
-                    }
+                function removeMail(mail) {
+                    remoteData.removeMail(mail).then(success, error);
 
                     function success(response) {
-                        vm.state = 'list';
-                        vm.list = response;
+                        var index = vm.mailList.indexOf(mail);
+                        vm.mailList.splice(index, 1);
                     }
 
                     function error(response) {
@@ -325,36 +229,7 @@
                     }
                 }
 
-                function showDetail(id) {
-                    remoteData.detail(id).then(success, error);
-                    vm.state = 'loading';
-
-                    function success(response) {
-                        vm.state = 'detail';
-                        vm.currentMail = response;
-                    }
-
-                    function error(response) {
-                        // TODO handle error
-                        console.log(response);
-                    }
-                }
-
-                function remove(mail) {
-                    remoteData.remove(mail).then(success, error);
-
-                    function success(response) {
-                        var index = vm.list.indexOf(mail);
-                        vm.list.splice(index, 1);
-                    }
-
-                    function error(response) {
-                        // TODO handle error
-                        console.log(response);
-                    }
-                }
-
-                function download(id) {
+                function downloadMail(id) {
                     $window.location.href = 'api/mail/download?id=' + id;
                 }
 
@@ -366,8 +241,76 @@
                 }
             }
 
-            function MailDetailController($stateParams) {
-                console.log($stateParams);
+            function MailDetailController($stateParams, mail) {
+                var vm = this;
+
+                vm.mail = mail;
+            }
+
+            function remoteData($http, $q) {
+                return {
+                    mailList: mailList,
+                    logList: logList,
+                    eventList: eventList,
+                    mailDetail: mailDetail,
+                    removeMail: removeMail
+                }
+
+                function mailList() {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/mail/list',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
+
+                function logList() {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/log/list',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
+
+                function eventList() {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/dnnEvent/list',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
+
+                function mailDetail(id) {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/mail/detail',
+                        params: {
+                            id: id
+                        },
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
+
+                function removeMail(mail) {
+                    return $http({
+                        method: 'delete',
+                        url: 'api/mail/delete',
+                        params: {
+                            id: mail.Id
+                        },
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
             }
         }());
     </script>

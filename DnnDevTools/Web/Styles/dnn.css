@@ -1,1 +1,178 @@
-﻿/* TODO */
+﻿/* MDT: Mail Developer Toolbar */
+
+/* ATOMS */
+.dnn-mdt-checkbox {
+    margin-right: 4px;
+}
+
+.dnn-mdt-iconButton {
+    display: block;
+    padding: 15px;
+    background-color: #00a5e1;
+    border: 2px solid #ffffff;
+    border-radius: 100%;
+    outline: 0;
+}
+
+.dnn-mdt-iconButton:hover {
+    background-color: #0184b4;
+}
+
+.dnn-mdt-iconButton.dnn-mdt-active {
+    background-color: #ec3d47;
+}
+
+.dnn-mdt-icon24x24 {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+}
+
+.dnn-mdt-icon16x16 {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+}
+
+.dnn-mdt-eyeIcon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTYgMGMtOC44MzcgMC0xNiA3LjE2My0xNiAxNnM3LjE2MyAxNiAxNiAxNiAxNi03LjE2MyAxNi0xNi03LjE2My0xNi0xNi0xNnptLTUgOC44NzVsNSA1IDUtNSAyLjEyNSAyLjEyNS01IDUgNSA1LTIuMTI1IDIuMTI1LTUtNS01IDUtMi4xMjUtMi4xMjUgNS01LTUtNSAyLjEyNS0yLjEyNXoiIC8+PC9zdmc+);
+}
+/*
+.dnn-mdt-iconButton.dnn-mdt-active .dnn-mdt-eyeIcon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTYgMGMtOC44MzcgMC0xNiA3LjE2My0xNiAxNnM3LjE2MyAxNiAxNiAxNiAxNi03LjE2MyAxNi0xNi03LjE2My0xNi0xNi0xNnptNi45MDYgOC44NzVsMi4yMTkgMi4wMzEtMTIuMDYzIDEzLjI4MS02LjE4OC02LjE4OCAyLjEyNS0yLjEyNSAzLjkzOCAzLjkzOCA5Ljk2OS0xMC45Mzh6IiAvPjwvc3ZnPg==);
+}
+*/
+.dnn-mdt-inboxIcon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMiAwYy0xLjEwNSAwLTIgLjg5NS0yIDJ2MjhjMCAxLjEwNS44OTUgMiAyIDJoMjZjMS4xMDUgMCAyLS44OTUgMi0ydi0yOGMwLTEuMTA1LS44OTUtMi0yLTJoLTI2em0xIDVoMjR2MTloLTdsLTIgM2gtNmwtMi0zaC03di0xOXoiLz48L3N2Zz4=);
+}
+
+.dnn-mdt-iconButton.dnn-mdt-active .dnn-mdt-inboxIcon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNOCAwdjNoLTh2NGg4djNsOC01LTgtNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMykiIC8+PC9zdmc+);
+}
+
+.dnn-mdt-cogIcon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGQ9Ik0zLjUgMGwtLjUgMS4xOWMtLjEuMDMtLjE5LjA4LS4yOC4xM2wtMS4xOS0uNS0uNzIuNzIuNSAxLjE5Yy0uMDUuMS0uMDkuMTgtLjEzLjI4bC0xLjE5LjV2MWwxLjE5LjVjLjA0LjEuMDguMTguMTMuMjhsLS41IDEuMTkuNzIuNzIgMS4xOS0uNWMuMDkuMDQuMTguMDkuMjguMTNsLjUgMS4xOWgxbC41LTEuMTljLjA5LS4wNC4xOS0uMDguMjgtLjEzbDEuMTkuNS43Mi0uNzItLjUtMS4xOWMuMDQtLjA5LjA5LS4xOS4xMy0uMjhsMS4xOS0uNXYtMWwtMS4xOS0uNWMtLjAzLS4wOS0uMDgtLjE5LS4xMy0uMjhsLjUtMS4xOS0uNzItLjcyLTEuMTkuNWMtLjA5LS4wNC0uMTktLjA5LS4yOC0uMTNsLS41LTEuMTloLTF6bS41IDIuNWMuODMgMCAxLjUuNjcgMS41IDEuNXMtLjY3IDEuNS0xLjUgMS41LTEuNS0uNjctMS41LTEuNS42Ny0xLjUgMS41LTEuNXoiLz48L3N2Zz4=);
+}
+
+.dnn-mdt-settingsButton {
+    padding: 5px;
+    background-color: #ec3d47;
+}
+
+.dnn-mdt-settingsButton:hover {
+    background-color: #b92d35;
+}
+
+/* MOLECULES */
+.dnn-mdt-menu {
+    position: relative;
+}
+.dnn-mdt-menu .dnn-mdt-settingsButton {
+    position: absolute;
+    right: -9px;
+    bottom: -9px;
+}
+
+/* LAST MAIL */
+#dnn-mdt-lastMail {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    cursor: pointer;
+}
+#dnn-mdt-lastMail:hover {
+    background-color: #cdcdcd;
+}
+
+/* TEMPLATES */
+#dnn-mdt-hint {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 10002;
+}
+
+#dnn-mdt-mailOverviewWindow {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1003;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#dnn-mdt-mailOverviewPanel {
+    position: fixed;
+    left: 15%;
+    right: 15%;
+    top: 0;
+    bottom: 0;
+}
+
+/* LAYOUT */
+.dnn-mdt-panel {
+    padding: 15px;
+    text-align: left;
+}
+
+.dnn-mdt-marginBottom1 {
+    margin-bottom: 14px;
+}
+
+.dnn-mdt-hidden {
+    display: none;
+}
+
+.dnn-mdt-visuallyHidden {
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+    position: absolute;
+}
+
+/* ANIMATIONS */
+.dnn-mdt-pulseAnimation {
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* COLORS */
+.dnn-mdt-bgColorGrey {
+    background-color: #e5e5e5;
+}
+
+/* FONTS */
+.dnn-mdt-copy {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dnn-mdt-copySmall {
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dnn-mdt-copyBold {
+    font-weight: bold;
+}

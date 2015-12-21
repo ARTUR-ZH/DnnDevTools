@@ -1,4 +1,6 @@
-﻿<strong>01.00.00</strong>
+﻿<p><strong>Please note: When installing DnnDevTools for the first time, you might need to login again after the installation is complete.</strong></p>
+
+<strong>01.00.00</strong>
 <ul>
 	<li>Initial release</li>
 </ul>

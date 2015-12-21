@@ -120,13 +120,55 @@
           </scripts>
         </component>
 
-        <component type="ResourceFile">
-          <resourceFiles>
+        <component type="File">
+          <files>
             <basePath>DesktopModules/DnnDevTools</basePath>
-            <resourceFile>
-              <name>Resources.zip</name>
-            </resourceFile>
-          </resourceFiles>
+            <file>
+              <path>App_LocalResources</path>
+              <name>HostSettings.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>Overlay.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>Toolbar.resx</name>
+            </file>
+            <file>
+              <path>Images</path>
+              <name>Icon_32x32.png</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>angular-sanitize.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>angular.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>dnn.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
+              <name>jquery.signalR-2.2.0.js</name>
+            </file>
+            <file>
+              <path>Styles</path>
+              <name>dnn.css</name>
+            </file>
+            <file>
+              <name>HostSettings.html</name>
+            </file>
+            <file>
+              <name>Overlay.aspx</name>
+            </file>
+            <file>
+              <name>Toolbar.html</name>
+            </file>
+          </files>
         </component>
 
         <component type="Module">

@@ -147,7 +147,6 @@
     <Content Include="Web\Scripts\angular-sanitize.js" />
     <Content Include="Web\Scripts\angular.js" />
     <Content Include="Web\Scripts\jquery.signalR-2.2.0.js" />
-    <Content Include="Web\Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Web\Overlay.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

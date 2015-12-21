@@ -24,19 +24,19 @@ namespace weweave.DnnDevTools.Api.Controller
         {
             var actions = new List<IAction>();
 
-            if (type.Contains(Globals.ActionTypeMail, StringComparer.OrdinalIgnoreCase))
+            if (type.Length == 0 || type.Contains(Globals.ActionTypeMail, StringComparer.OrdinalIgnoreCase))
             {
                 var mails = ServiceLocator.MailService.GetList(0, take, search);
                 actions.AddRange(mails);
             }
 
-            if (type.Contains(Globals.ActionTypeLogMessage, StringComparer.OrdinalIgnoreCase))
+            if (type.Length == 0 || type.Contains(Globals.ActionTypeLogMessage, StringComparer.OrdinalIgnoreCase))
             {
                 var logMessages = ServiceLocator.LogService.GetList(0, take, search);
                 actions.AddRange(logMessages);
             }
 
-            if (type.Contains(Globals.ActionTypeDnnEvent, StringComparer.OrdinalIgnoreCase))
+            if (type.Length == 0 || type.Contains(Globals.ActionTypeDnnEvent, StringComparer.OrdinalIgnoreCase))
             {
                 var dnnEvents = ServiceLocator.DnnEventService.GetList(0, take, search);
                 actions.AddRange(dnnEvents);

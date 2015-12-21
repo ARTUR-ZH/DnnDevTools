@@ -10,14 +10,11 @@ namespace weweave.DnnDevTools.Service.Dnn
         {
         }
 
-        private static string CachePrefix
-        {
-            get { return "DnnDevTools"; }
-        }
+        private static string CachePrefix => "DnnDevTools";
 
         private static string PrefixCacheKey(string cacheKey)
         {
-            return string.Format("{0}{1}", CachePrefix, cacheKey);
+            return $"{CachePrefix}{cacheKey}";
         }
 
         public T GetCachedObject<T>(int cacheTime, string cacheKey, Func<T> callback)
@@ -27,12 +24,14 @@ namespace weweave.DnnDevTools.Service.Dnn
             // Do not cache if caching is disabled or caching time is to small
             if (performanceSettings <= 0 || cacheTime < performanceSettings) return callback();
 
-            var data = DataCache.GetCachedData<object>(new CacheItemArgs(cacheKey, cacheTime / performanceSettings), args => callback());
+            var prefixedCacheKey = PrefixCacheKey(cacheKey);
+
+            var data = DataCache.GetCachedData<object>(new CacheItemArgs(prefixedCacheKey, cacheTime / performanceSettings), args => callback());
             if (data is T)
             {
                 return (T)data;
             }
-            ClearCache(cacheKey);
+            ClearCache(prefixedCacheKey);
             return callback();
         }
 

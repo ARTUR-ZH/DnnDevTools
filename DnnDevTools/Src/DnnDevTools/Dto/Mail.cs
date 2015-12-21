@@ -3,8 +3,10 @@ using CDO;
 
 namespace weweave.DnnDevTools.Dto
 {
-    public class Mail
+    public class Mail : IAction
     {
+        public string Type => Globals.ActionTypeMail;
+
         public string Id { get; set; }
 
         public string Sender { get; set; }
@@ -13,7 +15,10 @@ namespace weweave.DnnDevTools.Dto
 
         public string Subject { get; set; }
 
-        public DateTime SentOn { get; set; }
+        /// <summary>
+        /// Time stamp when the mail was sent
+        /// </summary>
+        public DateTime TimeStamp { get; set; }
 
         public Mail() {}
 
@@ -22,7 +27,7 @@ namespace weweave.DnnDevTools.Dto
             Id = id;
             Subject = mail.Subject;
             Sender = mail.Sender;
-            SentOn = mail.SentOn;
+            TimeStamp = mail.SentOn;
             To = mail.To;
         }
     }

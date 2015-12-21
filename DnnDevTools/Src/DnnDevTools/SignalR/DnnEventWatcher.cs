@@ -46,7 +46,7 @@ namespace weweave.DnnDevTools.SignalR
                     foreach (var newLog in newLogs)
                     {
                         // Send DNN event notification to clients
-                        var eventNotification = new DnnDnnEventNotification(newLog);
+                        var eventNotification = new DnnEvent(newLog);
                         GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(eventNotification);
                     }
                 }

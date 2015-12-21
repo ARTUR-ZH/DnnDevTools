@@ -93,7 +93,7 @@
             width: 20%;
             color: #ffffff;
         }
-        .dnn-mdt-tableCellSentOn {
+        .dnn-mdt-tableCellTimestamp {
             width: 20%;
             color: rgba(255, 255, 255, 0.3);
         }
@@ -136,10 +136,10 @@
                 <p ng-if="overview.mailList.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
                 <table class="dnn-mdt-table">
                     <tbody>
-                        <tr ng-repeat="mail in overview.mailList | orderBy:'-SentOn'">
+                        <tr ng-repeat="mail in overview.mailList | orderBy:'-Timestamp'">
                             <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSender">{{mail.Sender}}</td>
                             <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSubject">{{mail.Subject}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSentOn">{{mail.SentOn | date:'dd.MM.yyyy HH:mm'}}</td>
+                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTimestamp">{{mail.Timestamp | date:'dd.MM.yyyy HH:mm'}}</td>
                             <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTo">{{mail.To}}</td>
                             <td class="dnn-mdt-tableCell dnn-mdt-tableCellActions">
                                 <button ui-sref="mailDetail({id:mail.Id})" type="button">+</button>

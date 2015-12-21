@@ -6,7 +6,7 @@ namespace weweave.DnnDevTools
     {
         public void RegisterRoutes(IMapRoute mapRouteManager)
         {
-            mapRouteManager.MapHttpRoute("DnnDevTools", "default", "{controller}/{action}", new[] { "weweave.DnnDevTools.Api.Controller" });
+            mapRouteManager.MapHttpRoute("DnnDevTools", "default", "{controller}/{action}", new { action = "Index" }, new[] { "weweave.DnnDevTools.Api.Controller" });
         }
     }
 }

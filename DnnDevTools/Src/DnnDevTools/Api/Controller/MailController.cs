@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,25 +26,7 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public List<Mail> List(int? skip, int? take, string search)
         {
-            var mails = new List<Mail>();
-
-            var files = Directory.EnumerateFiles(MailPickupFolderWatcher.Path, "*.eml", SearchOption.TopDirectoryOnly);
-            foreach (var file in files)
-            {
-                var mail = EmlFileParser.ParseEmlFile(file);
-                if (mail == null) continue;
-
-                mails.Add(new Mail(Path.GetFileNameWithoutExtension(file), mail));
-            }
-
-            IEnumerable<Mail> result  = mails.OrderByDescending(e => e.SentOn);
-
-            if (!string.IsNullOrWhiteSpace(search))
-                result = result.Where(e => string.Concat(e.Sender, e.Subject, e.To).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
-            if (skip != null) result = result.Skip(skip.Value);
-            if (take != null) result = result.Take(take.Value);
-
-            return result.ToList();
+            return ServiceLocator.MailService.GetList(skip, take, search);
         }
 
         [ValidateAntiForgeryToken]
@@ -85,10 +65,10 @@ namespace weweave.DnnDevTools.Api.Controller
         public HttpResponseMessage Detail(string id)
         {
             var file = MailPickupFolderWatcher.Path + Path.DirectorySeparatorChar + id + ".eml";
-            var mail = EmlFileParser.ParseEmlFile(file);
-            return mail == null ? 
+            var message = EmlFileParser.ParseEmlFile(file);
+            return message == null ? 
                 Request.CreateResponse(HttpStatusCode.NotFound) : 
-                Request.CreateResponse(HttpStatusCode.OK, new MailDetail(id, mail));
+                Request.CreateResponse(HttpStatusCode.OK, new MailDetail(id, message));
         }
 
         [ValidateAntiForgeryToken]

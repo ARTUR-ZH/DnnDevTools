@@ -25,7 +25,7 @@ namespace weweave.DnnDevTools.SignalR
             if (level.Value > loggingEvent.Level.Value) return;
 
             // Create log event
-            var logMessageEvent = new LogMessageNotification(loggingEvent);
+            var logMessageEvent = new LogMessage(loggingEvent);
 
             // Queue logging event
             LogMessageQueue.Enqueue(logMessageEvent);

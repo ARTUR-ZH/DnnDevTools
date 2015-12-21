@@ -3,8 +3,10 @@ using DotNetNuke.Services.Log.EventLog;
 
 namespace weweave.DnnDevTools.Dto
 {
-    public class DnnEvent
+    public class DnnEvent : IAction
     {
+        public string Type => Globals.ActionTypeDnnEvent;
+
         /// <summary>
         /// Unique Id
         /// </summary>

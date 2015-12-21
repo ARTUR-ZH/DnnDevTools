@@ -10,26 +10,26 @@ namespace weweave.DnnDevTools.Test.Util.EmlFileParser
         [TestMethod]
         public void ParseMail1()
         {
-            var mail = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/Mail1.eml");
+            var message = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/Mail1.eml");
 
-            Assert.IsNotNull(mail);
-            Assert.IsTrue(mail.Sender.Contains("sender@localhost"));
-            Assert.IsTrue(mail.To.Contains("receiver@localhost"));
-            Assert.IsTrue(mail.TextBody.Contains("Hello world"));
+            Assert.IsNotNull(message);
+            Assert.IsTrue(message.Sender.Contains("sender@localhost"));
+            Assert.IsTrue(message.To.Contains("receiver@localhost"));
+            Assert.IsTrue(message.TextBody.Contains("Hello world"));
         }
 
         [TestMethod]
         public void ParseMailFileNotExist()
         {
-            var mail = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/MailDoesNotExist.eml");
-            Assert.IsNull(mail);
+            var message = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/MailDoesNotExist.eml");
+            Assert.IsNull(message);
         }
 
         [TestMethod]
         public void ParseInvalidMail()
         {
-            var mail = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/InvalidMail.eml");
-            Assert.IsNull(mail);
+            var message = DnnDevTools.Util.EmlFileParser.ParseEmlFile("Data/InvalidMail.eml");
+            Assert.IsNull(message);
         }
 
 

@@ -3,8 +3,10 @@ using log4net.Core;
 
 namespace weweave.DnnDevTools.Dto
 {
-    public class LogMessage
+    public class LogMessage : IAction
     {
+        public string Type => Globals.ActionTypeLogMessage;
+
         /// <summary>
         /// Unique Id
         /// </summary>

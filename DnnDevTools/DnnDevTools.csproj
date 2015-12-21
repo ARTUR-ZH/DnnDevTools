@@ -104,16 +104,21 @@
     <Compile Include="Src\DnnDevTools\Api\Controller\DnnEventController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\LogController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\MailController.cs" />
-    <Compile Include="Src\DnnDevTools\Dto\DnnDnnEventNotification.cs" />
+    <Compile Include="Src\DnnDevTools\Api\Controller\StreamController.cs" />
     <Compile Include="Src\DnnDevTools\Dto\DnnEvent.cs" />
     <Compile Include="Src\DnnDevTools\Dto\LogMessage.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />
     <Compile Include="Src\DnnDevTools\BusinessController.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
-    <Compile Include="Src\DnnDevTools\Dto\INotification.cs" />
-    <Compile Include="Src\DnnDevTools\Dto\LogMessageNotification.cs" />
-    <Compile Include="Src\DnnDevTools\Dto\MailSentNotification.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\IAction.cs" />
+    <Compile Include="Src\DnnDevTools\Globals.cs" />
+    <Compile Include="Src\DnnDevTools\Service\DnnEvent\DnnEventService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\DnnEvent\IDnnEventService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Log\ILogService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Log\LogService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Mail\IMailService.cs" />
+    <Compile Include="Src\DnnDevTools\Service\Mail\MailService.cs" />
     <Compile Include="Src\DnnDevTools\SignalR\Log4NetAppender.cs" />
     <Compile Include="Src\DnnDevTools\SignalR\DnnEventWatcher.cs" />
     <Compile Include="Src\DnnDevTools\SignalR\MailPickupFolderWatcher.cs" />
@@ -160,7 +165,9 @@
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Overlay.resx" />
+    <Content Include="App_LocalResources\Overlay.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">

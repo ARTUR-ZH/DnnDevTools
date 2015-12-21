@@ -48,12 +48,12 @@ namespace weweave.DnnDevTools.SignalR
                 return;
             
             // Try to parse mail
-            var mail = EmlFileParser.ParseEmlFile(e.FullPath);
-            if (mail == null) return;
+            var message = EmlFileParser.ParseEmlFile(e.FullPath);
+            if (message == null) return;
 
             // Send mail notification to clients
-            var emailSentEvent = new MailSentNotification(System.IO.Path.GetFileNameWithoutExtension(e.Name), mail);
-            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(emailSentEvent);
+            var mail = new Mail(System.IO.Path.GetFileNameWithoutExtension(e.Name), message);
+            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(mail);
         }
 
     }

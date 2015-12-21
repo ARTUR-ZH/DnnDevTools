@@ -126,7 +126,7 @@
   <data name="Mails.Column.Sender.Title" xml:space="preserve">
     <value>Sender</value>
   </data>
-  <data name="Mails.Column.SentOn.Title" xml:space="preserve">
+  <data name="Mails.Column.Timestamp.Title" xml:space="preserve">
     <value>Sent on</value>
   </data>
 </root>

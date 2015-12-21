@@ -88,12 +88,12 @@
             // listen to mail events
             hub.client.OnEvent = function (data) {
                 console.log(data.Type);
-                if (data.Type === 'MailSent') {
+                if (data.Type === 'Mail') {
                     updateLastEmail(data);
                     showLastMail();
                 } else if (data.Type === 'LogMessage') {
                     // console.log(data);
-                } else if (data.Type === 'Event') {
+                } else if (data.Type === 'DnnEvent') {
                     // console.log(data);
                 }
             };
@@ -136,7 +136,7 @@
         */
         function updateLastEmail(data) {
             lastMail = data;
-            dateElement.textContent = data.SentOn;
+            dateElement.textContent = data.Timestamp;
             subjectElement.textContent = data.Subject;
             senderElement.textContent = data.Sender;
             recieverElement.textContent = data.To;

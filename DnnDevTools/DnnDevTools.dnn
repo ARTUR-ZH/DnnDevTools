@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DnnDevTools" type="Module" version="01.00.00">
+    <package name="DnnDevTools" type="Module" version="06.00.00">
       <friendlyName>DNN Dev Tools</friendlyName>
       <description>DNN Dev Tools smoothly integrates into your DNN environment and adds useful functionalities for host admins.</description>
       <iconFile>Images/Icon_32x32.png</iconFile>
@@ -104,18 +104,18 @@
           <scripts>
             <basePath>DesktopModules\DnnDevTools</basePath>
 
-            <!-- 01.00.00 -->
+            <!-- 06.00.00 -->
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>01.00.00.SqlDataProvider</name>
-              <version>01.00.00</version>
+              <name>06.00.00.SqlDataProvider</name>
+              <version>06.00.00</version>
             </script>
             
             <!-- Uninstall -->
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>Uninstall.SqlDataProvider</name>
-              <version>01.00.00</version>
+              <version>06.00.00</version>
             </script>
           </scripts>
         </component>
@@ -207,7 +207,7 @@
             <attributes>
               <businessControllerClass>weweave.DnnDevTools.BusinessController</businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.00</upgradeVersionsList>
+              <upgradeVersionsList>06.00.00</upgradeVersionsList>
             </attributes>
           </eventMessage>
         </component>

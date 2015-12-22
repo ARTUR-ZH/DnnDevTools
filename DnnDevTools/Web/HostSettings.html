@@ -1,7 +1,10 @@
 ﻿<div>
-    <p class="dnn-mdt-copy">Dnn Dev Tools</p>
     <button id="dnn-mdt-enableButton" type="button">[Resx:{key:"Enable"}]</button>
     <button id="dnn-mdt-disableButton" type="button">[Resx:{key:"Disable"}]</button>
+    <div class="dnn-mdt-checkbox">
+        <input type="checkbox" id="dnn-mdt-enableCheckbox">
+        <label for="dnn-mdt-enableCheckbox" class="dnn-mdt-copy">Enable DNN Dev Tools</label>
+    </div>
 </div>
 
 <div>
@@ -31,7 +34,8 @@
 
 <script>
     (function () {
-        var enableButton = document.getElementById('dnn-mdt-enableButton'),
+        var enableCheckbox = document.getElementById('dnn-mdt-enableCheckbox'),
+            enableButton = document.getElementById('dnn-mdt-enableButton'),
             disableButton = document.getElementById('dnn-mdt-disableButton'),
             enableMailCatchButton = document.getElementById('dnn-mdt-enableMailCatchButton'),
             disableMailCatchButton = document.getElementById('dnn-mdt-disableMailCatchButton'),
@@ -39,6 +43,22 @@
             disableEventCatchButton = document.getElementById('dnn-mdt-disableEventCatchButton'),
             logLevelSelect = document.getElementById('dnn-mdt-logLevelSelect'),
             sendMailButton = document.getElementById('dnn-mdt-sendMailButton');
+/*
+        // set current status
+        enableCheckbox.checked = window.dnnDevTools.enable;
+console.log('=>', window.dnnDevTools.enable);
+        enableCheckbox.addEventListener('change', function (event) {
+            // enableCheckbox.checked ? setStatus(true) : setStatus(false);
+            console.log('> ', enableCheckbox.checked);
+            if (enableCheckbox.checked) {
+                console.log('true');
+                setStatus(true);
+            } else {
+                console.log('false');
+                setStatus(false)
+            }
+        }, false);
+*/
 
         enableButton.addEventListener('click', function () {
             setStatus(true);
@@ -75,7 +95,7 @@
         function setStatus(isEnabled) {
             dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled).then(
                 function (response) {
-                    window.location.reload(false);
+                    // window.location.reload(false);
                 }, function (error) {
                     // TODO show error
                 }

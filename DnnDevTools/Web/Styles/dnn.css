@@ -2,7 +2,18 @@
 
 /* ATOMS */
 .dnn-mdt-checkbox {
-    margin-right: 4px;
+    position: relative;
+    padding-left: 18px;
+}
+
+.dnn-mdt-checkbox input {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dnn-mdt-checkbox label {
+    line-height: 1;
 }
 
 .dnn-mdt-iconButton {
@@ -162,7 +173,7 @@
 /* FONTS */
 .dnn-mdt-copy {
     font-family: Arial, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 0;
     margin-bottom: 0;
 }

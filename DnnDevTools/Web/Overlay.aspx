@@ -57,7 +57,7 @@
         /* FONTS */
         .dnn-mdt-copy {
             font-family: Arial, sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             margin-top: 0;
             margin-bottom: 0;
         }
@@ -204,15 +204,19 @@
                 activate();
 
                 function activate() {
-                    remoteData.mailList().then(function (response) {
-                        vm.mailList = response.data;
+                    remoteData.stream().then(function (response) {
+                        console.log(response);
+                        // vm.mailList = response.data;
                     });
-                    remoteData.logList().then(function () {
-                        console.log('logList');
-                    });
-                    remoteData.eventList().then(function () {
-                        console.log('eventList');
-                    });
+                    // remoteData.mailList().then(function (response) {
+                    //     vm.mailList = response.data;
+                    // });
+                    // remoteData.logList().then(function () {
+                    //     console.log('logList');
+                    // });
+                    // remoteData.eventList().then(function () {
+                    //     console.log('eventList');
+                    // });
                 }
 
                 function removeMail(mail) {
@@ -249,11 +253,22 @@
 
             function remoteData($http, $q) {
                 return {
+                    stream: stream,
                     mailList: mailList,
                     logList: logList,
                     eventList: eventList,
                     mailDetail: mailDetail,
                     removeMail: removeMail
+                }
+
+                function stream() {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/stream',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
                 }
 
                 function mailList() {

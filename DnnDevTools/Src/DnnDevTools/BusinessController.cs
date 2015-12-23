@@ -12,7 +12,7 @@ namespace weweave.DnnDevTools
         {
             try
             {
-                var moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName("DNN Dev Tools");
+                var moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(Globals.ModuleFriendlyName);
                 if (moduleDefinition == null) return "Success";
 
                 const string tabName = "DNN Dev Tools";

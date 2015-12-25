@@ -1,70 +1,70 @@
-﻿<div id="dnn-mdt-hint">
-    <div class="dnn-mdt-menu">
-        <button type="button" id="dnn-mdt-mailOverviewButton" class="dnn-mdt-iconButton" title="[res:ShowMailOvierview]">
-            <span class="dnn-mdt-inboxIcon dnn-mdt-icon24x24"></span>
+﻿<div class="dnn-mdt-toolbar">
+    <div class="dnn-mdt-toolbarMenu">
+        <button type="button" id="dnn-mdt-overviewButton" class="dnn-mdt-overviewButton" title="Show overview">
+            <span class="dnn-mdt-wrenchIcon dnn-mdt-icon24x24"></span>
         </button>
-        <button type="button" id="dnn-mdt-settingsButton" class="dnn-mdt-settingsButton dnn-mdt-iconButton">
+        <button type="button" id="dnn-mdt-settingsButton" class="dnn-mdt-settingsButton">
             <span class="dnn-mdt-cogIcon dnn-mdt-icon16x16"></span>
         </button>
     </div>
 
-    <div id="dnn-mdt-lastMail" class="dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-hidden">
+    <div id="dnn-mdt-mailNote" class="dnn-mdt-mailNote dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-hidden">
         <p class="dnn-mdt-copySmall">
-            <span id="dnn-mdt-lastMailDate"></span>
+            <span id="dnn-mdt-mailNoteDate"></span>
         </p>
         <p class="dnn-mdt-copySmall">
-            <span id="dnn-mdt-lastMailSubject"></span>
+            <span id="dnn-mdt-mailNoteSubject"></span>
         </p>
         <p class="dnn-mdt-copySmall">
             <span class="dnn-mdt-copySmall dnn-mdt-copyBold">From:</span>
-            <span id="dnn-mdt-lastMailSender"></span>
+            <span id="dnn-mdt-mailNoteSender"></span>
         </p>
         <p class="dnn-mdt-copySmall">
             <span class="dnn-mdt-copySmall dnn-mdt-copyBold">To:</span>
-            <span id="dnn-mdt-lastMailReciever"></span>
+            <span id="dnn-mdt-mailNoteReciever"></span>
         </p>
     </div>
 </div>
 
-<div id="dnn-mdt-mailOverviewWindow" class="dnn-mdt-hidden">
-    <div id="dnn-mdt-mailOverviewPanel">
-        <iframe id="dnn-mdt-mailOverviewIframe" src="" width="100%" height="100%"></iframe>
+<div id="dnn-mdt-overlay" class="dnn-mdt-overlay dnn-mdt-hidden">
+    <div id="dnn-mdt-overlayPanel" class="dnn-mdt-overlayPanel">
+        <iframe id="dnn-mdt-overviewIframe" src="" width="100%" height="100%"></iframe>
     </div>
 </div>
 
 <script>
     (function(document, window, settings) {
         var hub = $.connection.dnnDevToolsNotificationHub,
-            lastMail = {},
-            lastMailTimeoutId,
-            lastMailElement = document.getElementById('dnn-mdt-lastMail'),
-            dateElement = document.getElementById('dnn-mdt-lastMailDate'),
-            subjectElement = document.getElementById('dnn-mdt-lastMailSubject'),
-            senderElement = document.getElementById('dnn-mdt-lastMailSender'),
-            recieverElement = document.getElementById('dnn-mdt-lastMailReciever'),
-            mailOverviewButton = document.getElementById('dnn-mdt-mailOverviewButton'),
-            mailOverviewWindow = document.getElementById('dnn-mdt-mailOverviewWindow'),
-            mailOverviewPanel = document.getElementById('dnn-mdt-mailOverviewPanel'),
-            mailOverviewIframe = document.getElementById('dnn-mdt-mailOverviewIframe'),
+            mailNote = {},
+            mailNoteTimeoutId,
+            mailNoteElement = document.getElementById('dnn-mdt-mailNote'),
+            dateElement = document.getElementById('dnn-mdt-mailNoteDate'),
+            subjectElement = document.getElementById('dnn-mdt-mailNoteSubject'),
+            senderElement = document.getElementById('dnn-mdt-mailNoteSender'),
+            recieverElement = document.getElementById('dnn-mdt-mailNoteReciever'),
+            overviewButton = document.getElementById('dnn-mdt-overviewButton'),
+            overlay = document.getElementById('dnn-mdt-overlay'),
+            overlayPanel = document.getElementById('dnn-mdt-overlayPanel'),
+            overviewIframe = document.getElementById('dnn-mdt-overviewIframe'),
             settingsButton = document.getElementById('dnn-mdt-settingsButton');
 
         // merge settings with default settings
-        settings.lastMailVisibleTime = settings.lastMailVisibleTime || 3000;
+        settings.mailNoteVisibleTime = settings.mailNoteVisibleTime || 3000;
         
         // initialization
-        initLastMail();
-        initMailOverview();
+        initMailNote();
+        initOverlay();
         initConnection();
 
-        function initLastMail() {
-            lastMailElement.addEventListener('click', function () {
-                openOverlay(lastMail.Id);
+        function initMailNote() {
+            mailNoteElement.addEventListener('click', function () {
+                openOverlay(mailNote.Id);
             }, false);
         }
 
-        function initMailOverview() {
+        function initOverlay() {
             // toggle overlay visibility on overview button click
-            mailOverviewButton.addEventListener('click', function () {
+            overviewButton.addEventListener('click', function () {
                 toggleOverlay();
             }, false);
 
@@ -74,12 +74,12 @@
             }, false);
             
             // close mail overview window when clicking outside the window panel
-            mailOverviewWindow.addEventListener('click', function () {
+            overlay.addEventListener('click', function () {
                 closeOverlay();
             });
 
             // prevent closing the mail overview window when clicking on the window panel
-            mailOverviewPanel.addEventListener('click', function (event) {
+            overlayPanel.addEventListener('click', function (event) {
                 event.stopPropagation();
             });
         }
@@ -89,8 +89,8 @@
             hub.client.OnEvent = function (data) {
                 console.log(data.Type);
                 if (data.Type === 'Mail') {
-                    updateLastEmail(data);
-                    showLastMail();
+                    updateMailNote(data);
+                    showMailNote();
                 } else if (data.Type === 'LogMessage') {
                     // console.log(data);
                 } else if (data.Type === 'DnnEvent') {
@@ -103,7 +103,7 @@
         }
 
         function toggleOverlay(id) {
-            if (mailOverviewWindow.classList.contains('dnn-mdt-hidden')) {
+            if (overlay.classList.contains('dnn-mdt-hidden')) {
                 openOverlay();
             } else {
                 closeOverlay();
@@ -115,50 +115,50 @@
          * @param {string} id The mail with this id will be initially highlighted in overlay
          */
         function openOverlay(id) {
-            var route = (id !== undefined) ? ('#/mail/' + id) : '';
+            var route = (id !== undefined) ? ('#/maildetail/' + id) : '';
 
-            mailOverviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx' + route;
-            mailOverviewWindow.classList.remove('dnn-mdt-hidden');
+            overviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx' + route;
+            overlay.classList.remove('dnn-mdt-hidden');
 
-            mailOverviewButton.classList.add('dnn-mdt-active');
+            overviewButton.classList.add('dnn-mdt-active');
         }
 
         function closeOverlay() {
-            mailOverviewIframe.src = '';
-            mailOverviewWindow.classList.add('dnn-mdt-hidden');
+            overviewIframe.src = '';
+            overlay.classList.add('dnn-mdt-hidden');
 
-            mailOverviewButton.classList.remove('dnn-mdt-active');
+            overviewButton.classList.remove('dnn-mdt-active');
         }
 
         /**
         * Populate last mail elements with new mails data
         * @param {object} data Data of mail
         */
-        function updateLastEmail(data) {
-            lastMail = data;
+        function updateMailNote(data) {
+            mailNote = data;
             dateElement.textContent = data.Timestamp;
             subjectElement.textContent = data.Subject;
             senderElement.textContent = data.Sender;
             recieverElement.textContent = data.To;
         }
 
-        function showLastMail() {
+        function showMailNote() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            lastMailElement.classList.remove('dnn-mdt-hidden');
+            mailNoteElement.classList.remove('dnn-mdt-hidden');
 
             // reset timeout if another mail comes in while the last mail is still visible
-            if (lastMailTimeoutId) {
-                clearTimeout(lastMailTimeoutId);
-                lastMailTimeoutId = null;
+            if (mailNoteTimeoutId) {
+                clearTimeout(mailNoteTimeoutId);
+                mailNoteTimeoutId = null;
             }
 
             // hide last mail after some short delay
-            lastMailTimeoutId = window.setTimeout(hideLastMail, settings.lastMailVisibleTime);
+            mailNoteTimeoutId = window.setTimeout(hideMailNote, settings.mailNoteVisibleTime);
         }
 
-        function hideLastMail() {
+        function hideMailNote() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            lastMailElement.classList.add('dnn-mdt-hidden');
+            mailNoteElement.classList.add('dnn-mdt-hidden');
         }
     }(document, window, {}));
 </script>

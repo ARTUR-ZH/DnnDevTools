@@ -1,189 +1,572 @@
-﻿/* MDT: Mail Developer Toolbar */
-
-/* ATOMS */
-.dnn-mdt-checkbox {
-    position: relative;
-    padding-left: 18px;
+/* MDT: Dot Net Nuke - Mail Developer Toolbar */
+[class^='dnn-mdt-'] *, [class*=' dnn-mdt-'] *,
+[class^='dnn-mdt-'] *:before, [class*=' dnn-mdt-'] *:before,
+[class^='dnn-mdt-'] *:after, [class*=' dnn-mdt-'] *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-.dnn-mdt-checkbox input {
-    position: absolute;
-    top: 0;
-    left: 0;
+[class^='dnn-mdt-'] img, [class*=' dnn-mdt-'] img,
+[class^='dnn-mdt-'] object, [class*=' dnn-mdt-'] object,
+[class^='dnn-mdt-'] embed, [class*=' dnn-mdt-'] embed {
+  max-width: 100%;
+  height: auto;
 }
 
-.dnn-mdt-checkbox label {
-    line-height: 1;
+[class^='dnn-mdt-'] object, [class*=' dnn-mdt-'] object,
+[class^='dnn-mdt-'] embed, [class*=' dnn-mdt-'] embed {
+  height: 100%;
 }
 
-.dnn-mdt-iconButton {
-    display: block;
-    padding: 15px;
-    background-color: #00a5e1;
-    border: 2px solid #ffffff;
-    border-radius: 100%;
-    outline: 0;
+[class^='dnn-mdt-'] img, [class*=' dnn-mdt-'] img {
+  -ms-interpolation-mode: bicubic;
 }
 
-.dnn-mdt-iconButton:hover {
-    background-color: #0184b4;
+[class*=' dnn-mdt-'] img {
+  vertical-align: middle;
 }
 
-.dnn-mdt-iconButton.dnn-mdt-active {
-    background-color: #ec3d47;
-}
-
-.dnn-mdt-icon24x24 {
-    display: block;
-    width: 24px;
-    height: 24px;
-    background-size: 24px 24px;
-}
-
-.dnn-mdt-icon16x16 {
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-size: 16px 16px;
-}
-
-.dnn-mdt-eyeIcon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTYgMGMtOC44MzcgMC0xNiA3LjE2My0xNiAxNnM3LjE2MyAxNiAxNiAxNiAxNi03LjE2MyAxNi0xNi03LjE2My0xNi0xNi0xNnptLTUgOC44NzVsNSA1IDUtNSAyLjEyNSAyLjEyNS01IDUgNSA1LTIuMTI1IDIuMTI1LTUtNS01IDUtMi4xMjUtMi4xMjUgNS01LTUtNSAyLjEyNS0yLjEyNXoiIC8+PC9zdmc+);
-}
-/*
-.dnn-mdt-iconButton.dnn-mdt-active .dnn-mdt-eyeIcon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTYgMGMtOC44MzcgMC0xNiA3LjE2My0xNiAxNnM3LjE2MyAxNiAxNiAxNiAxNi03LjE2MyAxNi0xNi03LjE2My0xNi0xNi0xNnptNi45MDYgOC44NzVsMi4yMTkgMi4wMzEtMTIuMDYzIDEzLjI4MS02LjE4OC02LjE4OCAyLjEyNS0yLjEyNSAzLjkzOCAzLjkzOCA5Ljk2OS0xMC45Mzh6IiAvPjwvc3ZnPg==);
-}
+/**
+* @desc         Font styles for dnn dev tools
+* @name         fonts
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
 */
-.dnn-mdt-inboxIcon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMiAwYy0xLjEwNSAwLTIgLjg5NS0yIDJ2MjhjMCAxLjEwNS44OTUgMiAyIDJoMjZjMS4xMDUgMCAyLS44OTUgMi0ydi0yOGMwLTEuMTA1LS44OTUtMi0yLTJoLTI2em0xIDVoMjR2MTloLTdsLTIgM2gtNmwtMi0zaC03di0xOXoiLz48L3N2Zz4=);
+.dnn-mdt-headline {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  color: #111111;
 }
 
-.dnn-mdt-iconButton.dnn-mdt-active .dnn-mdt-inboxIcon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNOCAwdjNoLTh2NGg4djNsOC01LTgtNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMykiIC8+PC9zdmc+);
-}
-
-.dnn-mdt-cogIcon {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGQ9Ik0zLjUgMGwtLjUgMS4xOWMtLjEuMDMtLjE5LjA4LS4yOC4xM2wtMS4xOS0uNS0uNzIuNzIuNSAxLjE5Yy0uMDUuMS0uMDkuMTgtLjEzLjI4bC0xLjE5LjV2MWwxLjE5LjVjLjA0LjEuMDguMTguMTMuMjhsLS41IDEuMTkuNzIuNzIgMS4xOS0uNWMuMDkuMDQuMTguMDkuMjguMTNsLjUgMS4xOWgxbC41LTEuMTljLjA5LS4wNC4xOS0uMDguMjgtLjEzbDEuMTkuNS43Mi0uNzItLjUtMS4xOWMuMDQtLjA5LjA5LS4xOS4xMy0uMjhsMS4xOS0uNXYtMWwtMS4xOS0uNWMtLjAzLS4wOS0uMDgtLjE5LS4xMy0uMjhsLjUtMS4xOS0uNzItLjcyLTEuMTkuNWMtLjA5LS4wNC0uMTktLjA5LS4yOC0uMTNsLS41LTEuMTloLTF6bS41IDIuNWMuODMgMCAxLjUuNjcgMS41IDEuNXMtLjY3IDEuNS0xLjUgMS41LTEuNS0uNjctMS41LTEuNS42Ny0xLjUgMS41LTEuNXoiLz48L3N2Zz4=);
-}
-
-.dnn-mdt-settingsButton {
-    padding: 5px;
-    background-color: #ec3d47;
-}
-
-.dnn-mdt-settingsButton:hover {
-    background-color: #b92d35;
-}
-
-/* MOLECULES */
-.dnn-mdt-menu {
-    position: relative;
-}
-.dnn-mdt-menu .dnn-mdt-settingsButton {
-    position: absolute;
-    right: -9px;
-    bottom: -9px;
-}
-
-/* LAST MAIL */
-#dnn-mdt-lastMail {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    cursor: pointer;
-}
-#dnn-mdt-lastMail:hover {
-    background-color: #cdcdcd;
-}
-
-/* TEMPLATES */
-#dnn-mdt-hint {
-    position: fixed;
-    right: 12px;
-    bottom: 12px;
-    z-index: 10002;
-}
-
-#dnn-mdt-mailOverviewWindow {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1003;
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-#dnn-mdt-mailOverviewPanel {
-    position: fixed;
-    left: 15%;
-    right: 15%;
-    top: 0;
-    bottom: 0;
-}
-
-/* LAYOUT */
-.dnn-mdt-panel {
-    padding: 15px;
-    text-align: left;
-}
-
-.dnn-mdt-marginBottom1 {
-    margin-bottom: 14px;
-}
-
-.dnn-mdt-hidden {
-    display: none;
-}
-
-.dnn-mdt-visuallyHidden {
-    margin: -1px;
-    padding: 0;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip: rect(0, 0, 0, 0);
-    position: absolute;
-}
-
-/* ANIMATIONS */
-.dnn-mdt-pulseAnimation {
-    animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.3;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* COLORS */
-.dnn-mdt-bgColorGrey {
-    background-color: #e5e5e5;
-}
-
-/* FONTS */
 .dnn-mdt-copy {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #111111;
 }
 
 .dnn-mdt-copySmall {
-    font-size: 12px;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #111111;
 }
 
 .dnn-mdt-copyBold {
-    font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: bold;
+  color: #111111;
+}
+
+.dnn-mdt-pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/**
+* @desc         Icons and icon helper classes
+* @name         atoms/icons
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-wrenchIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik01LjUgMGMtMS4zOCAwLTIuNSAxLjEyLTIuNSAyLjUgMCAuMzIuMDguNjIuMTkuOTFsLTIuOTEgMi44OGMtLjM5LjM5LS4zOSAxLjA1IDAgMS40NC4yLjIuNDYuMjguNzIuMjguMjYgMCAuNTItLjA5LjcyLS4yOGwyLjg4LTIuOTFjLjI4LjExLjU4LjE5LjkxLjE5IDEuMzggMCAyLjUtMS4xMiAyLjUtMi41IDAtLjE2IDAtLjMyLS4wMy0uNDdsLS45Ny45N2gtMnYtMmwuOTctLjk3Yy0uMTUtLjAzLS4zMS0uMDMtLjQ3LS4wM3ptLTQuNSA2LjVjLjI4IDAgLjUuMjIuNS41cy0uMjIuNS0uNS41LS41LS4yMi0uNS0uNS4yMi0uNS41LS41eiIvPjwvc3ZnPg==);
+}
+
+.dnn-mdt-cogIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGQ9Ik0zLjUgMGwtLjUgMS4xOWMtLjEuMDMtLjE5LjA4LS4yOC4xM2wtMS4xOS0uNS0uNzIuNzIuNSAxLjE5Yy0uMDUuMS0uMDkuMTgtLjEzLjI4bC0xLjE5LjV2MWwxLjE5LjVjLjA0LjEuMDguMTguMTMuMjhsLS41IDEuMTkuNzIuNzIgMS4xOS0uNWMuMDkuMDQuMTguMDkuMjguMTNsLjUgMS4xOWgxbC41LTEuMTljLjA5LS4wNC4xOS0uMDguMjgtLjEzbDEuMTkuNS43Mi0uNzItLjUtMS4xOWMuMDQtLjA5LjA5LS4xOS4xMy0uMjhsMS4xOS0uNXYtMWwtMS4xOS0uNWMtLjAzLS4wOS0uMDgtLjE5LS4xMy0uMjhsLjUtMS4xOS0uNzItLjcyLTEuMTkuNWMtLjA5LS4wNC0uMTktLjA5LS4yOC0uMTNsLS41LTEuMTloLTF6bS41IDIuNWMuODMgMCAxLjUuNjcgMS41IDEuNXMtLjY3IDEuNS0xLjUgMS41LTEuNS0uNjctMS41LTEuNS42Ny0xLjUgMS41LTEuNXoiLz48L3N2Zz4=);
+}
+
+.dnn-mdt-trashIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0zIDBjLS41NSAwLTEgLjQ1LTEgMWgtMWMtLjU1IDAtMSAuNDUtMSAxaDdjMC0uNTUtLjQ1LTEtMS0xaC0xYzAtLjU1LS40NS0xLTEtMWgtMXptLTIgM3Y0LjgxYzAgLjExLjA4LjE5LjE5LjE5aDQuNjNjLjExIDAgLjE5LS4wOC4xOS0uMTl2LTQuODFoLTF2My41YzAgLjI4LS4yMi41LS41LjVzLS41LS4yMi0uNS0uNXYtMy41aC0xdjMuNWMwIC4yOC0uMjIuNS0uNS41cy0uNS0uMjItLjUtLjV2LTMuNWgtMXoiIC8+PC9zdmc+);
+}
+
+.dnn-mdt-downloadIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0zIDB2M2gtMmwzIDMgMy0zaC0ydi0zaC0yem0tMyA3djFoOHYtMWgtOHoiIC8+PC9zdmc+);
+}
+
+.dnn-mdt-envelopeClosedIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0wIDB2MWw0IDIgNC0ydi0xaC04em0wIDJ2NGg4di00bC00IDItNC0yeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz48L3N2Zz4=);
+}
+
+.dnn-mdt-envelopeClosedIcon-111111 {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0wIDB2MWw0IDIgNC0ydi0xaC04em0wIDJ2NGg4di00bC00IDItNC0yeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz48L3N2Zz4=);
+}
+
+.dnn-mdt-audioIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0xLjE2IDBjLS43Mi43Mi0xLjE2IDEuNzEtMS4xNiAyLjgxcy40MyAyLjEyIDEuMTYgMi44NGwuNzItLjcyYy0uNTQtLjU0LS44OC0xLjI5LS44OC0yLjEzIDAtLjgzLjMzLTEuNTUuODgtMi4wOWwtLjcyLS43MnptNS42OSAwbC0uNzIuNzJjLjU0LjU0Ljg4IDEuMjYuODggMi4wOSAwIC44My0uMzMgMS41OC0uODggMi4xM2wuNzIuNzJjLjcyLS43MiAxLjE2LTEuNzQgMS4xNi0yLjg0IDAtMS4xLS40My0yLjA5LTEuMTYtMi44MXptLTQuMjUgMS40MWMtLjM2LjM2LS41OS44Ni0uNTkgMS40MSAwIC41NS4yMyAxLjA4LjU5IDEuNDRsLjY5LS43MmMtLjE4LS4xOC0uMjgtLjQ0LS4yOC0uNzIgMC0uMjguMS0uNS4yOC0uNjlsLS42OS0uNzJ6bTIuODEgMGwtLjY5LjcyYy4xOC4xOC4yOC40MS4yOC42OSAwIC4yOC0uMS41NC0uMjguNzJsLjY5LjcyYy4zNi0uMzYuNTktLjg5LjU5LTEuNDQgMC0uNTUtLjIzLTEuMDUtLjU5LTEuNDF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDEpIi8+PC9zdmc+);
+}
+
+.dnn-mdt-audioIcon-111111 {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0xLjE2IDBjLS43Mi43Mi0xLjE2IDEuNzEtMS4xNiAyLjgxcy40MyAyLjEyIDEuMTYgMi44NGwuNzItLjcyYy0uNTQtLjU0LS44OC0xLjI5LS44OC0yLjEzIDAtLjgzLjMzLTEuNTUuODgtMi4wOWwtLjcyLS43MnptNS42OSAwbC0uNzIuNzJjLjU0LjU0Ljg4IDEuMjYuODggMi4wOSAwIC44My0uMzMgMS41OC0uODggMi4xM2wuNzIuNzJjLjcyLS43MiAxLjE2LTEuNzQgMS4xNi0yLjg0IDAtMS4xLS40My0yLjA5LTEuMTYtMi44MXptLTQuMjUgMS40MWMtLjM2LjM2LS41OS44Ni0uNTkgMS40MSAwIC41NS4yMyAxLjA4LjU5IDEuNDRsLjY5LS43MmMtLjE4LS4xOC0uMjgtLjQ0LS4yOC0uNzIgMC0uMjguMS0uNS4yOC0uNjlsLS42OS0uNzJ6bTIuODEgMGwtLjY5LjcyYy4xOC4xOC4yOC40MS4yOC42OSAwIC4yOC0uMS41NC0uMjguNzJsLjY5LjcyYy4zNi0uMzYuNTktLjg5LjU5LTEuNDQgMC0uNTUtLjIzLTEuMDUtLjU5LTEuNDF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDEpIi8+PC9zdmc+);
+}
+
+.dnn-mdt-listIcon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0uNSAwYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02em0tMS41IDJjLS4yOCAwLS41LjIyLS41LjVzLjIyLjUuNS41LjUtLjIyLjUtLjUtLjIyLS41LS41LS41em0xLjUgMHYxaDZ2LTFoLTZ6bS0xLjUgMmMtLjI4IDAtLjUuMjItLjUuNXMuMjIuNS41LjUuNS0uMjIuNS0uNS0uMjItLjUtLjUtLjV6bTEuNSAwdjFoNnYtMWgtNnptLTEuNSAyYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjUpIi8+PC9zdmc+);
+}
+
+.dnn-mdt-listIcon-111111 {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0uNSAwYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02em0tMS41IDJjLS4yOCAwLS41LjIyLS41LjVzLjIyLjUuNS41LjUtLjIyLjUtLjUtLjIyLS41LS41LS41em0xLjUgMHYxaDZ2LTFoLTZ6bS0xLjUgMmMtLjI4IDAtLjUuMjItLjUuNXMuMjIuNS41LjUuNS0uMjIuNS0uNS0uMjItLjUtLjUtLjV6bTEuNSAwdjFoNnYtMWgtNnptLTEuNSAyYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjUpIi8+PC9zdmc+);
+}
+
+.dnn-mdt-icon24x24 {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  background-position: center center;
+}
+
+.dnn-mdt-icon16x16 {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-size: 16px 16px;
+  background-position: center center;
+}
+
+/**
+* @desc         Select box styles
+* @name         select
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-select {
+  margin-bottom: 0;
+  padding: 7px;
+}
+
+/**
+* @desc         Checkbox styles
+* @name         checkbox
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-checkbox {
+  position: relative;
+  padding-left: 18px;
+}
+.dnn-mdt-checkbox input {
+  position: absolute;
+  top: 1px;
+  left: 0;
+}
+.dnn-mdt-checkbox label {
+  line-height: 1;
+}
+
+/**
+* @desc         Resets native button styles, adds padding and adds simple opacity hover
+* @name         atoms/iconButton
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-iconButton {
+  background-color: transparent;
+  border: none;
+  padding: 14px 6px 13px 6px;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.1s linear;
+}
+.dnn-mdt-iconButton:hover {
+  opacity: 1;
+}
+
+/**
+* @desc         Button with icon and label
+* @name         atoms/iconLabelButton
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-iconLabelButton {
+  position: relative;
+  padding: 18px 22px 18px 44px;
+  cursor: pointer;
+  opacity: 0.6;
+  border: none;
+  background-color: #00a5e1;
+  text-decoration: none;
+  transition: all 0.1s linear;
+}
+.dnn-mdt-iconLabelButton span {
+  position: absolute;
+  top: 17px;
+  left: 20px;
+}
+.dnn-mdt-iconLabelButton:hover, .dnn-mdt-iconLabelButton.dnn-mdt-active {
+  opacity: 1;
+  background-color: #0092c8;
+}
+
+/**
+* @desc         Blue button with only icon and active state
+* @name         overviewButton
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+.dnn-mdt-overviewButton {
+  display: block;
+  padding: 15px;
+  background-color: #00a5e1;
+  border: 2px solid #ffffff;
+  border-radius: 100%;
+  outline: 0;
+}
+.dnn-mdt-overviewButton:hover {
+  background-color: #0080ae;
+}
+.dnn-mdt-overviewButton.dnn-mdt-active {
+  background-color: #ec3d47;
+}
+.dnn-mdt-overviewButton.dnn-mdt-active span {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNOCAwdjNoLTh2NGg4djNsOC01LTgtNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMykiIC8+PC9zdmc+);
+}
+
+/**
+* @desc         Settings button
+* @name         atoms/settingsButton
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+.dnn-mdt-settingsButton {
+  display: block;
+  padding: 5px;
+  background-color: #ec3d47;
+  border: 2px solid #ffffff;
+  border-radius: 100%;
+}
+.dnn-mdt-settingsButton:hover {
+  background-color: #e01621;
+}
+
+/**
+* @desc         Spinner animation for loading visualization
+* @name         atoms/spinner
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spinner {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.dnn-mdt-spinner:before {
+  content: '';
+  position: absolute;
+  margin-top: -14px;
+  margin-left: -14px;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 6px solid rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(0, 0, 0, 0.5);
+  animation: spinner .6s linear infinite;
+  -webkit-animation: spinner .6s linear infinite;
+}
+
+/**
+* @desc         Mail notification element styles
+* @name         molecules/mailNote
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+.dnn-mdt-mailNote {
+  cursor: pointer;
+}
+.dnn-mdt-mailNote:hover {
+  background-color: #cdcdcd;
+}
+
+/**
+* @desc         Toolbar menu styles
+* @name         molecules/toolbarMenu
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-toolbarMenu {
+  position: relative;
+}
+.dnn-mdt-toolbarMenu .dnn-mdt-settingsButton {
+  position: absolute;
+  right: -9px;
+  bottom: -9px;
+}
+
+/**
+* @desc         table styles
+* @name         molecules/table
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+.dnn-mdt-streamList {
+  width: 100%;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style: none;
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+.dnn-mdt-streamItem {
+  overflow: hidden;
+  *zoom: 1;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+.dnn-mdt-streamItem:hover {
+  background-color: #f8f8f8;
+}
+.dnn-mdt-streamItem:hover .dnn-mdt-streamItemIcon {
+  opacity: 1;
+}
+
+.dnn-mdt-streamItemCell {
+  float: left;
+  overflow: hidden;
+  padding: 14px 7px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.dnn-mdt-streamItemTimestamp {
+  position: relative;
+  width: 20%;
+  padding-left: 37px;
+}
+.dnn-mdt-streamItemTimestamp .dnn-mdt-streamItemIcon {
+  position: absolute;
+  top: 13px;
+  left: 7px;
+  opacity: 0.3;
+  transition: opacity 0.1s linear;
+}
+
+.dnn-mdt-streamItemMailSender {
+  width: 25%;
+}
+
+.dnn-mdt-streamItemMailSubject {
+  width: 20%;
+}
+
+.dnn-mdt-streamItemMailTo {
+  width: 25%;
+}
+
+.dnn-mdt-streamItemMailActions {
+  width: 10%;
+  text-align: right;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.dnn-mdt-streamItemEventLogType {
+  width: 15%;
+}
+
+.dnn-mdt-streamItemEventUsername {
+  width: 15%;
+}
+
+.dnn-mdt-streamItemEventMessage {
+  width: 30%;
+}
+
+.dnn-mdt-streamItemEventPortal {
+  width: 20%;
+}
+
+.dnn-mdt-streamItemLogLevel {
+  width: 15%;
+  padding: 9px;
+}
+
+.dnn-mdt-streamItemLogClassName {
+  width: 15%;
+}
+
+.dnn-mdt-streamItemLogMessage {
+  width: 30%;
+}
+
+.dnn-mdt-streamItemLogMethodName {
+  width: 20%;
+}
+
+.dnn-mdt-streamLabel {
+  padding: 5px;
+  text-transform: lowercase;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #cdcdcd;
+}
+
+/**
+* @desc         List of filters
+* @name         molecules/filterList
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-filterList {
+  overflow: hidden;
+  *zoom: 1;
+}
+.dnn-mdt-filterList .dnn-mdt-iconLabelButton {
+  float: left;
+}
+.dnn-mdt-filterList .dnn-mdt-removeIcon {
+  padding: 18px 27px;
+}
+
+/**
+* @desc         Toolbar styles
+* @name         organisms/toolbar
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-toolbar {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 10002;
+}
+.dnn-mdt-toolbar .dnn-mdt-mailNote {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+}
+
+/**
+* @desc         Overlay styles
+* @name         organisms/overlay
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1003;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.dnn-mdt-overlay .dnn-mdt-overlayPanel {
+  position: fixed;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  bottom: 0;
+}
+
+/**
+* @desc         Overview window styles
+* @name         templates/overview
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-overview {
+  margin: 0;
+}
+.dnn-mdt-overview .dnn-mdt-filterList {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.dnn-mdt-overview .dnn-mdt-streamWrapper {
+  padding: 64px 20px 15px 20px;
+}
+
+/**
+* @desc         Color classes
+* @name         util/colors
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+.dnn-mdt-colorWhite {
+  color: #ffffff;
+}
+
+.dnn-mdt-bgColorWhite {
+  background-color: #ffffff;
+}
+
+.dnn-mdt-bgColorGrey {
+  background-color: #e5e5e5;
+}
+
+.dnn-mdt-bgColorGrey2 {
+  background-color: #cdcdcd;
+}
+
+.dnn-mdt-bgColorDnnBlue {
+  background-color: #00a5e1;
+}
+
+.dnn-mdt-bgColorRed {
+  background-color: #dd0720;
+}
+
+.dnn-mdt-bgColorOrange {
+  background-color: #fabb00;
+}
+
+/**
+* @desc         Styles for layouting elements
+* @name         util/layout
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+.dnn-mdt-panel {
+  padding: 15px;
+  text-align: left;
+}
+
+.dnn-mdt-hidden {
+  display: none;
+}
+
+.dnn-mdt-visuallyHidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+.dnn-mdt-marginTop1 {
+  margin-top: 7px;
+}
+
+.dnn-mdt-marginTop2 {
+  margin-top: 14px;
+}
+
+.dnn-mdt-marginBottom2 {
+  margin-bottom: 14px;
+}
+
+.dnn-mdt-displayBlock {
+  display: block;
 }

@@ -1,92 +1,86 @@
-﻿<div>
-    <button id="dnn-mdt-enableButton" type="button">[Resx:{key:"Enable"}]</button>
-    <button id="dnn-mdt-disableButton" type="button">[Resx:{key:"Disable"}]</button>
+﻿<div class="dnn-mdt-panel dnn-mdt-bgColorDnnBlue">
     <div class="dnn-mdt-checkbox">
         <input type="checkbox" id="dnn-mdt-enableCheckbox">
-        <label for="dnn-mdt-enableCheckbox" class="dnn-mdt-copy">Enable DNN Dev Tools</label>
+        <label for="dnn-mdt-enableCheckbox" class="dnn-mdt-copy dnn-mdt-colorWhite">Enable DNN Dev Tools</label>
     </div>
 </div>
 
-<div>
-    <p class="dnn-mdt-copy">Mail Catch</p>
-    <button id="dnn-mdt-sendMailButton" type="button">[Resx:{key:"SendMail"}]</button>
-    <button id="dnn-mdt-enableMailCatchButton" type="button">[Resx:{key:"EnableMailCatch"}]</button>
-    <button id="dnn-mdt-disableMailCatchButton" type="button">[Resx:{key:"DisableMailCatch"}]</button>
+<div class="dnn-mdt-panel dnn-mdt-bgColorWhite dnn-mdt-marginTop2">
+    <h2 class="dnn-mdt-headline">Mail Catch</h2>
+    <div class="dnn-mdt-checkbox">
+        <input type="checkbox" id="dnn-mdt-enableMailCatchCheckbox">
+        <label for="dnn-mdt-enableMailCatchCheckbox" class="dnn-mdt-copy">Enable mail catch</label>
+    </div>
+    <div class="dnn-mdt-marginTop2">
+        <button type="button" id="dnn-mdt-sendMailButton">Send test mail</button>
+    </div>
 </div>
 
-<div>
-    <p class="dnn-mdt-copy">Event catch</p>
-    <button id="dnn-mdt-enableEventCatchButton" type="button">Enable event catch</button>
-    <button id="dnn-mdt-disableEventCatchButton" type="button">Disable event catch</button>
+<div class="dnn-mdt-panel dnn-mdt-bgColorWhite dnn-mdt-marginTop2">
+    <h2 class="dnn-mdt-headline">Event catch</h2>
+    <div class="dnn-mdt-checkbox">
+        <input type="checkbox" id="dnn-mdt-enableEventCatchCheckbox">
+        <label for="dnn-mdt-enableEventCatchCheckbox" class="dnn-mdt-copy">Enable event catch</label>
+    </div>
 </div>
 
-<div>
-    <p class="dnn-mdt-copy">Log level</p>
-    <select name="" id="dnn-mdt-logLevelSelect">
-        <option value="ALL">all</option>
-        <option value="DEBUG">debug</option>
-        <option value="INFO">info</option>
-        <option value="WARN">warning</option>
-        <option value="ERROR">error</option>
-        <option value="FATAL">fatal</option>
-    </select>
+<div class="dnn-mdt-panel dnn-mdt-bgColorWhite dnn-mdt-marginTop2">
+    <h2 class="dnn-mdt-headline">Logging</h2>
+    <div class="dnn-mdt-checkbox">
+        <input type="checkbox" id="dnn-mdt-enableLoggingCheckbox">
+        <label for="dnn-mdt-enableLoggingCheckbox" class="dnn-mdt-copy">Enable logging</label>
+    </div>
+    <div class="dnn-mdt-marginTop2">
+        <label for="dnn-mdt-logLevelSelect" class="dnn-mdt-copy dnn-mdt-displayBlock">Select log level</label>
+        <select name="" id="dnn-mdt-logLevelSelect" class="dnn-mdt-select dnn-mdt-marginTop1">
+            <option value="ALL">all</option>
+            <option value="DEBUG">debug</option>
+            <option value="INFO">info</option>
+            <option value="WARN">warning</option>
+            <option value="ERROR">error</option>
+            <option value="FATAL">fatal</option>
+        </select>
+    </div>
 </div>
 
 <script>
     (function () {
         var enableCheckbox = document.getElementById('dnn-mdt-enableCheckbox'),
-            enableButton = document.getElementById('dnn-mdt-enableButton'),
-            disableButton = document.getElementById('dnn-mdt-disableButton'),
-            enableMailCatchButton = document.getElementById('dnn-mdt-enableMailCatchButton'),
-            disableMailCatchButton = document.getElementById('dnn-mdt-disableMailCatchButton'),
-            enableEventCatchButton = document.getElementById('dnn-mdt-enableEventCatchButton'),
-            disableEventCatchButton = document.getElementById('dnn-mdt-disableEventCatchButton'),
+            enableMailCatchCheckbox = document.getElementById('dnn-mdt-enableMailCatchCheckbox'),
+            enableEventCatchCheckbox = document.getElementById('dnn-mdt-enableEventCatchCheckbox'),
+            enableLoggingCheckbox = document.getElementById('dnn-mdt-enableLoggingCheckbox'),
             logLevelSelect = document.getElementById('dnn-mdt-logLevelSelect'),
             sendMailButton = document.getElementById('dnn-mdt-sendMailButton');
-/*
+
         // set current status
         enableCheckbox.checked = window.dnnDevTools.enable;
-console.log('=>', window.dnnDevTools.enable);
+        enableMailCatchCheckbox.checked = window.dnnDevTools.enableMailCatch;
+        enableEventCatchCheckbox.checked = window.dnnDevTools.enableEventCatch;
+        enableLoggingCheckbox.checked = window.dnnDevTools.logMessageLevel !== 'OFF';
+
         enableCheckbox.addEventListener('change', function (event) {
-            // enableCheckbox.checked ? setStatus(true) : setStatus(false);
-            console.log('> ', enableCheckbox.checked);
-            if (enableCheckbox.checked) {
-                console.log('true');
-                setStatus(true);
-            } else {
-                console.log('false');
-                setStatus(false)
-            }
-        }, false);
-*/
-
-        enableButton.addEventListener('click', function () {
-            setStatus(true);
+            setStatus(enableCheckbox.checked);
         }, false);
 
-        disableButton.addEventListener('click', function () {
-            setStatus(false);
-        }, false);
-
-        enableMailCatchButton.addEventListener('click', function () {
-            setMailCatchStatus(true);
-        }, false);
-
-        disableMailCatchButton.addEventListener('click', function () {
-            setMailCatchStatus(false);
+        enableMailCatchCheckbox.addEventListener('change', function (event) {
+            setMailCatchStatus(enableMailCatchCheckbox.checked);
         }, false);
 
         sendMailButton.addEventListener('click', function () {
             sendMail();
         }, false);
 
-        enableEventCatchButton.addEventListener('click', function () {
-            setEventCatchStatus(true);
+        enableEventCatchCheckbox.addEventListener('click', function () {
+            setEventCatchStatus(enableEventCatchCheckbox.checked);
         }, false);
 
-        disableEventCatchButton.addEventListener('click', function () {
-            setEventCatchStatus(false);
+
+
+        enableLoggingCheckbox.addEventListener('click', function () {
+            setLoggingStatus(enableLoggingCheckbox.checked);
         }, false);
+
+
 
         logLevelSelect.addEventListener('change', function () {
             setLogLevel(logLevelSelect.value);
@@ -95,7 +89,7 @@ console.log('=>', window.dnnDevTools.enable);
         function setStatus(isEnabled) {
             dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled).then(
                 function (response) {
-                    // window.location.reload(false);
+                    window.location.reload(false);
                 }, function (error) {
                     // TODO show error
                 }
@@ -120,6 +114,14 @@ console.log('=>', window.dnnDevTools.enable);
                     // TODO show error
                 }
             );
+        }
+
+        function setLoggingStatus(isEnabled) {
+            if (isEnabled) {
+                setLogLevel(logLevelSelect.value);
+            } else {
+                setLogLevel('OFF');
+            }
         }
 
         function sendMail() {

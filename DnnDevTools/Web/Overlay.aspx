@@ -2,116 +2,11 @@
 <html>
 <head>
     <title>DotNetNuke Developer Tools Mail Window</title>
+
+    <link rel="stylesheet" type="text/css" href="Styles/dnn.css">
+
     <style>
-        body {
-            margin: 0;
-        } 
-
-        /* style scrollbar in webkit */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: #272822;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #12120f;
-        }
-
-        [ng-cloak] {
-            display: none !important;
-        }
-
-        /* SPINNER */
-        @keyframes spinner {
-            to {transform: rotate(360deg);}
-        }
-         
-        @-webkit-keyframes spinner {
-            to {-webkit-transform: rotate(360deg);}
-        }
-         
-        .dnn-mdt-spinner {
-            min-width: 24px;
-            min-height: 24px;
-        }
-
-        .dnn-mdt-spinner:before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 16px;
-            height: 16px;
-            margin-top: -10px;
-            margin-left: -10px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, .3);
-            border-top-color: rgba(255, 255, 255, .6);
-            animation: spinner .6s linear infinite;
-            -webkit-animation: spinner .6s linear infinite;
-        }
-
-        /* FONTS */
-        .dnn-mdt-copy {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        .dnn-mdt-pre {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        /* TABLE */
-        .dnn-mdt-table {
-            width: 100%;
-            table-layout: fixed;
-            border-spacing: 0;
-            border-collapse: separate;
-        }
-
-        .dnn-mdt-tableCell {
-            padding: 7px 14px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-        .dnn-mdt-tableCellSender {
-            width: 25%;
-            color: #ffffff;
-        }
-        .dnn-mdt-tableCellSubject {
-            width: 20%;
-            color: #ffffff;
-        }
-        .dnn-mdt-tableCellTimestamp {
-            width: 20%;
-            color: rgba(255, 255, 255, 0.3);
-        }
-        .dnn-mdt-tableCellTo {
-            width: 25%;
-            color: rgba(255, 255, 255, 0.3);
-        }
-        .dnn-mdt-tableCellActions {
-            width: 10%;
-            text-align: right;
-        }
-
         /* LIST */
-        .dnn-mdt-list {
-            padding: 20px;
-            background-color: #272822;
-            color: #ffffff;
-        }
         .dnn-mdt-listEmpty {
             text-align: center;
         }
@@ -119,12 +14,10 @@
         /* DETAIL */
         .dnn-mdt-detail {
             padding: 20px;
-            background-color: #ffffff;
-            color: #111111;
         }
     </style>
 </head>
-<body>
+<body class="dnn-mdt-overview dnn-mdt-bgColorWhite">
     
     <% Response.Write(System.Web.Helpers.AntiForgery.GetHtml()); %>
 
@@ -132,29 +25,54 @@
         <div ui-view role="main"></div>
 
         <script type="text/ng-template" id="dnn-mdt-overview.html">
-            <div class="dnn-mdt-list">
-                <p ng-if="overview.mailList.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
-                <table class="dnn-mdt-table">
-                    <tbody>
-                        <tr ng-repeat="mail in overview.mailList | orderBy:'-Timestamp'">
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSender">{{mail.Sender}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellSubject">{{mail.Subject}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTimestamp">{{mail.Timestamp | date:'dd.MM.yyyy HH:mm'}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-copy dnn-mdt-tableCellTo">{{mail.To}}</td>
-                            <td class="dnn-mdt-tableCell dnn-mdt-tableCellActions">
-                                <button ui-sref="mailDetail({id:mail.Id})" type="button">+</button>
-                                <button ng-click="overview.removeMail(mail)" type="button">x</button>
-                                <button ng-click="overview.downloadMail(mail.Id)" type="button">down</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="dnn-mdt-stream">
+                <div class="dnn-mdt-filterList dnn-mdt-bgColorDnnBlue">
+                    <a ui-sref="overview({filter: null})" ng-class="{'dnn-mdt-active': !overview.filter}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite dnn-mdt-removeIcon">Show all</a>
+                    <a ui-sref="overview({filter: 'Mail'})" ng-class="{'dnn-mdt-active': overview.filter === 'Mail'}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite"><span class="dnn-mdt-envelopeClosedIcon dnn-mdt-icon16x16"></span>Mails</a>
+                    <a ui-sref="overview({filter: 'DnnEvent'})" ng-class="{'dnn-mdt-active': overview.filter === 'DnnEvent'}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite"><span class="dnn-mdt-audioIcon dnn-mdt-icon16x16"></span>Events</a>
+                    <a ui-sref="overview({filter: 'LogMessage'})" ng-class="{'dnn-mdt-active': overview.filter === 'LogMessage'}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite"><span class="dnn-mdt-listIcon dnn-mdt-icon16x16"></span>Logs</a>
+                </div>
+
+                <div class="dnn-mdt-streamWrapper">
+                    <div ng-if="!overview.stream" class="dnn-mdt-spinner"></div>
+                    <p ng-if="overview.stream.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
+                    <ul class="dnn-mdt-streamList">
+                        <li ng-repeat="item in overview.stream | orderBy:'-TimeStamp'" ng-click="overview.showDetail(item)" class="dnn-mdt-streamItem">
+                            <div class="dnn-mdt-streamItemTimestamp dnn-mdt-streamItemCell">
+                                <span ng-class="{'dnn-mdt-envelopeClosedIcon-111111': item.Type === 'Mail', 'dnn-mdt-audioIcon-111111': item.Type === 'DnnEvent', 'dnn-mdt-listIcon-111111': item.Type === 'LogMessage'}" class="dnn-mdt-streamItemIcon dnn-mdt-icon16x16"></span>
+                                <p class="dnn-mdt-copy">{{item.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                            </div>
+
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventLogType">{{item.LogType || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventMessage">{{item.Message || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventUsername">{{item.Username || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventPortal">{{item.Portal || '&nbsp;'}}</p>
+
+                            <div ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-streamItemLogLevel"><p class="dnn-mdt-streamLabel dnn-mdt-copy" ng-class="{'dnn-mdt-bgColorRed': item.Level === 'ERROR', 'dnn-mdt-bgColorOrange': item.Level === 'WARN'}">{{item.Level}}</p></div>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemLogMessage">{{item.Message}}</p>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemLogClassName">{{item.ClassName}}</p>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemLogMethodName">{{item.MethodName}}</p>
+
+                            <p ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemMailSender">{{item.Sender}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemMailSubject">{{item.Subject}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemMailTo">{{item.To}}</p>
+                            <div ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-streamItemMailActions">
+                                <button ng-click="overview.removeMail($event, item)" type="button" class="dnn-mdt-iconButton">
+                                    <span class="dnn-mdt-trashIcon dnn-mdt-icon16x16"></span>
+                                </button>
+                                <button ng-click="overview.downloadMail($event, item.Id)" type="button" class="dnn-mdt-iconButton">
+                                    <span class="dnn-mdt-downloadIcon dnn-mdt-icon16x16"></span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </script>
 
         <script type="text/ng-template" id="dnn-mdt-mail-detail.html">
             <div class="dnn-mdt-detail">
-                <a ui-sref="overview">back to overview</a>
+                <a ui-sref="overview" class="dnn-mdt-copy">back to overview</a>
                 <div ng-if="mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnn-mdt-copy"></div>
                 <pre ng-if="!mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnn-mdt-pre"></pre>
                 <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnn-mdt-copy">Body is empty.</p>
@@ -178,12 +96,12 @@
                 $urlRouterProvider.otherwise('/');
                 $stateProvider
                     .state('overview', {
-                        url: '/',
+                        url: '/{filter}',
                         templateUrl: 'dnn-mdt-overview.html',
                         controller: 'OverviewController as overview'
                     })
                     .state('mailDetail', {
-                        url: '/mail/{id}',
+                        url: '/maildetail/{id}',
                         templateUrl: 'dnn-mdt-mail-detail.html',
                         controller: 'MailDetailController as mailDetail',
                         resolve: {
@@ -194,37 +112,58 @@
                     });
             }
 
-            function OverviewController($scope, $window, remoteData) {
+            function OverviewController($scope, $window, $state, $stateParams, remoteData) {
                 var vm = this;
 
-                vm.mailList = [];
+                vm.stream = null;
+                vm.filter = $stateParams.filter;
+                vm.showDetail = showDetail;
                 vm.removeMail = removeMail;
                 vm.downloadMail = downloadMail;
 
                 activate();
 
                 function activate() {
-                    remoteData.stream().then(function (response) {
-                        console.log(response);
-                        // vm.mailList = response.data;
-                    });
-                    // remoteData.mailList().then(function (response) {
-                    //     vm.mailList = response.data;
-                    // });
-                    // remoteData.logList().then(function () {
-                    //     console.log('logList');
-                    // });
-                    // remoteData.eventList().then(function () {
-                    //     console.log('eventList');
-                    // });
+                    // load stream
+                    switch (vm.filter) {
+                        case 'Mail':
+                            remoteData.mailList().then(function (response) {
+                                vm.stream = response.data;
+                            });
+                            break;
+                        case 'DnnEvent':
+                            remoteData.eventList().then(function (response) {
+                                vm.stream = response.data;
+                            });
+                            break;
+                        case 'LogMessage':
+                            remoteData.logList().then(function (response) {
+                                vm.stream = response.data;
+                            });
+                            break;
+                        default:
+                            remoteData.stream().then(function (response) {
+                                vm.stream = response.data.all;
+                            });
+                    }
                 }
 
-                function removeMail(mail) {
+                function showDetail(item) {
+                    switch (item.Type) {
+                        case 'Mail':
+                            $state.go('mailDetail', {id:item.Id});
+                            break;
+                    }
+                }
+
+                function removeMail($event, mail) {
+                    $event.stopPropagation();
+
                     remoteData.removeMail(mail).then(success, error);
 
                     function success(response) {
-                        var index = vm.mailList.indexOf(mail);
-                        vm.mailList.splice(index, 1);
+                        var index = vm.stream.indexOf(mail);
+                        vm.stream.splice(index, 1);
                     }
 
                     function error(response) {
@@ -233,7 +172,8 @@
                     }
                 }
 
-                function downloadMail(id) {
+                function downloadMail($event, id) {
+                    $event.stopPropagation();
                     $window.location.href = 'api/mail/download?id=' + id;
                 }
 
@@ -248,7 +188,7 @@
             function MailDetailController($stateParams, mail) {
                 var vm = this;
 
-                vm.mail = mail;
+                vm.mail = mail.data;
             }
 
             function remoteData($http, $q) {
@@ -264,7 +204,7 @@
                 function stream() {
                     return $http({
                         method: 'GET',
-                        url: 'api/stream',
+                        url: 'api/stream?skip=0&take=100&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
@@ -274,17 +214,7 @@
                 function mailList() {
                     return $http({
                         method: 'GET',
-                        url: 'api/mail/list',
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    });
-                }
-
-                function logList() {
-                    return $http({
-                        method: 'GET',
-                        url: 'api/log/list',
+                        url: 'api/mail/list?skip=0&take=10&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
@@ -294,7 +224,17 @@
                 function eventList() {
                     return $http({
                         method: 'GET',
-                        url: 'api/dnnEvent/list',
+                        url: 'api/dnnEvent/list?skip=0&take=10&search=',
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
+
+                function logList() {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/log/list?skip=0&take=10&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }

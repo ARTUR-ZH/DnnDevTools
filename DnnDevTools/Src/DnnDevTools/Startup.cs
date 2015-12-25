@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules.Definitions;
+using log4net;
 using log4net.Core;
 using Microsoft.Owin;
 using Owin;
@@ -12,6 +14,10 @@ namespace weweave.DnnDevTools
     {
         public void Configuration(IAppBuilder app)
         {
+            // Skip initialization if module is not defined
+            var moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(Globals.ModuleFriendlyName);
+            if (Null.IsNull(moduleDefinition)) return;
+
             // Wire up SignalR
             app.MapSignalR();
 

@@ -7,5 +7,7 @@
         internal const string ActionTypeLogMessage = "LogMessage";
 
         internal const string ActionTypeDnnEvent = "DnnEvent";
+
+        internal const string ModuleFriendlyName = "DNN Dev Tools";
     }
 }

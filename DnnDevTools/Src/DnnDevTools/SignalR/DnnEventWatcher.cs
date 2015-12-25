@@ -25,7 +25,7 @@ namespace weweave.DnnDevTools.SignalR
         {
             var lastLog = DateTime.Now;
 
-            (new Thread(() =>
+            new Thread(() =>
             {
                 var totalRecords = 0;
                 while (true)
@@ -51,7 +51,7 @@ namespace weweave.DnnDevTools.SignalR
                     }
                 }
 
-            })).Start();
+            }).Start();
         }
 
 

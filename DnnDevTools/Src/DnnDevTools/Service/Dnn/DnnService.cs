@@ -37,7 +37,7 @@ namespace weweave.DnnDevTools.Service.Dnn
 
         public void ClearCache(string cacheKeyOrPrefix)
         {
-            DataCache.ClearCache(cacheKeyOrPrefix);
+            DataCache.ClearCache(PrefixCacheKey(cacheKeyOrPrefix));
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
@@ -35,25 +37,46 @@ namespace weweave.DnnDevTools.SignalR
             };
 
             // Add event handlers
-            watcher.Created += OnChanged;
+            watcher.Created += OnCreated;
 
             // Begin watching
             watcher.EnableRaisingEvents = true;
         }
 
-        private void OnChanged(object source, FileSystemEventArgs e)
+        private void OnCreated(object source, FileSystemEventArgs e)
         {
-            // Do nothing, if mail catch is not enabled
-            if (!ServiceLocator.ConfigService.GetEnableMailCatch())
+            // Do nothing, if DNN Dev Tools or mail catch is not enabled
+            if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableMailCatch())
                 return;
-            
-            // Try to parse mail
-            var message = EmlFileParser.ParseEmlFile(e.FullPath);
-            if (message == null) return;
 
-            // Send mail notification to clients
-            var mail = new Mail(System.IO.Path.GetFileNameWithoutExtension(e.Name), message);
-            GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(mail);
+            // Start new background thread and wait until file is completely written and no longer locked
+            new Thread(() =>
+            {
+                var start = DateTime.Now;
+                var file = new FileInfo(e.FullPath);
+                while (true)
+                {
+                    Thread.Sleep(100);
+
+                    // Break if file is not released after max timeout
+                    if (start - DateTime.Now > new TimeSpan(0, 0, 1)) break;
+
+                    // Test if file is still locked
+                    if (FileUtil.IsFileLocked(file)) continue;
+
+                    // Try to parse mail
+                    var message = EmlFileParser.ParseEmlFile(e.FullPath);
+                    if (message == null) return;
+
+                    // Send mail notification to clients
+                    var mail = new Mail(System.IO.Path.GetFileNameWithoutExtension(e.Name), message);
+                    GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(mail);
+
+                    break;
+                }
+
+            }).Start();
+
         }
 
     }

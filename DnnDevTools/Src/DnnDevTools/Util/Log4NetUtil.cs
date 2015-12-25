@@ -3,7 +3,7 @@ using log4net.Core;
 
 namespace weweave.DnnDevTools.Util
 {
-    class Log4NetUtil
+    internal static class Log4NetUtil
     {
         public static Level ParseLevel(string level)
         {

@@ -10,6 +10,7 @@ using System.Web.Hosting;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
@@ -109,7 +110,8 @@ namespace weweave.DnnDevTools
                 ["enableDnnEventCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableDnnEventCatch(),
                 ["logMessageLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageLevel().DisplayName,
                 ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/",
-                ["hostSettingsUrl"] = $"{basePath}/Host/DNN-Dev-Tools/portalid/{portalSettings.PortalId}/"
+                ["hostSettingsUrl"] = $"{basePath}/Host/DNN-Dev-Tools/portalid/{portalSettings.PortalId}/",
+                ["hostSmtpConfigured"] =  !string.IsNullOrWhiteSpace(Host.SMTPServer)
             };
 
             // Inject DnnDevTool config at top of body

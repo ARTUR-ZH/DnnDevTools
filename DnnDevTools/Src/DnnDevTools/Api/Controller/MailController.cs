@@ -19,14 +19,14 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public List<Mail> List()
         {
-            return List(null, null, null);
+            return List(null, null, null, null);
         }
 
         [ValidateAntiForgeryToken]
         [HttpGet]
-        public List<Mail> List(int? skip, int? take, string search)
+        public List<Mail> List(string start, int? skip, int? take, string search)
         {
-            return ServiceLocator.MailService.GetList(skip, take, search);
+            return ServiceLocator.MailService.GetList(start, skip, take, search);
         }
 
         [ValidateAntiForgeryToken]

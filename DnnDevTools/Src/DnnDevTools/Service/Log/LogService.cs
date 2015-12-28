@@ -12,12 +12,13 @@ namespace weweave.DnnDevTools.Service.Log
         {
         }
 
-        public List<Dto.LogMessage> GetList(int? skip, int? take, string search)
+        public List<LogMessage> GetList(string start, int? skip, int? take, string search)
         {
-            IEnumerable<Dto.LogMessage> logs = Log4NetAppender.LogMessageQueue.Select(e => e.Copy()).OrderByDescending(e => e.TimeStamp);
-
+            IEnumerable<LogMessage> logs = Log4NetAppender.LogMessageQueue.Select(e => e.Copy()).OrderByDescending(e => e.TimeStamp);
             if (!string.IsNullOrWhiteSpace(search))
                 logs = logs.Where(e => string.Concat(e.ClassName, e.MethodName, e.Message).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            if (!string.IsNullOrWhiteSpace(start))
+                logs = logs.SkipWhile(e => e.Id != start);
             if (skip != null)
                 logs = logs.Skip(skip.Value).ToList();
             if (take != null)

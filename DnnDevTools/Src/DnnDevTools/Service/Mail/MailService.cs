@@ -13,7 +13,7 @@ namespace weweave.DnnDevTools.Service.Mail
         {
         }
 
-        public List<Dto.Mail> GetList(int? skip, int? take, string search)
+        public List<Dto.Mail> GetList(string start, int? skip, int? take, string search)
         {
             var mails = new List<Dto.Mail>();
 
@@ -30,6 +30,7 @@ namespace weweave.DnnDevTools.Service.Mail
 
             if (!string.IsNullOrWhiteSpace(search))
                 result = result.Where(e => string.Concat(e.Sender, e.Subject, e.To).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            if (!string.IsNullOrWhiteSpace(start)) result = result.SkipWhile(e => e.Id != start);
             if (skip != null) result = result.Skip(skip.Value);
             if (take != null) result = result.Take(take.Value);
 

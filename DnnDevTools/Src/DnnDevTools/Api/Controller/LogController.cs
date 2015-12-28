@@ -13,13 +13,13 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public List<LogMessage> List()
         {
-            return List(null, null, null);
+            return List(null, null, null, null);
         }
 
         [HttpGet]
-        public List<LogMessage> List(int? skip, int? take, string search)
+        public List<LogMessage> List(string start, int? skip, int? take, string search)
         {
-            return ServiceLocator.LogService.GetList(skip, take, search);
+            return ServiceLocator.LogService.GetList(start, skip, take, search);
         }
     }
 }

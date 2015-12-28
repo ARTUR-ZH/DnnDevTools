@@ -14,13 +14,13 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpGet]
         public List<DnnEvent> List()
         {
-            return List(null, null, null);
+            return List(null, null, null, null);
         }
 
         [HttpGet]
-        public List<DnnEvent> List(int? skip, int? take, string search)
+        public List<DnnEvent> List(string start, int? skip, int? take, string search)
         {
-            return ServiceLocator.DnnEventService.GetList(skip, take, search);
+            return ServiceLocator.DnnEventService.GetList(start, skip, take, search);
         }
 
     }

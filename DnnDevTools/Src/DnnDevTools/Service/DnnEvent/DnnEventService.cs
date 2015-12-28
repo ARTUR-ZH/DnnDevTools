@@ -11,7 +11,7 @@ namespace weweave.DnnDevTools.Service.DnnEvent
         {
         }
 
-        public List<Dto.DnnEvent> GetList(int? skip, int? take, string search)
+        public List<Dto.DnnEvent> GetList(string start, int? skip, int? take, string search)
         {
             var totalRecords = 0;
             var logs = DotNetNuke.Services.Log.EventLog.LogController.Instance.GetLogs(Null.NullInteger, Null.NullString, 1000, 0, ref totalRecords);
@@ -20,6 +20,8 @@ namespace weweave.DnnDevTools.Service.DnnEvent
 
             if (!string.IsNullOrWhiteSpace(search))
                 events = events.Where(e => string.Concat(e.Message, e.Username).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+            if (!string.IsNullOrWhiteSpace(start))
+                events = events.SkipWhile(e => e.Id != start);
             if (skip != null)
                 events = events.Skip(skip.Value);
             if (take != null)

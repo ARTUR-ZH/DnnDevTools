@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using DotNetNuke.Entities.Host;
 using DotNetNuke.Web.Api;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.SignalR;
@@ -75,6 +76,9 @@ namespace weweave.DnnDevTools.Api.Controller
         [HttpPost]
         public HttpResponseMessage SendMail()
         {
+            if (string.IsNullOrWhiteSpace(Host.SMTPServer))
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "SMTP_NOT_CONFIGURED");
+
             DotNetNuke.Services.Mail.Mail.SendEmail("sender@localhost", "receiver@localhost", "Test mail from DNN Dev Tools", "Hello world!");
             return Request.CreateResponse(HttpStatusCode.OK);
         }

@@ -145,6 +145,10 @@
             </file>
             <file>
               <path>Scripts</path>
+              <name>angular-ui-router.js</name>
+            </file>
+            <file>
+              <path>Scripts</path>
               <name>angular.js</name>
             </file>
             <file>

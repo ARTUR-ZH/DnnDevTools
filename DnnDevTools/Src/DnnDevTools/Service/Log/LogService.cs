@@ -16,7 +16,7 @@ namespace weweave.DnnDevTools.Service.Log
         {
             IEnumerable<LogMessage> logs = Log4NetAppender.LogMessageQueue.Select(e => e.Copy()).OrderByDescending(e => e.TimeStamp);
             if (!string.IsNullOrWhiteSpace(search))
-                logs = logs.Where(e => string.Concat(e.ClassName, e.MethodName, e.Message).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+                logs = logs.Where(e => string.Concat(e.Logger, e.ClassName, e.MethodName, e.Message).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
             if (!string.IsNullOrWhiteSpace(start))
                 logs = logs.SkipWhile(e => e.Id != start);
             if (skip != null)

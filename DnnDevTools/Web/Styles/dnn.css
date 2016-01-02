@@ -398,7 +398,7 @@
   padding: 9px;
 }
 
-.dnnDevTools-streamItemLogClassName {
+.dnnDevTools-streamItemLogLogger {
   width: 15%;
 }
 
@@ -406,7 +406,7 @@
   width: 30%;
 }
 
-.dnnDevTools-streamItemLogMethodName {
+.dnnDevTools-streamItemLogClassNameAndMethodName {
   width: 20%;
 }
 

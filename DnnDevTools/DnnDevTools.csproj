@@ -143,6 +143,7 @@
     <Compile Include="Src\DnnDevTools\SignalR\DnnDevToolsNotificationHub.cs" />
     <Compile Include="Src\DnnDevTools\Util\EmlFileParser.cs" />
     <Compile Include="Src\DnnDevTools\Util\FileUtil.cs" />
+    <Compile Include="Src\DnnDevTools\Util\HashUtil.cs" />
     <Compile Include="Src\DnnDevTools\Util\Log4NetUtil.cs" />
   </ItemGroup>
   <ItemGroup>

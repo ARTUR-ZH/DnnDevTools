@@ -1,5 +1,6 @@
 ﻿using System;
 using log4net.Core;
+using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.Dto
 {
@@ -16,6 +17,11 @@ namespace weweave.DnnDevTools.Dto
         /// Level of the log message (DEBUG, INFO, WARN, ERROR or FATAL)
         /// </summary>
         public string Level { get; set; }
+
+        /// <summary>
+        /// Name of the logger
+        /// </summary>
+        public string Logger { get; set; }
 
         /// <summary>
         /// Log message (contain HTML tags like <b/> or <br/>
@@ -41,12 +47,17 @@ namespace weweave.DnnDevTools.Dto
 
         internal LogMessage(LoggingEvent loggingEvent)
         {
-            Id = Guid.NewGuid().ToString();
-            Level = loggingEvent.Level.DisplayName;
+            Id = HashUtil.GetMd5Hash(string.Concat(
+                TimeStamp.Ticks.ToString(),
+                loggingEvent.LoggerName ?? string.Empty,
+                loggingEvent.RenderedMessage ?? string.Empty
+            ));
+            Level = loggingEvent.Level?.DisplayName;
+            Logger = loggingEvent.LoggerName;
             Message = loggingEvent.RenderedMessage;
             TimeStamp = loggingEvent.TimeStamp;
-            MethodName = loggingEvent.LocationInformation.MethodName;
-            ClassName = loggingEvent.LocationInformation.ClassName;
+            MethodName = loggingEvent.LocationInformation?.MethodName;
+            ClassName = loggingEvent.LocationInformation?.ClassName;
         }
 
         internal LogMessage Copy()
@@ -55,6 +66,7 @@ namespace weweave.DnnDevTools.Dto
             {
                 Level  = Level,
                 Id = Id,
+                Logger = Logger,
                 ClassName = ClassName,
                 Message = Message,
                 MethodName = MethodName,

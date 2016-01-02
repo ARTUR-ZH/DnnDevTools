@@ -9,7 +9,7 @@ namespace weweave.DnnDevTools.SignalR
 {
     internal class Log4NetAppender : AppenderSkeleton
     {
-        private const int QueueSize = 1000;
+        private const int QueueSize = 5000;
 
         internal readonly static ConcurrentQueue<LogMessage> LogMessageQueue = new ConcurrentQueue<LogMessage>();
 

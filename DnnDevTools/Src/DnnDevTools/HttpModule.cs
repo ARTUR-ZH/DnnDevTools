@@ -77,8 +77,8 @@ namespace weweave.DnnDevTools
         {
             var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
 
-            // Skip if user is no super user
-            if (!portalSettings.UserInfo.IsSuperUser)
+            // Skip if user is not allowed
+            if (!ServiceLocatorFactory.Instance.ConfigService.IsAllowed(portalSettings.UserInfo))
                 return;
 
             // Skip for DNN popups

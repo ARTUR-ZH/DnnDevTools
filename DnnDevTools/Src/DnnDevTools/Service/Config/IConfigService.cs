@@ -1,4 +1,5 @@
-﻿using log4net.Core;
+﻿using DotNetNuke.Entities.Users;
+using log4net.Core;
 
 namespace weweave.DnnDevTools.Service.Config
 {
@@ -19,5 +20,11 @@ namespace weweave.DnnDevTools.Service.Config
         Level GetLogMessageLevel();
 
         bool SetLogMessageLevel(Level level);
+
+        string [] GetAllowedRoles();
+
+        bool SetAllowedRoles(string[] allowedRoles);
+        bool IsAllowed(UserInfo user);
     }
+
 }

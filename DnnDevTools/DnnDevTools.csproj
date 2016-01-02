@@ -109,6 +109,7 @@
     <Compile Include="Src\DnnDevTools\Api\Controller\LogController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\MailController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\StreamController.cs" />
+    <Compile Include="Src\DnnDevTools\Api\IsAllowedAuthorizeAttribute.cs" />
     <Compile Include="Src\DnnDevTools\Dto\DnnEvent.cs" />
     <Compile Include="Src\DnnDevTools\Dto\LogMessage.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />
@@ -138,7 +139,7 @@
     <Compile Include="Src\DnnDevTools\Service\ServiceLocator.cs" />
     <Compile Include="Src\DnnDevTools\Service\Settings\ISettingsService.cs" />
     <Compile Include="Src\DnnDevTools\Service\Settings\SettingsService.cs" />
-    <Compile Include="Src\DnnDevTools\SignalR\SuperUserAuthorizeAttribute.cs" />
+    <Compile Include="Src\DnnDevTools\SignalR\IsAllowedAuthorizeAttribute.cs" />
     <Compile Include="Src\DnnDevTools\Startup.cs" />
     <Compile Include="Src\DnnDevTools\SignalR\DnnDevToolsNotificationHub.cs" />
     <Compile Include="Src\DnnDevTools\Util\EmlFileParser.cs" />

@@ -6,7 +6,7 @@ using weweave.DnnDevTools.Dto;
 namespace weweave.DnnDevTools.Api.Controller
 {
 
-    [SuperUserAuthorize]
+    [IsAllowedAuthorize]
     [ValidateAntiForgeryToken]
     public class LogController : ApiControllerBase
     {

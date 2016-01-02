@@ -1,7 +1,10 @@
-﻿using System.Net.Configuration;
+﻿using System.Linq;
+using System.Net.Configuration;
 using System.Net.Mail;
 using System.Threading;
 using System.Web.Configuration;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Users;
 using log4net.Core;
 using weweave.DnnDevTools.SignalR;
 using weweave.DnnDevTools.Util;
@@ -14,6 +17,7 @@ namespace weweave.DnnDevTools.Service.Config
         private const string ConfigKeyEnableMailCatch = "EnableMailCatch";
         private const string ConfigKeyEnableDnnEventCatch = "EnableDnnEventCatch";
         private const string ConfigKeyEnableLogMessageLevel = "LogMessageLevel";
+        private const string ConfigKeyAllowedRoles = "AllowedRoles";
 
         public ConfigService(IServiceLocator serviceLocator) : base(serviceLocator)
         {
@@ -108,13 +112,33 @@ namespace weweave.DnnDevTools.Service.Config
 
         public Level GetLogMessageLevel()
         {
-            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableLogMessageLevel, "ALL"));
+            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableLogMessageLevel, Level.All.ToString()));
             return log4NetLevel ?? Level.All;
         }
 
         public bool SetLogMessageLevel(Level level)
         {
             return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableLogMessageLevel, level.ToString());
+        }
+
+        public string [] GetAllowedRoles()
+        {
+            var allowedRoles = ServiceLocator.SettingsService.GetSetting(ConfigKeyAllowedRoles, string.Empty);
+            return allowedRoles.Split(',');
+        }
+
+        public bool SetAllowedRoles(string[] allowedRoles)
+        {
+            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyAllowedRoles, string.Join(",", allowedRoles));
+        }
+
+        public bool IsAllowed(UserInfo user)
+        {
+            if (user.IsSuperUser) return true;
+            if (user.UserID == Null.NullInteger) return false;
+
+            var allowedRoles = GetAllowedRoles();
+            return allowedRoles.Contains(DotNetNuke.Common.Globals.glbRoleAllUsersName) || allowedRoles.Any(e => user.Roles.Contains(e));
         }
     }
 }

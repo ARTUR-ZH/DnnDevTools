@@ -31,7 +31,7 @@ namespace weweave.DnnDevTools.Service.Settings
 
         #region DB Access
 
-        private Dictionary<string, string> LoadSettings()
+        private static Dictionary<string, string> LoadSettings()
         {
             var dictionary = new Dictionary<string, string>();
             var settings = DataProvider.Instance().ExecuteReader("DnnDevTools_GetSettings", new object[0]);

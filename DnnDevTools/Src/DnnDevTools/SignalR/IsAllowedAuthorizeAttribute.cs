@@ -4,7 +4,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace weweave.DnnDevTools.SignalR
 {
-    public class SuperUserAuthorizeAttribute : AuthorizeAttribute
+    public class IsAllowedAuthorizeAttribute : AuthorizeAttribute
     {
 
         protected override bool UserAuthorized(IPrincipal user)
@@ -12,7 +12,8 @@ namespace weweave.DnnDevTools.SignalR
             if (user == null || !user.Identity.IsAuthenticated) return false;
 
             var dnnUser = UserController.GetUserByName(user.Identity.Name);
-            return dnnUser.IsSuperUser;
+
+            return ServiceLocatorFactory.Instance.ConfigService.IsAllowed(dnnUser);
         }
     }
 }

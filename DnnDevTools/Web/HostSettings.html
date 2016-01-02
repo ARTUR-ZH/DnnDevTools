@@ -125,7 +125,7 @@
         }
 
         function sendMail() {
-            dnnDevTools.ajax('POST', window.weweave.dnnDevTools.baseUrl + 'api/mail/sendTestMail').then(
+            dnnDevTools.ajax('POST', window.weweave.dnnDevTools.baseUrl + 'api/config/sendTestMail').then(
                 function (response) {
                     console.log(response);
                 }, function (error) {

@@ -53,10 +53,10 @@
             sendMailButton = document.getElementById('dnn-mdt-sendMailButton');
 
         // set current status
-        enableCheckbox.checked = window.dnnDevTools.enable;
-        enableMailCatchCheckbox.checked = window.dnnDevTools.enableMailCatch;
-        enableEventCatchCheckbox.checked = window.dnnDevTools.enableEventCatch;
-        enableLoggingCheckbox.checked = window.dnnDevTools.logMessageLevel !== 'OFF';
+        enableCheckbox.checked = window.weweave.dnnDevTools.enable;
+        enableMailCatchCheckbox.checked = window.weweave.dnnDevTools.enableMailCatch;
+        enableEventCatchCheckbox.checked = window.weweave.dnnDevTools.enableEventCatch;
+        enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageLevel !== 'OFF';
 
         enableCheckbox.addEventListener('change', function (event) {
             setStatus(enableCheckbox.checked);
@@ -87,7 +87,7 @@
         });
 
         function setStatus(isEnabled) {
-            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled).then(
+            dnnMdt.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled).then(
                 function (response) {
                     window.location.reload(false);
                 }, function (error) {
@@ -97,7 +97,7 @@
         }
 
         function setMailCatchStatus(isEnabled) {
-            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enableMailCatch?status=' + isEnabled).then(
+            dnnMdt.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enableMailCatch?status=' + isEnabled).then(
                 function (response) {
                     console.log(response);
                 }, function (error) {
@@ -107,7 +107,7 @@
         }
 
         function setEventCatchStatus(isEnabled) {
-            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/enableDnnEventCatch?status=' + isEnabled).then(
+            dnnMdt.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enableDnnEventCatch?status=' + isEnabled).then(
                 function (response) {
                     console.log(response);
                 }, function (error) {
@@ -125,7 +125,7 @@
         }
 
         function sendMail() {
-            dnnMdt.ajax('POST', window.dnnDevTools.baseUrl + 'api/mail/sendMail').then(
+            dnnMdt.ajax('POST', window.weweave.dnnDevTools.baseUrl + 'api/mail/sendMail').then(
                 function (response) {
                     console.log(response);
                 }, function (error) {
@@ -135,7 +135,7 @@
         }
 
         function setLogLevel(level) {
-            dnnMdt.ajax('PUT', window.dnnDevTools.baseUrl + 'api/config/setLogMessageLevel?level=' + level).then(
+            dnnMdt.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/setLogMessageLevel?level=' + level).then(
                 function (response) {
                     console.log(response);
                 }, function (error) {

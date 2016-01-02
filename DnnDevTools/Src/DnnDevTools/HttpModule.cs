@@ -115,7 +115,7 @@ namespace weweave.DnnDevTools
             };
 
             // Inject DnnDevTool config at top of body
-            bodyControl.Controls.AddAt(0, new LiteralControl { Text = $@"<script type=""text/javascript"">window.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>" });
+            bodyControl.Controls.AddAt(0, new LiteralControl { Text = $@"<script type=""text/javascript"">var weweave=weweave||{{}};weweave.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>" });
 
             // Skip Toolbar HTML injection if DNN Dev Tools is not enabled
             if (!enabled) return;

@@ -70,7 +70,7 @@
 
             // open settings page on settings button click
             settingsButton.addEventListener('click', function () {
-                window.location.href = window.dnnDevTools.hostSettingsUrl;
+                window.location.href = window.weweave.dnnDevTools.hostSettingsUrl;
             }, false);
             
             // close mail overview window when clicking outside the window panel
@@ -117,7 +117,7 @@
         function openOverlay(id) {
             var route = (id !== undefined) ? ('#/maildetail/' + id) : '';
 
-            overviewIframe.src = window.dnnDevTools.baseUrl + 'Overlay.aspx' + route;
+            overviewIframe.src = window.weweave.dnnDevTools.baseUrl + 'Overlay.aspx' + route;
             overlay.classList.remove('dnn-mdt-hidden');
 
             overviewButton.classList.add('dnn-mdt-active');

@@ -2,7 +2,7 @@
 DNN Dev Tools - The Swiss army knife for DNN developers and host admins
 
 ## Features
-Screenshots and videos can be found in wiki (https://github.com/weweave/DNNDevTools/wiki/Screenshots).
+Screenshots and videos can be found in the wiki (https://github.com/weweave/DNNDevTools/wiki/Screenshots).
 
 ### Log messages
 DNN Dev Tools watches for log messages that are created in the DNN environment and offers a web interface to analyze them. 

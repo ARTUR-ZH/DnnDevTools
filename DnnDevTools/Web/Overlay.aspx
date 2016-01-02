@@ -1,7 +1,7 @@
 <%@ Page Language="C#" %>
 <html>
 <head>
-    <title>DotNetNuke Developer Tools Mail Window</title>
+    <title>DNN Dev Tools</title>
 
     <link rel="stylesheet" type="text/css" href="Styles/dnn.css">
 

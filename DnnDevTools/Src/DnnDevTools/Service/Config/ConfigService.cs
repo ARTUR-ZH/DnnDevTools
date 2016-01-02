@@ -10,26 +10,31 @@ namespace weweave.DnnDevTools.Service.Config
 {
     internal class ConfigService : ServiceBase, IConfigService
     {
+        private const string ConfigKeyEnable = "Enable";
+        private const string ConfigKeyEnableMailCatch = "EnableMailCatch";
+        private const string ConfigKeyEnableDnnEventCatch = "EnableDnnEventCatch";
+        private const string ConfigKeyEnableLogMessageLevel = "LogMessageLevel";
+
         public ConfigService(IServiceLocator serviceLocator) : base(serviceLocator)
         {
         }
 
         public bool SetEnable(bool status)
         {
-            return ServiceLocator.SettingsService.UpdateSetting("Enable", status.ToString());
+            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnable, status.ToString());
         }
 
         public bool GetEnable()
         {
             bool enable;
             return bool.TryParse(
-                ServiceLocator.SettingsService.GetSetting("Enable", true.ToString()),
+                ServiceLocator.SettingsService.GetSetting(ConfigKeyEnable, true.ToString()),
                 out enable) && enable;
         }
 
         public bool SetEnableMailCatch(bool status)
         {
-            var updated = ServiceLocator.SettingsService.UpdateSetting("EnableMailCatch", status.ToString());
+            var updated = ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableMailCatch, status.ToString());
 
             var configuration = WebConfigurationManager.OpenWebConfiguration("~");
             var section = configuration.GetSection("system.net/mailSettings/smtp") as SmtpSection;
@@ -84,32 +89,32 @@ namespace weweave.DnnDevTools.Service.Config
         {
             bool enableMailCatch;
             return bool.TryParse(
-                ServiceLocator.SettingsService.GetSetting("EnableMailCatch", false.ToString()),
+                ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableMailCatch, false.ToString()),
                 out enableMailCatch) && enableMailCatch;
         }
 
         public bool SetEnableDnnEventCatch(bool status)
         {
-            return ServiceLocator.SettingsService.UpdateSetting("EnableDnnEventCatch", status.ToString());
+            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableDnnEventCatch, status.ToString());
         }
 
         public bool GetEnableDnnEventCatch()
         {
             bool enableMailCatch;
             return bool.TryParse(
-                ServiceLocator.SettingsService.GetSetting("EnableDnnEventCatch", true.ToString()),
+                ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableDnnEventCatch, true.ToString()),
                 out enableMailCatch) && enableMailCatch;
         }
 
         public Level GetLogMessageLevel()
         {
-            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting("ALL", true.ToString()));
+            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableLogMessageLevel, "ALL"));
             return log4NetLevel ?? Level.All;
         }
 
         public bool SetLogMessageLevel(Level level)
         {
-            return ServiceLocator.SettingsService.UpdateSetting("LogMessageLevel", level.ToString());
+            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableLogMessageLevel, level.ToString());
         }
     }
 }

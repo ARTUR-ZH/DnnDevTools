@@ -19,8 +19,8 @@
 <div class="dnnDevTools-panel dnnDevTools-bgColorWhite dnnDevTools-marginTop2">
     <h2 class="dnnDevTools-headline">Event catch</h2>
     <div class="dnnDevTools-checkbox">
-        <input type="checkbox" id="dnnDevTools-enableEventCatchCheckbox">
-        <label for="dnnDevTools-enableEventCatchCheckbox" class="dnnDevTools-copy">Enable event catch</label>
+        <input type="checkbox" id="dnnDevTools-enableDnnEventCatchCheckbox">
+        <label for="dnnDevTools-enableDnnEventCatchCheckbox" class="dnnDevTools-copy">Enable event catch</label>
     </div>
 </div>
 
@@ -47,7 +47,7 @@
     (function () {
         var enableCheckbox = document.getElementById('dnnDevTools-enableCheckbox'),
             enableMailCatchCheckbox = document.getElementById('dnnDevTools-enableMailCatchCheckbox'),
-            enableEventCatchCheckbox = document.getElementById('dnnDevTools-enableEventCatchCheckbox'),
+            enableDnnEventCatchCheckbox = document.getElementById('dnnDevTools-enableDnnEventCatchCheckbox'),
             enableLoggingCheckbox = document.getElementById('dnnDevTools-enableLoggingCheckbox'),
             logLevelSelect = document.getElementById('dnnDevTools-logLevelSelect'),
             sendMailButton = document.getElementById('dnnDevTools-sendMailButton');
@@ -55,7 +55,7 @@
         // set current status
         enableCheckbox.checked = window.weweave.dnnDevTools.enable;
         enableMailCatchCheckbox.checked = window.weweave.dnnDevTools.enableMailCatch;
-        enableEventCatchCheckbox.checked = window.weweave.dnnDevTools.enableEventCatch;
+        enableDnnEventCatchCheckbox.checked = window.weweave.dnnDevTools.enableDnnEventCatch;
         enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageLevel !== 'OFF';
 
         enableCheckbox.addEventListener('change', function (event) {
@@ -70,8 +70,8 @@
             sendMail();
         }, false);
 
-        enableEventCatchCheckbox.addEventListener('click', function () {
-            setEventCatchStatus(enableEventCatchCheckbox.checked);
+        enableDnnEventCatchCheckbox.addEventListener('click', function () {
+            setEventCatchStatus(enableDnnEventCatchCheckbox.checked);
         }, false);
 
 

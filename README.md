@@ -46,5 +46,5 @@ Due to the fact that we replace Newtonsoft.Json.dll with a newer version than in
 
 ## Requirements
 
-* Grade-A browser (Firefox, Chrome, IE 11, Edge)
+* A-Grade browser (Firefox, Chrome, IE 11, Edge)
 * DNN 08.00.00 CTP 6 (tested up to DNN 08.00.00 Beta 1)

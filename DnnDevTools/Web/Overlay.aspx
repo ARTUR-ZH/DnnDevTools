@@ -7,61 +7,61 @@
 
     <style>
         /* LIST */
-        .dnn-mdt-listEmpty {
+        .dnnDevTools-listEmpty {
             text-align: center;
         }
 
         /* DETAIL */
-        .dnn-mdt-detail {
+        .dnnDevTools-detail {
             padding: 20px;
         }
     </style>
 </head>
-<body class="dnn-mdt-overview dnn-mdt-bgColorWhite">
+<body class="dnnDevTools-overview dnnDevTools-bgColorWhite">
     
     <% Response.Write(System.Web.Helpers.AntiForgery.GetHtml()); %>
 
     <div ng-app="app">
         <div ui-view role="main"></div>
 
-        <script type="text/ng-template" id="dnn-mdt-overview.html">
-            <div class="dnn-mdt-stream">
-                <div class="dnn-mdt-filterList dnn-mdt-bgColorDnnBlue">
-                    <a ui-sref="overview({filter: null})" ng-class="{'dnn-mdt-active': !overview.filter}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite dnn-mdt-removeIcon">Show all</a>
-                    <a ui-sref="overview({filter: 'Mail'})" ng-class="{'dnn-mdt-active': overview.filter === 'Mail'}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite"><span class="dnn-mdt-envelopeClosedIcon dnn-mdt-icon16x16"></span>Mails</a>
-                    <a ui-sref="overview({filter: 'DnnEvent'})" ng-class="{'dnn-mdt-active': overview.filter === 'DnnEvent'}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite"><span class="dnn-mdt-audioIcon dnn-mdt-icon16x16"></span>Events</a>
-                    <a ui-sref="overview({filter: 'LogMessage'})" ng-class="{'dnn-mdt-active': overview.filter === 'LogMessage'}" class="dnn-mdt-iconLabelButton dnn-mdt-copy dnn-mdt-colorWhite"><span class="dnn-mdt-listIcon dnn-mdt-icon16x16"></span>Logs</a>
+        <script type="text/ng-template" id="dnnDevTools-overview.html">
+            <div class="dnnDevTools-stream">
+                <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
+                    <a ui-sref="overview({filter: null})" ng-class="{'dnnDevTools-active': !overview.filter}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-removeIcon">Show all</a>
+                    <a ui-sref="overview({filter: 'Mail'})" ng-class="{'dnnDevTools-active': overview.filter === 'Mail'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-envelopeClosedIcon dnnDevTools-icon16x16"></span>Mails</a>
+                    <a ui-sref="overview({filter: 'DnnEvent'})" ng-class="{'dnnDevTools-active': overview.filter === 'DnnEvent'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-audioIcon dnnDevTools-icon16x16"></span>Events</a>
+                    <a ui-sref="overview({filter: 'LogMessage'})" ng-class="{'dnnDevTools-active': overview.filter === 'LogMessage'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-listIcon dnnDevTools-icon16x16"></span>Logs</a>
                 </div>
 
-                <div class="dnn-mdt-streamWrapper">
-                    <div ng-if="!overview.stream" class="dnn-mdt-spinner"></div>
-                    <p ng-if="overview.stream.length === 0" class="dnn-mdt-listEmpty dnn-mdt-copy">Your inbox is currently empty.</p>
-                    <ul class="dnn-mdt-streamList">
-                        <li ng-repeat="item in overview.stream | orderBy:'-TimeStamp'" ng-click="overview.showDetail(item)" class="dnn-mdt-streamItem">
-                            <div class="dnn-mdt-streamItemTimestamp dnn-mdt-streamItemCell">
-                                <span ng-class="{'dnn-mdt-envelopeClosedIcon-111111': item.Type === 'Mail', 'dnn-mdt-audioIcon-111111': item.Type === 'DnnEvent', 'dnn-mdt-listIcon-111111': item.Type === 'LogMessage'}" class="dnn-mdt-streamItemIcon dnn-mdt-icon16x16"></span>
-                                <p class="dnn-mdt-copy">{{item.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                <div class="dnnDevTools-streamWrapper">
+                    <div ng-if="!overview.stream" class="dnnDevTools-spinner"></div>
+                    <p ng-if="overview.stream.length === 0" class="dnnDevTools-listEmpty dnnDevTools-copy">Your inbox is currently empty.</p>
+                    <ul class="dnnDevTools-streamList">
+                        <li ng-repeat="item in overview.stream | orderBy:'-TimeStamp'" ng-click="overview.showDetail(item)" class="dnnDevTools-streamItem">
+                            <div class="dnnDevTools-streamItemTimestamp dnnDevTools-streamItemCell">
+                                <span ng-class="{'dnnDevTools-envelopeClosedIcon-111111': item.Type === 'Mail', 'dnnDevTools-audioIcon-111111': item.Type === 'DnnEvent', 'dnnDevTools-listIcon-111111': item.Type === 'LogMessage'}" class="dnnDevTools-streamItemIcon dnnDevTools-icon16x16"></span>
+                                <p class="dnnDevTools-copy">{{item.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
                             </div>
 
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventLogType">{{item.LogType || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventMessage">{{item.Message || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventUsername">{{item.Username || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemEventPortal">{{item.Portal || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventLogType">{{item.LogType || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventMessage">{{item.Message || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventUsername">{{item.Username || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventPortal">{{item.Portal || '&nbsp;'}}</p>
 
-                            <div ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-streamItemLogLevel"><p class="dnn-mdt-streamLabel dnn-mdt-copy" ng-class="{'dnn-mdt-bgColorRed': item.Level === 'ERROR', 'dnn-mdt-bgColorOrange': item.Level === 'WARN'}">{{item.Level}}</p></div>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemLogMessage">{{item.Message}}</p>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemLogClassName">{{item.ClassName}}</p>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemLogMethodName">{{item.MethodName}}</p>
+                            <div ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemLogLevel"><p class="dnnDevTools-streamLabel dnnDevTools-copy" ng-class="{'dnnDevTools-bgColorRed': item.Level === 'ERROR', 'dnnDevTools-bgColorOrange': item.Level === 'WARN'}">{{item.Level}}</p></div>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogMessage">{{item.Message}}</p>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogClassName">{{item.ClassName}}</p>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogMethodName">{{item.MethodName}}</p>
 
-                            <p ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemMailSender">{{item.Sender}}</p>
-                            <p ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemMailSubject">{{item.Subject}}</p>
-                            <p ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-copy dnn-mdt-streamItemMailTo">{{item.To}}</p>
-                            <div ng-if="item.Type === 'Mail'" class="dnn-mdt-streamItemCell dnn-mdt-streamItemMailActions">
-                                <button ng-click="overview.removeMail($event, item)" type="button" class="dnn-mdt-iconButton">
-                                    <span class="dnn-mdt-trashIcon dnn-mdt-icon16x16"></span>
+                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSender">{{item.Sender}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSubject">{{item.Subject}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailTo">{{item.To}}</p>
+                            <div ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemMailActions">
+                                <button ng-click="overview.removeMail($event, item)" type="button" class="dnnDevTools-iconButton">
+                                    <span class="dnnDevTools-trashIcon dnnDevTools-icon16x16"></span>
                                 </button>
-                                <button ng-click="overview.downloadMail($event, item.Id)" type="button" class="dnn-mdt-iconButton">
-                                    <span class="dnn-mdt-downloadIcon dnn-mdt-icon16x16"></span>
+                                <button ng-click="overview.downloadMail($event, item.Id)" type="button" class="dnnDevTools-iconButton">
+                                    <span class="dnnDevTools-downloadIcon dnnDevTools-icon16x16"></span>
                                 </button>
                             </div>
                         </li>
@@ -70,12 +70,12 @@
             </div>
         </script>
 
-        <script type="text/ng-template" id="dnn-mdt-mail-detail.html">
-            <div class="dnn-mdt-detail">
-                <a ui-sref="overview" class="dnn-mdt-copy">back to overview</a>
-                <div ng-if="mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnn-mdt-copy"></div>
-                <pre ng-if="!mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnn-mdt-pre"></pre>
-                <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnn-mdt-copy">Body is empty.</p>
+        <script type="text/ng-template" id="dnnDevTools-mail-detail.html">
+            <div class="dnnDevTools-detail">
+                <a ui-sref="overview" class="dnnDevTools-copy">back to overview</a>
+                <div ng-if="mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnnDevTools-copy"></div>
+                <pre ng-if="!mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnnDevTools-pre"></pre>
+                <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnnDevTools-copy">Body is empty.</p>
             </div>
         </script>
     </div>
@@ -97,12 +97,12 @@
                 $stateProvider
                     .state('overview', {
                         url: '/{filter}',
-                        templateUrl: 'dnn-mdt-overview.html',
+                        templateUrl: 'dnnDevTools-overview.html',
                         controller: 'OverviewController as overview'
                     })
                     .state('mailDetail', {
                         url: '/maildetail/{id}',
-                        templateUrl: 'dnn-mdt-mail-detail.html',
+                        templateUrl: 'dnnDevTools-mail-detail.html',
                         controller: 'MailDetailController as mailDetail',
                         resolve: {
                             mail: function ($stateParams, remoteData) {

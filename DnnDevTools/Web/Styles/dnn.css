@@ -1,29 +1,29 @@
 /* MDT: Dot Net Nuke - Mail Developer Toolbar */
-[class^='dnn-mdt-'] *, [class*=' dnn-mdt-'] *,
-[class^='dnn-mdt-'] *:before, [class*=' dnn-mdt-'] *:before,
-[class^='dnn-mdt-'] *:after, [class*=' dnn-mdt-'] *:after {
+[class^='dnnDevTools-'] *, [class*=' dnnDevTools-'] *,
+[class^='dnnDevTools-'] *:before, [class*=' dnnDevTools-'] *:before,
+[class^='dnnDevTools-'] *:after, [class*=' dnnDevTools-'] *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-[class^='dnn-mdt-'] img, [class*=' dnn-mdt-'] img,
-[class^='dnn-mdt-'] object, [class*=' dnn-mdt-'] object,
-[class^='dnn-mdt-'] embed, [class*=' dnn-mdt-'] embed {
+[class^='dnnDevTools-'] img, [class*=' dnnDevTools-'] img,
+[class^='dnnDevTools-'] object, [class*=' dnnDevTools-'] object,
+[class^='dnnDevTools-'] embed, [class*=' dnnDevTools-'] embed {
   max-width: 100%;
   height: auto;
 }
 
-[class^='dnn-mdt-'] object, [class*=' dnn-mdt-'] object,
-[class^='dnn-mdt-'] embed, [class*=' dnn-mdt-'] embed {
+[class^='dnnDevTools-'] object, [class*=' dnnDevTools-'] object,
+[class^='dnnDevTools-'] embed, [class*=' dnnDevTools-'] embed {
   height: 100%;
 }
 
-[class^='dnn-mdt-'] img, [class*=' dnn-mdt-'] img {
+[class^='dnnDevTools-'] img, [class*=' dnnDevTools-'] img {
   -ms-interpolation-mode: bicubic;
 }
 
-[class*=' dnn-mdt-'] img {
+[class*=' dnnDevTools-'] img {
   vertical-align: middle;
 }
 
@@ -33,7 +33,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     util/variables
 */
-.dnn-mdt-headline {
+.dnnDevTools-headline {
   font-family: Arial, sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -41,7 +41,7 @@
   color: #111111;
 }
 
-.dnn-mdt-copy {
+.dnnDevTools-copy {
   font-family: Arial, sans-serif;
   font-size: 13px;
   margin-top: 0;
@@ -49,14 +49,14 @@
   color: #111111;
 }
 
-.dnn-mdt-copySmall {
+.dnnDevTools-copySmall {
   font-size: 12px;
   margin-top: 0;
   margin-bottom: 0;
   color: #111111;
 }
 
-.dnn-mdt-copyBold {
+.dnnDevTools-copyBold {
   font-family: Arial, sans-serif;
   font-size: 13px;
   margin-top: 0;
@@ -65,7 +65,7 @@
   color: #111111;
 }
 
-.dnn-mdt-pre {
+.dnnDevTools-pre {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -76,47 +76,47 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-wrenchIcon {
+.dnnDevTools-wrenchIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik01LjUgMGMtMS4zOCAwLTIuNSAxLjEyLTIuNSAyLjUgMCAuMzIuMDguNjIuMTkuOTFsLTIuOTEgMi44OGMtLjM5LjM5LS4zOSAxLjA1IDAgMS40NC4yLjIuNDYuMjguNzIuMjguMjYgMCAuNTItLjA5LjcyLS4yOGwyLjg4LTIuOTFjLjI4LjExLjU4LjE5LjkxLjE5IDEuMzggMCAyLjUtMS4xMiAyLjUtMi41IDAtLjE2IDAtLjMyLS4wMy0uNDdsLS45Ny45N2gtMnYtMmwuOTctLjk3Yy0uMTUtLjAzLS4zMS0uMDMtLjQ3LS4wM3ptLTQuNSA2LjVjLjI4IDAgLjUuMjIuNS41cy0uMjIuNS0uNS41LS41LS4yMi0uNS0uNS4yMi0uNS41LS41eiIvPjwvc3ZnPg==);
 }
 
-.dnn-mdt-cogIcon {
+.dnnDevTools-cogIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGQ9Ik0zLjUgMGwtLjUgMS4xOWMtLjEuMDMtLjE5LjA4LS4yOC4xM2wtMS4xOS0uNS0uNzIuNzIuNSAxLjE5Yy0uMDUuMS0uMDkuMTgtLjEzLjI4bC0xLjE5LjV2MWwxLjE5LjVjLjA0LjEuMDguMTguMTMuMjhsLS41IDEuMTkuNzIuNzIgMS4xOS0uNWMuMDkuMDQuMTguMDkuMjguMTNsLjUgMS4xOWgxbC41LTEuMTljLjA5LS4wNC4xOS0uMDguMjgtLjEzbDEuMTkuNS43Mi0uNzItLjUtMS4xOWMuMDQtLjA5LjA5LS4xOS4xMy0uMjhsMS4xOS0uNXYtMWwtMS4xOS0uNWMtLjAzLS4wOS0uMDgtLjE5LS4xMy0uMjhsLjUtMS4xOS0uNzItLjcyLTEuMTkuNWMtLjA5LS4wNC0uMTktLjA5LS4yOC0uMTNsLS41LTEuMTloLTF6bS41IDIuNWMuODMgMCAxLjUuNjcgMS41IDEuNXMtLjY3IDEuNS0xLjUgMS41LTEuNS0uNjctMS41LTEuNS42Ny0xLjUgMS41LTEuNXoiLz48L3N2Zz4=);
 }
 
-.dnn-mdt-trashIcon {
+.dnnDevTools-trashIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0zIDBjLS41NSAwLTEgLjQ1LTEgMWgtMWMtLjU1IDAtMSAuNDUtMSAxaDdjMC0uNTUtLjQ1LTEtMS0xaC0xYzAtLjU1LS40NS0xLTEtMWgtMXptLTIgM3Y0LjgxYzAgLjExLjA4LjE5LjE5LjE5aDQuNjNjLjExIDAgLjE5LS4wOC4xOS0uMTl2LTQuODFoLTF2My41YzAgLjI4LS4yMi41LS41LjVzLS41LS4yMi0uNS0uNXYtMy41aC0xdjMuNWMwIC4yOC0uMjIuNS0uNS41cy0uNS0uMjItLjUtLjV2LTMuNWgtMXoiIC8+PC9zdmc+);
 }
 
-.dnn-mdt-downloadIcon {
+.dnnDevTools-downloadIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0zIDB2M2gtMmwzIDMgMy0zaC0ydi0zaC0yem0tMyA3djFoOHYtMWgtOHoiIC8+PC9zdmc+);
 }
 
-.dnn-mdt-envelopeClosedIcon {
+.dnnDevTools-envelopeClosedIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0wIDB2MWw0IDIgNC0ydi0xaC04em0wIDJ2NGg4di00bC00IDItNC0yeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz48L3N2Zz4=);
 }
 
-.dnn-mdt-envelopeClosedIcon-111111 {
+.dnnDevTools-envelopeClosedIcon-111111 {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0wIDB2MWw0IDIgNC0ydi0xaC04em0wIDJ2NGg4di00bC00IDItNC0yeiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz48L3N2Zz4=);
 }
 
-.dnn-mdt-audioIcon {
+.dnnDevTools-audioIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0xLjE2IDBjLS43Mi43Mi0xLjE2IDEuNzEtMS4xNiAyLjgxcy40MyAyLjEyIDEuMTYgMi44NGwuNzItLjcyYy0uNTQtLjU0LS44OC0xLjI5LS44OC0yLjEzIDAtLjgzLjMzLTEuNTUuODgtMi4wOWwtLjcyLS43MnptNS42OSAwbC0uNzIuNzJjLjU0LjU0Ljg4IDEuMjYuODggMi4wOSAwIC44My0uMzMgMS41OC0uODggMi4xM2wuNzIuNzJjLjcyLS43MiAxLjE2LTEuNzQgMS4xNi0yLjg0IDAtMS4xLS40My0yLjA5LTEuMTYtMi44MXptLTQuMjUgMS40MWMtLjM2LjM2LS41OS44Ni0uNTkgMS40MSAwIC41NS4yMyAxLjA4LjU5IDEuNDRsLjY5LS43MmMtLjE4LS4xOC0uMjgtLjQ0LS4yOC0uNzIgMC0uMjguMS0uNS4yOC0uNjlsLS42OS0uNzJ6bTIuODEgMGwtLjY5LjcyYy4xOC4xOC4yOC40MS4yOC42OSAwIC4yOC0uMS41NC0uMjguNzJsLjY5LjcyYy4zNi0uMzYuNTktLjg5LjU5LTEuNDQgMC0uNTUtLjIzLTEuMDUtLjU5LTEuNDF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDEpIi8+PC9zdmc+);
 }
 
-.dnn-mdt-audioIcon-111111 {
+.dnnDevTools-audioIcon-111111 {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0xLjE2IDBjLS43Mi43Mi0xLjE2IDEuNzEtMS4xNiAyLjgxcy40MyAyLjEyIDEuMTYgMi44NGwuNzItLjcyYy0uNTQtLjU0LS44OC0xLjI5LS44OC0yLjEzIDAtLjgzLjMzLTEuNTUuODgtMi4wOWwtLjcyLS43MnptNS42OSAwbC0uNzIuNzJjLjU0LjU0Ljg4IDEuMjYuODggMi4wOSAwIC44My0uMzMgMS41OC0uODggMi4xM2wuNzIuNzJjLjcyLS43MiAxLjE2LTEuNzQgMS4xNi0yLjg0IDAtMS4xLS40My0yLjA5LTEuMTYtMi44MXptLTQuMjUgMS40MWMtLjM2LjM2LS41OS44Ni0uNTkgMS40MSAwIC41NS4yMyAxLjA4LjU5IDEuNDRsLjY5LS43MmMtLjE4LS4xOC0uMjgtLjQ0LS4yOC0uNzIgMC0uMjguMS0uNS4yOC0uNjlsLS42OS0uNzJ6bTIuODEgMGwtLjY5LjcyYy4xOC4xOC4yOC40MS4yOC42OSAwIC4yOC0uMS41NC0uMjguNzJsLjY5LjcyYy4zNi0uMzYuNTktLjg5LjU5LTEuNDQgMC0uNTUtLjIzLTEuMDUtLjU5LTEuNDF6IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIDEpIi8+PC9zdmc+);
 }
 
-.dnn-mdt-listIcon {
+.dnnDevTools-listIcon {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik0uNSAwYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02em0tMS41IDJjLS4yOCAwLS41LjIyLS41LjVzLjIyLjUuNS41LjUtLjIyLjUtLjUtLjIyLS41LS41LS41em0xLjUgMHYxaDZ2LTFoLTZ6bS0xLjUgMmMtLjI4IDAtLjUuMjItLjUuNXMuMjIuNS41LjUuNS0uMjIuNS0uNS0uMjItLjUtLjUtLjV6bTEuNSAwdjFoNnYtMWgtNnptLTEuNSAyYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjUpIi8+PC9zdmc+);
 }
 
-.dnn-mdt-listIcon-111111 {
+.dnnDevTools-listIcon-111111 {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPjxwYXRoIGZpbGw9IiMxMTExMTEiIGQ9Ik0uNSAwYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02em0tMS41IDJjLS4yOCAwLS41LjIyLS41LjVzLjIyLjUuNS41LjUtLjIyLjUtLjUtLjIyLS41LS41LS41em0xLjUgMHYxaDZ2LTFoLTZ6bS0xLjUgMmMtLjI4IDAtLjUuMjItLjUuNXMuMjIuNS41LjUuNS0uMjIuNS0uNS0uMjItLjUtLjUtLjV6bTEuNSAwdjFoNnYtMWgtNnptLTEuNSAyYy0uMjggMC0uNS4yMi0uNS41cy4yMi41LjUuNS41LS4yMi41LS41LS4yMi0uNS0uNS0uNXptMS41IDB2MWg2di0xaC02eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjUpIi8+PC9zdmc+);
 }
 
-.dnn-mdt-icon24x24 {
+.dnnDevTools-icon24x24 {
   display: block;
   width: 24px;
   height: 24px;
@@ -124,7 +124,7 @@
   background-position: center center;
 }
 
-.dnn-mdt-icon16x16 {
+.dnnDevTools-icon16x16 {
   display: block;
   width: 16px;
   height: 16px;
@@ -138,7 +138,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-select {
+.dnnDevTools-select {
   margin-bottom: 0;
   padding: 7px;
 }
@@ -149,16 +149,16 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-checkbox {
+.dnnDevTools-checkbox {
   position: relative;
   padding-left: 18px;
 }
-.dnn-mdt-checkbox input {
+.dnnDevTools-checkbox input {
   position: absolute;
   top: 1px;
   left: 0;
 }
-.dnn-mdt-checkbox label {
+.dnnDevTools-checkbox label {
   line-height: 1;
 }
 
@@ -168,7 +168,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-iconButton {
+.dnnDevTools-iconButton {
   background-color: transparent;
   border: none;
   padding: 14px 6px 13px 6px;
@@ -176,7 +176,7 @@
   cursor: pointer;
   transition: opacity 0.1s linear;
 }
-.dnn-mdt-iconButton:hover {
+.dnnDevTools-iconButton:hover {
   opacity: 1;
 }
 
@@ -186,7 +186,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-iconLabelButton {
+.dnnDevTools-iconLabelButton {
   position: relative;
   padding: 18px 22px 18px 44px;
   cursor: pointer;
@@ -196,12 +196,12 @@
   text-decoration: none;
   transition: all 0.1s linear;
 }
-.dnn-mdt-iconLabelButton span {
+.dnnDevTools-iconLabelButton span {
   position: absolute;
   top: 17px;
   left: 20px;
 }
-.dnn-mdt-iconLabelButton:hover, .dnn-mdt-iconLabelButton.dnn-mdt-active {
+.dnnDevTools-iconLabelButton:hover, .dnnDevTools-iconLabelButton.dnnDevTools-active {
   opacity: 1;
   background-color: #0092c8;
 }
@@ -212,7 +212,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     util/variables
 */
-.dnn-mdt-overviewButton {
+.dnnDevTools-overviewButton {
   display: block;
   padding: 15px;
   background-color: #00a5e1;
@@ -220,13 +220,13 @@
   border-radius: 100%;
   outline: 0;
 }
-.dnn-mdt-overviewButton:hover {
+.dnnDevTools-overviewButton:hover {
   background-color: #0080ae;
 }
-.dnn-mdt-overviewButton.dnn-mdt-active {
+.dnnDevTools-overviewButton.dnnDevTools-active {
   background-color: #ec3d47;
 }
-.dnn-mdt-overviewButton.dnn-mdt-active span {
+.dnnDevTools-overviewButton.dnnDevTools-active span {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNOCAwdjNoLTh2NGg4djNsOC01LTgtNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMykiIC8+PC9zdmc+);
 }
 
@@ -236,14 +236,14 @@
 * @author       matthias.benfer@gmail.com
 * @requires     util/variables
 */
-.dnn-mdt-settingsButton {
+.dnnDevTools-settingsButton {
   display: block;
   padding: 5px;
   background-color: #ec3d47;
   border: 2px solid #ffffff;
   border-radius: 100%;
 }
-.dnn-mdt-settingsButton:hover {
+.dnnDevTools-settingsButton:hover {
   background-color: #e01621;
 }
 
@@ -263,7 +263,7 @@
     -webkit-transform: rotate(360deg);
   }
 }
-.dnn-mdt-spinner:before {
+.dnnDevTools-spinner:before {
   content: '';
   position: absolute;
   margin-top: -14px;
@@ -285,10 +285,10 @@
 * @author       matthias.benfer@gmail.com
 * @requires     util/variables
 */
-.dnn-mdt-mailNote {
+.dnnDevTools-mailNote {
   cursor: pointer;
 }
-.dnn-mdt-mailNote:hover {
+.dnnDevTools-mailNote:hover {
   background-color: #cdcdcd;
 }
 
@@ -298,10 +298,10 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-toolbarMenu {
+.dnnDevTools-toolbarMenu {
   position: relative;
 }
-.dnn-mdt-toolbarMenu .dnn-mdt-settingsButton {
+.dnnDevTools-toolbarMenu .dnnDevTools-settingsButton {
   position: absolute;
   right: -9px;
   bottom: -9px;
@@ -313,7 +313,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     util/variables
 */
-.dnn-mdt-streamList {
+.dnnDevTools-streamList {
   width: 100%;
   padding-left: 0;
   margin-top: 0;
@@ -323,20 +323,20 @@
   border-collapse: separate;
 }
 
-.dnn-mdt-streamItem {
+.dnnDevTools-streamItem {
   overflow: hidden;
   *zoom: 1;
   cursor: pointer;
   transition: background-color 0.1s linear;
 }
-.dnn-mdt-streamItem:hover {
+.dnnDevTools-streamItem:hover {
   background-color: #f8f8f8;
 }
-.dnn-mdt-streamItem:hover .dnn-mdt-streamItemIcon {
+.dnnDevTools-streamItem:hover .dnnDevTools-streamItemIcon {
   opacity: 1;
 }
 
-.dnn-mdt-streamItemCell {
+.dnnDevTools-streamItemCell {
   float: left;
   overflow: hidden;
   padding: 14px 7px;
@@ -345,12 +345,12 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.dnn-mdt-streamItemTimestamp {
+.dnnDevTools-streamItemTimestamp {
   position: relative;
   width: 20%;
   padding-left: 37px;
 }
-.dnn-mdt-streamItemTimestamp .dnn-mdt-streamItemIcon {
+.dnnDevTools-streamItemTimestamp .dnnDevTools-streamItemIcon {
   position: absolute;
   top: 13px;
   left: 7px;
@@ -358,59 +358,59 @@
   transition: opacity 0.1s linear;
 }
 
-.dnn-mdt-streamItemMailSender {
+.dnnDevTools-streamItemMailSender {
   width: 25%;
 }
 
-.dnn-mdt-streamItemMailSubject {
+.dnnDevTools-streamItemMailSubject {
   width: 20%;
 }
 
-.dnn-mdt-streamItemMailTo {
+.dnnDevTools-streamItemMailTo {
   width: 25%;
 }
 
-.dnn-mdt-streamItemMailActions {
+.dnnDevTools-streamItemMailActions {
   width: 10%;
   text-align: right;
   padding-top: 0;
   padding-bottom: 0;
 }
 
-.dnn-mdt-streamItemEventLogType {
+.dnnDevTools-streamItemEventLogType {
   width: 15%;
 }
 
-.dnn-mdt-streamItemEventUsername {
+.dnnDevTools-streamItemEventUsername {
   width: 15%;
 }
 
-.dnn-mdt-streamItemEventMessage {
+.dnnDevTools-streamItemEventMessage {
   width: 30%;
 }
 
-.dnn-mdt-streamItemEventPortal {
+.dnnDevTools-streamItemEventPortal {
   width: 20%;
 }
 
-.dnn-mdt-streamItemLogLevel {
+.dnnDevTools-streamItemLogLevel {
   width: 15%;
   padding: 9px;
 }
 
-.dnn-mdt-streamItemLogClassName {
+.dnnDevTools-streamItemLogClassName {
   width: 15%;
 }
 
-.dnn-mdt-streamItemLogMessage {
+.dnnDevTools-streamItemLogMessage {
   width: 30%;
 }
 
-.dnn-mdt-streamItemLogMethodName {
+.dnnDevTools-streamItemLogMethodName {
   width: 20%;
 }
 
-.dnn-mdt-streamLabel {
+.dnnDevTools-streamLabel {
   padding: 5px;
   text-transform: lowercase;
   color: #ffffff;
@@ -425,14 +425,14 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-filterList {
+.dnnDevTools-filterList {
   overflow: hidden;
   *zoom: 1;
 }
-.dnn-mdt-filterList .dnn-mdt-iconLabelButton {
+.dnnDevTools-filterList .dnnDevTools-iconLabelButton {
   float: left;
 }
-.dnn-mdt-filterList .dnn-mdt-removeIcon {
+.dnnDevTools-filterList .dnnDevTools-removeIcon {
   padding: 18px 27px;
 }
 
@@ -442,13 +442,13 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-toolbar {
+.dnnDevTools-toolbar {
   position: fixed;
   right: 12px;
   bottom: 12px;
   z-index: 10002;
 }
-.dnn-mdt-toolbar .dnn-mdt-mailNote {
+.dnnDevTools-toolbar .dnnDevTools-mailNote {
   position: absolute;
   bottom: 100%;
   right: 0;
@@ -460,7 +460,7 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-overlay {
+.dnnDevTools-overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -469,7 +469,7 @@
   z-index: 1003;
   background-color: rgba(0, 0, 0, 0.9);
 }
-.dnn-mdt-overlay .dnn-mdt-overlayPanel {
+.dnnDevTools-overlay .dnnDevTools-overlayPanel {
   position: fixed;
   left: 15%;
   right: 15%;
@@ -483,15 +483,15 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-overview {
+.dnnDevTools-overview {
   margin: 0;
 }
-.dnn-mdt-overview .dnn-mdt-filterList {
+.dnnDevTools-overview .dnnDevTools-filterList {
   position: fixed;
   width: 100%;
   z-index: 1;
 }
-.dnn-mdt-overview .dnn-mdt-streamWrapper {
+.dnnDevTools-overview .dnnDevTools-streamWrapper {
   padding: 64px 20px 15px 20px;
 }
 
@@ -501,31 +501,31 @@
 * @author       matthias.benfer@gmail.com
 * @requires     util/variables
 */
-.dnn-mdt-colorWhite {
+.dnnDevTools-colorWhite {
   color: #ffffff;
 }
 
-.dnn-mdt-bgColorWhite {
+.dnnDevTools-bgColorWhite {
   background-color: #ffffff;
 }
 
-.dnn-mdt-bgColorGrey {
+.dnnDevTools-bgColorGrey {
   background-color: #e5e5e5;
 }
 
-.dnn-mdt-bgColorGrey2 {
+.dnnDevTools-bgColorGrey2 {
   background-color: #cdcdcd;
 }
 
-.dnn-mdt-bgColorDnnBlue {
+.dnnDevTools-bgColorDnnBlue {
   background-color: #00a5e1;
 }
 
-.dnn-mdt-bgColorRed {
+.dnnDevTools-bgColorRed {
   background-color: #dd0720;
 }
 
-.dnn-mdt-bgColorOrange {
+.dnnDevTools-bgColorOrange {
   background-color: #fabb00;
 }
 
@@ -535,16 +535,16 @@
 * @author       matthias.benfer@gmail.com
 * @requires     -
 */
-.dnn-mdt-panel {
+.dnnDevTools-panel {
   padding: 15px;
   text-align: left;
 }
 
-.dnn-mdt-hidden {
+.dnnDevTools-hidden {
   display: none;
 }
 
-.dnn-mdt-visuallyHidden {
+.dnnDevTools-visuallyHidden {
   margin: -1px;
   padding: 0;
   width: 1px;
@@ -555,18 +555,18 @@
   position: absolute;
 }
 
-.dnn-mdt-marginTop1 {
+.dnnDevTools-marginTop1 {
   margin-top: 7px;
 }
 
-.dnn-mdt-marginTop2 {
+.dnnDevTools-marginTop2 {
   margin-top: 14px;
 }
 
-.dnn-mdt-marginBottom2 {
+.dnnDevTools-marginBottom2 {
   margin-bottom: 14px;
 }
 
-.dnn-mdt-displayBlock {
+.dnnDevTools-displayBlock {
   display: block;
 }

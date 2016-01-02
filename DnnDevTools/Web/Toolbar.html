@@ -1,34 +1,34 @@
-﻿<div class="dnn-mdt-toolbar">
-    <div class="dnn-mdt-toolbarMenu">
-        <button type="button" id="dnn-mdt-overviewButton" class="dnn-mdt-overviewButton" title="Show overview">
-            <span class="dnn-mdt-wrenchIcon dnn-mdt-icon24x24"></span>
+﻿<div class="dnnDevTools-toolbar">
+    <div class="dnnDevTools-toolbarMenu">
+        <button type="button" id="dnnDevTools-overviewButton" class="dnnDevTools-overviewButton" title="Show overview">
+            <span class="dnnDevTools-wrenchIcon dnnDevTools-icon24x24"></span>
         </button>
-        <button type="button" id="dnn-mdt-settingsButton" class="dnn-mdt-settingsButton">
-            <span class="dnn-mdt-cogIcon dnn-mdt-icon16x16"></span>
+        <button type="button" id="dnnDevTools-settingsButton" class="dnnDevTools-settingsButton">
+            <span class="dnnDevTools-cogIcon dnnDevTools-icon16x16"></span>
         </button>
     </div>
 
-    <div id="dnn-mdt-mailNote" class="dnn-mdt-mailNote dnn-mdt-panel dnn-mdt-bgColorGrey dnn-mdt-hidden">
-        <p class="dnn-mdt-copySmall">
-            <span id="dnn-mdt-mailNoteDate"></span>
+    <div id="dnnDevTools-mailNote" class="dnnDevTools-mailNote dnnDevTools-panel dnnDevTools-bgColorGrey dnnDevTools-hidden">
+        <p class="dnnDevTools-copySmall">
+            <span id="dnnDevTools-mailNoteDate"></span>
         </p>
-        <p class="dnn-mdt-copySmall">
-            <span id="dnn-mdt-mailNoteSubject"></span>
+        <p class="dnnDevTools-copySmall">
+            <span id="dnnDevTools-mailNoteSubject"></span>
         </p>
-        <p class="dnn-mdt-copySmall">
-            <span class="dnn-mdt-copySmall dnn-mdt-copyBold">From:</span>
-            <span id="dnn-mdt-mailNoteSender"></span>
+        <p class="dnnDevTools-copySmall">
+            <span class="dnnDevTools-copySmall dnnDevTools-copyBold">From:</span>
+            <span id="dnnDevTools-mailNoteSender"></span>
         </p>
-        <p class="dnn-mdt-copySmall">
-            <span class="dnn-mdt-copySmall dnn-mdt-copyBold">To:</span>
-            <span id="dnn-mdt-mailNoteReciever"></span>
+        <p class="dnnDevTools-copySmall">
+            <span class="dnnDevTools-copySmall dnnDevTools-copyBold">To:</span>
+            <span id="dnnDevTools-mailNoteReciever"></span>
         </p>
     </div>
 </div>
 
-<div id="dnn-mdt-overlay" class="dnn-mdt-overlay dnn-mdt-hidden">
-    <div id="dnn-mdt-overlayPanel" class="dnn-mdt-overlayPanel">
-        <iframe id="dnn-mdt-overviewIframe" src="" width="100%" height="100%"></iframe>
+<div id="dnnDevTools-overlay" class="dnnDevTools-overlay dnnDevTools-hidden">
+    <div id="dnnDevTools-overlayPanel" class="dnnDevTools-overlayPanel">
+        <iframe id="dnnDevTools-overviewIframe" src="" width="100%" height="100%"></iframe>
     </div>
 </div>
 
@@ -37,16 +37,16 @@
         var hub = $.connection.dnnDevToolsNotificationHub,
             mailNote = {},
             mailNoteTimeoutId,
-            mailNoteElement = document.getElementById('dnn-mdt-mailNote'),
-            dateElement = document.getElementById('dnn-mdt-mailNoteDate'),
-            subjectElement = document.getElementById('dnn-mdt-mailNoteSubject'),
-            senderElement = document.getElementById('dnn-mdt-mailNoteSender'),
-            recieverElement = document.getElementById('dnn-mdt-mailNoteReciever'),
-            overviewButton = document.getElementById('dnn-mdt-overviewButton'),
-            overlay = document.getElementById('dnn-mdt-overlay'),
-            overlayPanel = document.getElementById('dnn-mdt-overlayPanel'),
-            overviewIframe = document.getElementById('dnn-mdt-overviewIframe'),
-            settingsButton = document.getElementById('dnn-mdt-settingsButton');
+            mailNoteElement = document.getElementById('dnnDevTools-mailNote'),
+            dateElement = document.getElementById('dnnDevTools-mailNoteDate'),
+            subjectElement = document.getElementById('dnnDevTools-mailNoteSubject'),
+            senderElement = document.getElementById('dnnDevTools-mailNoteSender'),
+            recieverElement = document.getElementById('dnnDevTools-mailNoteReciever'),
+            overviewButton = document.getElementById('dnnDevTools-overviewButton'),
+            overlay = document.getElementById('dnnDevTools-overlay'),
+            overlayPanel = document.getElementById('dnnDevTools-overlayPanel'),
+            overviewIframe = document.getElementById('dnnDevTools-overviewIframe'),
+            settingsButton = document.getElementById('dnnDevTools-settingsButton');
 
         // merge settings with default settings
         settings.mailNoteVisibleTime = settings.mailNoteVisibleTime || 3000;
@@ -103,7 +103,7 @@
         }
 
         function toggleOverlay(id) {
-            if (overlay.classList.contains('dnn-mdt-hidden')) {
+            if (overlay.classList.contains('dnnDevTools-hidden')) {
                 openOverlay();
             } else {
                 closeOverlay();
@@ -118,16 +118,16 @@
             var route = (id !== undefined) ? ('#/maildetail/' + id) : '';
 
             overviewIframe.src = window.weweave.dnnDevTools.baseUrl + 'Overlay.aspx' + route;
-            overlay.classList.remove('dnn-mdt-hidden');
+            overlay.classList.remove('dnnDevTools-hidden');
 
-            overviewButton.classList.add('dnn-mdt-active');
+            overviewButton.classList.add('dnnDevTools-active');
         }
 
         function closeOverlay() {
             overviewIframe.src = '';
-            overlay.classList.add('dnn-mdt-hidden');
+            overlay.classList.add('dnnDevTools-hidden');
 
-            overviewButton.classList.remove('dnn-mdt-active');
+            overviewButton.classList.remove('dnnDevTools-active');
         }
 
         /**
@@ -144,7 +144,7 @@
 
         function showMailNote() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            mailNoteElement.classList.remove('dnn-mdt-hidden');
+            mailNoteElement.classList.remove('dnnDevTools-hidden');
 
             // reset timeout if another mail comes in while the last mail is still visible
             if (mailNoteTimeoutId) {
@@ -158,7 +158,7 @@
 
         function hideMailNote() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            mailNoteElement.classList.add('dnn-mdt-hidden');
+            mailNoteElement.classList.add('dnnDevTools-hidden');
         }
     }(document, window, {}));
 </script>

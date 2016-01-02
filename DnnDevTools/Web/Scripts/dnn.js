@@ -1,5 +1,5 @@
 ﻿(function () {
-    dnnMdt = {
+    dnnDevTools = {
         ajax: function (method, url) {
             return new Promise(function (resolve, reject) {
                 var req = new XMLHttpRequest();

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Log.EventLog;
 using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
@@ -11,6 +12,7 @@ namespace weweave.DnnDevTools.SignalR
 {
     internal class DnnEventWatcher
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(MailPickupFolderWatcher));
 
         private IServiceLocator _serviceLocator;
 
@@ -23,6 +25,8 @@ namespace weweave.DnnDevTools.SignalR
 
         internal void Run()
         {
+            Logger.Debug("Initializing DNN event watcher");
+
             var lastLog = DateTime.Now;
 
             new Thread(() =>

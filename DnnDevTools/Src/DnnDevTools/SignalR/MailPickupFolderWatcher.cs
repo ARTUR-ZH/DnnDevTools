@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Web;
+using DotNetNuke.Instrumentation;
 using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.Service;
@@ -11,6 +12,7 @@ namespace weweave.DnnDevTools.SignalR
 {
     internal class MailPickupFolderWatcher
     {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(MailPickupFolderWatcher));
 
         internal static string Path => HttpContext.Current.Server.MapPath("~/App_Data/MailPickup");
 
@@ -25,6 +27,8 @@ namespace weweave.DnnDevTools.SignalR
 
         internal void Run()
         {
+            Logger.DebugFormat("Initializing mail pickup folder watcher for directory {0}", Path);
+
             if (!Directory.Exists(Path))
                 Directory.CreateDirectory(Path);
 
@@ -48,6 +52,8 @@ namespace weweave.DnnDevTools.SignalR
             // Do nothing, if DNN Dev Tools or mail catch is not enabled
             if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableMailCatch())
                 return;
+
+            Logger.DebugFormat("New mail in pickup folder detected (File: {0})", e.FullPath);
 
             // Start new background thread and wait until file is completely written and no longer locked
             new Thread(() =>

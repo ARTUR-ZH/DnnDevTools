@@ -22,6 +22,8 @@ DNN Dev Tools takes care to not break the existing user interface by prefixing a
 
 ### Misc
 * Security: By default, DNN Dev Tools functionalities are only enabled for host admins.
+* Internationalization: Localized in en-US and de-DE
+* Quality: Passed EVS (see http://evs.dotnetnuke.com/)
 
 ## Installation / Setup
 Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website. Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze problems in a DNN environment and that should be done in a separate non-production environment.

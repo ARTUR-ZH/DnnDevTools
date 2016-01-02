@@ -27,8 +27,9 @@ DNN Dev Tools takes care to not break the existing user interface by prefixing a
 
 ## Installation / Setup
 Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website. Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze problems in a DNN environment and that should be done in a separate non-production environment.
+
 DNN Dev Tools is installed just as any other DNN module:
- 1. Download the most recent release DNN Dev Tools from here (TODO)
+ 1. Download the most recent release DNN Dev Tools from here https://github.com/weweave/DnnDevTools/releases
  1. Log in as host admin and install the module on the page System > Extensions
  1. When installing DNN Dev Tools the first time, you might need to login again
 

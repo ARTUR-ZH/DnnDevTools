@@ -27,6 +27,11 @@ DNN Dev Tools takes care to not break the existing user interface by prefixing a
 * Internationalization: Localized in en-US and de-DE
 * Quality: Passed EVS (see http://evs.dotnetnuke.com/)
 
+## Requirements
+
+* DNN 08.00.00 CTP 6 (tested up to DNN 08.00.00 Beta 1)
+* A-Grade browser (Firefox, Chrome, IE 11, Edge)
+
 ## Installation / Setup
 **Please note: Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website.** Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze problems in a DNN environment and that should be done in a separate non-production environment.
 
@@ -48,8 +53,3 @@ We use a version of SignalR that depends on Newtonsoft.Json.dll version 6 and th
 ### Upgrading DNN after DNN Dev Tools has been installed
 
 Due to the fact that we replace Newtonsoft.Json.dll with a newer version than included in DNN by default, you might run into problems when trying to upgrade DNN. The workaround is to copy DNN Dev Tool's version of Newtonsoft.Json.dll into the website's bin folder after the DNN upgrade files has beend copied into the website's root folder. DnnDevTool's version of Newtonsoft.Json can be downloaded here https://github.com/JamesNK/Newtonsoft.Json/releases/tag/6.0.4.
-
-## Requirements
-
-* DNN 08.00.00 CTP 6 (tested up to DNN 08.00.00 Beta 1)
-* A-Grade browser (Firefox, Chrome, IE 11, Edge)

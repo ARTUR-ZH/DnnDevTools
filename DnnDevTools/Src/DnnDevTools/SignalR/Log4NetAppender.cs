@@ -19,7 +19,7 @@ namespace weweave.DnnDevTools.SignalR
 
         override protected void Append(LoggingEvent loggingEvent)
         {
-            var level = ServiceLocator.ConfigService.GetLogMessageLevel();
+            var level = ServiceLocator.ConfigService.GetLogMessageTraceLevel();
 
             // Test log level
             if (level.Value > loggingEvent.Level.Value) return;

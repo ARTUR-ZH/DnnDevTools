@@ -107,8 +107,8 @@ namespace weweave.DnnDevTools
             {
                 ["enable"] = ServiceLocatorFactory.Instance.ConfigService.GetEnable(),
                 ["enableMailCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableMailCatch(),
-                ["enableDnnEventCatch"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableDnnEventCatch(),
-                ["logMessageLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageLevel().DisplayName,
+                ["enableDnnEventTrace"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableDnnEventTrace(),
+                ["logMessageTraceLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageTraceLevel().DisplayName,
                 ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/",
                 ["hostSettingsUrl"] = $"{basePath}/Host/DNN-Dev-Tools/portalid/{portalSettings.PortalId}/",
                 ["hostSmtpConfigured"] =  !string.IsNullOrWhiteSpace(Host.SMTPServer)

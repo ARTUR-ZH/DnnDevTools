@@ -13,17 +13,18 @@ namespace weweave.DnnDevTools.Service.Config
 
         bool GetEnableMailCatch();
 
-        bool SetEnableDnnEventCatch(bool status);
+        bool SetEnableDnnEventTrace(bool status);
 
-        bool GetEnableDnnEventCatch();
+        bool GetEnableDnnEventTrace();
 
-        Level GetLogMessageLevel();
+        Level GetLogMessageTraceLevel();
 
-        bool SetLogMessageLevel(Level level);
+        bool SetLogMessageTraceLevel(Level level);
 
         string [] GetAllowedRoles();
 
         bool SetAllowedRoles(string[] allowedRoles);
+
         bool IsAllowed(UserInfo user);
     }
 

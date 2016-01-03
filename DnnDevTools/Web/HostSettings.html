@@ -17,18 +17,18 @@
 </div>
 
 <div class="dnnDevTools-panel dnnDevTools-bgColorWhite dnnDevTools-marginTop2">
-    <h2 class="dnnDevTools-headline">Event catch</h2>
+    <h2 class="dnnDevTools-headline">DNN Event tracing</h2>
     <div class="dnnDevTools-checkbox">
-        <input type="checkbox" id="dnnDevTools-enableDnnEventCatchCheckbox">
-        <label for="dnnDevTools-enableDnnEventCatchCheckbox" class="dnnDevTools-copy">Enable event catch</label>
+        <input type="checkbox" id="dnnDevTools-enableDnnEventTraceCheckbox">
+        <label for="dnnDevTools-enableDnnEventTraceCheckbox" class="dnnDevTools-copy">Enable trace</label>
     </div>
 </div>
 
 <div class="dnnDevTools-panel dnnDevTools-bgColorWhite dnnDevTools-marginTop2">
-    <h2 class="dnnDevTools-headline">Logging</h2>
+    <h2 class="dnnDevTools-headline">Log message tracing</h2>
     <div class="dnnDevTools-checkbox">
         <input type="checkbox" id="dnnDevTools-enableLoggingCheckbox">
-        <label for="dnnDevTools-enableLoggingCheckbox" class="dnnDevTools-copy">Enable logging</label>
+        <label for="dnnDevTools-enableLoggingCheckbox" class="dnnDevTools-copy">Enable trace</label>
     </div>
     <div class="dnnDevTools-marginTop2">
         <label for="dnnDevTools-logLevelSelect" class="dnnDevTools-copy dnnDevTools-displayBlock">Select log level</label>
@@ -47,7 +47,7 @@
     (function () {
         var enableCheckbox = document.getElementById('dnnDevTools-enableCheckbox'),
             enableMailCatchCheckbox = document.getElementById('dnnDevTools-enableMailCatchCheckbox'),
-            enableDnnEventCatchCheckbox = document.getElementById('dnnDevTools-enableDnnEventCatchCheckbox'),
+            enableDnnEventTraceCheckbox = document.getElementById('dnnDevTools-enableDnnEventTraceCheckbox'),
             enableLoggingCheckbox = document.getElementById('dnnDevTools-enableLoggingCheckbox'),
             logLevelSelect = document.getElementById('dnnDevTools-logLevelSelect'),
             sendMailButton = document.getElementById('dnnDevTools-sendMailButton');
@@ -55,8 +55,8 @@
         // set current status
         enableCheckbox.checked = window.weweave.dnnDevTools.enable;
         enableMailCatchCheckbox.checked = window.weweave.dnnDevTools.enableMailCatch;
-        enableDnnEventCatchCheckbox.checked = window.weweave.dnnDevTools.enableDnnEventCatch;
-        enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageLevel !== 'OFF';
+        enableDnnEventTraceCheckbox.checked = window.weweave.dnnDevTools.enableDnnEventTrace;
+        enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageTraceLevel !== 'OFF';
 
         enableCheckbox.addEventListener('change', function (event) {
             setStatus(enableCheckbox.checked);
@@ -70,8 +70,8 @@
             sendMail();
         }, false);
 
-        enableDnnEventCatchCheckbox.addEventListener('click', function () {
-            setEventCatchStatus(enableDnnEventCatchCheckbox.checked);
+        enableDnnEventTraceCheckbox.addEventListener('click', function () {
+            setEventTraceStatus(enableDnnEventTraceCheckbox.checked);
         }, false);
 
 
@@ -106,8 +106,8 @@
             );
         }
 
-        function setEventCatchStatus(isEnabled) {
-            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enableDnnEventCatch?status=' + isEnabled).then(
+        function setEventTraceStatus(isEnabled) {
+            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enableDnnEventTrace?status=' + isEnabled).then(
                 function (response) {
                     console.log(response);
                 }, function (error) {
@@ -135,7 +135,7 @@
         }
 
         function setLogLevel(level) {
-            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/setLogMessageLevel?level=' + level).then(
+            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/setLogMessageTraceLevel?level=' + level).then(
                 function (response) {
                     console.log(response);
                 }, function (error) {

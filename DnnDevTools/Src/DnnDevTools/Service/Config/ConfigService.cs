@@ -15,8 +15,8 @@ namespace weweave.DnnDevTools.Service.Config
     {
         private const string ConfigKeyEnable = "Enable";
         private const string ConfigKeyEnableMailCatch = "EnableMailCatch";
-        private const string ConfigKeyEnableDnnEventCatch = "EnableDnnEventCatch";
-        private const string ConfigKeyEnableLogMessageLevel = "LogMessageLevel";
+        private const string ConfigKeyEnableDnnEventTrace = "DnnEventTrace";
+        private const string ConfigKeyLogMessageTraceLevel = "LogMessageTraceLevel";
         private const string ConfigKeyAllowedRoles = "AllowedRoles";
 
         public ConfigService(IServiceLocator serviceLocator) : base(serviceLocator)
@@ -97,28 +97,28 @@ namespace weweave.DnnDevTools.Service.Config
                 out enableMailCatch) && enableMailCatch;
         }
 
-        public bool SetEnableDnnEventCatch(bool status)
+        public bool SetEnableDnnEventTrace(bool status)
         {
-            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableDnnEventCatch, status.ToString());
+            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableDnnEventTrace, status.ToString());
         }
 
-        public bool GetEnableDnnEventCatch()
+        public bool GetEnableDnnEventTrace()
         {
             bool enableMailCatch;
             return bool.TryParse(
-                ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableDnnEventCatch, true.ToString()),
+                ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableDnnEventTrace, true.ToString()),
                 out enableMailCatch) && enableMailCatch;
         }
 
-        public Level GetLogMessageLevel()
+        public Level GetLogMessageTraceLevel()
         {
-            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyEnableLogMessageLevel, Level.All.ToString()));
+            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyLogMessageTraceLevel, Level.All.ToString()));
             return log4NetLevel ?? Level.All;
         }
 
-        public bool SetLogMessageLevel(Level level)
+        public bool SetLogMessageTraceLevel(Level level)
         {
-            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyEnableLogMessageLevel, level.ToString());
+            return ServiceLocator.SettingsService.UpdateSetting(ConfigKeyLogMessageTraceLevel, level.ToString());
         }
 
         public string [] GetAllowedRoles()

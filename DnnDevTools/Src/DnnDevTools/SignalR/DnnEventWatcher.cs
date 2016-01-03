@@ -25,7 +25,7 @@ namespace weweave.DnnDevTools.SignalR
 
         internal void Run()
         {
-            Logger.Debug("Initializing DNN event watcher");
+            Logger.Debug("Initializing DNN event tracing");
 
             var lastLog = DateTime.Now;
 
@@ -37,7 +37,7 @@ namespace weweave.DnnDevTools.SignalR
                     Thread.Sleep(1000);
 
                     // Skip if DnnDevTools or EnableEventCatch is not enabled
-                    if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableDnnEventCatch())
+                    if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableDnnEventTrace())
                         return;
 
                     // Get last 100 log entries

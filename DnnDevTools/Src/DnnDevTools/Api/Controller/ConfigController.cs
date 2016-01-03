@@ -32,19 +32,19 @@ namespace weweave.DnnDevTools.Api.Controller
         }
 
         [HttpPut]
-        public HttpResponseMessage EnableDnnEventCatch(bool status)
+        public HttpResponseMessage EnableDnnEventTrace(bool status)
         {
             if (status && !ServiceLocator.ConfigService.GetEnable())
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "NOT_ENABLED");
             }
 
-            ServiceLocator.ConfigService.SetEnableDnnEventCatch(status);
+            ServiceLocator.ConfigService.SetEnableDnnEventTrace(status);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpPut]
-        public HttpResponseMessage SetLogMessageLevel(string level)
+        public HttpResponseMessage SetLogMessageTraceLevel(string level)
         {
             var log4NetLevel = Log4NetUtil.ParseLevel(level);
 
@@ -52,7 +52,7 @@ namespace weweave.DnnDevTools.Api.Controller
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
 
 
-            ServiceLocator.ConfigService.SetLogMessageLevel(log4NetLevel);
+            ServiceLocator.ConfigService.SetLogMessageTraceLevel(log4NetLevel);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

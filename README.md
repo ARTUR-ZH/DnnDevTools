@@ -6,10 +6,10 @@ DNN Dev Tools is developed by weweave (https://weweave.net/) and licensed under 
 ## Features
 Screenshots and videos can be found in the wiki (https://github.com/weweave/DNNDevTools/wiki/Screenshots).
 
-### Log messages
+### Log message tracing
 DNN Dev Tools watches for log messages that are created in the DNN environment and offers a web interface to analyze them. 
 
-### DNN events
+### DNN event tracing
 DNN Dev Tools watches for events that are created in the DNN environment and offers a web interface to analyze them. 
 
 ### E-mail catch

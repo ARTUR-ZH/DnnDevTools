@@ -1,5 +1,12 @@
 ﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Target Name="AfterBuild" DependsOnTargets="CopyBin;GetFiles;DebugProject;PackageModule">
+  <Target Name="AfterBuild" DependsOnTargets="CompileSass;CopyBin;GetFiles;DebugProject;PackageModule">
+  </Target>
+  <Target Name="CompileSass">
+    <PropertyGroup>
+      <SasscExe>$(MSBuildThisFileDirectory)\sassc.exe</SasscExe>
+    </PropertyGroup>
+    <Exec Command="&quot;$(sasscExe)&quot; -I &quot;$(MSBuildThisFileDirectory)/compass-mixins-0.12.7&quot; &quot;$(MSBuildThisFileDirectory)\..\DnnDevTools\Sass\dnn.scss&quot; &quot;$(MSBuildThisFileDirectory)\..\DnnDevTools\Web\Styles\dnn.css&quot;" ConsoleToMSBuild="true">
+    </Exec>
   </Target>
   <Target Name="GetFiles">
     <ItemGroup>

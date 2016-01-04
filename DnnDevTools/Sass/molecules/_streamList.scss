@@ -90,13 +90,13 @@
     width: 15%;
     padding: 9px;
 }
-.#{$prefix}streamItemLogClassName {
+.#{$prefix}streamItemLogLogger {
     width: 15%;
 }
 .#{$prefix}streamItemLogMessage {
     width: 30%;
 }
-.#{$prefix}streamItemLogMethodName {
+.#{$prefix}streamItemLogClassNameAndMethodName {
     width: 20%;
 }
 

@@ -217,3 +217,4 @@ ModelManifest.xml
 
 [Ww]ebsite/
 .[Tt]emp/
+DnnDevTools/Web/Styles/*.css

@@ -1,0 +1,42 @@
+/**
+* @desc         Styles for layouting elements
+* @name         util/layout
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}panel {
+    padding: 15px;
+    text-align: left;
+}
+
+.#{$prefix}hidden {
+    display: none;
+}
+
+.#{$prefix}visuallyHidden {
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+    position: absolute;
+}
+
+.#{$prefix}marginTop1 {
+    margin-top: 7px;
+}
+
+.#{$prefix}marginTop2 {
+    margin-top: 14px;
+}
+
+.#{$prefix}marginBottom2 {
+    margin-bottom: 14px;
+}
+
+.#{$prefix}displayBlock {
+    display: block;
+}

@@ -1,0 +1,19 @@
+/**
+* @desc         Toolbar styles
+* @name         organisms/toolbar
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}toolbar {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 10002;
+
+    .#{$prefix}mailNote {
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+    }
+}

@@ -1,0 +1,23 @@
+[class^='#{$prefix}'] *, [class*=' #{$prefix}'] *,
+[class^='#{$prefix}'] *:before, [class*=' #{$prefix}'] *:before,
+[class^='#{$prefix}'] *:after, [class*=' #{$prefix}'] *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+[class^='#{$prefix}'] img, [class*=' #{$prefix}'] img,
+[class^='#{$prefix}'] object, [class*=' #{$prefix}'] object,
+[class^='#{$prefix}'] embed, [class*=' #{$prefix}'] embed { 
+    max-width: 100%; height: auto;
+}
+[class^='#{$prefix}'] object, [class*=' #{$prefix}'] object,
+[class^='#{$prefix}'] embed, [class*=' #{$prefix}'] embed { 
+    height: 100%;
+}
+[class^='#{$prefix}'] img, [class*=' #{$prefix}'] img { 
+    -ms-interpolation-mode: bicubic;
+}
+
+[class*=' #{$prefix}'] img {
+    vertical-align: middle;
+}

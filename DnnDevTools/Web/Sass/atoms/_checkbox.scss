@@ -1,0 +1,21 @@
+/**
+* @desc         Checkbox styles
+* @name         checkbox
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}checkbox {
+    position: relative;
+    padding-left: 18px;
+
+    input {
+        position: absolute;
+        top: 1px;
+        left: 0;
+    }
+
+    label {
+        line-height: 1;
+    }
+}

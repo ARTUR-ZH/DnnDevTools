@@ -1,0 +1,26 @@
+/**
+* @desc         Blue button with only icon and active state
+* @name         overviewButton
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+
+.#{$prefix}overviewButton {
+    display: block;
+    padding: 15px;
+    background-color: $colorDnnBlue;
+    border: 2px solid $colorWhite;
+    border-radius: 100%;
+    outline: 0;
+
+    &:hover {
+        background-color: adjust-lightness($colorDnnBlue, -10);
+    }
+
+    &.#{$prefix}active {
+        background-color: $colorDnnRed;
+        span {
+            @include arrowLeftIcon;
+        }
+    }
+}

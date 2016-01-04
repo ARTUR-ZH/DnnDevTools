@@ -1,0 +1,16 @@
+/**
+* @desc         Toolbar menu styles
+* @name         molecules/toolbarMenu
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}toolbarMenu {
+    position: relative;
+
+    .#{$prefix}settingsButton {
+        position: absolute;
+        right: -9px;
+        bottom: -9px;
+    }
+}

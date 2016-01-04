@@ -1,0 +1,43 @@
+/**
+* @desc         Font styles for dnn dev tools
+* @name         fonts
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+
+.#{$prefix}headline {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    color: $colorBlack;
+}
+
+.#{$prefix}copy {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: $colorBlack;
+}
+
+.#{$prefix}copySmall {
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: $colorBlack;
+}
+
+.#{$prefix}copyBold {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: $colorBlack;
+}
+
+.#{$prefix}pre {
+    margin-top: 0;
+    margin-bottom: 0;
+}

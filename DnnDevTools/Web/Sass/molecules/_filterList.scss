@@ -1,0 +1,18 @@
+/**
+* @desc         List of filters
+* @name         molecules/filterList
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}filterList {
+    @include clearfix;
+
+    .#{$prefix}iconLabelButton {
+        float: left;
+    }
+
+    .#{$prefix}removeIcon {
+        padding: 18px 27px;
+    }
+}

@@ -1,0 +1,110 @@
+/**
+* @desc         table styles
+* @name         molecules/table
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+
+.#{$prefix}streamList {
+    width: 100%;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+.#{$prefix}streamItem {
+    @include clearfix;
+
+    cursor: pointer;
+
+    // property name | duration | timing function | delay
+    transition: background-color 0.1s linear;
+
+    &:hover {
+        background-color: #f8f8f8;
+
+        .#{$prefix}streamItemIcon {
+            opacity: 1;
+        }
+    }
+}
+
+.#{$prefix}streamItemCell {
+    float: left;
+    overflow: hidden;
+    padding: 14px 7px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid $colorGrey;
+}
+
+.#{$prefix}streamItemTimestamp {
+    position: relative;
+    width: 20%;
+    padding-left: 37px;
+
+    .#{$prefix}streamItemIcon {
+        position: absolute;
+        top: 13px;
+        left: 7px;
+        opacity: 0.3;
+
+        // property name | duration | timing function | delay
+        transition: opacity 0.1s linear;
+    }
+}
+
+.#{$prefix}streamItemMailSender {
+    width: 25%;
+}
+.#{$prefix}streamItemMailSubject {
+    width: 20%;
+}
+.#{$prefix}streamItemMailTo {
+    width: 25%;
+}
+.#{$prefix}streamItemMailActions {
+    width: 10%;
+    text-align: right;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.#{$prefix}streamItemEventLogType {
+    width: 15%;
+}
+.#{$prefix}streamItemEventUsername {
+    width: 15%;
+}
+.#{$prefix}streamItemEventMessage {
+    width: 30%;
+}
+.#{$prefix}streamItemEventPortal {
+    width: 20%;
+}
+
+.#{$prefix}streamItemLogLevel {
+    width: 15%;
+    padding: 9px;
+}
+.#{$prefix}streamItemLogClassName {
+    width: 15%;
+}
+.#{$prefix}streamItemLogMessage {
+    width: 30%;
+}
+.#{$prefix}streamItemLogMethodName {
+    width: 20%;
+}
+
+.#{$prefix}streamLabel {
+    padding: 5px;
+    text-transform: lowercase;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 4px;
+    background-color: $colorGrey2;
+}

@@ -1,0 +1,30 @@
+/**
+* @desc         Button with icon and label
+* @name         atoms/iconLabelButton
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}iconLabelButton {
+    position: relative;
+    padding: 18px 22px 18px 44px;
+    cursor: pointer;
+    opacity: 0.6;
+    border: none;
+    background-color: $colorDnnBlue;
+    text-decoration: none;
+
+    // property name | duration | timing function | delay
+    transition: all 0.1s linear;
+
+    span {
+        position: absolute;
+        top: 17px;
+        left: 20px;
+    }
+
+    &:hover, &.#{$prefix}active {
+        opacity: 1;
+        background-color: adjust-lightness($colorDnnBlue, -5);
+    }
+}

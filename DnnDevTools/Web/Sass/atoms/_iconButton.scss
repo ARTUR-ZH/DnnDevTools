@@ -1,0 +1,21 @@
+/**
+* @desc         Resets native button styles, adds padding and adds simple opacity hover
+* @name         atoms/iconButton
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}iconButton {
+    background-color: transparent;
+    border: none;
+    padding: 14px 6px 13px 6px;
+    opacity: 0.3;
+    cursor: pointer;
+
+    // property name | duration | timing function | delay
+    transition: opacity 0.1s linear;
+
+    &:hover {
+        opacity: 1;
+    }
+}

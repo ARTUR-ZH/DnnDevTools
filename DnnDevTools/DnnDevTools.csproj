@@ -170,6 +170,27 @@
     <None Include="packages.config" />
     <None Include="Providers\DataProviders\SqlDataProvider\06.00.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
+    <None Include="Web\Sass\atoms\_checkbox.scss" />
+    <None Include="Web\Sass\atoms\_fonts.scss" />
+    <None Include="Web\Sass\atoms\_iconButton.scss" />
+    <None Include="Web\Sass\atoms\_iconLabelButton.scss" />
+    <None Include="Web\Sass\atoms\_icons.scss" />
+    <None Include="Web\Sass\atoms\_overviewButton.scss" />
+    <None Include="Web\Sass\atoms\_select.scss" />
+    <None Include="Web\Sass\atoms\_settingsButton.scss" />
+    <None Include="Web\Sass\atoms\_spinner.scss" />
+    <None Include="Web\Sass\dnn.scss" />
+    <None Include="Web\Sass\molecules\_filterList.scss" />
+    <None Include="Web\Sass\molecules\_mailNote.scss" />
+    <None Include="Web\Sass\molecules\_streamList.scss" />
+    <None Include="Web\Sass\molecules\_toolbarMenu.scss" />
+    <None Include="Web\Sass\organisms\_overlay.scss" />
+    <None Include="Web\Sass\organisms\_toolbar.scss" />
+    <None Include="Web\Sass\templates\_overview.scss" />
+    <None Include="Web\Sass\util\_colors.scss" />
+    <None Include="Web\Sass\util\_layout.scss" />
+    <None Include="Web\Sass\util\_normalize.scss" />
+    <None Include="Web\Sass\util\_variables.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Overlay.resx">

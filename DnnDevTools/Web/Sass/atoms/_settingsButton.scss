@@ -1,0 +1,18 @@
+/**
+* @desc         Settings button
+* @name         atoms/settingsButton
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+
+.#{$prefix}settingsButton {
+    display: block;
+    padding: 5px;
+    background-color: $colorDnnRed;
+    border: 2px solid $colorWhite;
+    border-radius: 100%;
+
+    &:hover {
+        background-color: adjust-lightness($colorDnnRed, -10);
+    }
+}

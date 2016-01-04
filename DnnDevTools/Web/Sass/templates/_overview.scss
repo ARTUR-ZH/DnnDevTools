@@ -1,0 +1,20 @@
+/**
+* @desc         Overview window styles
+* @name         templates/overview
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}overview {
+    margin: 0;
+
+    .#{$prefix}filterList {
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .#{$prefix}streamWrapper {
+        padding: 64px 20px 15px 20px;
+    }
+}

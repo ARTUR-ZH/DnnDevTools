@@ -1,0 +1,33 @@
+/**
+* @desc         Color classes
+* @name         util/colors
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+
+.#{$prefix}colorWhite {
+    color: $colorWhite;
+}
+
+.#{$prefix}bgColorWhite {
+    background-color: $colorWhite;
+}
+
+.#{$prefix}bgColorGrey {
+    background-color: $colorGrey;
+}
+
+.#{$prefix}bgColorGrey2 {
+    background-color: $colorGrey2;
+}
+
+.#{$prefix}bgColorDnnBlue {
+    background-color: $colorDnnBlue;
+}
+
+.#{$prefix}bgColorRed {
+    background-color: #dd0720;
+}
+.#{$prefix}bgColorOrange {
+    background-color: #fabb00;
+}

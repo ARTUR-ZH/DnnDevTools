@@ -1,4 +1,6 @@
 ﻿<div class="dnnDevTools-toolbar">
+    <p id="dnnDevTools-note" class="dnnDevTools-note dnnDevTools-copySmall dnnDevTools-hidden"></p>
+
     <div class="dnnDevTools-toolbarMenu">
         <button type="button" id="dnnDevTools-overviewButton" class="dnnDevTools-overviewButton" title="Show overview">
             <span class="dnnDevTools-wrenchIcon dnnDevTools-icon24x24"></span>
@@ -6,23 +8,6 @@
         <button type="button" id="dnnDevTools-settingsButton" class="dnnDevTools-settingsButton">
             <span class="dnnDevTools-cogIcon dnnDevTools-icon16x16"></span>
         </button>
-    </div>
-
-    <div id="dnnDevTools-mailNote" class="dnnDevTools-mailNote dnnDevTools-panel dnnDevTools-bgColorGrey dnnDevTools-hidden">
-        <p class="dnnDevTools-copySmall">
-            <span id="dnnDevTools-mailNoteDate"></span>
-        </p>
-        <p class="dnnDevTools-copySmall">
-            <span id="dnnDevTools-mailNoteSubject"></span>
-        </p>
-        <p class="dnnDevTools-copySmall">
-            <span class="dnnDevTools-copySmall dnnDevTools-copyBold">From:</span>
-            <span id="dnnDevTools-mailNoteSender"></span>
-        </p>
-        <p class="dnnDevTools-copySmall">
-            <span class="dnnDevTools-copySmall dnnDevTools-copyBold">To:</span>
-            <span id="dnnDevTools-mailNoteReciever"></span>
-        </p>
     </div>
 </div>
 
@@ -35,13 +20,9 @@
 <script>
     (function(document, window, settings) {
         var hub = $.connection.dnnDevToolsNotificationHub,
-            mailNote = {},
-            mailNoteTimeoutId,
-            mailNoteElement = document.getElementById('dnnDevTools-mailNote'),
-            dateElement = document.getElementById('dnnDevTools-mailNoteDate'),
-            subjectElement = document.getElementById('dnnDevTools-mailNoteSubject'),
-            senderElement = document.getElementById('dnnDevTools-mailNoteSender'),
-            recieverElement = document.getElementById('dnnDevTools-mailNoteReciever'),
+            currentNoteData = {},
+            noteTimeoutId,
+            noteElement = document.getElementById('dnnDevTools-note'),
             overviewButton = document.getElementById('dnnDevTools-overviewButton'),
             overlay = document.getElementById('dnnDevTools-overlay'),
             overlayPanel = document.getElementById('dnnDevTools-overlayPanel'),
@@ -49,16 +30,17 @@
             settingsButton = document.getElementById('dnnDevTools-settingsButton');
 
         // merge settings with default settings
-        settings.mailNoteVisibleTime = settings.mailNoteVisibleTime || 3000;
+        settings.noteVisibleTime = settings.noteVisibleTime || 3000;
         
         // initialization
-        initMailNote();
+        initNote();
         initOverlay();
         initConnection();
 
-        function initMailNote() {
-            mailNoteElement.addEventListener('click', function () {
-                openOverlay(mailNote.Id);
+        function initNote() {
+            noteElement.addEventListener('click', function () {
+                hideNote();
+                openOverlay(currentNoteData.Id);
             }, false);
         }
 
@@ -73,29 +55,41 @@
                 window.location.href = window.weweave.dnnDevTools.hostSettingsUrl;
             }, false);
             
-            // close mail overview window when clicking outside the window panel
+            // close overview window when clicking outside the window panel
             overlay.addEventListener('click', function () {
                 closeOverlay();
             });
 
-            // prevent closing the mail overview window when clicking on the window panel
+            // prevent closing the overview window when clicking on the window panel
             overlayPanel.addEventListener('click', function (event) {
                 event.stopPropagation();
             });
         }
 
         function initConnection() {
-            // listen to mail events
+            // listen to signalR events
             hub.client.OnEvent = function (data) {
-                console.log(data.Type);
-                if (data.Type === 'Mail') {
-                    updateMailNote(data);
-                    showMailNote();
-                } else if (data.Type === 'LogMessage') {
-                    // console.log(data);
-                } else if (data.Type === 'DnnEvent') {
-                    // console.log(data);
+                currentNoteData = data;
+
+                // remove icon classes
+                noteElement.classList.remove('dnnDevTools-envelopeClosedIcon', 'dnnDevTools-audioIcon', 'dnnDevTools-listIcon');
+
+                switch (data.Type) {
+                    case 'Mail':
+                        noteElement.classList.add('dnnDevTools-envelopeClosedIcon');
+                        noteElement.textContent = data.Subject;
+                        break;
+                    case 'DnnEvent':
+                        noteElement.classList.add('dnnDevTools-audioIcon');
+                        noteElement.textContent = data.Message;
+                        break;
+                    case 'LogMessage':
+                        noteElement.classList.add('dnnDevTools-listIcon');
+                        noteElement.textContent = data.Message;
+                        break;
                 }
+
+                showNote();
             };
 
             // open connection
@@ -130,35 +124,23 @@
             overviewButton.classList.remove('dnnDevTools-active');
         }
 
-        /**
-        * Populate last mail elements with new mails data
-        * @param {object} data Data of mail
-        */
-        function updateMailNote(data) {
-            mailNote = data;
-            dateElement.textContent = data.Timestamp;
-            subjectElement.textContent = data.Subject;
-            senderElement.textContent = data.Sender;
-            recieverElement.textContent = data.To;
-        }
-
-        function showMailNote() {
+        function showNote() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            mailNoteElement.classList.remove('dnnDevTools-hidden');
+            noteElement.classList.remove('dnnDevTools-hidden');
 
             // reset timeout if another mail comes in while the last mail is still visible
-            if (mailNoteTimeoutId) {
-                clearTimeout(mailNoteTimeoutId);
-                mailNoteTimeoutId = null;
+            if (noteTimeoutId) {
+                clearTimeout(noteTimeoutId);
+                noteTimeoutId = null;
             }
 
             // hide last mail after some short delay
-            mailNoteTimeoutId = window.setTimeout(hideMailNote, settings.mailNoteVisibleTime);
+            noteTimeoutId = window.setTimeout(hideNote, settings.noteVisibleTime);
         }
 
-        function hideMailNote() {
+        function hideNote() {
             // TODO check internet explorer support (http://caniuse.com/#search=classList)
-            mailNoteElement.classList.add('dnnDevTools-hidden');
+            noteElement.classList.add('dnnDevTools-hidden');
         }
     }(document, window, {}));
 </script>

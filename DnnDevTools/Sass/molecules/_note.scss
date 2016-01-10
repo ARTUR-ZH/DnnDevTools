@@ -1,0 +1,26 @@
+/**
+* @desc         Notification element styles
+* @name         molecules/note
+* @author       matthias.benfer@gmail.com
+* @requires     util/variables
+*/
+
+.#{$prefix}note {
+    max-width: 250px;
+    padding: 8px 10px 8px 34px;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $colorWhite;
+    border: 2px solid $colorWhite;
+    background-color: $colorBlack; 
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: 10px 8px;
+
+    &:hover {
+        background-color: adjust-lightness($colorBlack, 8);
+    }
+}

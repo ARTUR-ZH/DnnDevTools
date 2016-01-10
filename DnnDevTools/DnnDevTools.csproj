@@ -182,6 +182,7 @@
     <None Include="Sass\dnn.scss" />
     <None Include="Sass\molecules\_filterList.scss" />
     <None Include="Sass\molecules\_mailNote.scss" />
+    <None Include="Sass\molecules\_note.scss" />
     <None Include="Sass\molecules\_streamList.scss" />
     <None Include="Sass\molecules\_toolbarMenu.scss" />
     <None Include="Sass\organisms\_overlay.scss" />

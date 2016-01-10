@@ -78,6 +78,33 @@
                 <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnnDevTools-copy">Body is empty.</p>
             </div>
         </script>
+
+        <script type="text/ng-template" id="dnnDevTools-event-detail.html">
+            <div class="dnnDevTools-detail">
+                <a ui-sref="overview" class="dnnDevTools-copy">back to overview</a>
+                <p class="dnnDevTools-copy">Id: {{eventDetail.dnnEvent.Id}}</p>
+                <p class="dnnDevTools-copy">LogType: {{eventDetail.dnnEvent.LogType}}</p>
+                <p class="dnnDevTools-copy">Message: {{eventDetail.dnnEvent.Message}}</p>
+                <p class="dnnDevTools-copy">Portal: {{eventDetail.dnnEvent.Portal}}</p>
+                <p class="dnnDevTools-copy">TimeStamp: {{eventDetail.dnnEvent.TimeStamp}}</p>
+                <p class="dnnDevTools-copy">Type: {{eventDetail.dnnEvent.Type}}</p>
+                <p class="dnnDevTools-copy">Username: {{eventDetail.dnnEvent.Username}}</p>
+            </div>
+        </script>
+
+        <script type="text/ng-template" id="dnnDevTools-log-detail.html">
+            <div class="dnnDevTools-detail">
+                <a ui-sref="overview" class="dnnDevTools-copy">back to overview</a>
+                <p class="dnnDevTools-copy">ClassName: {{logDetail.logMessage.ClassName}}</p>
+                <p class="dnnDevTools-copy">Id: {{logDetail.logMessage.Id}}</p>
+                <p class="dnnDevTools-copy">Level: {{logDetail.logMessage.Level}}</p>
+                <p class="dnnDevTools-copy">Logger: {{logDetail.logMessage.Logger}}</p>
+                <p class="dnnDevTools-copy">Message: {{logDetail.logMessage.Message}}</p>
+                <p class="dnnDevTools-copy">MethodName: {{logDetail.logMessage.MethodName}}</p>
+                <p class="dnnDevTools-copy">TimeStamp: {{logDetail.logMessage.TimeStamp}}</p>
+                <p class="dnnDevTools-copy">Type: {{logDetail.logMessage.Type}}</p>
+            </div>
+        </script>
     </div>
     
     <script src="Scripts/angular.js"></script>
@@ -90,7 +117,10 @@
                 .config(config)
                 .factory('remoteData', remoteData)
                 .controller('OverviewController', OverviewController)
-                .controller('MailDetailController', MailDetailController);
+                .controller('MailDetailController', MailDetailController)
+                .controller('EventDetailController', EventDetailController)
+                .controller('LogDetailController', LogDetailController);
+
 
             function config($stateProvider, $urlRouterProvider) {
                 $urlRouterProvider.otherwise('/');
@@ -107,6 +137,28 @@
                         resolve: {
                             mail: function ($stateParams, remoteData) {
                                 return remoteData.mailDetail($stateParams.id);
+                            }
+                        }
+                    })
+                    .state('eventDetail', {
+                        url: '/eventdetail/{id}',
+                        templateUrl: 'dnnDevTools-event-detail.html',
+                        controller: 'EventDetailController as eventDetail',
+                        resolve: {
+                            dnnEvent: function ($stateParams, $filter, remoteData) {
+                                // get currently cached stream data and search it for the dnn event with the given id
+                                return $filter('filter')(remoteData.getCachedStream(), {Id: $stateParams.id}, true)[0];
+                            }
+                        }
+                    })
+                    .state('logDetail', {
+                        url: '/logdetail/{id}',
+                        templateUrl: 'dnnDevTools-log-detail.html',
+                        controller: 'LogDetailController as logDetail',
+                        resolve: {
+                            logMessage: function ($stateParams, $filter, remoteData) {
+                                // get currently cached stream data and search it for the dnn event with the given id
+                                return $filter('filter')(remoteData.getCachedStream(), {Id: $stateParams.id}, true)[0];
                             }
                         }
                     });
@@ -153,6 +205,12 @@
                         case 'Mail':
                             $state.go('mailDetail', {id:item.Id});
                             break;
+                        case 'DnnEvent':
+                            $state.go('eventDetail', {id:item.Id});
+                            break;
+                        case 'LogMessage':
+                            $state.go('logDetail', {id:item.Id});
+                            break;
                     }
                 }
 
@@ -168,7 +226,6 @@
 
                     function error(response) {
                         // TODO handle error
-                        console.log(response);
                     }
                 }
 
@@ -191,54 +248,121 @@
                 vm.mail = mail.data;
             }
 
+            function EventDetailController($stateParams, dnnEvent) {
+                var vm = this;
+
+                vm.dnnEvent = dnnEvent;
+            }
+
+            function LogDetailController($stateParams, logMessage) {
+                var vm = this;
+
+                vm.logMessage = logMessage;
+            }
+
             function remoteData($http, $q) {
+                var cachedStream = null;
+
                 return {
                     stream: stream,
                     mailList: mailList,
                     logList: logList,
                     eventList: eventList,
                     mailDetail: mailDetail,
-                    removeMail: removeMail
+                    removeMail: removeMail,
+                    getCachedStream: getCachedStream
                 }
 
                 function stream() {
-                    return $http({
+                    var deferred = $q.defer();
+
+                    $http({
                         method: 'GET',
                         url: 'api/stream?skip=0&take=100&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
-                    });
+                    }).then(success, error);
+
+                    function success(response) {
+                        cachedStream = response.data.all;
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+
+                    return deferred.promise;
                 }
 
                 function mailList() {
-                    return $http({
+                    var deferred = $q.defer();
+
+                    $http({
                         method: 'GET',
                         url: 'api/mail/list?skip=0&take=10&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
-                    });
+                    }).then(success, error);
+
+                    function success(response) {
+                        cachedStream = response.data;
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+
+                    return deferred.promise;
                 }
 
                 function eventList() {
-                    return $http({
+                    var deferred = $q.defer();
+
+                    $http({
                         method: 'GET',
                         url: 'api/dnnEvent/list?skip=0&take=10&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
-                    });
+                    }).then(success, error);
+
+                    function success(response) {
+                        cachedStream = response.data;
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+
+                    return deferred.promise;
                 }
 
                 function logList() {
-                    return $http({
+                    var deferred = $q.defer();
+
+                    $http({
                         method: 'GET',
                         url: 'api/log/list?skip=0&take=10&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
-                    });
+                    }).then(success, error);
+
+                    function success(response) {
+                        cachedStream = response.data;
+                        deferred.resolve(response);
+                    }
+
+                    function error(response) {
+                        deferred.reject(response);
+                    }
+
+                    return deferred.promise;
                 }
 
                 function mailDetail(id) {
@@ -265,6 +389,10 @@
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
                     });
+                }
+
+                function getCachedStream() {
+                    return cachedStream;
                 }
             }
         }());

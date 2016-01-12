@@ -1,0 +1,20 @@
+/**
+* @desc         Back button styles - adds arrow left icon
+* @name         atoms/backButton
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}backButton {
+    position: relative;
+
+    &:before {
+        content: "\25c0";
+        display: inline-block;
+        font-size: 18px;
+        line-height: 1;
+        position: absolute;
+        top: 17px;
+        left: 25px;
+    }
+}

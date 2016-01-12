@@ -9,9 +9,11 @@
     margin: 0;
 
     .#{$prefix}filterList {
-        position: fixed;
-        width: 100%;
-        z-index: 1;
+        &.#{$prefix}is-sticky {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+        }
     }
 
     .#{$prefix}streamWrapper {

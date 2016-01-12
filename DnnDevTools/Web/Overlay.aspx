@@ -26,7 +26,7 @@
 
         <script type="text/ng-template" id="dnnDevTools-overview.html">
             <div class="dnnDevTools-stream">
-                <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
+                <div class="dnnDevTools-filterList dnnDevTools-is-sticky dnnDevTools-bgColorDnnBlue">
                     <a ui-sref="overview({filter: null})" ng-class="{'dnnDevTools-active': !overview.filter}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-removeIcon">Show all</a>
                     <a ui-sref="overview({filter: 'Mail'})" ng-class="{'dnnDevTools-active': overview.filter === 'Mail'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-envelopeClosedIcon dnnDevTools-icon16x16"></span>Mails</a>
                     <a ui-sref="overview({filter: 'DnnEvent'})" ng-class="{'dnnDevTools-active': overview.filter === 'DnnEvent'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-audioIcon dnnDevTools-icon16x16"></span>Events</a>
@@ -71,8 +71,10 @@
         </script>
 
         <script type="text/ng-template" id="dnnDevTools-mail-detail.html">
+            <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
+                <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
+            </div>
             <div class="dnnDevTools-detail">
-                <a ui-sref="overview" class="dnnDevTools-copy">back to overview</a>
                 <div ng-if="mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnnDevTools-copy"></div>
                 <pre ng-if="!mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnnDevTools-pre"></pre>
                 <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnnDevTools-copy">Body is empty.</p>
@@ -80,8 +82,10 @@
         </script>
 
         <script type="text/ng-template" id="dnnDevTools-event-detail.html">
+            <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
+                <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
+            </div>
             <div class="dnnDevTools-detail">
-                <a ui-sref="overview" class="dnnDevTools-copy">back to overview</a>
                 <p class="dnnDevTools-copy">Id: {{eventDetail.dnnEvent.Id}}</p>
                 <p class="dnnDevTools-copy">LogType: {{eventDetail.dnnEvent.LogType}}</p>
                 <p class="dnnDevTools-copy">Message: {{eventDetail.dnnEvent.Message}}</p>
@@ -93,8 +97,10 @@
         </script>
 
         <script type="text/ng-template" id="dnnDevTools-log-detail.html">
+            <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
+                <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
+            </div>
             <div class="dnnDevTools-detail">
-                <a ui-sref="overview" class="dnnDevTools-copy">back to overview</a>
                 <p class="dnnDevTools-copy">ClassName: {{logDetail.logMessage.ClassName}}</p>
                 <p class="dnnDevTools-copy">Id: {{logDetail.logMessage.Id}}</p>
                 <p class="dnnDevTools-copy">Level: {{logDetail.logMessage.Level}}</p>

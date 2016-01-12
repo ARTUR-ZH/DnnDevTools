@@ -170,6 +170,8 @@
     <None Include="packages.config" />
     <None Include="Providers\DataProviders\SqlDataProvider\06.00.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
+    <None Include="Sass\atoms\_backButton.scss" />
+    <None Include="Sass\atoms\_button.scss" />
     <None Include="Sass\atoms\_checkbox.scss" />
     <None Include="Sass\atoms\_fonts.scss" />
     <None Include="Sass\atoms\_iconButton.scss" />
@@ -181,12 +183,12 @@
     <None Include="Sass\atoms\_spinner.scss" />
     <None Include="Sass\dnn.scss" />
     <None Include="Sass\molecules\_filterList.scss" />
-    <None Include="Sass\molecules\_mailNote.scss" />
     <None Include="Sass\molecules\_note.scss" />
     <None Include="Sass\molecules\_streamList.scss" />
     <None Include="Sass\molecules\_toolbarMenu.scss" />
     <None Include="Sass\organisms\_overlay.scss" />
     <None Include="Sass\organisms\_toolbar.scss" />
+    <None Include="Sass\templates\_hostSettings.scss" />
     <None Include="Sass\templates\_overview.scss" />
     <None Include="Sass\util\_colors.scss" />
     <None Include="Sass\util\_layout.scss" />

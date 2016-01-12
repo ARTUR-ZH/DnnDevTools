@@ -1,0 +1,13 @@
+/**
+* @desc         General button styles
+* @name         atoms/button
+* @author       matthias.benfer@gmail.com
+* @requires     -
+*/
+
+.#{$prefix}button {
+    &[disabled] {
+        opacity: 0.3;
+        cursor: default;
+    }
+}

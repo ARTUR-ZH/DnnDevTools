@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Providers\DataProviders\SqlDataProvider\06.00.00.SqlDataProvider" />
+    <None Include="Providers\DataProviders\SqlDataProvider\01.00.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\Uninstall.SqlDataProvider" />
     <None Include="Sass\atoms\_backButton.scss" />
     <None Include="Sass\atoms\_button.scss" />

@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DnnDevTools" type="Module" version="06.00.00">
+    <package name="DnnDevTools" type="Module" version="01.00.00">
       <friendlyName>DNN Dev Tools</friendlyName>
       <description>DNN Dev Tools smoothly integrates into your DNN environment and adds useful functionalities for host admins.</description>
       <iconFile>Images/Icon_32x32.png</iconFile>
@@ -26,15 +26,6 @@
                   <node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
                     <add name="weweave.DnnDevTools" type="weweave.DnnDevTools.HttpModule, weweave.DnnDevTools" preCondition="managedHandler" />
                   </node>
-                  <node path="/configuration/system.web/httpRuntime" action="updateattribute" name="targetFramework" value="4.5" collision="overwrite" />
-                  <node path="/configuration/runtime/ab:assemblyBinding" action="update"
-                      targetpath="/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly[ab:assemblyIdentity/@name='Newtonsoft.Json']"
-                      collision="overwrite" nameSpace="urn:schemas-microsoft-com:asm.v1" nameSpacePrefix="ab">
-                    <dependentAssembly xmlns="urn:schemas-microsoft-com:asm.v1">
-                      <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30AD4FE6B2A6AEED" />
-                      <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
-                    </dependentAssembly>
-                  </node>                    
                 </nodes>
               </configuration>
             </install>
@@ -75,19 +66,11 @@
             </assembly>
             <assembly>
               <path>bin</path>
-              <name>Newtonsoft.Json.dll</name>
-            </assembly>
-            <assembly>
-              <path>bin</path>
               <name>Microsoft.AspNet.SignalR.SystemWeb.dll</name>
             </assembly>
             <assembly>
               <path>bin</path>
               <name>Microsoft.AspNet.SignalR.Core.dll</name>
-            </assembly>
-            <assembly>
-              <path>bin</path>
-              <name>System.Net.Http.Formatting.dll</name>
             </assembly>
             <assembly>
               <path>bin</path>
@@ -104,18 +87,18 @@
           <scripts>
             <basePath>DesktopModules\DnnDevTools</basePath>
 
-            <!-- 06.00.00 -->
+            <!-- 01.00.00 -->
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>06.00.00.SqlDataProvider</name>
-              <version>06.00.00</version>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
             </script>
             
             <!-- Uninstall -->
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>Uninstall.SqlDataProvider</name>
-              <version>06.00.00</version>
+              <version>01.00.00</version>
             </script>
           </scripts>
         </component>
@@ -211,7 +194,7 @@
             <attributes>
               <businessControllerClass>weweave.DnnDevTools.BusinessController</businessControllerClass>
               <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>06.00.00</upgradeVersionsList>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
             </attributes>
           </eventMessage>
         </component>

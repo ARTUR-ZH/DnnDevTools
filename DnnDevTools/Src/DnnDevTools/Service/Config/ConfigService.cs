@@ -112,7 +112,7 @@ namespace weweave.DnnDevTools.Service.Config
 
         public Level GetLogMessageTraceLevel()
         {
-            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyLogMessageTraceLevel, Level.All.ToString()));
+            var log4NetLevel = Log4NetUtil.ParseLevel(ServiceLocator.SettingsService.GetSetting(ConfigKeyLogMessageTraceLevel, Level.Error.ToString()));
             return log4NetLevel ?? Level.All;
         }
 

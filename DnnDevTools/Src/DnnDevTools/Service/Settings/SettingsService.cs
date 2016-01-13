@@ -34,7 +34,7 @@ namespace weweave.DnnDevTools.Service.Settings
         private static Dictionary<string, string> LoadSettings()
         {
             var dictionary = new Dictionary<string, string>();
-            var settings = DataProvider.Instance().ExecuteReader("DnnDevTools_GetSettings", new object[0]);
+            var settings = DataProvider.Instance().ExecuteReader("DnnDevTools_GetSettings");
             try
             {
                 while (settings.Read())
@@ -54,7 +54,7 @@ namespace weweave.DnnDevTools.Service.Settings
 
         private static void SaveSetting(string key, string value)
         {
-            DataProvider.Instance().ExecuteNonQuery("DnnDevTools_UpdateSettings", (object)key, (object)value);
+            DataProvider.Instance().ExecuteNonQuery("DnnDevTools_UpdateSettings", key, value);
         }
 
         #endregion

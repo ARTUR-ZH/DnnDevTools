@@ -41,15 +41,3 @@ DNN Dev Tools is installed just as any other DNN module:
  1. When installing DNN Dev Tools the first time, you might need to login again
 
 **Please note:** After installing DNN Dev Tools, the module is (automatically) enabled and the DNN Dev Tools icon should be visible in the bottom right corner of every page. For security reasons DNN Dev Tools is only enabled for host admin users, for all other users nothing changes. To configure DNN Dev Tools settings, log in as host admin and browser to the page System > DNN Dev Tools.
-
-## FAQ
-
-### Why is the initial version number of DNN Dev Tools 06.00.00?
-
-We use a version of SignalR that depends on Newtonsoft.Json.dll version 6 and this assembly is included in DNN 8 in version 4.5. To update this assembly on the installation process of DNN Dev Tools we need a version number higher than 4.5.
-
-## Known issues
-
-### Upgrading DNN after DNN Dev Tools has been installed
-
-Due to the fact that we replace Newtonsoft.Json.dll with a newer version than included in DNN by default, you might run into problems when trying to upgrade DNN. The workaround is to copy DNN Dev Tool's version of Newtonsoft.Json.dll into the website's bin folder after the DNN upgrade files has beend copied into the website's root folder. DnnDevTool's version of Newtonsoft.Json can be downloaded here https://github.com/JamesNK/Newtonsoft.Json/releases/tag/6.0.4.

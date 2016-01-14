@@ -24,21 +24,21 @@ DNN Dev Tools uses real-time notification: If “something happens” (like a DN
 ### Seamless UI integration
 DNN Dev Tools takes care to not break the existing user interface by prefixing all CSS selectors and not using any 3rd party JavaScript or CSS libraries when adding elements to user interface like the DnnDevTool icon in the bottom right corner. The main (overlay) screen of DNN Dev Tools that makes use of libraries like AngularJS runs in an iframe to not influence the DNN website.
 
-### Misc
+### Miscellaneous
 * Security: By default, DNN Dev Tools functionalities are only enabled/visible for host admins
 * Internationalization: Localized in en-US and de-DE
 * Quality: Passed EVS (see http://evs.dotnetnuke.com/)
 
-## Requirements
-
-* DNN 08.00.00 CTP 6 (tested up to DNN 08.00.00 Beta 1)
-* A-Grade browser (Firefox, Chrome, IE 11, Edge)
-
 ## Installation / Setup
-**Please note: Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website.** Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze problems in a DNN environment and that should be done in a separate non-production environment.
+**Please note: Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website.** Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze DNN environments and that should be done in a separate non-production environment.
 
 DNN Dev Tools is installed just as any other DNN module:
  1. Download the most recent release DNN Dev Tools from here https://github.com/weweave/DnnDevTools/releases
  1. Log in as host admin and install the module on the page System > Extensions
  
-**Please note:** After installing DNN Dev Tools, the module is (automatically) enabled and the DNN Dev Tools icon should be visible in the bottom right corner of every page. For security reasons DNN Dev Tools is only enabled for host admin users, for all other users nothing changes. To configure DNN Dev Tools settings, log in as host admin and browser to the page System > DNN Dev Tools.
+**Please note:** After installing DNN Dev Tools, the module is (automatically) enabled and the DNN Dev Tools icon should be visible in the bottom right corner of every page. For security reasons DNN Dev Tools is only enabled for host admin users. To configure DNN Dev Tools settings, log in as host admin and browser to the page "System > DNN Dev Tools".
+
+## Requirements
+
+* DNN 08.00.00 RC (**Please note: Not compatible to DNN 08.00.00 beta or any DNN 08.00.00 CTP version)
+* A-Grade browser (Firefox, Chrome, IE 11, Edge)

@@ -4,30 +4,16 @@ DNN Dev Tools - The Swiss army knife for DNN developers and host admins
 DNN Dev Tools is developed by weweave (https://weweave.net/) and licensed under the The MIT License (MIT).
 
 ## Features
-Screenshots and videos can be found in the wiki (https://github.com/weweave/DNNDevTools/wiki/Screenshots).
 
-### Log message tracing
-DNN Dev Tools watches for log messages that are created in the DNN environment and offers a web interface to analyze them. 
+* Log message tracing
+* Log message tracing
+* E-mail catch
+* Real-time notification
+* Seamless UI integration
+* ...
+* 
 
-### DNN event tracing
-DNN Dev Tools watches for events that are created in the DNN environment and offers a web interface to analyze them. 
-
-### E-mail catch
-
-**Please note: Enabling this feature blocks e-mails from being sent to the actual recipient**. 
-
-DNN Dev Tools catches e-mails that are created in the DNN environment instead of sending them to the actual recipient and offers a web interface to analyze them. This feature is especially useful in non-production environments where you want to make sure no e-mails are sent to real users. This feature is not enabled by default as it blocks e-mails from being sent to the users which is in most cases not desired in production environments. 
-
-### Real-time notification
-DNN Dev Tools uses real-time notification: If “something happens” (like a DNN event happened or a mail was caught), DNN Dev Tools shows an overlay on the website in real-time.
-
-### Seamless UI integration
-DNN Dev Tools takes care to not break the existing user interface by prefixing all CSS selectors and not using any 3rd party JavaScript or CSS libraries when adding elements to user interface like the DnnDevTool icon in the bottom right corner. The main (overlay) screen of DNN Dev Tools that makes use of libraries like AngularJS runs in an iframe to not influence the DNN website.
-
-### Miscellaneous
-* Security: By default, DNN Dev Tools functionalities are only enabled/visible for host admins
-* Internationalization: Localized in en-US and de-DE
-* Quality: Passed EVS (see http://evs.dotnetnuke.com/)
+Check out our [wiki page](https://github.com/weweave/DnnDevTools/wiki/Features) to find put more about the features! Screenshots and videos can be also found in [our wiki](https://github.com/weweave/DNNDevTools/wiki/Screenshots).
 
 ## Installation / Setup
 **Please note: Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website.** Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze DNN environments and that should be done in a separate non-production environment.

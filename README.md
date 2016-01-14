@@ -3,7 +3,7 @@ DNN Dev Tools - The Swiss army knife for DNN developers and host admins
 
 DNN Dev Tools is developed by weweave (https://weweave.net/) and licensed under the The MIT License (MIT).
 
-## Features
+DNN Dev Tools includes th following features
 
 * Log message tracing
 * Log message tracing
@@ -27,3 +27,7 @@ DNN Dev Tools is installed just as any other DNN module:
 
 * DNN 08.00.00 RC (**Please note: Not compatible to DNN 08.00.00 beta or any DNN 08.00.00 CTP version)
 * A-Grade browser (Firefox, Chrome, IE 11, Edge)
+
+## Need help? Found a bug? Miss a feature?
+
+If you need help, please take a look at the [open issue list](https://github.com/weweave/DnnDevTools/issues) and create a new issue if you found something we are not aware of. If you miss a feature, please also do not hesitate to create [a new issue](https://github.com/weweave/DnnDevTools/issues/new).

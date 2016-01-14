@@ -11,7 +11,6 @@ DNN Dev Tools is developed by weweave (https://weweave.net/) and licensed under 
 * Real-time notification
 * Seamless UI integration
 * ...
-* 
 
 Check out our [wiki page](https://github.com/weweave/DnnDevTools/wiki/Features) to find put more about the features! Screenshots and videos can be also found in [our wiki](https://github.com/weweave/DNNDevTools/wiki/Screenshots).
 

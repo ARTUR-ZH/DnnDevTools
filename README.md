@@ -4,14 +4,14 @@ DNN Dev Tools is developed by weweave (https://weweave.net/) and licensed under 
 
 DNN Dev Tools includes th following features
 
-* Log message tracing
-* Log message tracing
-* E-mail catch
-* Real-time notification
-* Seamless UI integration
-* ...
+* [Log message tracing](https://github.com/weweave/DnnDevTools/wiki/Features#log-message-tracing)
+* [DNN event tracing](https://github.com/weweave/DnnDevTools/wiki/Features#dnn-event-tracing)
+* [E-mail catch](https://github.com/weweave/DnnDevTools/wiki/Features#e-mail-catch)
+* [Real-time notification](https://github.com/weweave/DnnDevTools/wiki/Features#real-time-notification)
+* [Seamless UI integration](https://github.com/weweave/DnnDevTools/wiki/Features#seamless-ui-integration)
+* [And others...](https://github.com/weweave/DnnDevTools/wiki/Features#miscellaneous)
 
-Check out our [wiki page](https://github.com/weweave/DnnDevTools/wiki/Features) to find put more about the features! Screenshots and videos can be also found in [our wiki](https://github.com/weweave/DNNDevTools/wiki/Screenshots).
+Check out our  [our wiki](https://github.com/weweave/DNNDevTools/wiki/Screenshots) for screenshots and videos.
 
 ## Installation / Setup
 **Please note: Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website.** Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze DNN environments and that should be done in a separate non-production environment.
@@ -29,4 +29,4 @@ DNN Dev Tools is installed just as any other DNN module:
 
 ## Need help? Found a bug? Miss a feature?
 
-If you need help, please take a look at our [wiki](https://github.com/weweave/DnnDevTools/wiki) and the [open issue list](https://github.com/weweave/DnnDevTools/issues) and do not hesitate to create [a new issue](https://github.com/weweave/DnnDevTools/issues/new) to request a new featire or report a bug.
+If you need help, please take a look at our [wiki](https://github.com/weweave/DnnDevTools/wiki) and the [open issue list](https://github.com/weweave/DnnDevTools/issues) and do not hesitate to create [a new issue](https://github.com/weweave/DnnDevTools/issues/new) to request a new feature or report a bug.

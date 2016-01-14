@@ -13,8 +13,10 @@ DNN Dev Tools watches for log messages that are created in the DNN environment a
 DNN Dev Tools watches for events that are created in the DNN environment and offers a web interface to analyze them. 
 
 ### E-mail catch
-DNN Dev Tools catches e-mails that are created in the DNN environment instead of sending them to the actual recipient and offers a web interface to analyze them. This feature is especially useful in non-production environments where you want to make sure no e-mails are sent to real users. This feature is not enabled by default, it blocks e-mails from being sent to the users which is in most cases not desired in production environments. 
-**Please note: Enabling this feature blocks e-mails from bwing sent to the actual recipient**. 
+
+**Please note: Enabling this feature blocks e-mails from being sent to the actual recipient**. 
+
+DNN Dev Tools catches e-mails that are created in the DNN environment instead of sending them to the actual recipient and offers a web interface to analyze them. This feature is especially useful in non-production environments where you want to make sure no e-mails are sent to real users. This feature is not enabled by default as it blocks e-mails from being sent to the users which is in most cases not desired in production environments. 
 
 ### Real-time notification
 DNN Dev Tools uses real-time notification: If “something happens” (like a DNN event happened or a mail was caught), DNN Dev Tools shows an overlay on the website in real-time.

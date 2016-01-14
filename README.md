@@ -1,5 +1,4 @@
-# DNN Dev Tools
-DNN Dev Tools - The Swiss army knife for DNN developers and host admins
+# DNN Dev Tools - The Swiss army knife for DNN developers and host admins
 
 DNN Dev Tools is developed by weweave (https://weweave.net/) and licensed under the The MIT License (MIT).
 
@@ -30,4 +29,4 @@ DNN Dev Tools is installed just as any other DNN module:
 
 ## Need help? Found a bug? Miss a feature?
 
-If you need help, please take a look at the [open issue list](https://github.com/weweave/DnnDevTools/issues) and create a new issue if you found something we are not aware of. If you miss a feature, please also do not hesitate to create [a new issue](https://github.com/weweave/DnnDevTools/issues/new).
+If you need help, please take a look at our [wiki](https://github.com/weweave/DnnDevTools/wiki) and the [open issue list](https://github.com/weweave/DnnDevTools/issues) and do not hesitate to create [a new issue](https://github.com/weweave/DnnDevTools/issues/new) to request a new featire or report a bug.

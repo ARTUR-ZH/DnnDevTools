@@ -37,10 +37,15 @@
         initOverlay();
         initConnection();
 
+        openOverlay({
+            Type: 'LogMessage',
+            Id: '52-62-58-76-79-55-F9-29-48-80-95-90-88-F3-6C-89'
+        });
+
         function initNote() {
             noteElement.addEventListener('click', function () {
                 hideNote();
-                openOverlay(currentNoteData.Id);
+                openOverlay(currentNoteData);
             }, false);
         }
 
@@ -96,11 +101,11 @@
             $.connection.hub.start();
         }
 
-        function toggleOverlay(id) {
+        function toggleOverlay() {
             if (overlay.classList.contains('dnnDevTools-hidden')) {
-                openOverlay(id);
+                openOverlay();
             } else {
-                closeOverlay(id);
+                closeOverlay();
             }
         }
 
@@ -108,8 +113,8 @@
          * opens the mail overlay
          * @param {string} id The mail with this id will be initially highlighted in overlay
          */
-        function openOverlay(id) {
-            var route = (id !== undefined) ? ('#/maildetail/' + id) : '';
+        function openOverlay(noteData) {
+            var route = (noteData !== undefined) ? ('#/' + noteData.Type.toLowerCase() + 'detail/' + noteData.Id) : '';
 
             overviewIframe.src = window.weweave.dnnDevTools.baseUrl + 'Overlay.aspx' + route;
             overlay.classList.remove('dnnDevTools-hidden');

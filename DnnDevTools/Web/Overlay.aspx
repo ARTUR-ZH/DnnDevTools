@@ -74,7 +74,17 @@
             <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
                 <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
             </div>
-            <div class="dnnDevTools-detail">
+
+            <div class="dnnDevTools-panel dnnDevTools-bgColorGrey">
+                <div class="dnnDevTools-marginBottom2">
+                    <p class="dnnDevTools-copy dnnDevTools-colorGrey3"><span class="dnnDevTools-copyBold dnnDevTools-colorBlack">from</span> {{mailDetail.mail.Sender}} <span class="dnnDevTools-copyBold dnnDevTools-colorBlack">to</span> {{mailDetail.mail.To}}</p>
+                </div>
+
+                <p class="dnnDevTools-copy">{{mailDetail.mail.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                <h1 class="dnnDevTools-headline">{{mailDetail.mail.Subject}}</h1>
+            </div>
+
+            <div class="dnnDevTools-panel">
                 <div ng-if="mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnnDevTools-copy"></div>
                 <pre ng-if="!mailDetail.mail.BodyIsHtml" ng-bind-html="mailDetail.mail.Body" class="dnnDevTools-pre"></pre>
                 <p ng-if="mailDetail.mail && mailDetail.mail.Body === ''" class="dnnDevTools-copy">Body is empty.</p>
@@ -85,14 +95,19 @@
             <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
                 <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
             </div>
-            <div class="dnnDevTools-detail">
-                <p class="dnnDevTools-copy">Id: {{eventDetail.dnnEvent.Id}}</p>
-                <p class="dnnDevTools-copy">LogType: {{eventDetail.dnnEvent.LogType}}</p>
-                <p class="dnnDevTools-copy">Message: {{eventDetail.dnnEvent.Message}}</p>
-                <p class="dnnDevTools-copy">Portal: {{eventDetail.dnnEvent.Portal}}</p>
-                <p class="dnnDevTools-copy">TimeStamp: {{eventDetail.dnnEvent.TimeStamp}}</p>
-                <p class="dnnDevTools-copy">Type: {{eventDetail.dnnEvent.Type}}</p>
-                <p class="dnnDevTools-copy">Username: {{eventDetail.dnnEvent.Username}}</p>
+            <div class="dnnDevTools-panel">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">Id</p></td>
+                            <td><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.Id}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">LogType</p></td>
+                            <td><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.LogType}}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </script>
 
@@ -100,15 +115,43 @@
             <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
                 <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
             </div>
-            <div class="dnnDevTools-detail">
-                <p class="dnnDevTools-copy">ClassName: {{logDetail.logMessage.ClassName}}</p>
-                <p class="dnnDevTools-copy">Id: {{logDetail.logMessage.Id}}</p>
-                <p class="dnnDevTools-copy">Level: {{logDetail.logMessage.Level}}</p>
-                <p class="dnnDevTools-copy">Logger: {{logDetail.logMessage.Logger}}</p>
-                <p class="dnnDevTools-copy">Message: {{logDetail.logMessage.Message}}</p>
-                <p class="dnnDevTools-copy">MethodName: {{logDetail.logMessage.MethodName}}</p>
-                <p class="dnnDevTools-copy">TimeStamp: {{logDetail.logMessage.TimeStamp}}</p>
-                <p class="dnnDevTools-copy">Type: {{logDetail.logMessage.Type}}</p>
+            <div class="dnnDevTools-panel">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">TimeStamp</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.TimeStamp}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">Level</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Level}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">Type</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Type}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">Id</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Id}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">Logger</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Logger}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">ClassName</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.ClassName}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">MethodName</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.MethodName}}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="dnnDevTools-copy">Message</p></td>
+                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Message}}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </script>
     </div>
@@ -147,24 +190,22 @@
                         }
                     })
                     .state('eventDetail', {
-                        url: '/eventdetail/{id}',
+                        url: '/dnneventdetail/{id}',
                         templateUrl: 'dnnDevTools-event-detail.html',
                         controller: 'EventDetailController as eventDetail',
                         resolve: {
-                            dnnEvent: function ($stateParams, $filter, remoteData) {
-                                // get currently cached stream data and search it for the dnn event with the given id
-                                return $filter('filter')(remoteData.getCachedStream(), {Id: $stateParams.id}, true)[0];
+                            dnnEvent: function ($stateParams, remoteData) {
+                                return remoteData.eventDetail($stateParams.id);
                             }
                         }
                     })
                     .state('logDetail', {
-                        url: '/logdetail/{id}',
+                        url: '/logmessagedetail/{id}',
                         templateUrl: 'dnnDevTools-log-detail.html',
                         controller: 'LogDetailController as logDetail',
                         resolve: {
                             logMessage: function ($stateParams, $filter, remoteData) {
-                                // get currently cached stream data and search it for the dnn event with the given id
-                                return $filter('filter')(remoteData.getCachedStream(), {Id: $stateParams.id}, true)[0];
+                                return remoteData.logDetail($stateParams.id);
                             }
                         }
                     });
@@ -248,35 +289,34 @@
                 }
             }
 
-            function MailDetailController($stateParams, mail) {
+            function MailDetailController(mail) {
                 var vm = this;
 
                 vm.mail = mail.data;
             }
 
-            function EventDetailController($stateParams, dnnEvent) {
+            function EventDetailController(dnnEvent) {
                 var vm = this;
 
-                vm.dnnEvent = dnnEvent;
+                vm.dnnEvent = dnnEvent.data;
             }
 
-            function LogDetailController($stateParams, logMessage) {
+            function LogDetailController(logMessage) {
                 var vm = this;
 
-                vm.logMessage = logMessage;
+                vm.logMessage = logMessage.data;
             }
 
             function remoteData($http, $q) {
-                var cachedStream = null;
-
                 return {
                     stream: stream,
                     mailList: mailList,
                     logList: logList,
                     eventList: eventList,
+                    eventDetail: eventDetail,
+                    logDetail: logDetail,
                     mailDetail: mailDetail,
-                    removeMail: removeMail,
-                    getCachedStream: getCachedStream
+                    removeMail: removeMail
                 }
 
                 function stream() {
@@ -291,7 +331,6 @@
                     }).then(success, error);
 
                     function success(response) {
-                        cachedStream = response.data.all;
                         deferred.resolve(response);
                     }
 
@@ -314,7 +353,6 @@
                     }).then(success, error);
 
                     function success(response) {
-                        cachedStream = response.data;
                         deferred.resolve(response);
                     }
 
@@ -337,7 +375,6 @@
                     }).then(success, error);
 
                     function success(response) {
-                        cachedStream = response.data;
                         deferred.resolve(response);
                     }
 
@@ -360,7 +397,6 @@
                     }).then(success, error);
 
                     function success(response) {
-                        cachedStream = response.data;
                         deferred.resolve(response);
                     }
 
@@ -369,6 +405,32 @@
                     }
 
                     return deferred.promise;
+                }
+
+                function eventDetail(id) {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/dnnEvent/detail',
+                        params: {
+                            id: id
+                        },
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
+                }
+
+                function logDetail(id) {
+                    return $http({
+                        method: 'GET',
+                        url: 'api/log/detail',
+                        params: {
+                            id: id
+                        },
+                        headers: {
+                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                        }
+                    });
                 }
 
                 function mailDetail(id) {
@@ -395,10 +457,6 @@
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }
                     });
-                }
-
-                function getCachedStream() {
-                    return cachedStream;
                 }
             }
         }());

@@ -11,7 +11,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1003;
+    z-index: 2147483646; // 32bit integer - 1 (so toolbar is on top)
     background-color: rgba(0, 0, 0, 0.9);
 
     .#{$prefix}overlayPanel {

@@ -93,33 +93,45 @@
         });
 
         function setStatus(isEnabled) {
-            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled).then(
-                function (response) {
-                    window.location.reload(false);
-                }, function (error) {
-                    // TODO show error
-                }
-            );
+            var url = window.weweave.dnnDevTools.baseUrl + 'api/config/enable?status=' + isEnabled;
+
+            dnnDevTools.ajax('PUT', url, success, error);
+
+            function success(response) {
+                window.location.reload(false);
+            }
+
+            function error(error) {
+                // TODO handle error
+            }
         }
 
         function setMailCatchStatus(isEnabled) {
-            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enableMailCatch?status=' + isEnabled).then(
-                function (response) {
-                    console.log(response);
-                }, function (error) {
-                    // TODO show error
-                }
-            );
+            var url = window.weweave.dnnDevTools.baseUrl + 'api/config/enableMailCatch?status=' + isEnabled;
+
+            dnnDevTools.ajax('PUT', url, success, error);
+
+            function success(response) {
+                // TODO handle success
+            }
+
+            function error(error) {
+                // TODO handle error
+            }
         }
 
         function setEventTraceStatus(isEnabled) {
-            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/enableDnnEventTrace?status=' + isEnabled).then(
-                function (response) {
-                    console.log(response);
-                }, function (error) {
-                    // TODO show error
-                }
-            );
+            var url = window.weweave.dnnDevTools.baseUrl + 'api/config/enableDnnEventTrace?status=' + isEnabled;
+
+            dnnDevTools.ajax('PUT', url, success, error);
+
+            function success(response) {
+                // TODO handle success
+            }
+
+            function error(error) {
+                // TODO handle error
+            }
         }
 
         function setLoggingStatus(isEnabled) {
@@ -131,23 +143,31 @@
         }
 
         function sendMail() {
-            dnnDevTools.ajax('POST', window.weweave.dnnDevTools.baseUrl + 'api/config/sendTestMail').then(
-                function (response) {
-                    console.log(response);
-                }, function (error) {
-                    // TODO show error
-                }
-            );
+            var url = window.weweave.dnnDevTools.baseUrl + 'api/config/sendTestMail';
+
+            dnnDevTools.ajax('POST', url, success, error);
+
+            function success(response) {
+                // TODO handle success
+            }
+
+            function error(error) {
+                // TODO handle error
+            }
         }
 
         function setLogLevel(level) {
-            dnnDevTools.ajax('PUT', window.weweave.dnnDevTools.baseUrl + 'api/config/setLogMessageTraceLevel?level=' + level).then(
-                function (response) {
-                    console.log(response);
-                }, function (error) {
-                    // TODO show error
-                }
-            );
+            var url = window.weweave.dnnDevTools.baseUrl + 'api/config/setLogMessageTraceLevel?level=' + level;
+
+            dnnDevTools.ajax('PUT', url, success, error);
+
+            function success(response) {
+                // TODO handle success
+            }
+
+            function error(error) {
+                // TODO handle error
+            }
         }
     }());
 </script>

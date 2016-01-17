@@ -48,14 +48,14 @@
                             <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventUsername">{{item.Username || '&nbsp;'}}</p>
                             <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventPortal">{{item.Portal || '&nbsp;'}}</p>
 
-                            <div ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemLogLevel"><p class="dnnDevTools-streamLabel dnnDevTools-copy" ng-class="{'dnnDevTools-bgColorRed': item.Level === 'ERROR', 'dnnDevTools-bgColorOrange': item.Level === 'WARN'}">{{item.Level}}</p></div>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogMessage">{{item.Message}}</p>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogLogger">{{item.Logger}}</p>
+                            <div ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemLogLevel"><p class="dnnDevTools-streamLabel dnnDevTools-copy" ng-class="{'dnnDevTools-bgColorRed': item.Level === 'ERROR', 'dnnDevTools-bgColorOrange': item.Level === 'WARN'}">{{item.Level || '&nbsp;'}}</p></div>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogMessage">{{item.Message || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogLogger">{{item.Logger || '&nbsp;'}}</p>
                             <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogClassNameAndMethodName">{{item.ClassName}}.{{item.MethodName}}</p>
 
-                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSender">{{item.Sender}}</p>
-                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSubject">{{item.Subject}}</p>
-                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailTo">{{item.To}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSender">{{item.Sender || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSubject">{{item.Subject || '&nbsp;'}}</p>
+                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailTo">{{item.To || '&nbsp;'}}</p>
                             <div ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemMailActions">
                                 <button ng-click="overview.removeMail($event, item)" type="button" class="dnnDevTools-iconButton">
                                     <span class="dnnDevTools-trashIcon dnnDevTools-icon16x16"></span>
@@ -77,10 +77,13 @@
 
             <div class="dnnDevTools-panel dnnDevTools-bgColorGrey">
                 <div class="dnnDevTools-marginBottom2">
-                    <p class="dnnDevTools-copy dnnDevTools-colorGrey3"><span class="dnnDevTools-copyBold dnnDevTools-colorBlack">from</span> {{mailDetail.mail.Sender}} <span class="dnnDevTools-copyBold dnnDevTools-colorBlack">to</span> {{mailDetail.mail.To}}</p>
+                    <p class="dnnDevTools-copy dnnDevTools-colorGrey3">
+                        <span ng-if="mailDetail.mail.Sender !== ''"><span class="dnnDevTools-copyBold dnnDevTools-colorBlack">from</span> {{mailDetail.mail.Sender}} </span>
+                        <span ng-if="mailDetail.mail.To !== ''"><span class="dnnDevTools-copyBold dnnDevTools-colorBlack">to</span> {{mailDetail.mail.To}}</span>
+                    </p>
                 </div>
 
-                <p class="dnnDevTools-copy">{{mailDetail.mail.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                <p class="dnnDevTools-copy dnnDevTools-marginBottom1">{{mailDetail.mail.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
                 <h1 class="dnnDevTools-headline">{{mailDetail.mail.Subject}}</h1>
             </div>
 
@@ -95,19 +98,35 @@
             <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
                 <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
             </div>
-            <div class="dnnDevTools-panel">
+            <div class="dnnDevTools-panel dnnDevTools-bgColorGrey">
+                <div class="dnnDevTools-marginBottom2">
+                    <p class="dnnDevTools-copy dnnDevTools-marginBottom1">{{eventDetail.dnnEvent.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                    <h1 class="dnnDevTools-headline">{{eventDetail.dnnEvent.LogType}}</h1>
+                </div>
                 <table>
                     <tbody>
                         <tr>
-                            <td><p class="dnnDevTools-copy">Id</p></td>
-                            <td><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.Id}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">Id</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.Id}}</p></td>
                         </tr>
                         <tr>
-                            <td><p class="dnnDevTools-copy">LogType</p></td>
-                            <td><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.LogType}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">LogType</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.LogType}}</p></td>
+                        </tr>
+                        <tr>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">Portal</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.Portal}}</p></td>
+                        </tr>
+                        <tr>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">Username</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{eventDetail.dnnEvent.Username}}</p></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="dnnDevTools-panel">
+                <p class="dnnDevTools-copy">{{eventDetail.dnnEvent.Message}}</p>
             </div>
         </script>
 
@@ -115,43 +134,41 @@
             <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
                 <a ui-sref="overview" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-backButton">back to overview</a>
             </div>
+
             <div class="dnnDevTools-panel">
+                <p class="dnnDevTools-copy dnnDevTools-marginBottom1">{{logDetail.logMessage.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                <p class="dnnDevTools-streamLabel dnnDevTools-displayInlineBlock dnnDevTools-copy" ng-class="{'dnnDevTools-bgColorRed': logDetail.logMessage.Level === 'ERROR', 'dnnDevTools-bgColorOrange': logDetail.logMessage.Level === 'WARN'}">{{logDetail.logMessage.Level || '&nbsp;'}}</p>
+            </div>
+
+            <div class="dnnDevTools-panel dnnDevTools-bgColorGrey">
                 <table>
                     <tbody>
                         <tr>
-                            <td><p class="dnnDevTools-copy">TimeStamp</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.TimeStamp}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">Id</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{logDetail.logMessage.Id}}</p></td>
                         </tr>
                         <tr>
-                            <td><p class="dnnDevTools-copy">Level</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Level}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">Logger</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{logDetail.logMessage.Logger}}</p></td>
                         </tr>
                         <tr>
-                            <td><p class="dnnDevTools-copy">Type</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Type}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">ClassName</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{logDetail.logMessage.ClassName}}</p></td>
                         </tr>
                         <tr>
-                            <td><p class="dnnDevTools-copy">Id</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Id}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">MethodName</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{logDetail.logMessage.MethodName}}</p></td>
                         </tr>
                         <tr>
-                            <td><p class="dnnDevTools-copy">Logger</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Logger}}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p class="dnnDevTools-copy">ClassName</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.ClassName}}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p class="dnnDevTools-copy">MethodName</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.MethodName}}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p class="dnnDevTools-copy">Message</p></td>
-                            <td><p class="dnnDevTools-copy">{{logDetail.logMessage.Message}}</p></td>
+                            <td class="dnnDevTools-tableCell dnnDevTools-bgColorWhite"><p class="dnnDevTools-copyBold">Username</p></td>
+                            <td class="dnnDevTools-tableCell"><p class="dnnDevTools-copy">{{logDetail.logMessage.Username}}</p></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="dnnDevTools-panel">
+                <p class="dnnDevTools-copy">{{logDetail.logMessage.Message}}</p>
             </div>
         </script>
     </div>

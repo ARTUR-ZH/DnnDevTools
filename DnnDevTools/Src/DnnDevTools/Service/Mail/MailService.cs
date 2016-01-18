@@ -15,6 +15,9 @@ namespace weweave.DnnDevTools.Service.Mail
 
         public List<Dto.Mail> GetList(string start, int? skip, int? take, string search)
         {
+            if (!ServiceLocator.ConfigService.GetEnableMailCatch())
+                return Enumerable.Empty<Dto.Mail>().ToList();
+
             var mails = new List<Dto.Mail>();
 
             var files = Directory.EnumerateFiles(MailPickupFolderWatcher.Path, "*.eml", SearchOption.TopDirectoryOnly);

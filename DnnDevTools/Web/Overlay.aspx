@@ -252,32 +252,13 @@
                 activate();
 
                 function activate() {
-                    // load stream
-                    switch (vm.filter) {
-                        case 'Mail':
-                            remoteData.mailList().then(function (response) {
-                                vm.stream = response.data;
-                            });
-                            break;
-                        case 'DnnEvent':
-                            remoteData.eventList().then(function (response) {
-                                vm.stream = response.data;
-                            });
-                            break;
-                        case 'LogMessage':
-                            remoteData.logList().then(function (response) {
-                                vm.stream = response.data;
-                            });
-                            break;
-                        default:
-                            remoteData.stream('', 0, startCount).then(function (response) {
-                                vm.stream = response.data.all;
-                            });
-                    }
+                    remoteData.stream('', 0, startCount, vm.searchInput, vm.filter).then(function (response) {
+                        vm.stream = response.data.all;
+                    });
                 }
 
                 function showMore() {
-                    remoteData.stream(vm.stream[0].Id, vm.stream.length, showMoreCount).then(function (response) {
+                    remoteData.stream(vm.stream[0].Id, vm.stream.length, showMoreCount, vm.searchInput, vm.filter).then(function (response) {
                         vm.stream = vm.stream.concat(response.data.all);
                     });
                 }
@@ -360,9 +341,6 @@
             function remoteData($http, $q) {
                 return {
                     stream: stream,
-                    mailList: mailList,
-                    logList: logList,
-                    eventList: eventList,
                     eventDetail: eventDetail,
                     logDetail: logDetail,
                     mailDetail: mailDetail,
@@ -387,72 +365,6 @@
                     $http({
                         method: 'GET',
                         url: 'api/stream' + parameters,
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    }).then(success, error);
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-
-                    return deferred.promise;
-                }
-
-                function mailList() {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'GET',
-                        url: 'api/mail/list?skip=0&take=10&search=',
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    }).then(success, error);
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-
-                    return deferred.promise;
-                }
-
-                function eventList() {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'GET',
-                        url: 'api/dnnEvent/list?skip=0&take=10&search=',
-                        headers: {
-                            'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
-                        }
-                    }).then(success, error);
-
-                    function success(response) {
-                        deferred.resolve(response);
-                    }
-
-                    function error(response) {
-                        deferred.reject(response);
-                    }
-
-                    return deferred.promise;
-                }
-
-                function logList() {
-                    var deferred = $q.defer();
-
-                    $http({
-                        method: 'GET',
-                        url: 'api/log/list?skip=0&take=10&search=',
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }

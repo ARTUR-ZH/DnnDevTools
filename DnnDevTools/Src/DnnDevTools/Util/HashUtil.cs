@@ -10,10 +10,15 @@ namespace weweave.DnnDevTools.Util
         {
             if (string.IsNullOrEmpty(s)) return string.Empty;
 
-            MD5 md5 = new MD5CryptoServiceProvider();
-            var textToHash = Encoding.Default.GetBytes(s);
-            var result = md5.ComputeHash(textToHash);
-            return System.BitConverter.ToString(result);
+            var md5 = MD5.Create();
+            var inputBytes = Encoding.ASCII.GetBytes(s);
+            var hash = md5.ComputeHash(inputBytes);
+            var sb = new StringBuilder();
+            foreach (var t in hash)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+            return sb.ToString();
         }
     }
 }

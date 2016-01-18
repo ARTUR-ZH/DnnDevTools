@@ -48,7 +48,7 @@ namespace weweave.DnnDevTools.Dto
         internal LogMessage(LoggingEvent loggingEvent)
         {
             Id = HashUtil.GetMd5Hash(string.Concat(
-                TimeStamp.Ticks.ToString(),
+                loggingEvent.TimeStamp.Ticks.ToString(),
                 loggingEvent.LoggerName ?? string.Empty,
                 loggingEvent.RenderedMessage ?? string.Empty
             ));

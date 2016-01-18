@@ -67,6 +67,7 @@
     <Compile Include="Src\Dto\LogMessage\ConstructorTest.cs" />
     <Compile Include="Src\Dto\LogMessage\CopyTest.cs" />
     <Compile Include="Src\Util\EmlFileParser\ParseEmlFileTest.cs" />
+    <Compile Include="Src\Util\HashUtil\GetMd5HashTest.cs" />
     <Compile Include="Src\Util\Log4NetUtil\ParseLevelTest.cs" />
   </ItemGroup>
   <ItemGroup>

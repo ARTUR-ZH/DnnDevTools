@@ -19,11 +19,6 @@ namespace weweave.DnnDevTools.SignalR
 
         override protected void Append(LoggingEvent loggingEvent)
         {
-            var level = ServiceLocator.ConfigService.GetLogMessageTraceLevel();
-
-            // Test log level
-            if (level.Value > loggingEvent.Level.Value) return;
-
             // Create log event
             var logMessageEvent = new LogMessage(loggingEvent);
 
@@ -35,7 +30,9 @@ namespace weweave.DnnDevTools.SignalR
                 LogMessageQueue.TryDequeue(out l);
             }
 
-            // Send log event to clients
+            // Send log event to clients if log level is not too low
+            var level = ServiceLocator.ConfigService.GetLogMessageTraceLevel();
+            if (level.Value > loggingEvent.Level.Value) return;
             GlobalHost.ConnectionManager.GetHubContext<DnnDevToolsNotificationHub>().Clients.All.OnEvent(logMessageEvent);
         }
 

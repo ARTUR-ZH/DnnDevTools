@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using log4net.Core;
 using weweave.DnnDevTools.Util;
 
@@ -14,9 +15,14 @@ namespace weweave.DnnDevTools.Dto
         public string Id { get; set; }
 
         /// <summary>
-        /// Level of the log message (DEBUG, INFO, WARN, ERROR or FATAL)
+        /// Level of the log message (TRACE, DEBUG, INFO, WARN, ERROR or FATAL)
         /// </summary>
         public string Level { get; set; }
+
+        /// <summary>
+        /// Numeric log level
+        /// </summary>
+        public int LevelValue { get; set; }
 
         /// <summary>
         /// Name of the logger
@@ -53,6 +59,8 @@ namespace weweave.DnnDevTools.Dto
                 loggingEvent.RenderedMessage ?? string.Empty
             ));
             Level = loggingEvent.Level?.DisplayName;
+            Debug.Assert(loggingEvent.Level != null, "loggingEvent.Level != null");
+            LevelValue = loggingEvent.Level.Value;
             Logger = loggingEvent.LoggerName;
             Message = loggingEvent.RenderedMessage;
             TimeStamp = loggingEvent.TimeStamp;
@@ -64,7 +72,8 @@ namespace weweave.DnnDevTools.Dto
         {
             return new LogMessage
             {
-                Level  = Level,
+                Level = Level,
+                LevelValue = LevelValue,
                 Id = Id,
                 Logger = Logger,
                 ClassName = ClassName,

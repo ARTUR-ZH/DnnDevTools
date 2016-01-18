@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net.Core;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.SignalR;
 
@@ -14,7 +15,13 @@ namespace weweave.DnnDevTools.Service.Log
 
         public List<LogMessage> GetList(string start, int? skip, int? take, string search)
         {
-            IEnumerable<LogMessage> logs = Log4NetAppender.LogMessageQueue.Select(e => e.Copy()).OrderByDescending(e => e.TimeStamp);
+            var logs = Log4NetAppender.LogMessageQueue.Select(e => e.Copy());
+            var level = ServiceLocator.ConfigService.GetLogMessageTraceLevel();
+            if (level != Level.All)
+            {
+                logs = logs.Where(e => e.LevelValue >= level.Value);
+            }
+            logs = logs.OrderByDescending(e => e.TimeStamp);
             if (!string.IsNullOrWhiteSpace(search))
                 logs = logs.Where(e => string.Concat(e.Logger, e.ClassName, e.MethodName, e.Message).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
             if (!string.IsNullOrWhiteSpace(start))

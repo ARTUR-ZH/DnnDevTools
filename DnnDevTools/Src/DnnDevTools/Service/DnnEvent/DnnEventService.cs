@@ -13,6 +13,9 @@ namespace weweave.DnnDevTools.Service.DnnEvent
 
         public List<Dto.DnnEvent> GetList(string start, int? skip, int? take, string search)
         {
+            if (!ServiceLocator.ConfigService.GetEnableDnnEventTrace())
+                return Enumerable.Empty<Dto.DnnEvent>().ToList();
+
             var totalRecords = 0;
             var logs = DotNetNuke.Services.Log.EventLog.LogController.Instance.GetLogs(Null.NullInteger, Null.NullString, 1000, 0, ref totalRecords);
 

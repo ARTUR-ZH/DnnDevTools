@@ -26,18 +26,21 @@
 
         <script type="text/ng-template" id="dnnDevTools-overview.html">
             <div class="dnnDevTools-stream">
-                <div class="dnnDevTools-filterList dnnDevTools-is-sticky dnnDevTools-bgColorDnnBlue">
-                    <a ui-sref="overview({filter: null})" ng-class="{'dnnDevTools-active': !overview.filter}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-removeIcon">Show all</a>
-                    <a ui-sref="overview({filter: 'Mail'})" ng-class="{'dnnDevTools-active': overview.filter === 'Mail'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-envelopeClosedIcon dnnDevTools-icon16x16"></span>Mails</a>
-                    <a ui-sref="overview({filter: 'DnnEvent'})" ng-class="{'dnnDevTools-active': overview.filter === 'DnnEvent'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-audioIcon dnnDevTools-icon16x16"></span>Events</a>
-                    <a ui-sref="overview({filter: 'LogMessage'})" ng-class="{'dnnDevTools-active': overview.filter === 'LogMessage'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-listIcon dnnDevTools-icon16x16"></span>Logs</a>
+                <div class="dnnDevTools-sticky">
+                    <div class="dnnDevTools-filterList dnnDevTools-bgColorDnnBlue">
+                        <a ui-sref="overview({filter: null})" ng-class="{'dnnDevTools-active': !overview.filter}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite dnnDevTools-removeIcon">Show all</a>
+                        <a ui-sref="overview({filter: 'Mail'})" ng-class="{'dnnDevTools-active': overview.filter === 'Mail'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-envelopeClosedIcon dnnDevTools-icon16x16"></span>Mails</a>
+                        <a ui-sref="overview({filter: 'DnnEvent'})" ng-class="{'dnnDevTools-active': overview.filter === 'DnnEvent'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-audioIcon dnnDevTools-icon16x16"></span>Events</a>
+                        <a ui-sref="overview({filter: 'LogMessage'})" ng-class="{'dnnDevTools-active': overview.filter === 'LogMessage'}" class="dnnDevTools-iconLabelButton dnnDevTools-copy dnnDevTools-colorWhite"><span class="dnnDevTools-listIcon dnnDevTools-icon16x16"></span>Logs</a>
+                    </div>
+                    <input type="search" ng-change="overview.onChangeSearchInput()" ng-model="overview.searchInput" class="dnnDevTools-search dnnDevTools-copy" placeholder="type your search">
                 </div>
 
                 <div class="dnnDevTools-streamWrapper">
                     <div ng-if="!overview.stream" class="dnnDevTools-spinner"></div>
-                    <p ng-if="overview.stream.length === 0" class="dnnDevTools-listEmpty dnnDevTools-copy">Your inbox is currently empty.</p>
+                    <p ng-if="overview.stream.length === 0" class="dnnDevTools-listEmpty dnnDevTools-copy">No data available.</p>
                     <ul class="dnnDevTools-streamList">
-                        <li ng-repeat="item in overview.stream | orderBy:'-TimeStamp'" ng-click="overview.showDetail(item)" class="dnnDevTools-streamItem">
+                        <li ng-repeat="item in overview.stream" ng-click="overview.showDetail(item)" class="dnnDevTools-streamItem">
                             <div class="dnnDevTools-streamItemTimestamp dnnDevTools-streamItemCell">
                                 <span ng-class="{'dnnDevTools-envelopeClosedIcon-111111': item.Type === 'Mail', 'dnnDevTools-audioIcon-111111': item.Type === 'DnnEvent', 'dnnDevTools-listIcon-111111': item.Type === 'LogMessage'}" class="dnnDevTools-streamItemIcon dnnDevTools-icon16x16"></span>
                                 <p class="dnnDevTools-copy">{{item.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
@@ -66,6 +69,10 @@
                             </div>
                         </li>
                     </ul>
+
+                    <div ng-if="overview.stream && overview.stream.length > 0" class="dnnDevTools-showMoreWrapper">
+                        <button type="button" ng-click="overview.showMore()" class="dnnDevTools-buttonDnnRed dnnDevTools-copy dnnDevTools-marginTop2">show more</button>
+                    </div>
                 </div>
             </div>
         </script>
@@ -228,14 +235,19 @@
                     });
             }
 
-            function OverviewController($scope, $window, $state, $stateParams, remoteData) {
-                var vm = this;
+            function OverviewController($scope, $window, $state, $stateParams, $timeout, remoteData) {
+                var vm = this,
+                    startCount = 100,
+                    showMoreCount = 50,
+                    searchInputTimeout;
 
                 vm.stream = null;
                 vm.filter = $stateParams.filter;
                 vm.showDetail = showDetail;
                 vm.removeMail = removeMail;
                 vm.downloadMail = downloadMail;
+                vm.showMore = showMore;
+                vm.onChangeSearchInput = onChangeSearchInput;
 
                 activate();
 
@@ -258,10 +270,31 @@
                             });
                             break;
                         default:
-                            remoteData.stream().then(function (response) {
+                            remoteData.stream('', 0, startCount).then(function (response) {
                                 vm.stream = response.data.all;
                             });
                     }
+                }
+
+                function showMore() {
+                    remoteData.stream(vm.stream[0].Id, vm.stream.length, showMoreCount).then(function (response) {
+                        vm.stream = vm.stream.concat(response.data.all);
+                    });
+                }
+
+                function onChangeSearchInput() {
+                    if (searchInputTimeout) {
+                        $timeout.cancel(searchInputTimeout);
+                    }
+
+                    searchInputTimeout = $timeout(function() {
+                        if (vm.searchInput.length > 3 || vm.searchInput === '') {
+                            vm.stream = null;
+                            remoteData.stream('', 0, startCount, vm.searchInput, vm.filter).then(function (response) {
+                                vm.stream = response.data.all;
+                            });
+                        }
+                    }, 500);
                 }
 
                 function showDetail(item) {
@@ -336,12 +369,24 @@
                     removeMail: removeMail
                 }
 
-                function stream() {
+                function stream(start, skip, take, search, type) {
                     var deferred = $q.defer();
+
+                    start = start || '';
+                    skip = skip || '';
+                    take = take || '';
+                    search = search || '';
+                    type = type ? type.toLowerCase() : '';
+
+                    parameters = '?start=' + start + '&skip=' + skip + '&take=' + take + '&search=' + search;
+
+                    if (type.length > 0) {
+                        parameters += '&type=' + type;
+                    }
 
                     $http({
                         method: 'GET',
-                        url: 'api/stream?skip=0&take=100&search=',
+                        url: 'api/stream' + parameters,
                         headers: {
                             'requestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
                         }

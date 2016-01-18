@@ -5,9 +5,52 @@
 * @requires     -
 */
 
+// creates a button with background and borders to achive subtile 3D-effect
+@mixin dnnDevTools-button($color, $bgColor, $colorTopLeft, $colorBottomRight) {
+    padding: 11px 14px;
+
+    border-top: 1px solid $colorTopLeft;
+    border-left: 1px solid $colorTopLeft;
+    border-right: 1px solid $colorBottomRight;
+    border-bottom: 1px solid $colorBottomRight;
+
+    display: inline-block;
+    line-height: 1;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $bgColor;
+    color: $color;
+    text-align: center;
+    float: none;
+    height: inherit;
+    text-transform: none;
+    font-style: normal;
+
+    &:hover, &.#{$prefix}is-selected {
+        background-color: $colorBottomRight;
+        border: 1px solid $colorBottomRight;
+    }
+
+    &[disabled] {
+        opacity: 0.4;
+
+        &:hover {
+            background-color: $bgColor;
+            border-top-color: $colorTopLeft;
+            border-left-color: $colorTopLeft;
+            border-right-color: $colorBottomRight;
+            border-bottom-color: $colorBottomRight;
+        }
+    }
+}
+
 .#{$prefix}button {
     &[disabled] {
         opacity: 0.3;
         cursor: default;
     }
+}
+
+.#{$prefix}buttonDnnRed {
+    @include dnnDevTools-button($colorWhite, $colorDnnRed, adjust-lightness($colorDnnRed, -10), adjust-lightness($colorDnnRed, 20));
 }

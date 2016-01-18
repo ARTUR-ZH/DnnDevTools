@@ -6,17 +6,36 @@
 */
 
 .#{$prefix}overview {
+    $filterListHeight: 50px;
+    $searchHeight: 48px;
+
     margin: 0;
 
+    .#{$prefix}sticky {
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+    }
+
     .#{$prefix}filterList {
-        &.#{$prefix}is-sticky {
-            position: fixed;
-            width: 100%;
-            z-index: 1;
-        }
+        height: $filterListHeight;
+    }
+
+    .#{$prefix}search {
+        height: $searchHeight;
+        width: 100%;
+        padding: 0 20px;
+        border: none;
+        background-color: #f2f2f2;
+        color: #808080;
     }
 
     .#{$prefix}streamWrapper {
-        padding: 64px 20px 15px 20px;
+        $paddingTop: $filterListHeight + $searchHeight + 14px;
+        padding: $paddingTop 20px 15px 20px;
+    }
+
+    .#{$prefix}showMoreWrapper {
+        text-align: center;
     }
 }

@@ -70,7 +70,7 @@
                         </li>
                     </ul>
 
-                    <div ng-if="overview.stream && overview.stream.length > 0" class="dnnDevTools-showMoreWrapper">
+                    <div ng-if="overview.displayShowMoreButton && overview.stream && overview.stream.length > 0" class="dnnDevTools-showMoreWrapper">
                         <button type="button" ng-click="overview.showMore()" class="dnnDevTools-buttonDnnRed dnnDevTools-copy dnnDevTools-marginTop2">show more</button>
                     </div>
                 </div>
@@ -248,17 +248,20 @@
                 vm.downloadMail = downloadMail;
                 vm.showMore = showMore;
                 vm.onChangeSearchInput = onChangeSearchInput;
+                vm.displayShowMoreButton = true;
 
                 activate();
 
                 function activate() {
                     remoteData.stream('', 0, startCount, vm.searchInput, vm.filter).then(function (response) {
+                        vm.displayShowMoreButton = response.displayShowMoreButton;
                         vm.stream = response.data.all;
                     });
                 }
 
                 function showMore() {
                     remoteData.stream(vm.stream[0].Id, vm.stream.length, showMoreCount, vm.searchInput, vm.filter).then(function (response) {
+                        vm.displayShowMoreButton = response.displayShowMoreButton;
                         vm.stream = vm.stream.concat(response.data.all);
                     });
                 }
@@ -272,6 +275,7 @@
                         if (vm.searchInput.length > 3 || vm.searchInput === '') {
                             vm.stream = null;
                             remoteData.stream('', 0, startCount, vm.searchInput, vm.filter).then(function (response) {
+                                vm.displayShowMoreButton = response.displayShowMoreButton;
                                 vm.stream = response.data.all;
                             });
                         }
@@ -356,6 +360,10 @@
                     search = search || '';
                     type = type ? type.toLowerCase() : '';
 
+                    // get one more entry to test if there are more entries to come
+                    // if there are not - don't show the 'show more' button
+                    take += 1;
+
                     parameters = '?start=' + start + '&skip=' + skip + '&take=' + take + '&search=' + search;
 
                     if (type.length > 0) {
@@ -371,6 +379,11 @@
                     }).then(success, error);
 
                     function success(response) {
+                        response.displayShowMoreButton = response.data.all.length === take;
+
+                        // remove entry that has been added 'artificially'
+                        response.data.all.pop();
+
                         deferred.resolve(response);
                     }
 

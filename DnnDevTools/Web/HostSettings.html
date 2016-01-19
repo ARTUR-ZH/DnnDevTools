@@ -61,6 +61,7 @@
         enableMailCatchCheckbox.checked = window.weweave.dnnDevTools.enableMailCatch;
         enableDnnEventTraceCheckbox.checked = window.weweave.dnnDevTools.enableDnnEventTrace;
         enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageTraceLevel !== 'OFF';
+        logLevelSelect.value = window.weweave.dnnDevTools.logMessageTraceLevel;
 
         // enable send test mail functionality if smtp is configured properly
         // otherwise disable send test mail button

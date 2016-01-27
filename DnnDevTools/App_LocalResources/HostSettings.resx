@@ -117,19 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Disable.Text" xml:space="preserve">
-    <value>Disable</value>
+  <data name="DnnEventTracingButtonLabel.Text" xml:space="preserve">
+    <value>Enable trace</value>
   </data>
-  <data name="DisableMailCatch.Text" xml:space="preserve">
-    <value>Disable mail catch</value>
+  <data name="DnnEventTracingHeadline.Text" xml:space="preserve">
+    <value>DNN Event tracing</value>
   </data>
-  <data name="Enable.Text" xml:space="preserve">
-    <value>Enable</value>
+  <data name="EnableDevTools.Text" xml:space="preserve">
+    <value>Enable DNN Dev Tools</value>
   </data>
   <data name="EnableMailCatch.Text" xml:space="preserve">
     <value>Enable mail catch</value>
   </data>
-  <data name="SendMail.Text" xml:space="preserve">
-    <value>Send Mail</value>
+  <data name="EnableTraceButtonLabel.Text" xml:space="preserve">
+    <value>Enable trace</value>
+  </data>
+  <data name="LogLevelAll.Text" xml:space="preserve">
+    <value>all</value>
+  </data>
+  <data name="LogLevelDebug.Text" xml:space="preserve">
+    <value>debug</value>
+  </data>
+  <data name="LogLevelError.Text" xml:space="preserve">
+    <value>error</value>
+  </data>
+  <data name="LogLevelFatal.Text" xml:space="preserve">
+    <value>fatal</value>
+  </data>
+  <data name="LogLevelInfo.Text" xml:space="preserve">
+    <value>info</value>
+  </data>
+  <data name="LogLevelTrace.Text" xml:space="preserve">
+    <value>trace</value>
+  </data>
+  <data name="LogLevelWarning.Text" xml:space="preserve">
+    <value>warning</value>
+  </data>
+  <data name="LogMessageTracingHeadline.Text" xml:space="preserve">
+    <value>Log message tracing</value>
+  </data>
+  <data name="MailCatchHeadline.Text" xml:space="preserve">
+    <value>Mail Catch</value>
+  </data>
+  <data name="SelectLogLevelLabel.Text" xml:space="preserve">
+    <value>Select log level</value>
+  </data>
+  <data name="SendTestMailButtonLabel.Text" xml:space="preserve">
+    <value>Send test mail</value>
+  </data>
+  <data name="SmtpError.Text" xml:space="preserve">
+    <value>SMTP not properly configured. Please check your SMTP settings.</value>
   </data>
 </root>

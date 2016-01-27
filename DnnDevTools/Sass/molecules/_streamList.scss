@@ -7,17 +7,12 @@
 
 .#{$prefix}streamList {
     width: 100%;
-    padding-left: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style: none;
+    table-layout: fixed;
     border-spacing: 0;
     border-collapse: separate;
 }
 
 .#{$prefix}streamItem {
-    @include clearfix;
-
     cursor: pointer;
 
     // property name | duration | timing function | delay
@@ -33,9 +28,9 @@
 }
 
 .#{$prefix}streamItemCell {
-    float: left;
+    height: 44px;
     overflow: hidden;
-    padding: 14px 7px;
+    padding: 0 7px;
     white-space: nowrap;
     text-overflow: ellipsis;
     border-bottom: 1px solid $colorGrey;

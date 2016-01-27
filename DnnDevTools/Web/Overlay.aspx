@@ -39,36 +39,38 @@
                 <div class="dnnDevTools-streamWrapper">
                     <div ng-if="!overview.stream" class="dnnDevTools-spinner"></div>
                     <p ng-if="overview.stream.length === 0" class="dnnDevTools-listEmpty dnnDevTools-copy">No data available.</p>
-                    <ul class="dnnDevTools-streamList">
-                        <li ng-repeat="item in overview.stream" ng-click="overview.showDetail(item)" class="dnnDevTools-streamItem">
-                            <div class="dnnDevTools-streamItemTimestamp dnnDevTools-streamItemCell">
-                                <span ng-class="{'dnnDevTools-envelopeClosedIcon-111111': item.Type === 'Mail', 'dnnDevTools-audioIcon-111111': item.Type === 'DnnEvent', 'dnnDevTools-listIcon-111111': item.Type === 'LogMessage'}" class="dnnDevTools-streamItemIcon dnnDevTools-icon16x16"></span>
-                                <p class="dnnDevTools-copy">{{item.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
-                            </div>
+                    <table class="dnnDevTools-streamList">
+                        <tbody>
+                            <tr ng-repeat="item in overview.stream" ng-click="overview.showDetail(item)" class="dnnDevTools-streamItem">
+                                <td class="dnnDevTools-streamItemTimestamp dnnDevTools-streamItemCell">
+                                    <span ng-class="{'dnnDevTools-envelopeClosedIcon-111111': item.Type === 'Mail', 'dnnDevTools-audioIcon-111111': item.Type === 'DnnEvent', 'dnnDevTools-listIcon-111111': item.Type === 'LogMessage'}" class="dnnDevTools-streamItemIcon dnnDevTools-icon16x16"></span>
+                                    <p class="dnnDevTools-copy">{{item.TimeStamp | date:'dd.MM.yyyy HH:mm'}}</p>
+                                </td>
 
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventLogType">{{item.LogType || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventMessage">{{item.Message || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventUsername">{{item.Username || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventPortal">{{item.Portal || '&nbsp;'}}</p>
+                                <td ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventLogType">{{item.LogType || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventMessage">{{item.Message || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventUsername">{{item.Username || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'DnnEvent'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemEventPortal">{{item.Portal || '&nbsp;'}}</td>
 
-                            <div ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemLogLevel"><p class="dnnDevTools-streamLabel dnnDevTools-copy" ng-class="{'dnnDevTools-bgColorRed': item.Level === 'ERROR', 'dnnDevTools-bgColorOrange': item.Level === 'WARN'}">{{item.Level || '&nbsp;'}}</p></div>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogMessage">{{item.Message || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogLogger">{{item.Logger || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogClassNameAndMethodName">{{item.ClassName}}.{{item.MethodName}}</p>
+                                <td ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemLogLevel"><p class="dnnDevTools-streamLabel dnnDevTools-copy" ng-class="{'dnnDevTools-bgColorRed': item.Level === 'ERROR', 'dnnDevTools-bgColorOrange': item.Level === 'WARN'}">{{item.Level || '&nbsp;'}}</p></td>
+                                <td ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogMessage">{{item.Message || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogLogger">{{item.Logger || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'LogMessage'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemLogClassNameAndMethodName">{{item.ClassName}}.{{item.MethodName}}</td>
 
-                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSender">{{item.Sender || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSubject">{{item.Subject || '&nbsp;'}}</p>
-                            <p ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailTo">{{item.To || '&nbsp;'}}</p>
-                            <div ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemMailActions">
-                                <button ng-click="overview.removeMail($event, item)" type="button" class="dnnDevTools-iconButton">
-                                    <span class="dnnDevTools-trashIcon dnnDevTools-icon16x16"></span>
-                                </button>
-                                <button ng-click="overview.downloadMail($event, item.Id)" type="button" class="dnnDevTools-iconButton">
-                                    <span class="dnnDevTools-downloadIcon dnnDevTools-icon16x16"></span>
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
+                                <td ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSender">{{item.Sender || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailSubject">{{item.Subject || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-copy dnnDevTools-streamItemMailTo">{{item.To || '&nbsp;'}}</td>
+                                <td ng-if="item.Type === 'Mail'" class="dnnDevTools-streamItemCell dnnDevTools-streamItemMailActions">
+                                    <button ng-click="overview.removeMail($event, item)" type="button" class="dnnDevTools-iconButton">
+                                        <span class="dnnDevTools-trashIcon dnnDevTools-icon16x16"></span>
+                                    </button>
+                                    <button ng-click="overview.downloadMail($event, item.Id)" type="button" class="dnnDevTools-iconButton">
+                                        <span class="dnnDevTools-downloadIcon dnnDevTools-icon16x16"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <div ng-if="overview.displayShowMoreButton && overview.stream && overview.stream.length > 0" class="dnnDevTools-showMoreWrapper">
                         <button type="button" ng-click="overview.showMore()" class="dnnDevTools-buttonDnnRed dnnDevTools-copy dnnDevTools-marginTop2">show more</button>

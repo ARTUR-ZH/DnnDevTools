@@ -114,17 +114,25 @@ namespace weweave.DnnDevTools
                 ["hostSmtpConfigured"] =  !string.IsNullOrWhiteSpace(Host.SMTPServer)
             };
 
-            // Inject DnnDevTool config at top of body
-            bodyControl.Controls.AddAt(0, new LiteralControl { Text = $@"<script type=""text/javascript"">var weweave=weweave||{{}};weweave.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>" });
+            // Get element to inject scripts and HTML (needs to be injected before dnn.js)
+            // Use top of body as fallback
+            var injectIndex = 0;
+            Control injectControl = bodyControl;
+            var bottomPlaceHolderControl = page?.FindControl(DnnFormBottomProvider.DnnFormBottomPlaceHolderName);
+            if (bottomPlaceHolderControl != null)
+            {
+                injectControl = bottomPlaceHolderControl.Parent;
+                injectIndex = injectControl.Controls.IndexOf(bottomPlaceHolderControl);
+            }
+
+            // Inject DnnDevTool
+            injectControl.Controls.AddAt(injectIndex, new LiteralControl { Text = $@"<script type=""text/javascript"">var weweave=weweave||{{}};weweave.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>" });
 
             // Skip Toolbar HTML injection if DNN Dev Tools is not enabled
             if (!enabled) return;
 
-            // Include SignalR script
-            var html = $@"<script src=""{basePath}/signalr/hubs""></script>";
-
-            // Register SignalR
-            ClientResourceManager.RegisterScript(page, "~/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js", FileOrder.Js.DefaultPriority, DnnFormBottomProvider.DefaultName);
+            // Include SignalR scripts
+            injectControl.Controls.AddAt(injectIndex, new LiteralControl { Text = $@"<script src=""{basePath}/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js""></script><script src=""{basePath}/signalr/hubs""></script>" });
 
             // Get (static) toolbar html
             var toolbarHtml = File.ReadAllText(
@@ -133,11 +141,11 @@ namespace weweave.DnnDevTools
 
             // Replace toolbar resources
             var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
-            html += rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
+            var html = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
 
-            // Inject toolbar at end of body
+            // Inject toolbar
             var scriptControl = new LiteralControl { Text = html };
-            bodyControl.Controls.Add(scriptControl);
+            injectControl.Controls.AddAt(injectIndex, scriptControl);
         }
 
     }

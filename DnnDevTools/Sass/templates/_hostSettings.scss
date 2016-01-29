@@ -5,7 +5,7 @@
 * @requires     -
 */
 
-.#{$prefix}hostSettings {
+##{$prefix}hostSettings {
     .#{$prefix}sendMailButton[disabled] + .#{$prefix}smtpError {
         display: inline-block;
         padding-left: 5px;

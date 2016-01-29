@@ -227,7 +227,17 @@
   <ItemGroup>
     <Content Include="App_LocalResources\HostSettings.resx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_LocalResources\Toolbar.de-DE.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\HostSettings.de-DE.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Overlay.de-DE.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

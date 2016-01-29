@@ -112,11 +112,23 @@
             </file>
             <file>
               <path>App_LocalResources</path>
+              <name>HostSettings.de-DE.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
               <name>Overlay.resx</name>
             </file>
             <file>
               <path>App_LocalResources</path>
+              <name>Overlay.de-DE.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
               <name>Toolbar.resx</name>
+            </file>
+            <file>
+              <path>App_LocalResources</path>
+              <name>Toolbar.de-DE.resx</name>
             </file>
             <file>
               <path>Images</path>

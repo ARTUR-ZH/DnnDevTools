@@ -117,7 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ShowOverview" xml:space="preserve">
-    <value>Show overview</value>
+  <data name="BackToOverviewLink" xml:space="preserve">
+    <value>Zurück zur Übersicht</value>
+  </data>
+  <data name="DnnEventId" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="DnnEventLogType" xml:space="preserve">
+    <value>Log Typ</value>
+  </data>
+  <data name="DnnEventPortal" xml:space="preserve">
+    <value>Portal</value>
+  </data>
+  <data name="DnnEventUsername" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="EventsLink" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="LogMessageClassName" xml:space="preserve">
+    <value>Klassenname</value>
+  </data>
+  <data name="LogMessageId" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="LogMessageLogger" xml:space="preserve">
+    <value>Logger</value>
+  </data>
+  <data name="LogMessageMethodName" xml:space="preserve">
+    <value>Methodenname</value>
+  </data>
+  <data name="LogMessageUsername" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="LogsLink" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="MailBodyEmpty" xml:space="preserve">
+    <value>Body is leer.</value>
+  </data>
+  <data name="MailsLink" xml:space="preserve">
+    <value>Mails</value>
+  </data>
+  <data name="NoDataAvailable" xml:space="preserve">
+    <value>Keine Daten verfügbar.</value>
+  </data>
+  <data name="Reciever" xml:space="preserve">
+    <value>an</value>
+  </data>
+  <data name="SearchInputPlaceholder" xml:space="preserve">
+    <value>Suchbegriff eingeben</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>fromvon</value>
+  </data>
+  <data name="ShowAllLink" xml:space="preserve">
+    <value>Zeige alle</value>
+  </data>
+  <data name="ShowMoreButtonLabel" xml:space="preserve">
+    <value>Zeige mehr</value>
   </data>
 </root>

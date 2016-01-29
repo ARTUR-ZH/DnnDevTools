@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.UI;
@@ -24,10 +25,10 @@ namespace weweave.DnnDevTools
 {
     public class HttpModule : IHttpModule
     {
-        private class LocalizeResourceFilter : MemoryStream
+        private class OverlayLocalizeResourceFilter : MemoryStream
         {
             private readonly Stream _outputStream;
-            public LocalizeResourceFilter(Stream outputStream)
+            public OverlayLocalizeResourceFilter(Stream outputStream)
             {
                 _outputStream = outputStream;
             }
@@ -35,7 +36,20 @@ namespace weweave.DnnDevTools
             public override void Write(byte[] buffer, int offset, int count)
             {
                 var contentInBuffer = Encoding.UTF8.GetString(buffer);
-                var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Overlay.resx"));
+
+                // Get localized resource file (or default as fallback)
+                string resxFile = null;
+                if (HttpContext.Current.Request.Cookies["language"] != null)
+                {
+                    var resxFileLocalized = HttpContext.Current.Server.MapPath($"~/DesktopModules/DnnDevTools/App_LocalResources/Overlay.{HttpContext.Current.Request.Cookies["language"]?.Value}.resx");
+                    if (File.Exists(resxFileLocalized)) resxFile = resxFileLocalized;
+
+                }
+                if (string.IsNullOrWhiteSpace(resxFile)) 
+                    resxFile = HttpContext.Current.Server.MapPath($"~/DesktopModules/DnnDevTools/App_LocalResources/Overlay.resx");
+
+                // Localize content
+                var rsxr = new ResXResourceReader(resxFile);
                 contentInBuffer = rsxr.Cast<DictionaryEntry>().Aggregate(contentInBuffer, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
                 _outputStream.Write(Encoding.UTF8.GetBytes(contentInBuffer), offset, Encoding.UTF8.GetByteCount(contentInBuffer));
             }
@@ -55,7 +69,7 @@ namespace weweave.DnnDevTools
             if (!"~/DesktopModules/DnnDevTools/Overlay.aspx".Equals(request.AppRelativeCurrentExecutionFilePath, StringComparison.OrdinalIgnoreCase))
                 return;
 
-            HttpContext.Current.Response.Filter = new LocalizeResourceFilter(HttpContext.Current.Response.Filter);
+            HttpContext.Current.Response.Filter = new OverlayLocalizeResourceFilter(HttpContext.Current.Response.Filter);
         }
 
         public void Dispose()
@@ -140,7 +154,10 @@ namespace weweave.DnnDevTools
                 );
 
             // Replace toolbar resources
-            var rsxr = new ResXResourceReader(HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx"));
+            var resxFile = HttpContext.Current.Server.MapPath($"~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.{Thread.CurrentThread.CurrentCulture}.resx");
+            if (!File.Exists(resxFile))
+                resxFile = HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Toolbar.resx");
+            var rsxr = new ResXResourceReader(resxFile);
             var html = rsxr.Cast<DictionaryEntry>().Aggregate(toolbarHtml, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
 
             // Inject toolbar

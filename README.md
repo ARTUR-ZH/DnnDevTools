@@ -24,7 +24,7 @@ DNN Dev Tools is installed just as any other DNN module:
 
 ## Requirements
 
-* DNN 08.00.00 RC (**Please note: Not compatible to DNN 08.00.00 beta or any DNN 08.00.00 CTP version)
+* DNN 08.00.00 RC (not compatible to DNN 08.00.00 beta or any DNN 08.00.00 CTP version)
 * A-Grade browser (Firefox, Chrome, IE 11, Edge)
 
 ## Need help? Found a bug? Miss a feature?

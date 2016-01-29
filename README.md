@@ -11,7 +11,7 @@ DNN Dev Tools includes th following features
 * [Seamless UI integration](https://github.com/weweave/DnnDevTools/wiki/Features#seamless-ui-integration)
 * [And others...](https://github.com/weweave/DnnDevTools/wiki/Features#miscellaneous)
 
-Check out our  [our wiki](https://github.com/weweave/DNNDevTools/wiki/Screenshots) for screenshots and videos.
+Check out our [our wiki](https://github.com/weweave/DNNDevTools/wiki) for more information or watch [this video](https://youtu.be/xkoXRMk12sE) on youtube.
 
 ## Installation / Setup
 **Please note: Whenever possible use DNN Dev Tools only in development, staging or QA-environments but not on production website.** Even though DNN Dev Tools only adds a minimal performance overhead, the purpose of the module is to help developers (and host admins) to analyze DNN environments and that should be done in a separate non-production environment.

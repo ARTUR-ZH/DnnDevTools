@@ -22,7 +22,7 @@ namespace weweave.DnnDevTools.Service.DnnEvent
             IEnumerable<Dto.DnnEvent> events = logs.Select(e => new Dto.DnnEvent(e)).OrderByDescending(e => e.TimeStamp);
 
             if (!string.IsNullOrWhiteSpace(search))
-                events = events.Where(e => string.Concat(e.Message, e.Username).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+                events = events.Where(e => string.Concat(e.Message, e.Username, e.Portal, e.LogType).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
             if (!string.IsNullOrWhiteSpace(start))
                 events = events.SkipWhile(e => e.Id != start);
             if (skip != null)

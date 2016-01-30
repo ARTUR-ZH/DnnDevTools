@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DnnEventTracingButtonLabel.Text" xml:space="preserve">
+  <data name="DnnEventTraceButtonLabel.Text" xml:space="preserve">
     <value>DNN Events abfangen</value>
+  </data>
+  <data name="DnnEventTraceDescription.Text" xml:space="preserve">
+    <value>Diese Option aktiviert Benachrichtigungen über Ereignisse in der DNN Umgebung.</value>
   </data>
   <data name="EnableDevTools.Text" xml:space="preserve">
     <value>DNN Dev Tools aktivieren</value>
@@ -149,6 +152,12 @@
   </data>
   <data name="LogLevelWarning.Text" xml:space="preserve">
     <value>warning</value>
+  </data>
+  <data name="LogMessageTraceDescription.Text" xml:space="preserve">
+    <value>Diese Option aktiviert Benachrichtigungen über Log-Nachrichten in der DNN.</value>
+  </data>
+  <data name="MailCatchDescription.Text" xml:space="preserve">
+    <value>Diese Option bewirkt, dass alle Mails aus der DNN Umgebung abgefangen werden anstelle Sie dem eigentlichem Empfänger zuzustellen. Bitte beachten: Diese Option nicht in Produktions-Umgebungen nutzen, da sie das Versenden von E-Mails blockiert.</value>
   </data>
   <data name="SelectLogLevelLabel.Text" xml:space="preserve">
     <value>Log level auswählen</value>

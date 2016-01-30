@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DnnEventTracingButtonLabel.Text" xml:space="preserve">
+  <data name="DnnEventTraceDescription.Text" xml:space="preserve">
+    <value>This option activates notifications about events that are created in the DNN environment.</value>
+  </data>
+  <data name="DnnEventTraceButtonLabel.Text" xml:space="preserve">
     <value>Trace DNN Events</value>
   </data>
   <data name="EnableDevTools.Text" xml:space="preserve">
@@ -149,6 +152,12 @@
   </data>
   <data name="LogLevelWarning.Text" xml:space="preserve">
     <value>warning</value>
+  </data>
+  <data name="LogMessageTraceDescription.Text" xml:space="preserve">
+    <value>This option activates notifications about log messages that are created in the DNN environment.</value>
+  </data>
+  <data name="MailCatchDescription.Text" xml:space="preserve">
+    <value>This option causes all e-mails that are created in the DNN environment to be caught instead of being send to the actual recipient. Please note: Do not use this feature in production environments as it blocks e-mails from being sent to the users.</value>
   </data>
   <data name="SelectLogLevelLabel.Text" xml:space="preserve">
     <value>Select log level</value>

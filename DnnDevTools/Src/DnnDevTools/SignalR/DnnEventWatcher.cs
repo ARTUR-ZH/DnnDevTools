@@ -25,7 +25,7 @@ namespace weweave.DnnDevTools.SignalR
 
         internal void Run()
         {
-            Logger.Debug("Initializing DNN event tracing");
+            Logger.Debug("Initializing DNN event trace");
 
             var lastLog = DateTime.Now;
 

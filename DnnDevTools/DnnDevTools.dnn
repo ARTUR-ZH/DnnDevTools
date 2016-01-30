@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DnnDevTools" type="Module" version="01.00.00">
+    <package name="DnnDevTools" type="Module" version="01.01.00">
       <friendlyName>DNN Dev Tools</friendlyName>
       <description>DNN Dev Tools smoothly integrates into your DNN environment and adds useful functionalities for host admins.</description>
       <iconFile>Images/Icon_32x32.png</iconFile>

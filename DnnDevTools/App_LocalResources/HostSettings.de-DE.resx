@@ -118,19 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DnnEventTracingButtonLabel.Text" xml:space="preserve">
-    <value>Trace aktivieren</value>
-  </data>
-  <data name="DnnEventTracingHeadline.Text" xml:space="preserve">
-    <value>DNN Event Trace</value>
+    <value>DNN Events abfangen</value>
   </data>
   <data name="EnableDevTools.Text" xml:space="preserve">
-    <value>Enable DNN Dev Tools</value>
+    <value>DNN Dev Tools aktivieren</value>
   </data>
   <data name="EnableMailCatch.Text" xml:space="preserve">
-    <value>Mail Catch aktivieren</value>
+    <value>Mails abfangen</value>
   </data>
   <data name="EnableTraceButtonLabel.Text" xml:space="preserve">
-    <value>Trace aktivieren</value>
+    <value>Log Nachrichten abfangen</value>
   </data>
   <data name="LogLevelAll.Text" xml:space="preserve">
     <value>all</value>
@@ -152,12 +149,6 @@
   </data>
   <data name="LogLevelWarning.Text" xml:space="preserve">
     <value>warning</value>
-  </data>
-  <data name="LogMessageTracingHeadline.Text" xml:space="preserve">
-    <value>Lok Nachrichten trace</value>
-  </data>
-  <data name="MailCatchHeadline.Text" xml:space="preserve">
-    <value>Mail-Catch</value>
   </data>
   <data name="SelectLogLevelLabel.Text" xml:space="preserve">
     <value>Log level auswählen</value>

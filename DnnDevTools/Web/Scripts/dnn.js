@@ -10,7 +10,6 @@
         req.setRequestHeader('requestVerificationToken', $.ServicesFramework().getAntiForgeryValue());
 
         req.onload = function () {
-            console.log(" --> ", req.responseText);
             var response = (req.responseText && req.responseText != '') ? JSON.parse(req.responseText) : '';
 
             if (req.status == 200) {
@@ -42,7 +41,10 @@
         enableDnnEventTraceCheckbox = document.getElementById('dnnDevTools-enableDnnEventTraceCheckbox'),
         enableLoggingCheckbox = document.getElementById('dnnDevTools-enableLoggingCheckbox'),
         logLevelSelect = document.getElementById('dnnDevTools-logLevelSelect'),
-        sendMailButton = document.getElementById('dnnDevTools-sendMailButton');
+        sendMailButton = document.getElementById('dnnDevTools-sendMailButton'),
+        devToolsSettingsWrapper = document.getElementById('dnnDevTools-devToolsSettingsWrapper'),
+        mailSettingsWrapper = document.getElementById('dnnDevTools-mailSettingsWrapper'),
+        logMessagesSettingsWrapper = document.getElementById('dnnDevTools-logMessagesSettingsWrapper');
 
     // set current status
     enableCheckbox.checked = window.weweave.dnnDevTools.enable;
@@ -50,6 +52,15 @@
     enableDnnEventTraceCheckbox.checked = window.weweave.dnnDevTools.enableDnnEventTrace;
     enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageTraceLevel !== 'OFF';
     logLevelSelect.value = window.weweave.dnnDevTools.logMessageTraceLevel;
+
+    // only show settings when dnn dev tools are activated
+    setElementVisibility(devToolsSettingsWrapper, window.weweave.dnnDevTools.enable);
+
+    // only show mail settings when mail catch is enabled
+    setElementVisibility(mailSettingsWrapper, window.weweave.dnnDevTools.enableMailCatch);
+
+    // only show log message settings when log message catch is enabled
+    setElementVisibility(logMessagesSettingsWrapper, enableLoggingCheckbox.checked);
 
     // enable send test mail functionality if smtp is configured properly
     // otherwise disable send test mail button
@@ -67,6 +78,7 @@
 
     enableMailCatchCheckbox.addEventListener('change', function (event) {
         setMailCatchStatus(enableMailCatchCheckbox.checked);
+        setElementVisibility(mailSettingsWrapper, enableMailCatchCheckbox.checked);
     }, false);
 
     enableDnnEventTraceCheckbox.addEventListener('click', function () {
@@ -75,6 +87,8 @@
 
     enableLoggingCheckbox.addEventListener('click', function () {
         setLoggingStatus(enableLoggingCheckbox.checked);
+        setElementVisibility(logMessagesSettingsWrapper, enableLoggingCheckbox.checked);
+        logLevelSelect.value = 'ALL';
     }, false);
 
     logLevelSelect.addEventListener('change', function () {
@@ -156,6 +170,14 @@
 
         function error(error) {
             // TODO handle error
+        }
+    }
+
+    function setElementVisibility(element, isVisible) {
+        if (isVisible) {
+            element.classList.remove('dnnDevTools-hidden');
+        } else {
+            element.classList.add('dnnDevTools-hidden');
         }
     }
 }(document, window));

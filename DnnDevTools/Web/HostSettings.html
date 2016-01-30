@@ -1,48 +1,50 @@
 ﻿<div id="dnnDevTools-hostSettings">
-    <div class="dnnDevTools-panel dnnDevTools-bgColorDnnBlue dnnDevTools-marginTop2">
+    <div class="dnnDevTools-panel dnnDevTools-bgColorDnnBlue dnnDevTools-marginTop2 dnnDevTools-marginBottom1">
         <div class="dnnDevTools-checkbox">
             <input type="checkbox" id="dnnDevTools-enableCheckbox">
             <label for="dnnDevTools-enableCheckbox" class="dnnDevTools-copy dnnDevTools-colorWhite">[Resx:{key:"EnableDevTools"}]</label>
         </div>
     </div>
+    
+    <div id="dnnDevTools-devToolsSettingsWrapper" class="dnnDevTools-hidden">
+        <div class="dnnDevTools-panel dnnDevTools-bgColorGrey dnnDevTools-marginBottom1">
+            <!-- <h2 class="dnnDevTools-headline">[Resx:{key:"MailCatchHeadline"}]</h2> -->
+            <div class="dnnDevTools-checkbox">
+                <input type="checkbox" id="dnnDevTools-enableMailCatchCheckbox">
+                <label for="dnnDevTools-enableMailCatchCheckbox" class="dnnDevTools-copy">[Resx:{key:"EnableMailCatch"}]</label>
+            </div>
+            <div id="dnnDevTools-mailSettingsWrapper" class="dnnDevTools-marginTop2">
+                <button type="button" id="dnnDevTools-sendMailButton" class="dnnDevTools-sendMailButton dnnDevTools-button">[Resx:{key:"SendTestMailButtonLabel"}]</button>
+                <p class="dnnDevTools-smtpError dnnDevTools-copy dnnDevTools-hidden">[Resx:{key:"SmtpError"}]</p>
+            </div>
+        </div>
 
-    <div class="dnnDevTools-panel dnnDevTools-bgColorWhite">
-        <h2 class="dnnDevTools-headline">[Resx:{key:"MailCatchHeadline"}]</h2>
-        <div class="dnnDevTools-checkbox">
-            <input type="checkbox" id="dnnDevTools-enableMailCatchCheckbox">
-            <label for="dnnDevTools-enableMailCatchCheckbox" class="dnnDevTools-copy">[Resx:{key:"EnableMailCatch"}]</label>
+        <div class="dnnDevTools-panel dnnDevTools-bgColorGrey dnnDevTools-marginBottom1">
+            <!-- <h2 class="dnnDevTools-headline">[Resx:{key:"DnnEventTracingHeadline"}]</h2> -->
+            <div class="dnnDevTools-checkbox">
+                <input type="checkbox" id="dnnDevTools-enableDnnEventTraceCheckbox">
+                <label for="dnnDevTools-enableDnnEventTraceCheckbox" class="dnnDevTools-copy">[Resx:{key:"DnnEventTracingButtonLabel"}]</label>
+            </div>
         </div>
-        <div class="dnnDevTools-marginTop2">
-            <button type="button" id="dnnDevTools-sendMailButton" class="dnnDevTools-sendMailButton dnnDevTools-button">[Resx:{key:"SendTestMailButtonLabel"}]</button>
-            <p class="dnnDevTools-smtpError dnnDevTools-copy dnnDevTools-hidden">[Resx:{key:"SmtpError"}]</p>
-        </div>
-    </div>
 
-    <div class="dnnDevTools-panel dnnDevTools-bgColorWhite">
-        <h2 class="dnnDevTools-headline">[Resx:{key:"DnnEventTracingHeadline"}]</h2>
-        <div class="dnnDevTools-checkbox">
-            <input type="checkbox" id="dnnDevTools-enableDnnEventTraceCheckbox">
-            <label for="dnnDevTools-enableDnnEventTraceCheckbox" class="dnnDevTools-copy">[Resx:{key:"DnnEventTracingButtonLabel"}]</label>
-        </div>
-    </div>
-
-    <div class="dnnDevTools-panel dnnDevTools-bgColorWhite">
-        <h2 class="dnnDevTools-headline">[Resx:{key:"LogMessageTracingHeadline"}]</h2>
-        <div class="dnnDevTools-checkbox">
-            <input type="checkbox" id="dnnDevTools-enableLoggingCheckbox">
-            <label for="dnnDevTools-enableLoggingCheckbox" class="dnnDevTools-copy">[Resx:{key:"EnableTraceButtonLabel"}]</label>
-        </div>
-        <div class="dnnDevTools-marginTop2">
-            <label for="dnnDevTools-logLevelSelect" class="dnnDevTools-copy dnnDevTools-displayBlock">[Resx:{key:"SelectLogLevelLabel"}]</label>
-            <select name="" id="dnnDevTools-logLevelSelect" class="dnnDevTools-select dnnDevTools-marginTop1">
-                <option value="ALL">[Resx:{key:"LogLevelAll"}]</option>
-                <option value="TRACE">[Resx:{key:"LogLevelTrace"}]</option>
-                <option value="DEBUG">[Resx:{key:"LogLevelDebug"}]</option>
-                <option value="INFO">[Resx:{key:"LogLevelInfo"}]</option>
-                <option value="WARN">[Resx:{key:"LogLevelWarning"}]</option>
-                <option value="ERROR">[Resx:{key:"LogLevelError"}]</option>
-                <option value="FATAL">[Resx:{key:"LogLevelFatal"}]</option>
-            </select>
+        <div class="dnnDevTools-panel dnnDevTools-bgColorGrey dnnDevTools-marginBottom1">
+            <!-- <h2 class="dnnDevTools-headline">[Resx:{key:"LogMessageTracingHeadline"}]</h2> -->
+            <div class="dnnDevTools-checkbox">
+                <input type="checkbox" id="dnnDevTools-enableLoggingCheckbox">
+                <label for="dnnDevTools-enableLoggingCheckbox" class="dnnDevTools-copy">[Resx:{key:"EnableTraceButtonLabel"}]</label>
+            </div>
+            <div id="dnnDevTools-logMessagesSettingsWrapper" class="dnnDevTools-marginTop2">
+                <label for="dnnDevTools-logLevelSelect" class="dnnDevTools-copy dnnDevTools-displayBlock">[Resx:{key:"SelectLogLevelLabel"}]</label>
+                <select name="" id="dnnDevTools-logLevelSelect" class="dnnDevTools-select dnnDevTools-marginTop1">
+                    <option value="ALL">[Resx:{key:"LogLevelAll"}]</option>
+                    <option value="TRACE">[Resx:{key:"LogLevelTrace"}]</option>
+                    <option value="DEBUG">[Resx:{key:"LogLevelDebug"}]</option>
+                    <option value="INFO">[Resx:{key:"LogLevelInfo"}]</option>
+                    <option value="WARN">[Resx:{key:"LogLevelWarning"}]</option>
+                    <option value="ERROR">[Resx:{key:"LogLevelError"}]</option>
+                    <option value="FATAL">[Resx:{key:"LogLevelFatal"}]</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>

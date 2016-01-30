@@ -4,6 +4,7 @@ using log4net.Core;
 using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.Service;
+using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.SignalR
 {
@@ -19,6 +20,9 @@ namespace weweave.DnnDevTools.SignalR
 
         override protected void Append(LoggingEvent loggingEvent)
         {
+            // Skip if DNN Dev Tools is not installed (to prevent errors with log messages just after module has been uninstalled)
+            if (!ModuleUtil.IsInstalled()) return;
+
             // Create log event
             var logMessageEvent = new LogMessage(loggingEvent);
 

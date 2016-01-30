@@ -146,6 +146,7 @@
     <Compile Include="Src\DnnDevTools\Util\FileUtil.cs" />
     <Compile Include="Src\DnnDevTools\Util\HashUtil.cs" />
     <Compile Include="Src\DnnDevTools\Util\Log4NetUtil.cs" />
+    <Compile Include="Src\DnnDevTools\Util\ModuleUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />

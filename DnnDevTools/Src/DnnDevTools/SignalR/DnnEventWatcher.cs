@@ -7,6 +7,7 @@ using DotNetNuke.Services.Log.EventLog;
 using Microsoft.AspNet.SignalR;
 using weweave.DnnDevTools.Dto;
 using weweave.DnnDevTools.Service;
+using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools.SignalR
 {
@@ -35,6 +36,9 @@ namespace weweave.DnnDevTools.SignalR
                 while (true)
                 {
                     Thread.Sleep(1000);
+
+                    // Do nothing if module has been uninstalled
+                    if (!ModuleUtil.IsInstalled()) return;
 
                     // Skip if DnnDevTools or EnableEventCatch is not enabled
                     if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableDnnEventTrace())

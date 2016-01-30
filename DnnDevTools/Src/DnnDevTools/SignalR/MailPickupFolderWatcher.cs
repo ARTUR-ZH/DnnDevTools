@@ -49,6 +49,9 @@ namespace weweave.DnnDevTools.SignalR
 
         private void OnCreated(object source, FileSystemEventArgs e)
         {
+            // Do nothing if module has been uninstalled
+            if (!ModuleUtil.IsInstalled()) return;
+
             // Do nothing, if DNN Dev Tools or mail catch is not enabled
             if (!ServiceLocator.ConfigService.GetEnable() || !ServiceLocator.ConfigService.GetEnableMailCatch())
                 return;

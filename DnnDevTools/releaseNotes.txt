@@ -2,8 +2,8 @@
 <ul>
 	<li>Initial release</li>
 </ul>
-
 <strong>01.01.00</strong>
 <ul>
 	<li>Improved user interface of host settings module</li>
+	<li>Fixed error after module has been uninstalled</li>
 </ul>

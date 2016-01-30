@@ -20,6 +20,7 @@ using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.Client.Providers;
 using Newtonsoft.Json;
+using weweave.DnnDevTools.Util;
 
 namespace weweave.DnnDevTools
 {
@@ -64,6 +65,9 @@ namespace weweave.DnnDevTools
 
         private static void OnReleaseRequestState(object sender, EventArgs e)
         {
+            // Do nothing if module has been uninstalled
+            if (!ModuleUtil.IsInstalled()) return;
+
             var request = HttpContext.Current.Request;
 
             if (!"~/DesktopModules/DnnDevTools/Overlay.aspx".Equals(request.AppRelativeCurrentExecutionFilePath, StringComparison.OrdinalIgnoreCase))
@@ -79,6 +83,9 @@ namespace weweave.DnnDevTools
 
         private static void OnPreRequestHandlerExecute(object sender, EventArgs e)
         {
+            // Do nothing if module has been uninstalled
+            if (!ModuleUtil.IsInstalled()) return;
+
             var context = HttpContext.Current;
 
             var page = context?.Handler as CDefault;

@@ -20,7 +20,7 @@ DNN Dev Tools is installed just as any other DNN module:
  1. Download the most recent release from here https://github.com/weweave/DnnDevTools/releases
  1. Log in as host admin and install the module on the page System > Extensions
  
-**Please note:** After installing DNN Dev Tools, the module is (automatically) enabled and the DNN Dev Tools icon should be visible in the bottom right corner of every page. For security reasons DNN Dev Tools is only enabled for host admin users. To configure DNN Dev Tools settings, log in as host admin and browser to the page "System > DNN Dev Tools".
+**Please note:** After installing DNN Dev Tools, the module is (automatically) enabled and the DNN Dev Tools icon should be visible in the bottom right corner of every page. For security reasons DNN Dev Tools is only enabled for host admin users. To configure DNN Dev Tools settings, log in as host admin and browse to the page "System > DNN Dev Tools".
 
 ## Requirements
 

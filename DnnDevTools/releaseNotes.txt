@@ -7,4 +7,5 @@
 	<li>Improved user interface of host settings module</li>
 	<li>Fixed error after module has been uninstalled</li>
 	<li>Added log level, portal name and log type to searchable fields</li>
+	<li>Fixed fulltext search to search fields separately instead of concating all fields</li>
 </ul>

@@ -23,7 +23,13 @@ namespace weweave.DnnDevTools.Service.Log
             }
             logs = logs.OrderByDescending(e => e.TimeStamp);
             if (!string.IsNullOrWhiteSpace(search))
-                logs = logs.Where(e => string.Concat(e.Logger, e.ClassName, e.MethodName, e.Message, e.Level).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+                logs = logs.Where(e => 
+                    e.Logger.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.ClassName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.MethodName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.Message.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.Level.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0
+                );
             if (!string.IsNullOrWhiteSpace(start))
                 logs = logs.SkipWhile(e => e.Id != start);
             if (skip != null)

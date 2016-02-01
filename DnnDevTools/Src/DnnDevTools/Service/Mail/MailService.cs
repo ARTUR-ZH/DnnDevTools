@@ -32,7 +32,11 @@ namespace weweave.DnnDevTools.Service.Mail
             IEnumerable<Dto.Mail> result = mails.OrderByDescending(e => e.TimeStamp);
 
             if (!string.IsNullOrWhiteSpace(search))
-                result = result.Where(e => string.Concat(e.Sender, e.Subject, e.To).IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0);
+                result = result.Where(e => 
+                    e.Sender.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.To.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    e.Subject.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0
+                );
             if (!string.IsNullOrWhiteSpace(start)) result = result.SkipWhile(e => e.Id != start);
             if (skip != null) result = result.Skip(skip.Value);
             if (take != null) result = result.Take(take.Value);

@@ -185,6 +185,7 @@
     <None Include="Sass\dnn.scss" />
     <None Include="Sass\molecules\_filterList.scss" />
     <None Include="Sass\molecules\_note.scss" />
+    <None Include="Sass\molecules\_popup.scss" />
     <None Include="Sass\molecules\_streamList.scss" />
     <None Include="Sass\molecules\_table.scss" />
     <None Include="Sass\molecules\_toolbarMenu.scss" />

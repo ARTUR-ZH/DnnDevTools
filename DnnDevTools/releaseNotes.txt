@@ -1,12 +1,12 @@
-﻿<strong>01.00.00</strong>
-<ul>
-	<li>Initial release</li>
-</ul>
-<strong>01.01.00</strong>
+﻿<strong>01.01.00</strong>
 <ul>
 	<li>Improved user interface of host settings module</li>
 	<li>Fixed error after module has been uninstalled</li>
 	<li>Added log level, portal name and log type to searchable fields</li>
 	<li>Fixed fulltext search to search fields separately instead of concating all fields</li>
 	<li>Added description texts on host settings page</li>
+</ul>
+<strong>01.00.00</strong>
+<ul>
+	<li>Initial release</li>
 </ul>

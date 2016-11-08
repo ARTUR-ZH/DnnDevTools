@@ -12,9 +12,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
-using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
@@ -53,6 +51,7 @@ namespace weweave.DnnDevTools
                 var rsxr = new ResXResourceReader(resxFile);
                 contentInBuffer = rsxr.Cast<DictionaryEntry>().Aggregate(contentInBuffer, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
                 _outputStream.Write(Encoding.UTF8.GetBytes(contentInBuffer), offset, Encoding.UTF8.GetByteCount(contentInBuffer));
+                _outputStream.Flush();
             }
         }
 

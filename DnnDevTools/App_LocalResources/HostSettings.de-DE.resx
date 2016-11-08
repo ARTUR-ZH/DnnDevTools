@@ -117,55 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DnnEventTraceButtonLabel.Text" xml:space="preserve">
+  <data name="DnnEventTraceButtonLabel" xml:space="preserve">
     <value>DNN Events abfangen</value>
   </data>
-  <data name="DnnEventTraceDescription.Text" xml:space="preserve">
+  <data name="DnnEventTraceDescription" xml:space="preserve">
     <value>Diese Option aktiviert Benachrichtigungen über Ereignisse in der DNN Umgebung.</value>
   </data>
-  <data name="EnableDevTools.Text" xml:space="preserve">
+  <data name="EnableDevTools" xml:space="preserve">
     <value>DNN Dev Tools aktivieren</value>
   </data>
-  <data name="EnableMailCatch.Text" xml:space="preserve">
+  <data name="EnableMailCatch" xml:space="preserve">
     <value>Mails abfangen</value>
   </data>
-  <data name="EnableTraceButtonLabel.Text" xml:space="preserve">
+  <data name="EnableTraceButtonLabel" xml:space="preserve">
     <value>Log Nachrichten abfangen</value>
   </data>
-  <data name="LogLevelAll.Text" xml:space="preserve">
+  <data name="LogLevelAll" xml:space="preserve">
     <value>all</value>
   </data>
-  <data name="LogLevelDebug.Text" xml:space="preserve">
+  <data name="LogLevelDebug" xml:space="preserve">
     <value>debug</value>
   </data>
-  <data name="LogLevelError.Text" xml:space="preserve">
+  <data name="LogLevelError" xml:space="preserve">
     <value>error</value>
   </data>
-  <data name="LogLevelFatal.Text" xml:space="preserve">
+  <data name="LogLevelFatal" xml:space="preserve">
     <value>fatal</value>
   </data>
-  <data name="LogLevelInfo.Text" xml:space="preserve">
+  <data name="LogLevelInfo" xml:space="preserve">
     <value>info</value>
   </data>
-  <data name="LogLevelTrace.Text" xml:space="preserve">
+  <data name="LogLevelTrace" xml:space="preserve">
     <value>trace</value>
   </data>
-  <data name="LogLevelWarning.Text" xml:space="preserve">
+  <data name="LogLevelWarning" xml:space="preserve">
     <value>warning</value>
   </data>
-  <data name="LogMessageTraceDescription.Text" xml:space="preserve">
+  <data name="LogMessageTraceDescription" xml:space="preserve">
     <value>Diese Option aktiviert Benachrichtigungen über Log-Nachrichten in der DNN.</value>
   </data>
-  <data name="MailCatchDescription.Text" xml:space="preserve">
+  <data name="MailCatchDescription" xml:space="preserve">
     <value>Diese Option bewirkt, dass alle Mails aus der DNN Umgebung abgefangen werden anstelle Sie dem eigentlichem Empfänger zuzustellen. Bitte beachten: Diese Option nicht in Produktions-Umgebungen nutzen, da sie das Versenden von E-Mails blockiert.</value>
   </data>
-  <data name="SelectLogLevelLabel.Text" xml:space="preserve">
+  <data name="SelectLogLevelLabel" xml:space="preserve">
     <value>Log level auswählen</value>
   </data>
-  <data name="SendTestMailButtonLabel.Text" xml:space="preserve">
+  <data name="SendTestMailButtonLabel" xml:space="preserve">
     <value>Sende Test Mail</value>
   </data>
-  <data name="SmtpError.Text" xml:space="preserve">
+  <data name="SmtpError" xml:space="preserve">
     <value>SMTP nicht korrekt konfiguriert, bitte prüfen Sie ihre SMTP Einstellungen.</value>
   </data>
 </root>

@@ -24,7 +24,7 @@
               <configuration>
                 <nodes>
                   <node path="/configuration/system.webServer/modules" action="update" key="name" collision="overwrite">
-                    <add name="weweave.DnnDevTools" type="weweave.DnnDevTools.HttpModule, weweave.DnnDevTools" preCondition="managedHandler" />
+                    <add name="weweave.DnnDevTools" type="weweave.DnnDevTools.HttpModule, weweave.DnnDevTools" />
                   </node>
                 </nodes>
               </configuration>

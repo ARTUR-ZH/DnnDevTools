@@ -148,6 +148,7 @@
     <Compile Include="Src\DnnDevTools\Util\ModuleUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PersonaBar\css\DnnDevTools.css" />
     <Content Include="PersonaBar\DnnDevTools.html" />
     <Content Include="license.txt" />
     <Content Include="PersonaBar\scripts\DnnDevTools.js" />
@@ -246,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
-    <Folder Include="PersonaBar\css\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

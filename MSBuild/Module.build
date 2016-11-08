@@ -7,6 +7,8 @@
     </PropertyGroup>
     <Exec Command="&quot;$(sasscExe)&quot; -I &quot;$(MSBuildThisFileDirectory)/compass-mixins-0.12.7&quot; &quot;$(MSBuildThisFileDirectory)\..\DnnDevTools\Sass\dnn.scss&quot; &quot;$(MSBuildThisFileDirectory)\..\DnnDevTools\Web\Styles\dnn.css&quot;" ConsoleToMSBuild="true">
     </Exec>
+    <Exec Command="&quot;$(sasscExe)&quot; -I &quot;$(MSBuildThisFileDirectory)/compass-mixins-0.12.7&quot; &quot;$(MSBuildThisFileDirectory)\..\DnnDevTools\Sass\DnnDevTools.scss&quot; &quot;$(MSBuildThisFileDirectory)\..\DnnDevTools\PersonaBar\css\DnnDevTools.css&quot;" ConsoleToMSBuild="true">
+    </Exec>
   </Target>
   <Target Name="GetFiles">
     <ItemGroup>

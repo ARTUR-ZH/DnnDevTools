@@ -148,7 +148,6 @@
     <Compile Include="Src\DnnDevTools\Util\ModuleUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PersonaBar\css\DnnDevTools.css" />
     <Content Include="PersonaBar\DnnDevTools.html" />
     <Content Include="license.txt" />
     <Content Include="PersonaBar\scripts\DnnDevTools.js" />
@@ -183,6 +182,7 @@
     <None Include="Sass\atoms\_select.scss" />
     <None Include="Sass\atoms\_settingsButton.scss" />
     <None Include="Sass\atoms\_spinner.scss" />
+    <None Include="Sass\DnnDevTools.scss" />
     <None Include="Sass\dnn.scss" />
     <None Include="Sass\molecules\_filterList.scss" />
     <None Include="Sass\molecules\_note.scss" />
@@ -246,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
+    <Folder Include="PersonaBar\css\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

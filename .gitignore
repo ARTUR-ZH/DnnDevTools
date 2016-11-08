@@ -217,4 +217,5 @@ ModelManifest.xml
 
 [Ww]ebsite/
 .[Tt]emp/
+DnnDevTools/PersonaBar/css/*.css
 DnnDevTools/Web/Styles/*.css

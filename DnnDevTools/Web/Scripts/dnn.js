@@ -40,7 +40,7 @@
 
         // open settings page on settings button click
         settingsButton.addEventListener('click', function () {
-            alert("Please use PersonaBar entry to configure DNN Dev Tools")
+            alert("Please use PersonaBar entry Settings > DNN Dev Tools to configure DNN Dev Tools");
         }, false);
 
         // close overview window when clicking outside the window panel

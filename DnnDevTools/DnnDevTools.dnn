@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DnnDevTools" type="Module" version="01.01.00">
+    <package name="DnnDevTools" type="PersonaBar" version="02.00.00">
       <friendlyName>DNN Dev Tools</friendlyName>
       <description>DNN Dev Tools smoothly integrates into your DNN environment and adds useful functionalities for host admins.</description>
       <iconFile>Images/Icon_32x32.png</iconFile>
@@ -14,7 +14,7 @@
       <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
       <dependencies>
-        <dependency type="CoreVersion">08.00.00</dependency>
+        <dependency type="CoreVersion">09.00.00</dependency>
       </dependencies>
       <components>
         <component type="Config">
@@ -105,6 +105,25 @@
 
         <component type="File">
           <files>
+            <basePath>admin/Dnn.PersonaBar</basePath>
+            <file>
+              <path>App_LocalResources</path>
+              <name>DnnDevTools.resx</name>
+            </file>
+            <file>
+              <path>.</path>
+              <name>DnnDevTools.html</name>
+            </file>
+            <file>
+              <path>scripts</path>
+              <name>DnnDevTools.js</name>
+            </file>
+            <file>
+              <path>css</path>
+              <name>DnnDevTools.css</name>
+            </file>
+          </files>
+          <files>
             <basePath>DesktopModules/DnnDevTools</basePath>
             <file>
               <path>App_LocalResources</path>
@@ -159,9 +178,6 @@
               <name>dnn.css</name>
             </file>
             <file>
-              <name>HostSettings.html</name>
-            </file>
-            <file>
               <name>Overlay.aspx</name>
             </file>
             <file>
@@ -170,45 +186,16 @@
           </files>
         </component>
 
-        <component type="Module">
-          <desktopModule>
+        <component type="PersonaBarMenu">
+          <menu>
+            <identifier>DnnDevTools</identifier>
             <moduleName>DnnDevTools</moduleName>
-            <foldername>DnnDevTools</foldername>
-
-            <businessControllerClass>weweave.DnnDevTools.BusinessController, weweave.DnnDevTools</businessControllerClass>
-            <supportedFeatures>
-              <supportedFeature type="Upgradeable" />
-            </supportedFeatures>
-
-            <moduleDefinitions>
-              <moduleDefinition>
-                <friendlyName>DNN Dev Tools</friendlyName>
-                <defaultCacheTime>0</defaultCacheTime>
-                <moduleControls>
-                  <moduleControl>
-                    <controlKey />
-                    <controlSrc>DesktopModules/DnnDevTools/HostSettings.html</controlSrc>
-                    <supportsPartialRendering>False</supportsPartialRendering>
-                    <controlTitle />
-                    <controlType>View</controlType>
-                    <iconFile />
-                    <helpUrl />
-                    <viewOrder>0</viewOrder>
-                  </moduleControl>
-                </moduleControls>
-              </moduleDefinition>
-            </moduleDefinitions>
-          </desktopModule>
-
-          <eventMessage>
-            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
-            <processorCommand>UpgradeModule</processorCommand>
-            <attributes>
-              <businessControllerClass>weweave.DnnDevTools.BusinessController</businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>01.00.00</upgradeVersionsList>
-            </attributes>
-          </eventMessage>
+            <resourceKey>nav_DnnDevTools</resourceKey>
+            <path>DnnDevTools</path>
+            <mobileSupport>true</mobileSupport>
+            <parent>Settings</parent>
+            <order>2</order>
+          </menu>
         </component>
 
       </components>

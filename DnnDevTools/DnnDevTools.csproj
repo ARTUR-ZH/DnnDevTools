@@ -113,7 +113,6 @@
     <Compile Include="Src\DnnDevTools\Dto\DnnEvent.cs" />
     <Compile Include="Src\DnnDevTools\Dto\LogMessage.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />
-    <Compile Include="Src\DnnDevTools\BusinessController.cs" />
     <Compile Include="Src\DnnDevTools\Dto\MailDetail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\Mail.cs" />
     <Compile Include="Src\DnnDevTools\Dto\IAction.cs" />
@@ -149,7 +148,10 @@
     <Compile Include="Src\DnnDevTools\Util\ModuleUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PersonaBar\css\DnnDevTools.css" />
+    <Content Include="PersonaBar\DnnDevTools.html" />
     <Content Include="license.txt" />
+    <Content Include="PersonaBar\scripts\DnnDevTools.js" />
     <Content Include="releaseNotes.txt" />
     <Content Include="Web\Images\Icon_32x32.png" />
     <Content Include="Web\Scripts\angular-sanitize.js" />
@@ -162,7 +164,6 @@
     <Content Include="Web\Scripts\dnn.js" />
     <Content Include="Web\Styles\dnn.css" />
     <Content Include="Web\Toolbar.html" />
-    <Content Include="Web\HostSettings.html" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DnnDevTools.dnn">
@@ -239,6 +240,12 @@
     <Content Include="App_LocalResources\Overlay.de-DE.resx">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PersonaBar\App_LocalResources\DnnDevTools.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

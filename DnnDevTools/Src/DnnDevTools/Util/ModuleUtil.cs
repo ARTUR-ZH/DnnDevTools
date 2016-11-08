@@ -1,5 +1,5 @@
 ﻿using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Modules.Definitions;
+using DotNetNuke.Services.Installer.Packages;
 
 namespace weweave.DnnDevTools.Util
 {
@@ -8,8 +8,8 @@ namespace weweave.DnnDevTools.Util
 
         public static bool IsInstalled()
         {
-            var moduleDefinition = ModuleDefinitionController.GetModuleDefinitionByFriendlyName(Globals.ModuleFriendlyName);
-            return !Null.IsNull(moduleDefinition);
+            var package = PackageController.Instance.GetExtensionPackage(Null.NullInteger, e => e.FriendlyName == Globals.ModuleFriendlyName);
+            return !Null.IsNull(package);
         }
 
     }

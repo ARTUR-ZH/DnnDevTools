@@ -105,11 +105,10 @@ namespace weweave.DnnDevTools
             // Skip for DNN popups
             if (UrlUtils.InPopUp()) return;
 
-            var hostSettings = TabController.CurrentPage.Modules.Cast<ModuleInfo>().Any(m => m.DesktopModule.ModuleName == "DnnDevTools");
             var enabled = ServiceLocatorFactory.Instance.ConfigService.GetEnable();
 
-            // Skip if Dnn Dev Tools in not enabled and we do not show host settings
-            if (!enabled && !hostSettings) return;
+            // Skip if DNN Dev Tools is not enabled
+            if (!enabled) return;
 
             var page = (Page)sender;
             var bodyControl = page?.FindControl("Body") as HtmlContainerControl;
@@ -131,7 +130,6 @@ namespace weweave.DnnDevTools
                 ["enableDnnEventTrace"] = ServiceLocatorFactory.Instance.ConfigService.GetEnableDnnEventTrace(),
                 ["logMessageTraceLevel"] = ServiceLocatorFactory.Instance.ConfigService.GetLogMessageTraceLevel().DisplayName,
                 ["baseUrl"] = $"{basePath}/DesktopModules/DnnDevTools/",
-                ["hostSettingsUrl"] = $"{basePath}/Host/DNN-Dev-Tools/portalid/{portalSettings.PortalId}/",
                 ["hostSmtpConfigured"] =  !string.IsNullOrWhiteSpace(Host.SMTPServer)
             };
 
@@ -148,9 +146,6 @@ namespace weweave.DnnDevTools
 
             // Inject DnnDevTool
             injectControl.Controls.AddAt(injectIndex, new LiteralControl { Text = $@"<script type=""text/javascript"">var weweave=weweave||{{}};weweave.dnnDevTools={JsonConvert.SerializeObject(javaScriptConfig)}</script>" });
-
-            // Skip Toolbar HTML injection if DNN Dev Tools is not enabled
-            if (!enabled) return;
 
             // Include SignalR scripts
             injectControl.Controls.AddAt(injectIndex, new LiteralControl { Text = $@"<script src=""{basePath}/desktopmodules/DnnDevTools/Scripts/jquery.signalR-2.2.0.js""></script><script src=""{basePath}/signalr/hubs""></script>" });

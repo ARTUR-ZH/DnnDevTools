@@ -29,6 +29,7 @@
       <Resources Include="@(ResourceFiles);@(Scripts);@(Images);@(TextFiles);@(SourceFiles);@(ClientScripts);@(JsFiles);
                  @(Keys);@(Services);@(RootConfig);@(ConfigFiles);@(Templates);@(DataFiles);@(SharedScripts);@(Controls)" />
       <WebResources Include="Web/**/*.*" />
+      <PersonaBarResources Include="PersonaBar/**/*.*" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">    
@@ -59,6 +60,7 @@
     <Copy SourceFiles="@(Templates)" DestinationFolder="$(ModuleFolderName)\Templates" />
 
     <Copy SourceFiles="@(WebResources)" DestinationFolder="$(ModuleFolderName)\%(RecursiveDir)" />
+    <Copy SourceFiles="@(PersonaBarResources)" DestinationFolder="$(WebsitePath)\admin\Dnn.PersonaBar\%(RecursiveDir)" />
 
   </Target> 
 </Project>

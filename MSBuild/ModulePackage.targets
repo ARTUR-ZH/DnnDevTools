@@ -40,6 +40,12 @@
     </CreateItem>
     <Copy SourceFiles="@(WebFiles)" DestinationFiles="@(WebFiles->'$(BuildTempFolder)\Package\%(RecursiveDir)%(Filename)%(Extension)')" />
 
+    <!-- PersonaBar -->
+    <CreateItem Include="PersonaBar\**\*.*">
+      <Output TaskParameter="Include" ItemName="PersonaBarFiles" />
+    </CreateItem>
+    <Copy SourceFiles="@(PersonaBarFiles)" DestinationFiles="@(PersonaBarFiles->'$(BuildTempFolder)\Package\%(RecursiveDir)%(Filename)%(Extension)')" />
+
     <!--                                    -->
     <!-- Copy files  to package temp folder -->
     <!--                                    -->

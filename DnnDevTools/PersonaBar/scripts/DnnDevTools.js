@@ -166,7 +166,7 @@ function initDnnDevTools(config) {
             ajax('PUT', url, success, error);
 
             function success(response) {
-                window.location.reload(false);
+                window.parent.location.reload(false);
             }
 
             function error(error) {

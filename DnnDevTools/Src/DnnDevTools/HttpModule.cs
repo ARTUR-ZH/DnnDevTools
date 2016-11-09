@@ -55,37 +55,6 @@ namespace weweave.DnnDevTools
             }
         }
 
-        private class PersonaBarResourceFilter : MemoryStream
-        {
-            private readonly Stream _outputStream;
-            public PersonaBarResourceFilter(Stream outputStream)
-            {
-                _outputStream = outputStream;
-            }
-
-            public override void Write(byte[] buffer, int offset, int count)
-            {
-                var contentInBuffer = Encoding.UTF8.GetString(buffer);
-
-                // Get localized resource file (or default as fallback)
-                string resxFile = null;
-                if (HttpContext.Current.Request.Cookies["language"] != null)
-                {
-                    var resxFileLocalized = HttpContext.Current.Server.MapPath($"~/DesktopModules/DnnDevTools/App_LocalResources/HostSettings.{HttpContext.Current.Request.Cookies["language"]?.Value}.resx");
-                    if (File.Exists(resxFileLocalized)) resxFile = resxFileLocalized;
-
-                }
-                if (string.IsNullOrWhiteSpace(resxFile))
-                    resxFile = HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/HostSettings.resx");
-
-                // Localize content
-                var rsxr = new ResXResourceReader(resxFile);
-                contentInBuffer = rsxr.Cast<DictionaryEntry>().Aggregate(contentInBuffer, (current, d) => current.Replace($"[res:{d.Key}]", d.Value.ToString()));
-                _outputStream.Write(Encoding.UTF8.GetBytes(contentInBuffer), offset, Encoding.UTF8.GetByteCount(contentInBuffer));
-                _outputStream.Flush();
-            }
-        }
-
         public void Init(HttpApplication context)
         {
             context.PreRequestHandlerExecute += OnPreRequestHandlerExecute;
@@ -101,9 +70,6 @@ namespace weweave.DnnDevTools
 
             if ("~/DesktopModules/DnnDevTools/Overlay.aspx".Equals(request.AppRelativeCurrentExecutionFilePath, StringComparison.OrdinalIgnoreCase))
                 HttpContext.Current.Response.Filter = new OverlayLocalizeResourceFilter(HttpContext.Current.Response.Filter);
-
-            if ("~/admin/Dnn.PersonaBar/DnnDevTools.html".Equals(request.AppRelativeCurrentExecutionFilePath, StringComparison.OrdinalIgnoreCase))
-                HttpContext.Current.Response.Filter = new PersonaBarResourceFilter(HttpContext.Current.Response.Filter);
         }
 
         public void Dispose()

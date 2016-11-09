@@ -108,8 +108,10 @@
     <Compile Include="Src\DnnDevTools\Api\Controller\DnnEventController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\LogController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\MailController.cs" />
+    <Compile Include="Src\DnnDevTools\Api\Controller\PersonaBarController.cs" />
     <Compile Include="Src\DnnDevTools\Api\Controller\StreamController.cs" />
     <Compile Include="Src\DnnDevTools\Api\IsAllowedAuthorizeAttribute.cs" />
+    <Compile Include="Src\DnnDevTools\Dto\PersonaBar.cs" />
     <Compile Include="Src\DnnDevTools\Dto\DnnEvent.cs" />
     <Compile Include="Src\DnnDevTools\Dto\LogMessage.cs" />
     <Compile Include="Src\DnnDevTools\Api\SuperUserAuthorizeAttribute.cs" />

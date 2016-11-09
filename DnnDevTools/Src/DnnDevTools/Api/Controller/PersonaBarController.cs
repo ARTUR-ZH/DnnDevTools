@@ -22,10 +22,10 @@ namespace weweave.DnnDevTools.Api.Controller
 
             // Get localized resource file (or default as fallback)
             string resxFile = null;
-            var resxFileLocalized = HttpContext.Current.Server.MapPath($"~/DesktopModules/DnnDevTools/App_LocalResources/HostSettings.{culture}.resx");
+            var resxFileLocalized = HttpContext.Current.Server.MapPath($"~/DesktopModules/DnnDevTools/App_LocalResources/PersonaBar.{culture}.resx");
             if (File.Exists(resxFileLocalized)) resxFile = resxFileLocalized;
             if (string.IsNullOrWhiteSpace(resxFile))
-                resxFile = HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/Hostsettings.resx");
+                resxFile = HttpContext.Current.Server.MapPath("~/DesktopModules/DnnDevTools/App_LocalResources/PersonaBar.resx");
             var rsxr = new ResXResourceReader(resxFile);
             var resources = rsxr.Cast<DictionaryEntry>().ToDictionary(x => x.Key.ToString(), x => x.Value.ToString());
 

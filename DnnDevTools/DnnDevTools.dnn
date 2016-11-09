@@ -127,11 +127,11 @@
             <basePath>DesktopModules/DnnDevTools</basePath>
             <file>
               <path>App_LocalResources</path>
-              <name>HostSettings.resx</name>
+              <name>PersonaBar.resx</name>
             </file>
             <file>
               <path>App_LocalResources</path>
-              <name>HostSettings.de-DE.resx</name>
+              <name>PersonaBar.de-DE.resx</name>
             </file>
             <file>
               <path>App_LocalResources</path>

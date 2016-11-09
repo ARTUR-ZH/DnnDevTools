@@ -83,9 +83,9 @@ function initDnnDevTools(config) {
     }
 
     /**
-     * Functionality for HostSettings.aspx
+     * Functionality PeronaBar Ui 
      */
-    var initUi = function(document, window) {
+    var initUi = function(options, document) {
 
         // Test if Host setting elements exist
         if (!document.getElementById('dnnDevTools-hostSettings')) return;
@@ -101,24 +101,24 @@ function initDnnDevTools(config) {
             logMessagesSettingsWrapper = document.getElementById('dnnDevTools-logMessagesSettingsWrapper');
 
         // set current status
-        enableCheckbox.checked = window.weweave.dnnDevTools.enable;
-        enableMailCatchCheckbox.checked = window.weweave.dnnDevTools.enableMailCatch;
-        enableDnnEventTraceCheckbox.checked = window.weweave.dnnDevTools.enableDnnEventTrace;
-        enableLoggingCheckbox.checked = window.weweave.dnnDevTools.logMessageTraceLevel !== 'OFF';
-        logLevelSelect.value = window.weweave.dnnDevTools.logMessageTraceLevel;
+        enableCheckbox.checked = options.enable;
+        enableMailCatchCheckbox.checked = options.enableMailCatch;
+        enableDnnEventTraceCheckbox.checked = options.enableDnnEventTrace;
+        enableLoggingCheckbox.checked = options.logMessageTraceLevel !== 'OFF';
+        logLevelSelect.value = options.logMessageTraceLevel;
 
         // only show settings when dnn dev tools are activated
-        setElementVisibility(devToolsSettingsWrapper, window.weweave.dnnDevTools.enable);
+        setElementVisibility(devToolsSettingsWrapper, options.enable);
 
         // only show mail settings when mail catch is enabled
-        setElementVisibility(mailSettingsWrapper, window.weweave.dnnDevTools.enableMailCatch);
+        setElementVisibility(mailSettingsWrapper, options.enableMailCatch);
 
         // only show log message settings when log message catch is enabled
         setElementVisibility(logMessagesSettingsWrapper, enableLoggingCheckbox.checked);
 
         // enable send test mail functionality if smtp is configured properly
         // otherwise disable send test mail button
-        if (window.weweave.dnnDevTools.hostSmtpConfigured) {
+        if (options.hostSmtpConfigured) {
             sendMailButton.addEventListener('click',
                 function() {
                     sendMail();
@@ -254,20 +254,19 @@ function initDnnDevTools(config) {
     function success(response) {
 
         // Init DNN Dev Tools options
-        window.weweave = window.weweave || {};
-        window.weweave.dnnDevTools = window.weweave.dnnDevTools || {};
-        window.weweave.dnnDevTools.enable = response.Enable;
-        window.weweave.dnnDevTools.enableMailCatch = response.EnableMailCatch;
-        window.weweave.dnnDevTools.enableDnnEventTrace = response.EnableDnnEventTrace;
-        window.weweave.dnnDevTools.logMessageTraceLevel = response.LogMessageTraceLevel;
-        window.weweave.dnnDevTools.hostSmtpConfigured = response.HostSmtpConfigured;
+        var options = {};
+        options.enable = response.Enable;
+        options.enableMailCatch = response.EnableMailCatch;
+        options.enableDnnEventTrace = response.EnableDnnEventTrace;
+        options.logMessageTraceLevel = response.LogMessageTraceLevel;
+        options.hostSmtpConfigured = response.HostSmtpConfigured;
 
         // Translate HTML
         $("*[data-dnnDevTools-resource]").each(function () {
             $(this).text(response.Resources[$(this).attr("data-dnnDevTools-resource")]);
         });
 
-        initUi(document, window);
+        initUi(options, document);
     }
 
     function error(error) {

@@ -231,13 +231,7 @@
     <Content Include="App_LocalResources\Toolbar.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\HostSettings.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_LocalResources\Toolbar.de-DE.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_LocalResources\HostSettings.de-DE.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Overlay.de-DE.resx">
